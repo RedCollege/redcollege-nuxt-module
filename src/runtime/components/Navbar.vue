@@ -146,12 +146,12 @@ function logout() {
                     SidebarSheetMenu
                     .flex.gap-2.items-center
                         img(:src="logoUrl", width="40")
-                        h5.text-sky-700.font-bold {{ titulo }}
+                        h5.text-primary.font-bold {{ titulo }}
                     NavigationMenu
                         NavigationMenuList
                             NavigationMenuItem
                                 NavigationMenuTrigger
-                                    .flex.gap-2.items-center.text-sky-700
+                                    .flex.gap-2.items-center.text-primary
                                         Icon(name="tabler:layout-2", size="25")
                                         p Mis Módulos
                                 NavigationMenuContent

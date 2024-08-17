@@ -111,7 +111,7 @@ ScrollArea(class="[&>div>div[style]]:!block")
                                     )
                                         NuxtLink(to="/")
                                             span(:class="isOpen === false ? '' : 'mr-4'")
-                                                Icon.text-sky-700(:name="`tabler:${icon}`", size="18")
+                                                Icon.text-primary(:name="`tabler:${icon}`", size="18")
                                             p(:class="['max-w-[200px] truncate', isOpen === false ? '-translate-x-96 opacity-0' : 'translate-x-0 opacity-100']") {{ label }}
                                 TooltipContent(side="right", v-if="isOpen === false") {{ label }}
                     SidebarCollapseMenuButton(

@@ -4,6 +4,9 @@ const isOpen = ref(false)
 
 <template>
     <NuxtLayout name="dashboard">
-        <h1>Hola chicos</h1>
+        <div class="my-2">
+            <ContenidosMain />
+            <PlanificacionesTable />
+        </div>
     </NuxtLayout>
 </template>

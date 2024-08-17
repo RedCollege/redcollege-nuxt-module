@@ -6,6 +6,11 @@
 @layer base {
 
 :root  {
+    --sky: 221.2 83.2% 53.3%;
+    --purple: 281 45% 51%;
+    --green: 170 100% 32%;
+    --gold: 48 100% 35%;
+
     --background: 201.3 100% 98%;
     --foreground: 201.3 5% 10%;
     --card: 201.3 50% 98%;
