@@ -3,8 +3,8 @@
 <template lang="pug">
 div.grid.gap-2
     PlanificacionesHeader
-    .grid.grid-cols-8.gap-4
-        .col-span-2
+    .grid.grid-cols-12.gap-4
+        .col-span-4
             Card
                 CardHeader.py-2
                     .flex.justify-between.items-center
@@ -16,7 +16,7 @@ div.grid.gap-2
                     ScrollArea(class="h-[calc(100vh_-_230px)]")
                         .grid.divide-y
                             ContenidosCard(v-for="i in 20", :index="i")
-        .col-span-6
+        .col-span-8
             Card
                 Tabs(default-value="contenido")
                     CardHeader.py-2
