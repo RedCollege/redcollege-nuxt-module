@@ -13,7 +13,7 @@ div.grid.gap-2
                             Icon(name="tabler:plus")
                 Separator
                 CardContent.p-0
-                    ScrollArea(class="h-[calc(100vh_-_230px)]")
+                    ScrollArea(class="h-[calc(100vh_-_225px)]")
                         .grid.divide-y
                             ContenidosCard(v-for="i in 20", :index="i")
         .col-span-8
@@ -28,9 +28,10 @@ div.grid.gap-2
                                 TabsTrigger(value="componentes") Componentes Curriculares
                     Separator
                     CardContent
-                        TabsContent(value="contenido")
-                            ContenidosSeccionContenido
-                        TabsContent(value="dua")
-                        TabsContent(value="adecuacion")
-                        TabsContent(value="componentes")
+                        ScrollArea(class="h-[calc(100vh_-_250px)]")
+                            TabsContent(value="contenido")
+                                ContenidosSeccionContenido
+                            TabsContent(value="dua")
+                            TabsContent(value="adecuacion")
+                            TabsContent(value="componentes")
 </template>

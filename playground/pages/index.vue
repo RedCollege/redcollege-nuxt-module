@@ -5,6 +5,7 @@ const isOpen = ref(false)
 <template>
     <NuxtLayout name="dashboard">
         <div class="my-2">
+            <!--<IAButton></IAButton>-->
             <ContenidosMain />
             <PlanificacionesTable />
         </div>

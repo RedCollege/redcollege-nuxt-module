@@ -39,7 +39,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -51,7 +51,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -63,7 +63,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -75,7 +75,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -87,7 +87,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },{
         id: 1,
         status: "Por Validar",
@@ -98,7 +98,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -110,7 +110,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -122,7 +122,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -134,7 +134,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -146,7 +146,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -158,7 +158,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     },
     {
         id: 1,
@@ -170,7 +170,7 @@ const planificaciones: Payment[] = [
         asignatura: "MA03",
         periodo: 2024 ,
         colaboradores: [],
-        cobertura: 20,
+        cobertura: Math.random() * (100),
     }
     // ...
 ]
@@ -183,7 +183,7 @@ Card.my-4
     CardContent.space-y-4
         .flex.items-center.justify-between
             .flex.flex-1.justify-between
-                Input(placeholder="Filter tasks...", class="h-8 w-[150px] lg:w-[250px]")
+                Input(placeholder="Buscar...", class="h-8 w-[150px] lg:w-[250px]")
                 .flex.items-center.space-x-2
                     PlanificacionesTableFilter(label="Profesor", icon="school")
                     PlanificacionesTableFilter(label="Nivel", icon="triangles")

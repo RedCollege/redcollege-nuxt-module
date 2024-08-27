@@ -31,8 +31,8 @@
     --input: 201.3 30% 50%;
     --ring: 201.3 96.3% 32.2%;
     --radius: 0.5rem;
-  }
-  .dark  {
+}
+.dark  {
     --background: 201.3 50% 10%;
     --foreground: 201.3 5% 98%;
     --card: 201.3 50% 10%;
