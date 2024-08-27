@@ -23,7 +23,7 @@ jobs:
         run: npx nypm@latest i
 
       - name: Build
-        run: package-build
+        run: npm run package-build
 
 
       - name: npm publish
