@@ -29,7 +29,6 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm run build
 
       # Create the new release:
       - name: Bump version & push
