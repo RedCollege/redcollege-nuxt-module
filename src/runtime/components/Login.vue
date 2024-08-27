@@ -11,14 +11,12 @@ const isLoginLoading = ref(false)
 
 
 
-async function login(){
+async function login() {
     isLoginLoading.value = true
     await authStore.login(correo.value, password.value)
     isLoginLoading.value = false
     emit('successLogin')
 }
-
-
 
 </script>
 
