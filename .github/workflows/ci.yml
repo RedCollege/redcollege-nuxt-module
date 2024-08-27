@@ -1,4 +1,4 @@
-name: ci
+name: CI
 
 on:
   push:
@@ -13,14 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - run: corepack enable
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: '20'
+          registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
-        run: npx nypm@latest i
+        run: npx npm@latest install
 
       - name: Build
         run: npm run prepack
@@ -31,14 +37,16 @@ jobs:
           git config --local user.name "Jose Puma"
           VERSION=$(echo ${{ github.event.release.tag_name }} | sed 's/v//')
           sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/g" package.json
-          if [ "$(git status --porcelain)" = "" ]; then
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Bump version to $VERSION"
+            git push
+          else
             echo "No changes to commit"
             exit 0
           fi
-          git add .
-          git commit -m "Bump version to $VERSION"
 
-      - name: npm publish
+      - name: Publish package
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_REDCOLLEGE_ACCESS }}
