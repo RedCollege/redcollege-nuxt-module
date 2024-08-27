@@ -41,4 +41,4 @@ jobs:
       - name: npm publish
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_NPM_TOKEN_REDCOLLEGE_UI }}
+          NODE_AUTH_TOKEN: ${{ secrets.token_github_redcollege_npm }}
