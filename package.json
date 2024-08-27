@@ -1,6 +1,6 @@
 {
     "name": "@redcollege/ui-nuxt-module",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "RedCollege Nuxt module",
     "repository": "https://github.com/RedCollege/redcollege-ui-module",
     "license": "MIT",
