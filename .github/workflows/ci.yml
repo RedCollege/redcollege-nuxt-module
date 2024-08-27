@@ -25,12 +25,18 @@ jobs:
       - name: Build
         run: npm run prepack
 
-      - name: Bump version & push
+      - name: Update Version
         run: |
-          git config --global user.name 'Automated publish'
-          git config --global user.email 'josepuma@sayrin.cl'
-          npm version patch
-          git push && git push --tags
+          git config --local user.email "josepuma@sayrin.cl"
+          git config --local user.name "Jose Puma"
+          VERSION=$(echo ${{ github.event.release.tag_name }} | sed 's/v//')
+          sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/g" package.json
+          if [ "$(git status --porcelain)" = "" ]; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git add .
+          git commit -m "Bump version to $VERSION"
 
       - name: npm publish
         run: npm publish
