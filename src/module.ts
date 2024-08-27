@@ -1,10 +1,10 @@
 import defu from 'defu'
 import { defineNuxtModule, addLayout, addPlugin, addTemplate, addComponentsDir, createResolver, installModule, addImportsDir } from '@nuxt/kit'
-import type { NuxtTemplate } from '@nuxt/schema'
-//import hola from 'lucide-vue-next'
 
 // Module options TypeScript interface definition
-export interface ModuleOptions { }
+export interface ModuleOptions {
+    baseURL: string;
+}
 
 export default defineNuxtModule<ModuleOptions>({
     meta: {

@@ -1,13 +1,13 @@
 export interface ICursoEstablecimientoResponse {
     id: number
-    curso: any
+    curso: string
     seccion: string
     isDinamico: boolean
     created_at: string
     updated_at: string
-    nombre: any
-    decreto: any
-    anio: any
+    nombre: string
+    decreto: string
+    anio: number
     sige_id: number
     cupos: number
     identificadorSala: string
