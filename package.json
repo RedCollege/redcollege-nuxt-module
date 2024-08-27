@@ -23,7 +23,7 @@
         "dev:build": "nuxi build playground",
         "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
         "release": "npm run lint && npm run test && npm run prepack && changelogen --release",
-        "package-build": "npm run prepack && changelogen --release && git push --follow-tags",
+        "package-build": "npm run prepack && changelogen --release",
         "lint": "eslint .",
         "test": "vitest run",
         "test:watch": "vitest watch",
