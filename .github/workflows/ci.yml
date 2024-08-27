@@ -27,7 +27,7 @@ jobs:
 
       - name: Bump version & push
         run: |
-          git config --global user.name 'Add new package publish'
+          git config --global user.name 'Automated publish'
           git config --global user.email 'josepuma@sayrin.cl'
           npm version patch
           git push && git push --tags
