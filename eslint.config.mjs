@@ -5,9 +5,9 @@ import { createConfigForNuxt } from '@nuxt/eslint-config/flat'
 export default createConfigForNuxt({
     features: {
         // Rules for module authors
-        tooling: true,
+        tooling: false,
         // Rules for formatting
-        stylistic: true,
+        stylistic: false,
     },
     dirs: {
         src: [

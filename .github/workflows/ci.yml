@@ -23,9 +23,11 @@ jobs:
         run: npx nypm@latest i
 
       - name: Build
-        run: npm run build
+        run: package-build
+
 
       - name: npm publish
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_NPM_TOKEN_REDCOLLEGE_UI }}
+
