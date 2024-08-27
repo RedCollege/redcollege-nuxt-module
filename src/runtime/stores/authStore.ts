@@ -1,8 +1,7 @@
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { defineStore } from 'pinia';
 import type { IAuthUsuarioResponse } from '../models/Auth'
-import { useCookie, useFetch, useRoute, useRouter, useRuntimeConfig } from '#app';
-import { onMounted } from 'vue';
+import { useCookie, useRouter, useRuntimeConfig } from '#app';
 
 export const useAuthStore = defineStore('auth', () => {
 
