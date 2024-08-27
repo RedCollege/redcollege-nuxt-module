@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  lint:
+  publish-package:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,6 @@ jobs:
 
       - name: Build
         run: npm run package-build
-
 
       - name: npm publish
         run: npm publish
