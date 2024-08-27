@@ -1,6 +1,6 @@
 {
     "name": "@redcollege/ui-nuxt-module",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "RedCollege Nuxt module",
     "repository": "https://github.com/RedCollege/redcollege-ui-module",
     "license": "MIT",
@@ -18,7 +18,7 @@
         "dist"
     ],
     "scripts": {
-        "prepack": "nuxt-module-build build",
+        "prepack": "nuxt-module-build build --stub && nuxt-module-build prepare",
         "dev": "nuxi dev playground",
         "dev:build": "nuxi build playground",
         "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
