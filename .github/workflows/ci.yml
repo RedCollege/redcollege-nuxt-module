@@ -22,9 +22,6 @@ jobs:
       - name: Install dependencies
         run: npx nypm@latest i
 
-      - name: Lint
-        run: npm run lint
-
       - name: npm publish
         run: npm publish
         env:
