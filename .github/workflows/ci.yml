@@ -33,10 +33,12 @@ jobs:
 
       - name: Update Version
         run: |
-          git config --local user.email "josepuma@sayrin.cl"
-          git config --local user.name "Jose Puma"
-          npm version patch
-          git push && git push --tags
+            git config --local user.email "josepuma@sayrin.cl"
+            git config --local user.name "Jose Puma"
+            git add .
+            git commit -m "Commit changes before version bump" || echo "No changes to commit"
+            npm version patch
+            git push && git push --tags
 
       - name: Publish package
         run: npm publish
