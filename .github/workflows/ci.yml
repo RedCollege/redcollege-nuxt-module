@@ -23,7 +23,7 @@ jobs:
         run: npx nypm@latest i
 
       - name: Build
-        run: npm run package-build
+        run: npm run prepack
 
       - name: Bump version & push
         run: |
