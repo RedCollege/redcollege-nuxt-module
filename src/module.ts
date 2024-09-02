@@ -43,20 +43,20 @@ export default defineNuxtModule<ModuleOptions>({
         addTemplate({
             filename: 'types/redcollege-ui.d.ts',
             getContents: () => `
-              declare module '@redcollege/ui-nuxt-module' {
-                export * from '${resolver.resolve('./runtime/types')}'
-              }
+                declare module '@redcollege/ui-nuxt-module' {
+                    export * from '${resolver.resolve('./runtime/types')}'
+                }
             `
-          })
+        })
 
-          // Asegúrate de que Nuxt incluya los tipos en la compilación
-          nuxt.options.alias['@redcollege/ui-nuxt-module'] = resolver.resolve('.')
-          nuxt.options.build.transpile.push('@redcollege/ui-nuxt-module')
+        // Asegúrate de que Nuxt incluya los tipos en la compilación
+        nuxt.options.alias['@redcollege/ui-nuxt-module'] = resolver.resolve('.')
+        nuxt.options.build.transpile.push('@redcollege/ui-nuxt-module')
 
-          // Añadir los tipos al array de tipos de Nuxt
-          nuxt.hook('prepare:types', ({ references }) => {
+        // Añadir los tipos al array de tipos de Nuxt
+        nuxt.hook('prepare:types', ({ references }) => {
             references.push({ path: resolver.resolve(nuxt.options.buildDir, 'types/redcollege-ui.d.ts') })
-          })
+        })
 
     },
 })
