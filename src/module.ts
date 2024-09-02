@@ -17,8 +17,6 @@ export default defineNuxtModule<ModuleOptions>({
             baseURL: options.baseURL
         })
 
-        nuxt.options.css.push(resolver.resolve('./runtime/assets/tailwind.css'))
-
         // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
         addPlugin(resolver.resolve('./runtime/plugin'))
         addPlugin(resolver.resolve('./runtime/plugins/lucide'))
@@ -28,7 +26,15 @@ export default defineNuxtModule<ModuleOptions>({
         })
         await installModule('@nuxtjs/tailwindcss', {
             cssPath: resolver.resolve('./runtime/assets/tailwind.css'),
-            configPath: resolver.resolve('./runtime/tailwind.config.js')
+            configPath: resolver.resolve('./runtime/tailwind.config.js'),
+            exposeConfig: true,
+            config: {
+                content: [
+                    resolver.resolve('runtime/components/**/*.{vue,js,ts}'),
+                    resolver.resolve('runtime/**/*.{vue,js,ts}')
+                ],
+                important: true
+            }
         })
 
         await installModule('shadcn-nuxt', {
