@@ -17,7 +17,7 @@ export default defineNuxtModule<ModuleOptions>({
             baseURL: options.baseURL
         })
 
-        nuxt.options.css.push(resolver.resolve('./runtime/assets/styles.css'))
+        nuxt.options.css.push(resolver.resolve('./runtime/assets/tailwind.css'))
 
         // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
         addPlugin(resolver.resolve('./runtime/plugin'))
