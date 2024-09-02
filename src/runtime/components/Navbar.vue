@@ -6,6 +6,8 @@ import type { IPeriodoEscolarResponse } from '../models/Periodo'
 import type { ICursoEstablecimientoResponse } from '../models/Curso'
 import { useAuthStore } from '../stores/authStore';
 import { useRuntimeConfig } from '#app';
+import { useNavbar } from '../composables/states';
+
 
 interface Props {
     logoUrl: string,
@@ -108,10 +110,12 @@ watch(selectedEstablecimientoId, async () => {
     periodos.value = []
     arePeriodosLoaded.value = false
     areCursosLoaded.value = false
-    periodos.value = await $fetch<Array<IPeriodoEscolarResponse>>(`${baseURL}/v2/aniosEscolares/${Number(selectedEstablecimientoId.value)}`, {
+    useNavbar().setSelectedEstablecimientoId(Number(selectedEstablecimientoId.value))
+    useNavbar().setSelectedPeriodo(0)
+    /*periodos.value = await $fetch<Array<IPeriodoEscolarResponse>>(`${baseURL}/v2/aniosEscolares/${Number(selectedEstablecimientoId.value)}`, {
         method: 'GET'
     });
-    arePeriodosLoaded.value = true
+    arePeriodosLoaded.value = true*/
     emit('selectedFilters', selectedEstablecimientoId.value, selectedPeriodoId.value, selectedCursoId.value)
 })
 
@@ -119,6 +123,7 @@ watch(selectedPeriodoId, async () => {
     selectedCursoId.value = ""
     cursos.value = []
     areCursosLoaded.value = false
+    useNavbar().setSelectedPeriodo(Number(selectedPeriodoId.value))
     cursos.value = await $fetch<Array<ICursoEstablecimientoResponse>>(`${baseURL}/v2/cursos/cursosQuery/${Number(selectedEstablecimientoId.value)}?year=${selectedPeriodoId.value}`, {
         method: 'GET'
     });

@@ -2,23 +2,26 @@
 import { DateTime } from 'luxon'
 import type { TUsuario } from '@redcollege/ui-nuxt-module/module';
 
+import { storeToRefs } from 'pinia';
+
 const isOpen = ref(false)
+const { selectedEstablecimientoId } = storeToRefs(useNavbar())
 
-useNavbarStore().setHideCursos(true)
+useNavbar().setHideCursos(true)
 
-useSidebarStore().setMenuList([
+useSidebar().setMenuList([
     {
         groupLabel: "",
         menus: [
             {
-                href: "/dashboard",
+                href: "/",
                 label: "Inicio",
                 active: false,
                 icon: 'home',
                 submenus: []
             },
             {
-                href: "/dashboard",
+                href: "/",
                 label: "Auditoría General",
                 active: false,
                 icon: 'clipboard-data',
@@ -48,7 +51,7 @@ useSidebarStore().setMenuList([
                 ]
             },
             {
-                href: "/categories",
+                href: "/",
                 label: "Comunidad",
                 active: false,
                 icon: 'friends',
@@ -60,14 +63,14 @@ useSidebarStore().setMenuList([
         groupLabel: "Settings",
         menus: [
             {
-                href: "/users",
+                href: "/",
                 label: "Papelera",
                 active: false,
                 icon: 'trash',
                 submenus: []
             },
             {
-                href: "/account",
+                href: "/",
                 label: "Configuración",
                 active: false,
                 icon: 'settings',
@@ -76,6 +79,13 @@ useSidebarStore().setMenuList([
         ]
     }
 ])
+
+watch(selectedEstablecimientoId, (establecimientoId) => {
+    if (establecimientoId) {
+        useRouter().push(`/planificaciones/${establecimientoId}`)
+    }
+})
+
 </script>
 
 <template>
