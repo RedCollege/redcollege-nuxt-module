@@ -1,8 +1,6 @@
 import defu from 'defu'
 import { defineNuxtModule, addLayout, addPlugin, addTemplate, addComponentsDir, createResolver, installModule, addImportsDir } from '@nuxt/kit'
-import { readFileSync } from 'fs'
-import { readdirSync, statSync } from 'fs';
-import { relative } from 'path';
+import { resolve as resolvePackage } from 'mlly'
 // Module options TypeScript interface definition
 export interface ModuleOptions {
     baseURL: string;
@@ -38,7 +36,9 @@ export default defineNuxtModule<ModuleOptions>({
             storesDirs: [resolver.resolve('runtime/stores/**')]
         })
 
-        nuxt.options.build.transpile.push('pinia')
+        await resolvePackage('pinia')
+
+        await resolvePackage('typescript')
 
         await installModule('@nuxt/icon')
         addImportsDir(resolver.resolve('runtime/composables'))
