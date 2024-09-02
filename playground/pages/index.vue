@@ -80,11 +80,6 @@ useSidebar().setMenuList([
     }
 ])
 
-watch(selectedEstablecimientoId, (establecimientoId) => {
-    if (establecimientoId) {
-        useRouter().push(`/planificaciones/${establecimientoId}`)
-    }
-})
 
 </script>
 
