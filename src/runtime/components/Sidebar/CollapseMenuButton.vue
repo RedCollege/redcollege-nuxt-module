@@ -9,7 +9,7 @@ const props = defineProps({
     isOpen: Boolean
 });
 
-const isSubmenuActive = props.submenus.some(submenu => submenu.active);
+const isSubmenuActive = props.submenus?.some(submenu => submenu.active);
 const isCollapsed = ref(isSubmenuActive);
 const isMenuOpen = ref(false)
 

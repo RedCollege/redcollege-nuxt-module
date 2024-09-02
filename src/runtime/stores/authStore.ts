@@ -1,7 +1,7 @@
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia';
 import type { IAuthUsuarioResponse } from '../models/Auth'
-import type { IUsuario } from '../interfaces/auth/usuario';
+import type { TUsuario } from '../types/auth/usuario';
 import { useCookie, useRouter, useRuntimeConfig } from '#app';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -22,16 +22,22 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const { baseURL } = useRuntimeConfig().public.redcollege
-    const user = ref<IUsuario>()
+    const user = ref<TUsuario>()
     const userId = useCookie<number>('userId')
     const isLoggedIn = useCookie<boolean>('isLoggedIn')
     const bearerToken = useCookie<string>('auth._token.local')
 
-    onMounted(async () => {
+    // Función de inicialización asíncrona
+    async function init() {
+        console.log("Inicializando store")
         if(bearerToken.value && isLoggedIn.value && userId.value > 0){
-            await loadUser()
+            try {
+                await loadUser()
+            } catch (error) {
+                await logout()
+            }
         }
-    })
+    }
 
     async function login(correo: string, password: string){
         const data = await $fetch<ITokenMainResponse>(`${baseURL}/auth/login`, {
@@ -50,7 +56,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     async function loadUser(){
-        const usuario = await $fetch<IUsuario>(`${baseURL}/auth/usuario/logged`, {
+        const usuario = await $fetch<TUsuario>(`${baseURL}/auth/usuario/logged`, {
             method: 'GET',
             headers: {
                 Authorization: bearerToken.value
@@ -76,7 +82,7 @@ export const useAuthStore = defineStore('auth', () => {
             },
         });
 
-        user.value = {} as IUsuario
+        user.value = {} as TUsuario
         isLoggedIn.value = false
         userId.value = 0
         bearerToken.value = ""
@@ -86,6 +92,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     return {
-        user, loadUser, logout, isLoggedIn, login
+        user, loadUser, logout, isLoggedIn, login, init
     }
 })

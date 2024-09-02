@@ -3,6 +3,8 @@ import { defineNuxtModule, addLayout, addPlugin, addTemplate, addComponentsDir, 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
     baseURL: string;
+    logoURL: string;
+    nombreModulo: string;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -14,13 +16,16 @@ export default defineNuxtModule<ModuleOptions>({
     async setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
         nuxt.options.runtimeConfig.public.redcollege = defu(nuxt.options.runtimeConfig.public.redcollege, {
-            baseURL: options.baseURL
+            baseURL: options.baseURL,
+            logoURL: options.logoURL,
+            nombreModulo: options.nombreModulo
         })
 
         // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
         addPlugin(resolver.resolve('./runtime/plugin'))
         addPlugin(resolver.resolve('./runtime/plugins/lucide'))
         addPlugin(resolver.resolve('./runtime/plugins/vue-table'))
+        addPlugin(resolver.resolve('./runtime/plugins/middleware'))
         addComponentsDir({
             path: resolver.resolve('runtime/components')
         })
@@ -43,6 +48,8 @@ export default defineNuxtModule<ModuleOptions>({
         await installModule('@pinia/nuxt', {
             storesDirs: [resolver.resolve('runtime/stores/**')]
         })
+
+        addPlugin(resolver.resolve('./runtime/plugins/auth'))
 
         await installModule('@nuxt/icon')
         addImportsDir(resolver.resolve('runtime/composables'))
