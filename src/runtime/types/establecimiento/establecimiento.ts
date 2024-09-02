@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-export type TEstablecimiento = {
+export interface IEstablecimiento {
     id: number;
     nombre: string;
     logo: string;

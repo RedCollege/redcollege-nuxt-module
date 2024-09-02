@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-export type TPerfil = {
+export interface IPerfil {
     id: number;
     usuario_id: number;
     created_at: DateTime;

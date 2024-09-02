@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia';
 import type { IAuthUsuarioResponse } from '../models/Auth'
-import type { TUsuario } from '../types/auth/usuario';
+import type { IUsuario } from '../types/auth/usuario';
 import { useCookie, useRouter, useRuntimeConfig } from '#app';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const { baseURL } = useRuntimeConfig().public.redcollege
-    const user = ref<TUsuario>()
+    const user = ref<IUsuario>()
     const userId = useCookie<number>('userId')
     const isLoggedIn = useCookie<boolean>('isLoggedIn')
     const bearerToken = useCookie<string>('auth._token.local')
@@ -56,7 +56,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     async function loadUser(){
-        const usuario = await $fetch<TUsuario>(`${baseURL}/auth/usuario/logged`, {
+        const usuario = await $fetch<IUsuario>(`${baseURL}/auth/usuario/logged`, {
             method: 'GET',
             headers: {
                 Authorization: bearerToken.value
@@ -82,7 +82,7 @@ export const useAuthStore = defineStore('auth', () => {
             },
         });
 
-        user.value = {} as TUsuario
+        user.value = {} as IUsuario
         isLoggedIn.value = false
         userId.value = 0
         bearerToken.value = ""

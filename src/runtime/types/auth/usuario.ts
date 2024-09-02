@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
-import type { TEstablecimiento } from "../establecimiento/establecimiento.ts";
-import type { TPerfil } from "./perfil.ts";
+import type { IEstablecimiento } from "../establecimiento/establecimiento.ts";
+import type { IPerfil } from "./perfil.ts";
 
-export type TUsuario = {
+export interface IUsuario {
     id: number;
     correo: string;
     clave: string;
@@ -13,6 +13,6 @@ export type TUsuario = {
     avatarUrl: string;
     created_at: DateTime;
     updated_at: DateTime;
-    establecimientos: Array<TEstablecimiento>;
-    perfil: TPerfil;
+    establecimientos: Array<IEstablecimiento>;
+    perfil: IPerfil;
 }

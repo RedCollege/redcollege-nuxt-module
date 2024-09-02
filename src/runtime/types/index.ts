@@ -1,3 +1,3 @@
-export * from './auth/perfil';
-export * from './auth/usuario';
-export * from './establecimiento/establecimiento';
+export * from './auth/perfil.ts';
+export * from './auth/usuario.ts';
+export * from './establecimiento/establecimiento.ts';
