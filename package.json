@@ -43,7 +43,6 @@
         "defu": "^6.1.4",
         "lucide-vue-next": "^0.428.0",
         "luxon": "^3.5.0",
-        "mlly": "^1.7.1",
         "pinia": "^2.2.2",
         "radix-vue": "^1.9.4",
         "shadcn-nuxt": "^0.10.4",
