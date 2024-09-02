@@ -41,7 +41,7 @@ ScrollArea(class="[&>div>div[style]]:!block")
                                         class="w-full justify-start h-10 mb-1"
                                         as-child
                                     )
-                                        NuxtLink(to="/")
+                                        NuxtLink(:to="href")
                                             span(:class="isOpen === false ? '' : 'mr-4'")
                                                 Icon.text-primary(:name="`tabler:${icon}`", size="18")
                                             p(:class="['max-w-[200px] truncate', isOpen === false ? '-translate-x-96 opacity-0' : 'translate-x-0 opacity-100']") {{ label }}

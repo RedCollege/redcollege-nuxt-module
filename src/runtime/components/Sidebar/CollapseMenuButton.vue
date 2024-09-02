@@ -43,7 +43,7 @@ div
                 class="w-full justify-start h-10 mb-1"
                 asChild=""
             )
-                a(:href="href")
+                NuxtLink(:href="href")
                     span.mr-4.ml-2
                         Icon(:size="10", name="tabler:point-filled")
                     p(
