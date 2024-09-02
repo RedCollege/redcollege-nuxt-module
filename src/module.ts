@@ -37,6 +37,9 @@ export default defineNuxtModule<ModuleOptions>({
         await installModule('@pinia/nuxt', {
             storesDirs: [resolver.resolve('runtime/stores/**')]
         })
+
+        nuxt.options.build.transpile.push('pinia')
+
         await installModule('@nuxt/icon')
         addImportsDir(resolver.resolve('runtime/composables'))
         addLayout(resolver.resolve('runtime/layouts', 'dashboard.vue'), 'dashboard')
