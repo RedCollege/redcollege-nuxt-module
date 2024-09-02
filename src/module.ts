@@ -20,10 +20,6 @@ export default defineNuxtModule<ModuleOptions>({
             baseURL: options.baseURL
         })
 
-        if (!nuxt.options.modules.includes('@nuxtjs/tailwindcss')) {
-            await installModule('@nuxtjs/tailwindcss')
-        }
-
         // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
         addPlugin(resolver.resolve('./runtime/plugin'))
         addPlugin(resolver.resolve('./runtime/plugins/lucide'))
