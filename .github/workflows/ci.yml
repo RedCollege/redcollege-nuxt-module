@@ -29,6 +29,9 @@ jobs:
         run: npx npm@latest install
 
       - name: Build
+        run: npm run dev:prepare
+
+      - name: Build
         run: npm run prepack
 
       - name: Update Version
