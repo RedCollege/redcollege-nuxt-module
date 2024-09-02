@@ -1,13 +1,14 @@
 import { ref, onMounted } from 'vue'
 import { defineStore } from 'pinia';
 import type { IAuthUsuarioResponse } from '../models/Auth'
+import type { IUsuario } from '../interfaces/auth/usuario';
 import { useCookie, useRouter, useRuntimeConfig } from '#app';
 
 export const useAuthStore = defineStore('auth', () => {
 
     interface ITokenMainResponse {
-        estado: string;
-        data: ITokenAuthResponse;
+        type: string;
+        token: string;
     }
 
     interface ITokenAuthResponse  {
@@ -21,7 +22,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const { baseURL } = useRuntimeConfig().public.redcollege
-    const user = ref<IAuthUsuarioResponse>()
+    const user = ref<IUsuario>()
     const userId = useCookie<number>('userId')
     const isLoggedIn = useCookie<boolean>('isLoggedIn')
     const bearerToken = useCookie<string>('auth._token.local')
@@ -33,7 +34,7 @@ export const useAuthStore = defineStore('auth', () => {
     })
 
     async function login(correo: string, password: string){
-        const { data } = await $fetch<ITokenMainResponse>(`${baseURL}/auth/iniciarSesion`, {
+        const data = await $fetch<ITokenMainResponse>(`${baseURL}/auth/login`, {
             method: 'POST',
             body: {
                 correo: correo,
@@ -42,14 +43,14 @@ export const useAuthStore = defineStore('auth', () => {
         });
 
         if(data){
-            bearerToken.value = `${data.type} ${data.token}`
+            bearerToken.value = `Bearer ${data.token}`
             await loadUser()
         }
 
     }
 
     async function loadUser(){
-        const { data : usuario } = await $fetch<IAuthMainResponse>(`${baseURL}/auth/usuario/autenticado`, {
+        const usuario = await $fetch<IUsuario>(`${baseURL}/auth/usuario/logged`, {
             method: 'GET',
             headers: {
                 Authorization: bearerToken.value
@@ -66,8 +67,16 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
-    function logout(){
-        user.value = {} as IAuthUsuarioResponse
+    async function logout(){
+
+        await $fetch(`${baseURL}/auth/logout`, {
+            method: 'POST',
+            headers: {
+                Authorization: bearerToken.value
+            },
+        });
+
+        user.value = {} as IUsuario
         isLoggedIn.value = false
         userId.value = 0
         bearerToken.value = ""

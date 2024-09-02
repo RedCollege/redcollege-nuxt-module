@@ -9,8 +9,6 @@ const password = ref("")
 const authStore = useAuthStore()
 const isLoginLoading = ref(false)
 
-
-
 async function login() {
     isLoginLoading.value = true
     await authStore.login(correo.value, password.value)

@@ -1,6 +1,8 @@
 import defu from 'defu'
 import { defineNuxtModule, addLayout, addPlugin, addTemplate, addComponentsDir, createResolver, installModule, addImportsDir } from '@nuxt/kit'
-
+import { readFileSync } from 'fs'
+import { readdirSync, statSync } from 'fs';
+import { relative } from 'path';
 // Module options TypeScript interface definition
 export interface ModuleOptions {
     baseURL: string;
@@ -8,13 +10,10 @@ export interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
     meta: {
-        name: '@redcollege/ui-module',
+        name: '@redcollege/ui-nuxt-module',
         configKey: 'redcollege',
     },
     // Default configuration options of the Nuxt module
-    defaults: {
-        baseURL: 'https://api.redcollege.net/api'
-    },
     async setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
         nuxt.options.runtimeConfig.public.redcollege = defu(nuxt.options.runtimeConfig.public.redcollege, {
@@ -40,5 +39,26 @@ export default defineNuxtModule<ModuleOptions>({
         await installModule('@nuxt/icon')
         addImportsDir(resolver.resolve('runtime/composables'))
         addLayout(resolver.resolve('runtime/layouts', 'dashboard.vue'), 'dashboard')
+
+        addTemplate({
+            filename: 'types/redcollege-ui.d.ts',
+            getContents: () => `
+              declare module '@redcollege/ui-nuxt-module' {
+                export * from '${resolver.resolve('./runtime/types')}'
+              }
+            `
+          })
+
+          // Asegúrate de que Nuxt incluya los tipos en la compilación
+          nuxt.options.alias['@redcollege/ui-nuxt-module'] = resolver.resolve('.')
+          nuxt.options.build.transpile.push('@redcollege/ui-nuxt-module')
+
+          // Añadir los tipos al array de tipos de Nuxt
+          nuxt.hook('prepare:types', ({ references }) => {
+            references.push({ path: resolver.resolve(nuxt.options.buildDir, 'types/redcollege-ui.d.ts') })
+          })
+
     },
 })
+
+export * from './runtime/types'
