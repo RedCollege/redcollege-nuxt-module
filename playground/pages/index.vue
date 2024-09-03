@@ -5,7 +5,6 @@ import type { IUsuario } from '@redcollege/ui-nuxt-module/module';
 
 const { planificaciones } = useNuxtApp().$apis;
 
-const algo = planificaciones.planificacion.getAll()
 
 import { storeToRefs } from 'pinia';
 
