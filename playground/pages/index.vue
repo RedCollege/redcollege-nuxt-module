@@ -91,7 +91,14 @@ useSidebar().setMenuList([
 <template>
     <NuxtLayout name="dashboard">
         <div class="my-2">
-            <!--<IAButton></IAButton>-->
+            <Popover>
+                <PopoverTrigger>
+                    <Button variant="outline"> Elige una fecha</Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                    <Calendar locale="es-ES" />
+                </PopoverContent>
+            </Popover>
             <ContenidosMain />
             <PlanificacionesTable />
         </div>
