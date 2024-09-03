@@ -50,6 +50,8 @@ export default defineNuxtModule<ModuleOptions>({
             storesDirs: [resolver.resolve('runtime/stores/**')]
         })
 
+        await installModule('@formkit/auto-animate/nuxt')
+
         addPlugin(resolver.resolve('./runtime/plugins/auth'))
         addPlugin(resolver.resolve('./runtime/plugins/form'))
         await installModule('@nuxt/icon')

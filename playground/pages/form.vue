@@ -16,7 +16,7 @@ const onSubmit = form.handleSubmit((values) => {
 <template>
     <form @submit.prevent="onSubmit">
         <FormField v-slot="{ componentField }" name="username">
-        <FormItem>
+        <FormItem v-auto-animate>
             <FormLabel>Username</FormLabel>
             <FormControl>
             <Input type="text" placeholder="shadcn" v-bind="componentField" />
