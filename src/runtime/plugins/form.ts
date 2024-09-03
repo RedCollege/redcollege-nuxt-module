@@ -3,12 +3,27 @@ import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 
-export default defineNuxtPlugin((nuxtApp) => {
+export interface FormPluginInjection {
+    useForm: typeof useForm
+    toTypedSchema: typeof toTypedSchema
+    z: typeof z
+    owo: string
+}
+
+export default defineNuxtPlugin(() => {
+    const injection: FormPluginInjection = {
+        useForm,
+        toTypedSchema,
+        z,
+        owo: "hola"
+    }
+
     return {
         provide: {
-            useForm,
-            toTypedSchema,
-            z
+            form: injection
         }
     }
 })
+
+// Exporta los tipos individuales si es necesario
+export { useForm, toTypedSchema, z }

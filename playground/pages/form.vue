@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const { $toTypedSchema, $z, $useForm } = useNuxtApp()
+const { toTypedSchema, z, useForm } = useNuxtApp().$form
 
-const formSchema = $toTypedSchema($z.object({
-    username: $z.string().min(2).max(50),
+const formSchema = toTypedSchema(z.object({
+    username: z.string().min(2).max(50),
 }))
 
-const form = $useForm({
+const form = useForm({
     validationSchema: formSchema,
 })
 

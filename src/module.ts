@@ -27,6 +27,8 @@ export default defineNuxtModule<ModuleOptions>({
         addPlugin(resolver.resolve('./runtime/plugins/vue-table'))
         addPlugin(resolver.resolve('./runtime/plugins/middleware'))
         addPlugin(resolver.resolve('./runtime/plugins/api'))
+        addPlugin(resolver.resolve('./runtime/plugins/form'))
+
         addComponentsDir({
             path: resolver.resolve('runtime/components')
         })
@@ -53,7 +55,7 @@ export default defineNuxtModule<ModuleOptions>({
         await installModule('@formkit/auto-animate/nuxt')
 
         addPlugin(resolver.resolve('./runtime/plugins/auth'))
-        addPlugin(resolver.resolve('./runtime/plugins/form'))
+
         await installModule('@nuxt/icon')
         addImportsDir(resolver.resolve('runtime/composables'))
         addLayout(resolver.resolve('runtime/layouts', 'dashboard.vue'), 'dashboard')
