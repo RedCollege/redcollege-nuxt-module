@@ -51,7 +51,7 @@ export default defineNuxtModule<ModuleOptions>({
         })
 
         addPlugin(resolver.resolve('./runtime/plugins/auth'))
-
+        addPlugin(resolver.resolve('./runtime/plugins/form'))
         await installModule('@nuxt/icon')
         addImportsDir(resolver.resolve('runtime/composables'))
         addLayout(resolver.resolve('runtime/layouts', 'dashboard.vue'), 'dashboard')

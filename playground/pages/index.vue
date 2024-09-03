@@ -2,6 +2,7 @@
 import { DateTime } from 'luxon'
 import type { IUsuario } from '@redcollege/ui-nuxt-module/module';
 
+
 const { planificaciones } = useNuxtApp().$apis;
 
 const algo = planificaciones.planificacion.getAll()
