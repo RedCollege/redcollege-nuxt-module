@@ -7,6 +7,7 @@ const { logoURL, nombreModulo } = useRuntimeConfig().public.redcollege
 
 <template lang="pug">
 div
+    Toaster
     MainLayout(:logoUrl="logoURL", :titulo="nombreModulo")
         slot
 </template>
