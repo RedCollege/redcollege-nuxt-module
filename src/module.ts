@@ -26,6 +26,7 @@ export default defineNuxtModule<ModuleOptions>({
         addPlugin(resolver.resolve('./runtime/plugins/lucide'))
         addPlugin(resolver.resolve('./runtime/plugins/vue-table'))
         addPlugin(resolver.resolve('./runtime/plugins/middleware'))
+        addPlugin(resolver.resolve('./runtime/plugins/api'))
         addComponentsDir({
             path: resolver.resolve('runtime/components')
         })

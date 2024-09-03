@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { DateTime } from 'luxon'
-import type { TUsuario } from '@redcollege/ui-nuxt-module/module';
+import type { IUsuario } from '@redcollege/ui-nuxt-module/module';
+
+const { planificaciones } = useNuxtApp().$apis;
+
+const algo = planificaciones.planificacion.getAll()
 
 import { storeToRefs } from 'pinia';
 
