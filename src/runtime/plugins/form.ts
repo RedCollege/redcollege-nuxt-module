@@ -7,15 +7,13 @@ export interface FormPluginInjection {
     useForm: typeof useForm
     toTypedSchema: typeof toTypedSchema
     z: typeof z
-    owo: string
 }
 
 export default defineNuxtPlugin(() => {
     const injection: FormPluginInjection = {
         useForm,
         toTypedSchema,
-        z,
-        owo: "hola"
+        z
     }
 
     return {
