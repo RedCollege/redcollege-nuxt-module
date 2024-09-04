@@ -38,6 +38,7 @@
         "@radix-icons/vue": "^1.0.0",
         "@tanstack/vue-table": "^8.20.4",
         "@types/node": "^20.14.11",
+        "@vee-validate/nuxt": "^4.13.2",
         "@vee-validate/zod": "^4.13.2",
         "@vueuse/core": "^11.0.0",
         "class-variance-authority": "^0.7.0",
