@@ -45,6 +45,8 @@ export default defineNuxtModule<ModuleOptions>({
             }
         })
 
+        await installModule('@vee-validate/nuxt')
+
         await installModule('shadcn-nuxt', {
             componentDir: resolver.resolve('runtime/components/ui')
         })
@@ -72,6 +74,15 @@ export default defineNuxtModule<ModuleOptions>({
         // Asegúrate de que Nuxt incluya los tipos en la compilación
         nuxt.options.alias['@redcollege/ui-nuxt-module'] = resolver.resolve('.')
         nuxt.options.build.transpile.push('@redcollege/ui-nuxt-module')
+
+        nuxt.options.build.transpile.push('zod', '@vee-validate/zod')
+
+        // Añadir auto-imports para zod y @vee-validate/zod
+        nuxt.options.imports.imports = nuxt.options.imports.imports || []
+        nuxt.options.imports.imports.push(
+            { from: 'zod', name: 'z' },
+            { from: '@vee-validate/zod', name: 'toTypedSchema' }
+        )
 
         // Añadir los tipos al array de tipos de Nuxt
         nuxt.hook('prepare:types', ({ references }) => {
