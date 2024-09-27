@@ -1,6 +1,7 @@
 import type { DateTime } from 'luxon';
 import type { ICursoAsignatura, ICurso } from '../Establecimiento';
-import type { IEstablecimiento, IUsuario } from '../../types';
+import type { IEstablecimiento } from "../Establecimiento/establecimiento";
+import type { IUsuario } from "../Auth/usuario";
 
 export interface IPlanificacion {
     id: number;
