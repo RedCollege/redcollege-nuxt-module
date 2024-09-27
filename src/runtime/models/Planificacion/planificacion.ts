@@ -1,5 +1,5 @@
 import type { DateTime } from 'luxon';
-import type { ICursoAsignatura, ICursoEstablecimientoResponse } from '../Curso';
+import type { ICursoAsignatura, ICurso } from '../Establecimiento';
 import type { IEstablecimiento, IUsuario } from '../../types';
 
 export interface IPlanificacionResponse {
@@ -16,7 +16,7 @@ export interface IPlanificacionResponse {
     updated_at: DateTime;
     deleted_at: DateTime;
     deleted_by: number | null;
-    curso: ICursoEstablecimientoResponse;
+    curso: ICurso;
     establecimiento: IEstablecimiento;
     usuario: IUsuario;
     colaboradores: Array<IUsuario>;
