@@ -2,9 +2,9 @@
 
 export interface IGradosSige {
     id: number;
-    tipo_ensenanza_id: number;
+    tipoEnsenanzaId: number;
     descripcion: string;
-    codigo_grado_id: number;
-    descripcion_grado: string;
+    codigoGradoId: number;
+    descripcionGrado: string;
     tag: string;
 }

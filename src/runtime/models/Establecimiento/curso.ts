@@ -10,8 +10,8 @@ export interface ICurso {
     isReciclado: boolean;
     tags: string;
     periodo: string;
-    establecimiento_id: number;
-    sige_id: number;
+    establecimientoId: number;
+    sigeId: number;
     createdAt: DateTime;
     updatedAt: DateTime;
     sige: IGradosSige;

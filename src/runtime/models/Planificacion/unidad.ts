@@ -1,25 +1,25 @@
 import type { DateTime } from 'luxon';
 import type { IPlanificacion } from './planificacion';
 
-export interface IUnidadResponse {
+export interface IUnidad {
     id: number;
-    planificacion_id: number;
+    planificacionId: number;
     titulo: string;
     numero: number;
     descripcion: string | null;
-    fecha_inicio: DateTime | null | string;
-    fecha_fin: DateTime | null | string;
-    created_at: DateTime;
-    updated_at: DateTime;
-    deleted_at: DateTime;
+    fechaInicio: DateTime | null | string;
+    fechaFin: DateTime | null | string;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt: DateTime;
     planificacion: IPlanificacion;
 }
 
-export interface IUnidad {
-    planificacion_id: number,
+export interface IUnidadForm {
+    planificacionId: number,
     titulo: string,
     numero: number,
     descripcion: string,
-    fecha_inicio: DateTime | null,
-    fecha_fin: DateTime | null
+    fechaInicio: DateTime | null,
+    fechaFin: DateTime | null
 }
