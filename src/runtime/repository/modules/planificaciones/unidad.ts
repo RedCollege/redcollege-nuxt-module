@@ -1,32 +1,32 @@
 import type { $Fetch } from 'ofetch';
-import type { IUnidad, IUnidadResponse } from '~/src/runtime/models/Planificacion';
+import type { IUnidad, IUnidadForm } from '~/src/runtime/models/Planificacion';
 
 export default class UnidadModule {
     constructor(private fetcher: $Fetch) {}
 
-    async getAll(planificacionId: number): Promise<IUnidadResponse[]> {
+    async getAll(planificacionId: number): Promise<IUnidad[]> {
         return this.fetcher(`/unidades/planificacion/${planificacionId}`);
     }
 
-    async getUnidadById(unidadId: number): Promise<IUnidadResponse> {
+    async getUnidadById(unidadId: number): Promise<IUnidad> {
         return this.fetcher(`/unidades/${unidadId}`);
     }
 
-    async saveUnidad(data: IUnidad): Promise<IUnidadResponse> {
+    async saveUnidad(data: IUnidadForm): Promise<IUnidad> {
         return this.fetcher(`/unidades`, {
             method: 'POST',
             body: data
         })
     }
 
-    async updateUnidad({data, id}: { data: IUnidad, id: number} ): Promise<IUnidadResponse> {
+    async updateUnidad({data, id}: { data: IUnidadForm, id: number} ): Promise<IUnidad> {
         return this.fetcher(`/unidades/${id}`, {
             method: 'PUT',
             body: data
         })
     }
 
-    async deleteUnidad(id: number): Promise<IUnidadResponse> {
+    async deleteUnidad(id: number): Promise<IUnidad> {
         return this.fetcher(`/unidades/${id}`, {
             method: 'DELETE'
         })

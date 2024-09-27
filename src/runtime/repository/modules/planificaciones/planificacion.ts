@@ -1,40 +1,40 @@
 import type { $Fetch } from 'ofetch';
-import type { IPlanificacion, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
+import type { IPlanificacion, IPlanificacionForm } from '~/src/runtime/models/Planificacion';
 
 export default class PlanificacionModule {
     constructor(private fetcher: $Fetch) {}
 
-    async getAll(): Promise<IPlanificacionResponse[]> {
+    async getAll(): Promise<IPlanificacion[]> {
         return this.fetcher('/planificacion');
     }
 
-    async getPlanificacionById(planificacionId: number): Promise<IPlanificacionResponse> {
+    async getPlanificacionById(planificacionId: number): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${planificacionId}`);
     }
 
-    async savePlanificacion(data: IPlanificacion): Promise<IPlanificacionResponse> {
+    async savePlanificacion(data: IPlanificacionForm): Promise<IPlanificacion> {
         return this.fetcher('/planificacion', {
             method: 'POST',
             body: data
         })
     }
 
-    async updatePlanificacion({data, id}: { data: IPlanificacion, id: number} ): Promise<IPlanificacionResponse> {
+    async updatePlanificacion({data, id}: { data: IPlanificacionForm, id: number} ): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}`, {
             method: 'PUT',
             body: data
         })
     }
 
-    async deleteTemporalPlanificacion(id: number): Promise<IPlanificacionResponse> {
+    async deleteTemporalPlanificacion(id: number): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}`)
     }
 
-    async restorePlanificacion(id: number): Promise<IPlanificacionResponse> {
+    async restorePlanificacion(id: number): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}/restore`)
     }
 
-    async deletePlanificacion(id: number): Promise<IPlanificacionResponse> {
+    async deletePlanificacion(id: number): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}`, {
             method: 'DELETE'
         })
