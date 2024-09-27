@@ -1,7 +1,7 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
 import type { FetchOptions, $Fetch } from 'ofetch';
 import { createApiModules } from '../utils/apiModuleFactory';
-import type { ApiModules, PlanificacionesModules, InformesModules } from '../utils/apiModuleFactory';
+import type { ApiModules, InformesModules, PlanificacionesModules } from '../utils/apiModuleFactory';
 
 // Definir tipos de API
 type ApiType = 'planificaciones' | 'informes';
