@@ -24,6 +24,11 @@ export interface IPlanificacion {
     asignaturas: Array<ICursoAsignatura>;
 }
 
+export interface IPlanificacionResponse {
+    meta: Meta,
+    data: IPlanificacion
+}
+
 export interface IPlanificacionForm {
     titulo: string,
     periodo: string,
@@ -34,4 +39,16 @@ export interface IPlanificacionForm {
     establecimientoId: number,
     colaboradores: number[],
     asignaturas: number[]
+}
+
+interface Meta {
+    total: number | null,
+    perPage: number | null,
+    currentPage: number | null,
+    lastPage: number| null,
+    firstPage: number| null,
+    firstPageUrl: string | null,
+    lastPageUrl: string | null,
+    nextPageUrl: string | null,
+    previousPageUrl: string| null 
 }

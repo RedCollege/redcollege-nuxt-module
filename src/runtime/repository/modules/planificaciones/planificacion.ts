@@ -1,10 +1,10 @@
 import type { $Fetch } from 'ofetch';
-import type { IPlanificacion, IPlanificacionForm } from '~/src/runtime/models/Planificacion';
+import type { IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
 
 export default class PlanificacionModule {
     constructor(private fetcher: $Fetch) {}
 
-    async getAll(): Promise<IPlanificacion[]> {
+    async getAll(): Promise<IPlanificacionResponse> {
         return this.fetcher('/planificacion');
     }
 
