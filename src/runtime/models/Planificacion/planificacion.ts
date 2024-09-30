@@ -26,7 +26,7 @@ export interface IPlanificacion {
 
 export interface IPlanificacionResponse {
     meta: Meta,
-    data: IPlanificacion
+    data: IPlanificacion[]
 }
 
 export interface IPlanificacionForm {
