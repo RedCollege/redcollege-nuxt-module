@@ -12,6 +12,13 @@ export default class PlanificacionModule {
         return this.fetcher(`/planificacion/${planificacionId}`);
     }
 
+    async duplicatePlanificacion(planificacionId: number): Promise<IPlanificacion> {
+        return this.fetcher(`/planificacion/duplicate/${planificacionId}`, {
+            method: 'POST',
+            body: {}
+        })
+    }
+
     async savePlanificacion(data: IPlanificacionForm): Promise<IPlanificacion> {
         return this.fetcher('/planificacion', {
             method: 'POST',
