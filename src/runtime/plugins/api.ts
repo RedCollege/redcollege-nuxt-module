@@ -2,6 +2,7 @@ import { defineNuxtPlugin, useRuntimeConfig } from '#app';
 import type { FetchOptions, $Fetch } from 'ofetch';
 import { createApiModules } from '../utils/apiModuleFactory';
 import type { ApiModules, InformesModules, PlanificacionesModules } from '../utils/apiModuleFactory';
+import { useAuthStore } from '../stores/authStore';
 
 // Definir tipos de API
 type ApiType = 'planificaciones' | 'informes';
@@ -10,6 +11,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     const { baseURL } = useRuntimeConfig().public.redcollege
     const fetchOptions: FetchOptions = {
         baseURL: baseURL, // URL base común para todas las APIs
+        headers: {
+            Authorization: useAuthStore().bearerToken
+        }
     };
 
     const apiFetcher = $fetch.create(fetchOptions) as $Fetch;
