@@ -1,11 +1,25 @@
 import type { $Fetch } from 'ofetch';
 import type { IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
 
+
+interface GetAllProps {
+    trashed?: boolean;
+    periodo?: string;
+    curso?: string;
+    cobertura?: string;
+    estado?: string;
+    colaborativa?: boolean;
+    asignatura?: string;
+    page?: number;
+}
+
 export default class PlanificacionModule {
     constructor(private fetcher: $Fetch) {}
 
-    async getAll(): Promise<IPlanificacionResponse> {
-        return this.fetcher('/planificacion');
+    async getAll(props?: GetAllProps): Promise<IPlanificacionResponse> {
+        return this.fetcher('/planificacion', {
+            params: props
+        });
     }
 
     async getPlanificacionById(planificacionId: number): Promise<IPlanificacion> {
