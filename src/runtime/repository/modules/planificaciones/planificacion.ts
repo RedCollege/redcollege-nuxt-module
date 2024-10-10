@@ -48,7 +48,9 @@ export default class PlanificacionModule {
     }
 
     async deleteTemporalPlanificacion(id: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${id}`)
+        return this.fetcher(`/planificacion/${id}`, {
+            method: "DELETE"
+        })
     }
 
     async restorePlanificacion(id: number): Promise<IPlanificacion> {
