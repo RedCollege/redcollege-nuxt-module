@@ -18,12 +18,15 @@ export default class PlanificacionModule {
 
     async getAll(props?: GetAllProps): Promise<IPlanificacionResponse> {
         return this.fetcher('/planificacion', {
-            params: props
+            params: props,
+            method: 'GET'
         });
     }
 
     async getPlanificacionById(planificacionId: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${planificacionId}`);
+        return this.fetcher(`/planificacion/${planificacionId}`, {
+            method: 'GET'
+        });
     }
 
     async duplicatePlanificacion(planificacionId: number): Promise<IPlanificacion> {
@@ -42,21 +45,25 @@ export default class PlanificacionModule {
 
     async updatePlanificacion({data, id}: { data: IPlanificacionForm, id: number} ): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}`, {
-            method: 'PUT',
+            method: 'PATCH',
             body: data
         })
     }
 
     async deleteTemporalPlanificacion(id: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${id}`)
+        return this.fetcher(`/planificacion/${id}`, {
+            method: "DELETE"
+        })
     }
 
     async restorePlanificacion(id: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${id}/restore`)
+        return this.fetcher(`/planificacion/${id}/restore`, {
+            method: 'PATCH'
+        })
     }
 
     async deletePlanificacion(id: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${id}`, {
+        return this.fetcher(`/planificacion/${id}/destroy`, {
             method: 'DELETE'
         })
     }
