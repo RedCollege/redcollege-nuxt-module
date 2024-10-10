@@ -52,7 +52,9 @@ export default class PlanificacionModule {
     }
 
     async restorePlanificacion(id: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${id}/restore`)
+        return this.fetcher(`/planificacion/${id}/restore`, {
+            method: 'PATCH'
+        })
     }
 
     async deletePlanificacion(id: number): Promise<IPlanificacion> {
