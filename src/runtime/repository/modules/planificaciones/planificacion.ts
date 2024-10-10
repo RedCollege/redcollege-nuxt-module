@@ -42,7 +42,7 @@ export default class PlanificacionModule {
 
     async updatePlanificacion({data, id}: { data: IPlanificacionForm, id: number} ): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}`, {
-            method: 'PUT',
+            method: 'PATCH',
             body: data
         })
     }
