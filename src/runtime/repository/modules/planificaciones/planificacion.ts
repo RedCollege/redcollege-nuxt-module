@@ -18,12 +18,15 @@ export default class PlanificacionModule {
 
     async getAll(props?: GetAllProps): Promise<IPlanificacionResponse> {
         return this.fetcher('/planificacion', {
-            params: props
+            params: props,
+            method: 'GET'
         });
     }
 
     async getPlanificacionById(planificacionId: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${planificacionId}`);
+        return this.fetcher(`/planificacion/${planificacionId}`, {
+            method: 'GET'
+        });
     }
 
     async duplicatePlanificacion(planificacionId: number): Promise<IPlanificacion> {
