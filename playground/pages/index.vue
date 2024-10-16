@@ -218,5 +218,18 @@ function notificate() {
             <ContenidosMain />
             <PlanificacionesTable />
         </div>
+        <div class='bg-slate-500' >
+            <ToggleGroup type="single">
+                <ToggleGroupItem value="bold" aria-label="Toggle bold">
+                    <span>hola</span>
+                </ToggleGroupItem>
+                <ToggleGroupItem value="italic" aria-label="Toggle italic">
+                    <span>hola</span>
+                </ToggleGroupItem>
+                <ToggleGroupItem value="underline" aria-label="Toggle underline">
+                    <span>hola</span>
+                </ToggleGroupItem>
+            </ToggleGroup>
+        </div>
     </NuxtLayout>
 </template>
