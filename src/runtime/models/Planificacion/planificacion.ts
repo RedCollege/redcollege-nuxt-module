@@ -2,6 +2,7 @@ import type { DateTime } from 'luxon';
 import type { ICursoAsignatura, ICurso } from '../Establecimiento';
 import type { IEstablecimiento } from "../Establecimiento/establecimiento";
 import type { IUsuario } from "../Auth/usuario";
+import { IUnidad } from './unidad';
 
 export interface IPlanificacion {
     id: number;
@@ -22,6 +23,7 @@ export interface IPlanificacion {
     usuario: IUsuario;
     colaboradores: Array<IUsuario>;
     asignaturas: Array<ICursoAsignatura>;
+    unidades: Array<IUnidad> 
 }
 
 export interface IPlanificacionResponse {
@@ -45,10 +47,10 @@ interface Meta {
     total: number | null,
     perPage: number | null,
     currentPage: number | null,
-    lastPage: number| null,
-    firstPage: number| null,
+    lastPage: number | null,
+    firstPage: number | null,
     firstPageUrl: string | null,
     lastPageUrl: string | null,
     nextPageUrl: string | null,
-    previousPageUrl: string| null 
+    previousPageUrl: string | null
 }
