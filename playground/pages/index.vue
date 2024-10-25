@@ -3,7 +3,7 @@ import { DateTime } from 'luxon'
 import type { IUsuario } from '@redcollege/ui-nuxt-module/module';
 
 
-const { planificaciones } = useNuxtApp().$apis;
+const { planificaciones, establecimiento } = useNuxtApp().$apis;
 
 
 import { storeToRefs } from 'pinia';
@@ -108,6 +108,15 @@ function notificate() {
         description: 'Friday, February 10, 2023 at 5:57 PM',
     })
 }
+
+onMounted(async () => {
+  try {
+    const asignaturas = await establecimiento.establecimiento.getAsignaturasByCurso(1003);
+    console.log('Asignaturas:', asignaturas);
+  } catch (error) {
+    console.error('Error al obtener asignaturas:', error);
+  }
+});
 
 </script>
 
