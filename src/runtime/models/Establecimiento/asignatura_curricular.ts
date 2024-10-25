@@ -6,11 +6,10 @@ export interface IAsignaturaCurricular {
     gradoEducacionalId: number;
     itemEducacionalId: number;
     nivelEducacionalId: number;
-    oldId: number;
     itemConfiguracionId: number;
     establecimientoId: number;
     asignaturaParentId: number;
-    codigoSige: string;
+    codigoSige: number;
     sigeId: number;
     createdAt: DateTime;
     updatedAt: DateTime;
