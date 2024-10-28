@@ -1,5 +1,6 @@
 import type { $Fetch } from 'ofetch';
 import type { ICursoAsignatura } from '../../../models/Establecimiento';
+import type { ICurso } from '~/src/runtime/models/Establecimiento/curso';
 
 
 
@@ -14,10 +15,10 @@ export default class EstablecimientoModule {
         });
     }
 
-    async getAllCursosByEstablecimiento(establecimientoId: number, periodo: number): Promise<ICursoAsignatura[]> {
+    async getAllCursosByEstablecimiento(establecimientoId: number, periodo: number, isDinamico: boolean): Promise<ICurso[]> {
         return this.fetcher(`/establecimiento/${establecimientoId}/cursos`, {
             method: 'GET',
-            params: { periodo }
+            params: { periodo, isDinamico }
         });
     }
 
