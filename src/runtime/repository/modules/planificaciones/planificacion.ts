@@ -14,7 +14,7 @@ interface GetAllProps {
 }
 
 export default class PlanificacionModule {
-    constructor(private fetcher: $Fetch) {}
+    constructor(private fetcher: $Fetch) { }
 
     async getAll(props?: GetAllProps): Promise<IPlanificacionResponse> {
         return this.fetcher('/planificacion', {
@@ -43,7 +43,7 @@ export default class PlanificacionModule {
         })
     }
 
-    async updatePlanificacion({data, id}: { data: IPlanificacionForm, id: number} ): Promise<IPlanificacion> {
+    async updatePlanificacion({ data, id }: { data: IPlanificacionForm, id: number }): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}`, {
             method: 'PATCH',
             body: data
@@ -65,6 +65,15 @@ export default class PlanificacionModule {
     async deletePlanificacion(id: number): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}/destroy`, {
             method: 'DELETE'
+        })
+    }
+
+    async clonePlanificacion(asignaturaId: number, planificacionId: number): Promise<IPlanificacion[]> {
+        return this.fetcher(`/planificacion/clone/${asignaturaId}`, {
+            method: 'POST',
+            body: {
+                planificacionId: planificacionId
+            }
         })
     }
 

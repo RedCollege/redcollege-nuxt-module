@@ -1,5 +1,6 @@
 import type { DateTime } from 'luxon';
 import type { IPlanificacion } from './planificacion';
+import { IItemEntradaCurricular } from './itemEntradaCurricular';
 
 export interface IUnidad {
     id: number;
@@ -13,6 +14,7 @@ export interface IUnidad {
     updatedAt: DateTime;
     deletedAt: DateTime;
     planificacion: IPlanificacion;
+    itemsEntradasCurriculares: Array<IItemEntradaCurricular>
 }
 
 export interface IUnidadForm {
