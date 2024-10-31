@@ -3,6 +3,7 @@ import type { ICursoAsignatura, ICurso } from '../Establecimiento';
 import type { IEstablecimiento } from "../Establecimiento/establecimiento";
 import type { IUsuario } from "../Auth/usuario";
 import { IUnidad } from './unidad';
+import { IItemEntradaCurricular } from './itemEntradaCurricular';
 
 export interface IPlanificacion {
     id: number;
@@ -14,6 +15,7 @@ export interface IPlanificacion {
     cursoId: number;
     establecimientoId: number;
     usuarioId: number;
+    unidadId: number;
     createdAt: DateTime;
     updatedAt: DateTime;
     deletedAt: DateTime;
@@ -23,7 +25,8 @@ export interface IPlanificacion {
     usuario: IUsuario;
     colaboradores: Array<IUsuario>;
     asignaturas: Array<ICursoAsignatura>;
-    unidades: Array<IUnidad> 
+    unidades: Array<IUnidad>;
+    itemsEntradasCurriculares: Array<IItemEntradaCurricular>;
 }
 
 export interface IPlanificacionResponse {

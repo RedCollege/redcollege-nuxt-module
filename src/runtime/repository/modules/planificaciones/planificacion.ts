@@ -68,6 +68,15 @@ export default class PlanificacionModule {
         })
     }
 
+    async relateItemsEntradaCurricular(planificacionId: number, itemsIds: Number[]): Promise<IPlanificacion> {
+        return this.fetcher(`/planificacion/relateItems/${planificacionId}`, {
+            method: 'POST',
+            body: {
+                itemsEntradaCurricular: itemsIds
+            }
+        })
+    }
+
     async clonePlanificacion(asignaturaId: number, planificacionId: number): Promise<IPlanificacion[]> {
         return this.fetcher(`/planificacion/clone/${asignaturaId}`, {
             method: 'POST',
