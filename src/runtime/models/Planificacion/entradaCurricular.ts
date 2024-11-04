@@ -5,11 +5,11 @@ export interface IEntradaCurricular {
     id: number;
     descripcion: string;
     digitoCurricular: number | null;
-    asignatura_id: number;
+    asignaturaId: number;
     grado: number;
     slug: number | null;
-    establecimiento_id: number;
-    item_entrada_curricular_id: number;
+    establecimientoId: number;
+    itemEntradaCurricularId: number;
     createdAt: DateTime;
     updatedAt: DateTime;
     itemsEntradaCurricular: Array<IItemEntradaCurricular>;

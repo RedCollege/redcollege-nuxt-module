@@ -68,7 +68,7 @@ export default class PlanificacionModule {
         })
     }
 
-    async relateItemsEntradaCurricular(planificacionId: number, itemsIds: Number[]): Promise<IPlanificacion> {
+    async relateItemsEntradaCurricular(planificacionId: number, itemsIds: number[]): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/relateItems/${planificacionId}`, {
             method: 'POST',
             body: {
