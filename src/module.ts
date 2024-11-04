@@ -66,7 +66,7 @@ export default defineNuxtModule<ModuleOptions>({
             filename: 'types/redcollege-ui.d.ts',
             getContents: () => `
                 declare module '@redcollege/ui-nuxt-module' {
-                    export * from '${resolver.resolve('./runtime/types')}'
+                    export * from '${resolver.resolve('./runtime/models')}'
                 }
             `
         })
