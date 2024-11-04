@@ -14,5 +14,5 @@ export interface ICurso {
     sigeId: number;
     createdAt: DateTime;
     updatedAt: DateTime;
-    sige: IGradosSige;
+    sige?: IGradosSige;
 }

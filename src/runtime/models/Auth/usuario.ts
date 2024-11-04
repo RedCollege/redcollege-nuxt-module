@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import type { IEstablecimiento } from "../Establecimiento/establecimiento";
 import type { IPerfil } from "./perfil";
+import type { IRol } from '../Establecimiento/rol';
 
 export interface IUsuario {
     id: number;
@@ -15,4 +16,5 @@ export interface IUsuario {
     updatedAt: DateTime;
     establecimientos: Array<IEstablecimiento>;
     perfil: IPerfil;
+    roles: Array<IRol>;
 }
