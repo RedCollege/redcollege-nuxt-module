@@ -21,7 +21,7 @@ export default class UnidadModule {
 
     async updateUnidad({data, id}: { data: IUnidadForm, id: number} ): Promise<IUnidad> {
         return this.fetcher(`/unidades/${id}`, {
-            method: 'PUT',
+            method: 'PATCH',
             body: data
         })
     }
