@@ -105,7 +105,6 @@ const emit = defineEmits(['sucessLogout', 'selectedFilters'])
 onMounted(() => {
     if(Number(useRoute().params.establecimientoid) > 0){
         selectedEstablecimientoId.value = String(useRoute().params.establecimientoid)
-        useNavbar().setSelectedEstablecimientoId(Number(useRoute().params.establecimientoid))
     }
 })
 
