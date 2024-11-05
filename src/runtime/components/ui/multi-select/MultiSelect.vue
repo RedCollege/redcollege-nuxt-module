@@ -106,7 +106,7 @@ const setIsPopoverOpen = (value: boolean) => {
 <template>
     <Popover>
         <PopoverTrigger  class="w-full">
-            <Button  :class="[
+            <Button type="button" :class="[
                 'flex w-full p-1 rounded-md border border-input min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit',
                 className
             ]">
