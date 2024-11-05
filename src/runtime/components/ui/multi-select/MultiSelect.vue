@@ -107,7 +107,7 @@ const setIsPopoverOpen = (value: boolean) => {
     <Popover>
         <PopoverTrigger  class="w-full">
             <Button  :class="[
-                'flex w-full p-1 rounded-md border min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit',
+                'flex w-full p-1 rounded-md border border-input min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit',
                 className
             ]">
                 <div v-if="selectedValues.length > 0" class="flex justify-between items-center w-full">
