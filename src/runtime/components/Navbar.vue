@@ -103,9 +103,9 @@ const modules: { link: string, title: string, subtitle: string, img: string, doH
 const emit = defineEmits(['sucessLogout', 'selectedFilters'])
 
 onMounted(() => {
-    if(Number(useRoute().params.establecimientoId) > 0){
-        selectedEstablecimientoId.value = String(useRoute().params.establecimientoId)
-        useNavbar().setSelectedEstablecimientoId(Number(useRoute().params.establecimientoId))
+    if(Number(useRoute().params.establecimientoid) > 0){
+        selectedEstablecimientoId.value = String(useRoute().params.establecimientoid)
+        useNavbar().setSelectedEstablecimientoId(Number(useRoute().params.establecimientoid))
     }
 })
 
