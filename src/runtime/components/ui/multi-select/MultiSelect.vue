@@ -41,7 +41,8 @@ interface MultiSelectProps {
 
 const props = defineProps<MultiSelectProps>()
 const emit = defineEmits<{
-    (e: 'update:modelValue', value: string[]): void
+    (e: 'update:modelValue', value: string[]): void,
+    (e: 'select', value: string[]): void
 }>()
 
 const isPopoverOpen = ref(false)
@@ -56,10 +57,13 @@ const toggleOption = (option: string) => {
         ? selectedValues.value.filter((value) => value !== option)
         : [...selectedValues.value, option]
     selectedValues.value = newSelectedValues
+
+    emit('select', newSelectedValues)
 }
 
 const handleClear = () => {
     selectedValues.value = []
+    emit('select', [])
 }
 
 const togglePopover = () => {
@@ -69,6 +73,7 @@ const togglePopover = () => {
 const clearExtraOptions = () => {
     const newSelectedValues = selectedValues.value.slice(0, props.maxCount ?? 3)
     selectedValues.value = newSelectedValues
+    emit('select', newSelectedValues)
 }
 
 const toggleAll = () => {
@@ -77,6 +82,7 @@ const toggleAll = () => {
     } else {
         const allValues = props.options.map((option) => option.value)
         selectedValues.value = allValues
+        emit('select', allValues)
     }
 }
 
@@ -87,6 +93,7 @@ const handleInputKeyDown = (event: KeyboardEvent) => {
         const newSelectedValues = [...selectedValues.value]
         newSelectedValues.pop()
         selectedValues.value = newSelectedValues
+        emit('select', newSelectedValues)
     }
 }
 

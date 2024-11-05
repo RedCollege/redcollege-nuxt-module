@@ -109,16 +109,7 @@ function notificate() {
     })
 }
 
-const options: Option[] = [
-  { label: 'Matemática', value: 'option1' },
-  { label: 'Lenguaje', value: 'option2' },
-  { label: 'Historia', value: 'option3' },
-  { label: 'Comunicación', value: 'option4' },
-  { label: 'Artes Visuales', value: 'option5' },
-  // Add more options as needed
-]
 
-const selectedValues = ref<string[]>(['option1', 'option3'])
 
 const handleValueChange = (newValues: string[]) => {
   console.log('Selected values:', newValues)
@@ -129,11 +120,6 @@ const handleValueChange = (newValues: string[]) => {
 
 <template>
     <NuxtLayout name="dashboard">
-        <div class="my-4">
-            <pre>{{  selectedValues }}</pre>
-            <MultiSelect :options="options" v-model="selectedValues" placeholder="Elegir Asignatura(s)" :max-count="3"></MultiSelect>
-        </div>
-        <div class="mt-4"></div>
         <Stepper class="flex w-full items-start gap-2">
             <StepperItem
             v-for="step in steps"
