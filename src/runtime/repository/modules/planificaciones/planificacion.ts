@@ -12,6 +12,7 @@ interface GetAllProps {
     asignatura?: string;
     page?: number;
     titulo?: string;
+    establecimiento: number;
 }
 
 export default class PlanificacionModule {
