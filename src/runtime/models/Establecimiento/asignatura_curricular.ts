@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon';
+import { IEntradaCurricular } from '../Planificacion/entradaCurricular';
 
 export interface IAsignaturaCurricular {
     id: number;
@@ -13,4 +14,5 @@ export interface IAsignaturaCurricular {
     sigeId: number;
     createdAt: DateTime;
     updatedAt: DateTime;
+    entradasCurriculares: Array<IEntradaCurricular>;
 }

@@ -5,7 +5,7 @@ import { IPlanificacion } from "..";
 
 export interface IItemEntradaCurricular {
     id: number;
-    descripcion: string;
+    descripcion: string | null;
     entradaCurricularId: number | null;
     establecimientoId: number;
     nivelPriorizacionId: number | null;
