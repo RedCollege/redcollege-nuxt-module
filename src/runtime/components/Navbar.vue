@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 
 import { storeToRefs } from 'pinia'
 import type { IPeriodoEscolarResponse } from '../models/Periodo'
 import type { ICursoEstablecimientoResponse } from '../models/Curso'
 import { useAuthStore } from '../stores/authStore';
-import { useRuntimeConfig } from '#app';
+import { useRuntimeConfig, useRoute } from '#app';
 import { useNavbar } from '../composables/states';
-
 
 interface Props {
     logoUrl: string,
@@ -102,6 +101,13 @@ const modules: { link: string, title: string, subtitle: string, img: string, doH
 ]
 
 const emit = defineEmits(['sucessLogout', 'selectedFilters'])
+
+onMounted(() => {
+    if(Number(useRoute().params.establecimientoid) > 0){
+        selectedEstablecimientoId.value = String(useRoute().params.establecimientoid)
+        useNavbar().setSelectedEstablecimientoId(Number(useRoute().params.establecimientoid))
+    }
+})
 
 watch(selectedEstablecimientoId, async () => {
     selectedPeriodoId.value = ""

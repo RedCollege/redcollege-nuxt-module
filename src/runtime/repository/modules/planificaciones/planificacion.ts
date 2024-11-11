@@ -11,6 +11,8 @@ interface GetAllProps {
     colaborativa?: boolean;
     asignatura?: string;
     page?: number;
+    titulo?: string;
+    establecimiento: number;
 }
 
 export default class PlanificacionModule {

@@ -109,6 +109,13 @@ function notificate() {
     })
 }
 
+
+
+const handleValueChange = (newValues: string[]) => {
+  console.log('Selected values:', newValues)
+  // Handle the value change as needed
+}
+
 </script>
 
 <template>
