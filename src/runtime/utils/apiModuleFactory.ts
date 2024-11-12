@@ -4,7 +4,7 @@ import InformesModule from '../repository/modules/informes/informes';
 import UnidadModule from '../repository/modules/planificaciones/unidad';
 import EstablecimientoModule from '../repository/modules/establecimiento/establecimiento';
 import CursoModule from '../repository/modules/establecimiento/curso';
-import AsignaturaCurricularModule from '../repository/modules/establecimiento/asignaturasCurriculares';
+import AsignaturaCurricularModule from '../repository/modules/establecimiento/asignaturas_curriculares';
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
