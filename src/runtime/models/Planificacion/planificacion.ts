@@ -3,7 +3,7 @@ import type { ICursoAsignatura, ICurso } from '../Establecimiento';
 import type { IEstablecimiento } from "../Establecimiento/establecimiento";
 import type { IUsuario } from "../Auth/usuario";
 import type { IUnidad } from './unidad';
-import type { IItemEntradaCurricular } from '../Curriculum/itemEntradaCurricular';
+import type { IItemEntradaCurricular } from '../Curriculum/item_entrada_curricular';
 
 export interface IPlanificacion {
     id: number;
