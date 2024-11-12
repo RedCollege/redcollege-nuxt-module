@@ -1,6 +1,6 @@
 import type { DateTime } from 'luxon';
 import type { IPlanificacion } from './planificacion';
-import { IItemEntradaCurricular } from '../curriculum/itemEntradaCurricular';
+import type { IItemEntradaCurricular } from '../curriculum/itemEntradaCurricular';
 
 export interface IUnidad {
     id: number;
