@@ -1,4 +1,4 @@
-import type { DateTime } from 'luxon';
+import { DateTime } from 'luxon';
 import type { IEntradaCurricular } from '../Curriculum/entrada_curricular';
 
 export interface IAsignaturaCurricular {

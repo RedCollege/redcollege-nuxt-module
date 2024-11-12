@@ -1,4 +1,4 @@
-import type { DateTime } from "luxon";
+import { DateTime } from "luxon";
 import type { IUnidad } from "../Planificacion/unidad";
 import type { IEntradaCurricular } from "./entrada_curricular";
 import type { IPlanificacion } from "..";

@@ -1,4 +1,4 @@
-import type { DateTime } from "luxon";
+import { DateTime } from "luxon";
 import type { IItemEntradaCurricular } from "./item_entrada_curricular";
 
 export interface IEntradaCurricular {
