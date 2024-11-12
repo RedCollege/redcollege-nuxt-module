@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { IEntradaCurricular } from '../Planificacion/entradaCurricular';
+import { IEntradaCurricular } from '../curriculum/entradaCurricular';
 
 export interface IAsignaturaCurricular {
     id: number;

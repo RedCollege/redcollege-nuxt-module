@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { IItemEntradaCurricular } from "./itemEntradaCurricular";
+import type { IItemEntradaCurricular } from "./itemEntradaCurricular";
 
 export interface IEntradaCurricular {
     id: number;

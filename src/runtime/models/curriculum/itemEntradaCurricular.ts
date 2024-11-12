@@ -1,18 +1,20 @@
 import { DateTime } from "luxon";
-import { IUnidad } from "./unidad";
-import { IEntradaCurricular } from "./entradaCurricular";
-import { IPlanificacion } from "..";
+import type { IUnidad } from "../Planificacion/unidad";
+import type { IEntradaCurricular } from "./entradaCurricular";
+import type { IPlanificacion } from "..";
 
 export interface IItemEntradaCurricular {
     id: number;
-    descripcion: string | null;
     entradaCurricularId: number | null;
     establecimientoId: number;
+    descripcion: string;
     nivelPriorizacionId: number | null;
     slug: string | null;
+    itemEntradaCurricularId: number;
     alias: string | null;
     createdAt: DateTime;
     updatedAt: DateTime;
+    entradasCurriculares: Array<IEntradaCurricular>;
     unidadesRelacionadas: Array<IUnidad>;
     planificaciones: Array<IPlanificacion>;
     entradaCurricular: IEntradaCurricular;
