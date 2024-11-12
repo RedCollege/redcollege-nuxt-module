@@ -2,8 +2,8 @@ import type { DateTime } from 'luxon';
 import type { ICursoAsignatura, ICurso } from '../Establecimiento';
 import type { IEstablecimiento } from "../Establecimiento/establecimiento";
 import type { IUsuario } from "../Auth/usuario";
-import { IUnidad } from './unidad';
-import { IItemEntradaCurricular } from './itemEntradaCurricular';
+import type { IUnidad } from './unidad';
+import type { IItemEntradaCurricular } from '../Curriculum/item_entrada_curricular';
 
 export interface IPlanificacion {
     id: number;
