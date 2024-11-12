@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import { IAsignaturaCurricular } from '../../../models/Establecimiento/asignatura_curricular';
+import type { IAsignaturaCurricular } from '../../../models/Establecimiento/asignatura_curricular';
 
 export default class AsignaturaCurricularModule {
     constructor(private fetcher: $Fetch) { }
