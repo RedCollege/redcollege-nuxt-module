@@ -42,13 +42,29 @@ const emit = defineEmits(['sucessLogout', 'selectedFilters'])
 // Función para actualizar la ruta
 const updateRoute = (establecimientoId: string, periodoId: string) => {
     if (establecimientoId) {
-        const newPath = periodoId
-            ? `/${establecimientoId}/${periodoId}/${redirectTo}`
-            : `/${establecimientoId}/0`
+        const currentPath = route.path
+        const pathParts = currentPath.split('/')
 
-        // Solo actualizar si la ruta es diferente
-        if (route.path !== newPath) {
-            router.push(newPath)
+        // Si estamos en la ruta inicial o solo con establecimiento
+        if (pathParts.length <= 2) {
+            const newPath = periodoId
+                ? `/${establecimientoId}/${periodoId}/${redirectTo}`
+                : `/${establecimientoId}/0`
+
+            if (currentPath !== newPath) {
+                router.push(newPath)
+            }
+        } else {
+            // Si estamos en una subruta (ej: /establecimiento/periodo/blog)
+            // Solo actualizamos los parámetros de establecimiento y periodo
+            const remainingPath = pathParts.slice(3).join('/')
+            const newPath = periodoId
+                ? `/${establecimientoId}/${periodoId}/${remainingPath}`
+                : `/${establecimientoId}/0/${remainingPath}`
+
+            if (currentPath !== newPath) {
+                router.push(newPath)
+            }
         }
     }
 }
