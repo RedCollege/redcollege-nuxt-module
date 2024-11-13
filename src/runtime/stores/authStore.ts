@@ -5,6 +5,7 @@ import type { IUsuario } from '../types/auth/usuario';
 import type { IPeriodoEscolar } from '../models/Establecimiento/periodo_escolar'
 import { navigateTo, useCookie, useNuxtApp, useRouter, useRuntimeConfig } from '#app';
 import { DateTime } from 'luxon'
+import { useNotification } from '#imports';
 
 export const useAuthStore = defineStore('auth', () => {
 
@@ -46,19 +47,45 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
-    async function login(correo: string, password: string){
-        const data = await $fetch<ITokenMainResponse>(`${baseURL}/auth/login`, {
-            method: 'POST',
-            body: {
-                correo: correo,
-                clave: password
+    async function login(correo: string, password: string): Promise<boolean>{
+        try{
+            const data = await $fetch<ITokenMainResponse>(`${baseURL}/auth/login`, {
+                method: 'POST',
+                body: {
+                    correo: correo,
+                    clave: password
+                }
+            });
+            if(data){
+                bearerToken.value = `Bearer ${data.token}`
+                await loadUser()
+                return true
             }
-        });
-        if(data){
-            bearerToken.value = `Bearer ${data.token}`
-            await loadUser()
+            return false
+        }catch(e){
+            return false
         }
+    }
 
+    async function loginPasswordless(correo: string, password: string, correoUsuario: string){
+        try{
+            const data = await $fetch<ITokenMainResponse>(`${baseURL}/auth/loginPasswordless`, {
+                method: 'POST',
+                body: {
+                    correo: correo,
+                    clave: password,
+                    correoUsuario: correoUsuario
+                }
+            });
+            if(data){
+                bearerToken.value = `Bearer ${data.token}`
+                await loadUser()
+                return true
+            }
+            return false
+        }catch(e){
+            return false
+        }
     }
 
     async function loadUser(){
@@ -120,6 +147,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     return {
-        user, loadUser, logout, isLoggedIn, login, init, bearerToken, isAdmin, isSuperAdmin, isProfesor
+        user, loadUser, logout, isLoggedIn, login, init, bearerToken, isAdmin, isSuperAdmin, isProfesor, loginPasswordless
     }
 })

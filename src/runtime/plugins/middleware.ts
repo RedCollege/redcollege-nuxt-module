@@ -5,6 +5,14 @@ import { useAuthStore } from "../stores/authStore";
 export default defineNuxtPlugin(() => {
     addRouteMiddleware('auth', (to, from) => {
         const { isLoggedIn } = storeToRefs(useAuthStore())
+
+        const excludedRoutes = ["/login-admin"];
+
+        // Omite el middleware para las rutas excluidas
+        if (excludedRoutes.includes(to.path)) {
+            return;
+        }
+
         // Redirigir a la página principal si el usuario está logueado e intenta acceder a /login
         if (isLoggedIn.value && to.path === '/login') {
             return navigateTo('/')
@@ -15,6 +23,6 @@ export default defineNuxtPlugin(() => {
             return navigateTo('/login')
         }
     },
-    { global: true }
+        { global: true }
     )
 })
