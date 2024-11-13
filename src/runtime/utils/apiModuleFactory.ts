@@ -6,20 +6,20 @@ import EstablecimientoModule from '../repository/modules/establecimiento/estable
 import CursoModule from '../repository/modules/establecimiento/curso';
 import AsignaturaCurricularModule from '../repository/modules/establecimiento/asignaturas_curriculares';
 import PeriodoEscolarModule from '../repository/modules/establecimiento/periodo_escolar';
+import MatriculaModule from '../repository/modules/matricula/matricula';
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
     unidades: UnidadModule
-
-    // ... otros submódulos de planificaciones
 };
+
+export type MatriculasModules = {
+    matricula: MatriculaModule
+}
 
 export type InformesModules = {
     informes: InformesModule;
-
-    // ... otros submódulos de informes
 };
-
 
 export type EstablecimientoModules = {
     establecimiento: EstablecimientoModule;
@@ -28,19 +28,26 @@ export type EstablecimientoModules = {
     periodoEscolar: PeriodoEscolarModule
 };
 
+
+// agrupación de modulos
 export type ApiModules = {
     planificaciones: PlanificacionesModules;
     informes: InformesModules;
     establecimiento: EstablecimientoModules;
+    matriculas: MatriculasModules
 };
 
-export function createApiModules(apiType: 'planificaciones' | 'informes' | 'establecimiento', apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules {
+export function createApiModules(apiType: 'planificaciones' | 'informes' | 'establecimiento' | 'matriculas', apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules {
     switch (apiType) {
         case 'planificaciones':
             return {
                 planificacion: new PlanificacionModule(apiFetcher),
                 unidades: new UnidadModule(apiFetcher)
                 // ... inicializar otros submódulos de planificaciones
+            };
+        case 'matriculas':
+            return {
+                matricula: new MatriculaModule(apiFetcher)
             };
         case 'informes':
             return {

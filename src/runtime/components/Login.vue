@@ -13,15 +13,16 @@ const showErrorMessage = ref(false)
 const open = ref(false)
 
 
-const { Meta_R, Ctrl_R } = useMagicKeys({
+
+const { Meta_B, Ctrl_B } = useMagicKeys({
     passive: false,
     onEventFired(e) {
-        if (e.key === 'r' && (e.metaKey || e.ctrlKey))
+        if (e.key === 'b' && (e.metaKey || e.ctrlKey))
             e.preventDefault()
     },
 })
 
-watch([Meta_R, Ctrl_R], (v) => {
+watch([Meta_B, Ctrl_B], (v) => {
     if (v[0] || v[1])
         handleOpenChange()
 })

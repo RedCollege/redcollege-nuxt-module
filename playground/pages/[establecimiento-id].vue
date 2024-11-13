@@ -2,9 +2,6 @@
 
 const { $apis } = useNuxtApp()
 
-const { data } = await useAsyncData('planificaciones', () => {
-    return $apis.planificaciones.planificacion.getAll()
-})
 
 useNavbar().setHideCursos(true)
 </script>
