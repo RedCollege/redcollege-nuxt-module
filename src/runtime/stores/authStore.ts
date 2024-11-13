@@ -25,10 +25,13 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const { baseURL, redirectTo } = useRuntimeConfig().public.redcollege
-    const user = ref<IUsuario>()
+    const user = ref<IAuthUsuarioResponse>()
     const userId = useCookie<number>('userId')
     const isLoggedIn = useCookie<boolean>('isLoggedIn')
     const bearerToken = useCookie<string>('auth._token.local')
+    const isSuperAdmin = ref(false)
+    const isAdmin = ref(false)
+    const isProfesor = ref(false)
 
     // Función de inicialización asíncrona
     async function init() {
@@ -57,7 +60,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     async function loadUser(){
-        const usuario = await $fetch<IUsuario>(`${baseURL}/auth/usuario/logged`, {
+        const usuario = await $fetch<IAuthUsuarioResponse>(`${baseURL}/auth/usuario/logged`, {
             method: 'GET',
             headers: {
                 Authorization: bearerToken.value
@@ -65,10 +68,15 @@ export const useAuthStore = defineStore('auth', () => {
         });
 
         if(usuario){
-
             isLoggedIn.value = true
             user.value = usuario
             userId.value = usuario.id
+
+            //Setear los roles al store
+            isAdmin.value = usuario.roles.some(r => r.nombre === 'Admin')
+            isSuperAdmin.value = usuario.roles.some(r => r.nombre === 'SuperAdmin')
+            isProfesor.value = usuario.roles.some(r => r.nombre === 'Profesor')
+
             const startEstablecimiento = user.value.establecimientos?.at(0)
             if(startEstablecimiento && Number(startEstablecimiento.id) > 0){
                 const periodos = await $fetch<IPeriodoEscolar[]>(`${baseURL}/establecimiento/periodos/${startEstablecimiento.id}`, {
@@ -100,7 +108,7 @@ export const useAuthStore = defineStore('auth', () => {
             },
         });
 
-        user.value = {} as IUsuario
+        user.value = {} as IAuthUsuarioResponse
         isLoggedIn.value = false
         userId.value = 0
         bearerToken.value = ""
@@ -110,6 +118,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     return {
-        user, loadUser, logout, isLoggedIn, login, init, bearerToken
+        user, loadUser, logout, isLoggedIn, login, init, bearerToken, isAdmin, isSuperAdmin, isProfesor
     }
 })

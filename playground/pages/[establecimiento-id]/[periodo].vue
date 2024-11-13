@@ -15,4 +15,5 @@ const showConfetti = () => {
         Card
             Button(@click="showConfetti") Show confetti
             Calendar(v-model="value" :weekday-format="'short'" locale="es" class="rounded-md border")
+            NuxtPage
 </template>
