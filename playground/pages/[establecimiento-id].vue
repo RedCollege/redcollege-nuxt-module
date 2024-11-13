@@ -11,7 +11,5 @@ useNavbar().setHideCursos(true)
 
 <template lang="pug">
 NuxtLayout(name="dashboard")
-    .w-32.h-32.bg-card-foreground
-    pre {{ data.data }}
-    div {{ useRoute().params }}
+    NuxtPage
 </template>

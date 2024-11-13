@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
-
 import { storeToRefs } from 'pinia'
-import type { IPeriodoEscolarResponse } from '../models/Periodo'
-import type { ICursoEstablecimientoResponse } from '../models/Curso'
-import { useAuthStore } from '../stores/authStore';
-import { useRuntimeConfig, useRoute } from '#app';
-import { useNavbar } from '../composables/states';
+import { applicationModules as modules } from '../config/modules'
+import type { IPeriodoEscolar } from '../models'
+//import type { ICursoEstablecimientoResponse } from '../models/Curso'
+import { useAuthStore } from '../stores/authStore'
+import { useRuntimeConfig, useRoute, useRouter, useNuxtApp } from '#app'
+import { useNavbar } from '../composables/states'
 
 interface Props {
     logoUrl: string,
@@ -20,132 +20,127 @@ const props = withDefaults(defineProps<Props>(), {
     titulo: '',
     hideCursos: false,
     hidePeriodos: false,
-});
+})
 
-const { baseURL } = useRuntimeConfig().public.redcollege
+const { $apis } = useNuxtApp()
+const route = useRoute()
+const router = useRouter()
 const selectedEstablecimientoId = ref("")
 const selectedPeriodoId = ref("")
 const selectedCursoId = ref("")
 const authStore = useAuthStore()
 const { user, isLoggedIn } = storeToRefs(authStore)
-const periodos = ref<Array<IPeriodoEscolarResponse>>([])
-const cursos = ref<Array<ICursoEstablecimientoResponse>>([])
+const periodos = ref<Array<IPeriodoEscolar>>([])
+//const cursos = ref<Array<ICursoEstablecimientoResponse>>([])
 
 const arePeriodosLoaded = ref(false)
 const areCursosLoaded = ref(false)
 
-const modules: { link: string, title: string, subtitle: string, img: string, doHighlight: boolean }[] = [
-    {
-        link: "https://convivenciaescolar.redcollege.net/",
-        title: "Ayün",
-        img: "https://login.redcollege.net/logos/modulos/ayun.svg",
-        subtitle: "Convivencia Escolar",
-        doHighlight: true
-    },
-    {
-        link: "https://librodigital.redcollege.net",
-        title: "Libro de Clases Digital",
-        img: "https://login.redcollege.net/logos/modulos/libroClases.svg",
-        subtitle: "",
-        doHighlight: false
-    },
-    {
-        link: "https://planificacion.redcollege.net",
-        title: "Planificaciones Gantt",
-        img: "https://login.redcollege.net/logos/modulos/planificacion.svg",
-        subtitle: "",
-        doHighlight: false
-    },
-    {
-        link: "https://evaluaciones.redcollege.net",
-        title: "Evaluaciones y Retroalimentación",
-        img: "https://login.redcollege.net/logos/modulos/evaluaciones.svg",
-        subtitle: "",
-        doHighlight: false
-    },
-    {
-        link: "https://nido.redcollege.net",
-        title: "Nido",
-        img: "https://login.redcollege.net/logos/modulos/nido.svg",
-        subtitle: "Gestión de alumnos NEE",
-        doHighlight: false
-    },
-    {
-        link: "https://comunicaciones.redcollege.net/bandeja/recibidos",
-        title: "Visto, +Comunicación",
-        img: "https://login.redcollege.net/logos/modulos/comunicacion.svg",
-        subtitle: "",
-        doHighlight: false
-    },
-    {
-        link: "https://centrodedatos.redcollege.net",
-        title: "Centro de Datos",
-        img: "https://login.redcollege.net/logos/modulos/centroDatos.svg",
-        subtitle: "",
-        doHighlight: false
-    },
-    {
-        link: "https://aulavirtual.redcollege.net",
-        title: "Aula Virtual",
-        img: "https://login.redcollege.net/logos/modulos/aula.svg",
-        subtitle: "",
-        doHighlight: false
-    },
-    {
-        link: "https://evaluaciones.redcollege.net/rubricas-v2/mibanco/listado",
-        title: "Rúbricas",
-        subtitle: "(En Mantención)",
-        img: "https://login.redcollege.net/logos/modulos/rubricas.svg",
-        doHighlight: false
-    }
-]
-
 const emit = defineEmits(['sucessLogout', 'selectedFilters'])
 
-onMounted(() => {
-    if(Number(useRoute().params.establecimientoid) > 0){
-        selectedEstablecimientoId.value = String(useRoute().params.establecimientoid)
-        useNavbar().setSelectedEstablecimientoId(Number(useRoute().params.establecimientoid))
+// Función para actualizar la ruta
+const updateRoute = (establecimientoId: string, periodoId: string) => {
+    if (establecimientoId) {
+        const newPath = periodoId
+            ? `/${establecimientoId}/${periodoId}`
+            : `/${establecimientoId}/0`
+
+        // Solo actualizar si la ruta es diferente
+        if (route.path !== newPath) {
+            router.push(newPath)
+        }
+    }
+}
+
+// Función para cargar periodos
+const loadPeriodos = async (establecimientoId: number) => {
+    try {
+        periodos.value = await $apis.establecimiento.periodoEscolar.getByEstablecimiento(establecimientoId)
+        arePeriodosLoaded.value = true
+    } catch (error) {
+        console.error('Error al cargar periodos:', error)
+        periodos.value = []
+        arePeriodosLoaded.value = true
+    }
+}
+
+// Función para cargar cursos
+const loadCursos = async (establecimientoId: number, year: string) => {
+    try {
+        //cursos.value = await $apis.establecimiento.curso.getByEstablecimiento(establecimientoId, year)
+        areCursosLoaded.value = true
+    } catch (error) {
+        console.error('Error al cargar cursos:', error)
+        //cursos.value = []
+        areCursosLoaded.value = true
+    }
+}
+
+// Función para resetear los selects
+const resetSelects = (resetPeriodo: boolean = true, resetCurso: boolean = true) => {
+    if (resetPeriodo) {
+        selectedPeriodoId.value = ""
+        useNavbar().setSelectedPeriodo(0)
+    }
+    if (resetCurso) {
+        selectedCursoId.value = ""
+        //cursos.value = []
+        areCursosLoaded.value = false
+    }
+}
+
+// Inicialización desde los parámetros de la ruta
+onMounted(async () => {
+    const establecimientoIdParam = Number(route.params.establecimientoid)
+    const periodoParam = Number(route.params.periodo)
+
+    if (establecimientoIdParam > 0) {
+        selectedEstablecimientoId.value = String(establecimientoIdParam)
+        useNavbar().setSelectedEstablecimientoId(establecimientoIdParam)
+
+        // Cargar periodos primero
+        await loadPeriodos(establecimientoIdParam)
+
+        // Si hay un periodo en la ruta y existe en los periodos cargados
+        if (periodoParam > 0 && periodos.value.some(p => p.periodo === periodoParam)) {
+            selectedPeriodoId.value = String(periodoParam)
+            useNavbar().setSelectedPeriodo(periodoParam)
+        }
     }
 })
 
-watch(selectedEstablecimientoId, async () => {
-    selectedPeriodoId.value = ""
-    selectedCursoId.value = ""
-    cursos.value = []
-    periodos.value = []
-    arePeriodosLoaded.value = false
-    areCursosLoaded.value = false
-    useNavbar().setSelectedEstablecimientoId(Number(selectedEstablecimientoId.value))
-    useNavbar().setSelectedPeriodo(0)
-    /*periodos.value = await $fetch<Array<IPeriodoEscolarResponse>>(`${baseURL}/v2/aniosEscolares/${Number(selectedEstablecimientoId.value)}`, {
-        method: 'GET'
-    });
-    arePeriodosLoaded.value = true*/
-    emit('selectedFilters', selectedEstablecimientoId.value, selectedPeriodoId.value, selectedCursoId.value)
+// Watch para establecimiento
+watch(selectedEstablecimientoId, async (newVal) => {
+    if (newVal) {
+        resetSelects()
+        useNavbar().setSelectedEstablecimientoId(Number(newVal))
+        await loadPeriodos(Number(newVal))
+        updateRoute(newVal, selectedPeriodoId.value)
+        emit('selectedFilters', newVal, selectedPeriodoId.value, selectedCursoId.value)
+    }
 })
 
-watch(selectedPeriodoId, async () => {
-    selectedCursoId.value = ""
-    cursos.value = []
-    areCursosLoaded.value = false
-    useNavbar().setSelectedPeriodo(Number(selectedPeriodoId.value))
-    cursos.value = await $fetch<Array<ICursoEstablecimientoResponse>>(`${baseURL}/v2/cursos/cursosQuery/${Number(selectedEstablecimientoId.value)}?year=${selectedPeriodoId.value}`, {
-        method: 'GET'
-    });
-    areCursosLoaded.value = true
-    emit('selectedFilters', selectedEstablecimientoId.value, selectedPeriodoId.value, selectedCursoId.value)
+// Watch para periodo
+watch(selectedPeriodoId, async (newVal) => {
+    if (newVal) {
+        resetSelects(false, true)
+        useNavbar().setSelectedPeriodo(Number(newVal))
+        if (selectedEstablecimientoId.value) {
+            await loadCursos(Number(selectedEstablecimientoId.value), newVal)
+            updateRoute(selectedEstablecimientoId.value, newVal)
+        }
+        emit('selectedFilters', selectedEstablecimientoId.value, newVal, selectedCursoId.value)
+    }
 })
 
-watch(selectedCursoId, () => {
-    emit('selectedFilters', selectedEstablecimientoId.value, selectedPeriodoId.value, selectedCursoId.value)
+// Watch para curso
+watch(selectedCursoId, (newVal) => {
+    emit('selectedFilters', selectedEstablecimientoId.value, selectedPeriodoId.value, newVal)
 })
 
-function logout() {
+const logout = () => {
     authStore.logout()
-    //emit('sucessLogout')
 }
-
 </script>
 
 <template lang="pug">
@@ -198,7 +193,7 @@ function logout() {
                                 SelectContent
                                     SelectGroup
                                         SelectLabel Años Escolares
-                                        SelectItem(:value="String(periodo?.anio?.periodo)", v-for="periodo in periodos") {{ periodo?.anio?.periodo }}
+                                        SelectItem(:value="String(periodo.periodo)", v-for="periodo in periodos", :key="periodo.periodo") {{ periodo.periodo }}
 
                         NavigationMenuItem.max-w-64(v-if="!hideCursos")
                             Select(:disabled="!areCursosLoaded", v-model="selectedCursoId")

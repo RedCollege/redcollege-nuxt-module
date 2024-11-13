@@ -2,10 +2,13 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia';
 import type { IAuthUsuarioResponse } from '../models/Auth'
 import type { IUsuario } from '../types/auth/usuario';
-import { useCookie, useRouter, useRuntimeConfig } from '#app';
+import type { IPeriodoEscolar } from '../models/Establecimiento/periodo_escolar'
+import { navigateTo, useCookie, useNuxtApp, useRouter, useRuntimeConfig } from '#app';
+import { DateTime } from 'luxon'
 
 export const useAuthStore = defineStore('auth', () => {
 
+    const { $apis } = useNuxtApp()
     interface ITokenMainResponse {
         type: string;
         token: string;
@@ -29,7 +32,6 @@ export const useAuthStore = defineStore('auth', () => {
 
     // Función de inicialización asíncrona
     async function init() {
-        console.log("Inicializando store")
         if(bearerToken.value && isLoggedIn.value && userId.value > 0){
             try {
                 await loadUser()
@@ -47,7 +49,6 @@ export const useAuthStore = defineStore('auth', () => {
                 clave: password
             }
         });
-
         if(data){
             bearerToken.value = `Bearer ${data.token}`
             await loadUser()
@@ -64,9 +65,26 @@ export const useAuthStore = defineStore('auth', () => {
         });
 
         if(usuario){
+
             isLoggedIn.value = true
             user.value = usuario
             userId.value = usuario.id
+            const startEstablecimiento = user.value.establecimientos?.at(0)
+            if(startEstablecimiento && Number(startEstablecimiento.id) > 0){
+                const periodos = await $fetch<IPeriodoEscolar[]>(`${baseURL}/establecimiento/periodos/${startEstablecimiento.id}`, {
+                    headers: {
+                        Authorization: bearerToken.value
+                    }
+                })
+                if(periodos?.length > 0){
+                    const currentPeriodo = periodos.find(p => p.periodo === DateTime.now().year)
+                    if(currentPeriodo){
+                        return navigateTo(`/${startEstablecimiento.id}/${currentPeriodo.periodo}`)
+                    }
+                    return navigateTo(`/${startEstablecimiento.id}/${periodos[0].periodo}`)
+                }
+                return navigateTo(`/${startEstablecimiento.id}/`)
+            }
             return useRouter().push({
                 name: 'index'
             })

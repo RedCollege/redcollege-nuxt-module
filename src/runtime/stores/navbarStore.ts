@@ -3,11 +3,10 @@ import { DateTime } from 'luxon';
 import { defineStore } from "pinia";
 
 export const useNavbarStore = defineStore('navbar', () => {
-    const currentPeriodo = DateTime.now().year
     const hideCursos = ref(false)
     const hidePeriodos = ref(false)
     const selectedEstablecimientoId = ref(0)
-    const selectedPeriodo = ref(currentPeriodo)
+    const selectedPeriodo = ref(0)
 
     function setHideCursos(hide: boolean) {
         hideCursos.value = hide
