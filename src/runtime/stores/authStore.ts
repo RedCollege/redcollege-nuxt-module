@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
         data: IAuthUsuarioResponse;
     }
 
-    const { baseURL } = useRuntimeConfig().public.redcollege
+    const { baseURL, redirectTo } = useRuntimeConfig().public.redcollege
     const user = ref<IUsuario>()
     const userId = useCookie<number>('userId')
     const isLoggedIn = useCookie<boolean>('isLoggedIn')
@@ -79,9 +79,9 @@ export const useAuthStore = defineStore('auth', () => {
                 if(periodos?.length > 0){
                     const currentPeriodo = periodos.find(p => p.periodo === DateTime.now().year)
                     if(currentPeriodo){
-                        return navigateTo(`/${startEstablecimiento.id}/${currentPeriodo.periodo}`)
+                        return navigateTo(`/${startEstablecimiento.id}/${currentPeriodo.periodo}/${redirectTo}`)
                     }
-                    return navigateTo(`/${startEstablecimiento.id}/${periodos[0].periodo}`)
+                    return navigateTo(`/${startEstablecimiento.id}/${periodos[0].periodo}/${redirectTo}`)
                 }
                 return navigateTo(`/${startEstablecimiento.id}/`)
             }

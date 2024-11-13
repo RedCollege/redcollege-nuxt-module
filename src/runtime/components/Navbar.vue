@@ -30,6 +30,7 @@ const selectedPeriodoId = ref("")
 const selectedCursoId = ref("")
 const authStore = useAuthStore()
 const { user, isLoggedIn } = storeToRefs(authStore)
+const { redirectTo } = useRuntimeConfig().public.redcollege
 const periodos = ref<Array<IPeriodoEscolar>>([])
 //const cursos = ref<Array<ICursoEstablecimientoResponse>>([])
 
@@ -42,7 +43,7 @@ const emit = defineEmits(['sucessLogout', 'selectedFilters'])
 const updateRoute = (establecimientoId: string, periodoId: string) => {
     if (establecimientoId) {
         const newPath = periodoId
-            ? `/${establecimientoId}/${periodoId}`
+            ? `/${establecimientoId}/${periodoId}/${redirectTo}`
             : `/${establecimientoId}/0`
 
         // Solo actualizar si la ruta es diferente
