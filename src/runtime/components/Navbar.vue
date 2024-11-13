@@ -181,7 +181,7 @@ const logout = () => {
                                     ul(class="grid w-[500px] gap-2 p-4 grid-cols-2")
                                         li(v-for="module in modules", :key="module.title")
                                             NavigationMenuLink(as-child)
-                                                a.relative(:href="module.link", target="_blank" class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground")
+                                                a.relative(:href="module.link", class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground")
                                                     .flex.gap-2.items-center
                                                         img(:src="module.img", width="30px")
                                                         div

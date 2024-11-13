@@ -25,13 +25,15 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const { baseURL, redirectTo } = useRuntimeConfig().public.redcollege
+    const cookieDomain = process.env.NODE_ENV == 'production' ?  '.redcollege.net' : 'localhost'
     const user = ref<IAuthUsuarioResponse>()
-    const userId = useCookie<number>('userId')
-    const isLoggedIn = useCookie<boolean>('isLoggedIn')
-    const bearerToken = useCookie<string>('auth._token.local')
+    const userId = useCookie<number>('userId', { domain: cookieDomain })
+    const isLoggedIn = useCookie<boolean>('isLoggedIn', { domain: cookieDomain })
+    const bearerToken = useCookie<string>('auth._token.local', { domain: cookieDomain })
     const isSuperAdmin = ref(false)
     const isAdmin = ref(false)
     const isProfesor = ref(false)
+
 
     // Función de inicialización asíncrona
     async function init() {

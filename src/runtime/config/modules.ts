@@ -62,12 +62,5 @@ export const applicationModules: Module[] = [
         img: "https://login.redcollege.net/logos/modulos/aula.svg",
         subtitle: "",
         doHighlight: false
-    },
-    {
-        link: "https://evaluaciones.redcollege.net/rubricas-v2/mibanco/listado",
-        title: "Rúbricas",
-        subtitle: "(En Mantención)",
-        img: "https://login.redcollege.net/logos/modulos/rubricas.svg",
-        doHighlight: false
     }
 ]
