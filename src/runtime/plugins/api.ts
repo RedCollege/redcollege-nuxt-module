@@ -1,7 +1,7 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
 import type { FetchOptions, $Fetch } from 'ofetch';
 import { createApiModules } from '../utils/apiModuleFactory';
-import type { ApiModules, InformesModules, PlanificacionesModules, EstablecimientoModules } from '../utils/apiModuleFactory';
+import type { ApiModules, InformesModules, PlanificacionesModules, EstablecimientoModules, MatriculasModules } from '../utils/apiModuleFactory';
 import { useAuthStore } from '../stores/authStore';
 
 // Definir tipos de API
@@ -24,6 +24,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         planificaciones: createApiModules('planificaciones', apiFetcher) as PlanificacionesModules,
         informes: createApiModules('informes', apiFetcher) as InformesModules,
         establecimiento: createApiModules('establecimiento', apiFetcher) as EstablecimientoModules,
+        matriculas: createApiModules('matriculas', apiFetcher) as MatriculasModules
     };
 
     return {
