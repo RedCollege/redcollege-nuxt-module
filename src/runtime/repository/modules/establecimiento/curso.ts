@@ -12,7 +12,7 @@ export default class CursoModule {
     }
 
     async obtenerAsignaturasPorGradoSige(sigeId: number): Promise<ICursoAsignatura[]> {
-        return this.fetcher(`/curso/obtenerNivelesSige/${sigeId}`, {
+        return this.fetcher(`/curso/obtenerAsignaturasBySigeId/${sigeId}`, {
             method: 'GET'
         })
     }
