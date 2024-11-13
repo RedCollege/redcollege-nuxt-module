@@ -25,6 +25,13 @@ export default class PlanificacionModule {
         });
     }
 
+    async getByEstablecimiento(props?: GetAllProps): Promise<IPlanificacionResponse> {
+        return this.fetcher('/planificacion/getByEstablecimiento', {
+            params: props,
+            method: 'GET'
+        });
+    }
+
     async getPlanificacionById(planificacionId: number): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${planificacionId}`, {
             method: 'GET'
