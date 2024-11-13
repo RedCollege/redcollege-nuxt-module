@@ -19,8 +19,6 @@ export interface IEstablecimientoResponse {
     logo: string
 }
 
-
-
 export interface IRoleResponse {
     id: number
     nombre: string

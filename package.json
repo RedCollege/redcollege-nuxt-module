@@ -1,6 +1,6 @@
 {
     "name": "@redcollege/ui-nuxt-module",
-    "version": "0.0.54",
+    "version": "0.0.63",
     "description": "RedCollege Nuxt module",
     "repository": "RedCollege/redcollege-ui-module",
     "license": "MIT",
@@ -53,6 +53,7 @@
         "tailwindcss-animate": "^1.0.7",
         "vee-validate": "^4.13.2",
         "vite-plugin-pug": "^0.3.2",
+        "vue-confetti-explosion": "^1.0.2",
         "zod": "^3.23.8"
     },
     "devDependencies": {

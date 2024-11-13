@@ -5,6 +5,7 @@ export interface ModuleOptions {
     baseURL: string;
     logoURL: string;
     nombreModulo: string;
+    redirectTo: string;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -18,7 +19,8 @@ export default defineNuxtModule<ModuleOptions>({
         nuxt.options.runtimeConfig.public.redcollege = defu(nuxt.options.runtimeConfig.public.redcollege, {
             baseURL: options.baseURL,
             logoURL: options.logoURL,
-            nombreModulo: options.nombreModulo
+            nombreModulo: options.nombreModulo,
+            redirectTo: options.redirectTo
         })
 
         // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`

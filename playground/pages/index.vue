@@ -120,6 +120,7 @@ const handleValueChange = (newValues: string[]) => {
 
 <template>
     <NuxtLayout name="dashboard">
+        <NuxtLink to="/103">Cargar planificaciones</NuxtLink>
         <Stepper class="flex w-full items-start gap-2">
             <StepperItem
             v-for="step in steps"

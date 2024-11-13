@@ -9,14 +9,16 @@ type ApiType = 'planificaciones' | 'informes' | 'establecimiento';
 
 export default defineNuxtPlugin((nuxtApp) => {
     const { baseURL } = useRuntimeConfig().public.redcollege
-    const fetchOptions: FetchOptions = {
-        baseURL: baseURL, // URL base común para todas las APIs
-        headers: {
-            Authorization: useAuthStore().bearerToken
-        }
-    };
 
-    const apiFetcher = $fetch.create(fetchOptions) as $Fetch;
+    const apiFetcher = $fetch.create({
+        baseURL,
+        async onRequest({ options }){
+            options.headers = {
+                ...options.headers,
+                Authorization: useAuthStore().bearerToken
+            }
+        }
+    }) as $Fetch;
 
     const apis: ApiModules = {
         planificaciones: createApiModules('planificaciones', apiFetcher) as PlanificacionesModules,

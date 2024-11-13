@@ -5,6 +5,7 @@ import UnidadModule from '../repository/modules/planificaciones/unidad';
 import EstablecimientoModule from '../repository/modules/establecimiento/establecimiento';
 import CursoModule from '../repository/modules/establecimiento/curso';
 import AsignaturaCurricularModule from '../repository/modules/establecimiento/asignaturas_curriculares';
+import PeriodoEscolarModule from '../repository/modules/establecimiento/periodo_escolar';
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
@@ -23,7 +24,8 @@ export type InformesModules = {
 export type EstablecimientoModules = {
     establecimiento: EstablecimientoModule;
     curso: CursoModule;
-    asignaturaCurricular: AsignaturaCurricularModule
+    asignaturaCurricular: AsignaturaCurricularModule,
+    periodoEscolar: PeriodoEscolarModule
 };
 
 export type ApiModules = {
@@ -47,6 +49,7 @@ export function createApiModules(apiType: 'planificaciones' | 'informes' | 'esta
             };
         case 'establecimiento':
             return {
+                periodoEscolar: new PeriodoEscolarModule(apiFetcher),
                 establecimiento: new EstablecimientoModule(apiFetcher),
                 curso: new CursoModule(apiFetcher),
                 asignaturaCurricular: new AsignaturaCurricularModule(apiFetcher)
