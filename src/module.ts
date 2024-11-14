@@ -5,7 +5,9 @@ export interface ModuleOptions {
     baseURL: string;
     logoURL: string;
     nombreModulo: string;
+    shouldRedirect: boolean;
     redirectTo: string;
+    redirectToAdmin: string;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -20,7 +22,9 @@ export default defineNuxtModule<ModuleOptions>({
             baseURL: options.baseURL,
             logoURL: options.logoURL,
             nombreModulo: options.nombreModulo,
-            redirectTo: options.redirectTo
+            redirectTo: options.redirectTo,
+            redirectToAdmin: options.redirectToAdmin,
+            shouldRedirect: options.shouldRedirect
         })
 
         // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
@@ -60,6 +64,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         addPlugin(resolver.resolve('./runtime/plugins/auth'))
 
+        await installModule('nuxt-icon-tw')
         await installModule('@nuxt/icon', {
             serverBundle: {
                 collections: ['tabler']

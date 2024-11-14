@@ -1,10 +1,12 @@
-import { addRouteMiddleware, defineNuxtPlugin, navigateTo } from "#app";
+import { addRouteMiddleware, defineNuxtPlugin, navigateTo, useRuntimeConfig } from "#app";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "../stores/authStore";
+import { DateTime } from 'luxon'
 
 export default defineNuxtPlugin(() => {
+    const { redirectTo, redirectToAdmin, shouldRedirect } = useRuntimeConfig().public.redcollege
     addRouteMiddleware('auth', (to, from) => {
-        const { isLoggedIn } = storeToRefs(useAuthStore())
+        const { isLoggedIn, isAdmin, isSuperAdmin, isProfesor, user } = storeToRefs(useAuthStore())
 
         const excludedRoutes = ["/login-admin"];
 
@@ -22,6 +24,17 @@ export default defineNuxtPlugin(() => {
         if (!isLoggedIn.value && to.path !== '/login') {
             return navigateTo('/login')
         }
+        console.log(isLoggedIn.value, shouldRedirect, from.name)
+        if(isLoggedIn.value && shouldRedirect && to.name === 'index'){
+            console.log('entered here')
+            const establecimiento = user.value?.establecimientos?.at(0)
+            const currentYear =  DateTime.now().year
+
+            if(establecimiento){
+                return navigateTo(`/${establecimiento.id}/${currentYear}/${ isAdmin.value || isSuperAdmin.value ? redirectToAdmin : redirectTo }`)
+            }
+        }
+
     },
         { global: true }
     )
