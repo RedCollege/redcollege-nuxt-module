@@ -24,9 +24,8 @@ export default defineNuxtPlugin(() => {
         if (!isLoggedIn.value && to.path !== '/login') {
             return navigateTo('/login')
         }
-        console.log(isLoggedIn.value, shouldRedirect, from.name)
+
         if(isLoggedIn.value && shouldRedirect && to.name === 'index'){
-            console.log('entered here')
             const establecimiento = user.value?.establecimientos?.at(0)
             const currentYear =  DateTime.now().year
 

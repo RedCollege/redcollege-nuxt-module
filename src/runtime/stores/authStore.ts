@@ -116,7 +116,6 @@ export const useAuthStore = defineStore('auth', () => {
                 if(periodos?.length > 0){
                     const currentPeriodo = periodos.find(p => p.periodo === DateTime.now().year)
                     if(currentPeriodo){
-                        console.log(redirectToAdmin, redirectTo)
                         return navigateTo(`/${startEstablecimiento.id}/${currentPeriodo.periodo}/${ isAdmin.value || isSuperAdmin.value ? redirectToAdmin : redirectTo }`)
                     }
                     return navigateTo(`/${startEstablecimiento.id}/${periodos[0].periodo}/${ isAdmin.value || isSuperAdmin.value ? redirectToAdmin : redirectTo }`)

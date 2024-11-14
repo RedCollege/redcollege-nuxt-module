@@ -7,6 +7,7 @@ import CursoModule from '../repository/modules/establecimiento/curso';
 import AsignaturaCurricularModule from '../repository/modules/establecimiento/asignaturas_curriculares';
 import PeriodoEscolarModule from '../repository/modules/establecimiento/periodo_escolar';
 import MatriculaModule from '../repository/modules/matricula/matricula';
+import { ItemEntradaCurricularModule } from '../repository/modules';
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
@@ -15,6 +16,10 @@ export type PlanificacionesModules = {
 
 export type MatriculasModules = {
     matricula: MatriculaModule
+}
+
+export type CurriculumModules = {
+    itemEntradaCurricular: ItemEntradaCurricularModule
 }
 
 export type InformesModules = {
@@ -34,10 +39,11 @@ export type ApiModules = {
     planificaciones: PlanificacionesModules;
     informes: InformesModules;
     establecimiento: EstablecimientoModules;
-    matriculas: MatriculasModules
+    matriculas: MatriculasModules;
+    curriculum: CurriculumModules;
 };
 
-export function createApiModules(apiType: 'planificaciones' | 'informes' | 'establecimiento' | 'matriculas', apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules {
+export function createApiModules(apiType: 'planificaciones' | 'informes' | 'establecimiento' | 'matriculas' | 'curriculum', apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules | CurriculumModules {
     switch (apiType) {
         case 'planificaciones':
             return {
@@ -48,6 +54,10 @@ export function createApiModules(apiType: 'planificaciones' | 'informes' | 'esta
         case 'matriculas':
             return {
                 matricula: new MatriculaModule(apiFetcher)
+            };
+        case 'curriculum':
+            return {
+                itemEntradaCurricular: new ItemEntradaCurricularModule(apiFetcher)
             };
         case 'informes':
             return {

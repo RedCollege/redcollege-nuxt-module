@@ -11,7 +11,6 @@ const form = useForm({
 })
 
 const onSubmit = form.handleSubmit((values) => {
-    console.log('Form submitted!', values)
 })
 
 const options: { label: string; value: string }[] = [
@@ -29,7 +28,6 @@ const selectedValues = ref<string[]>(['30339', '30340'])
 form.setFieldValue('asignaturas', selectedValues.value)
 
 function update(owo: any){
-    console.log(owo)
 }
 
 </script>
