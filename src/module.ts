@@ -60,7 +60,11 @@ export default defineNuxtModule<ModuleOptions>({
 
         addPlugin(resolver.resolve('./runtime/plugins/auth'))
 
-        await installModule('@nuxt/icon')
+        await installModule('@nuxt/icon', {
+            serverBundle: {
+                collections: ['tabler']
+            }
+        })
         addImportsDir(resolver.resolve('runtime/composables'))
         addLayout(resolver.resolve('runtime/layouts', 'dashboard.vue'), 'dashboard')
 
