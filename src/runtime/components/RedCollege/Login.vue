@@ -1,44 +1,22 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useAuthStore } from '../stores/authStore';
-import { useNotification } from '#imports';
-import { useMagicKeys } from '@vueuse/core'
+import { ref } from 'vue';
+import { useAuthStore } from "../../stores/authStore";
 
 const emit = defineEmits(['successLogin'])
 const correo = ref("")
 const password = ref("")
+const correoUsuario = ref("")
 const authStore = useAuthStore()
 const isLoginLoading = ref(false)
 const showErrorMessage = ref(false)
-const open = ref(false)
-
-
-
-const { Meta_B, Ctrl_B } = useMagicKeys({
-    passive: false,
-    onEventFired(e) {
-        if (e.key === 'b' && (e.metaKey || e.ctrlKey))
-            e.preventDefault()
-    },
-})
-
-watch([Meta_B, Ctrl_B], (v) => {
-    if (v[0] || v[1])
-        handleOpenChange()
-})
-
-function handleOpenChange() {
-    open.value = !open.value
-}
 
 async function login() {
     isLoginLoading.value = true
-    showErrorMessage.value = false
-    const isLogged = await authStore.login(correo.value, password.value)
-    if (isLogged) {
+    const isLogged = await authStore.loginPasswordless(correo.value, password.value, correoUsuario.value)
+    if(isLogged){
         showErrorMessage.value = false
         emit('successLogin')
-    } else {
+    }else{
         showErrorMessage.value = true
         isLoginLoading.value = false
     }
@@ -66,10 +44,14 @@ div.w-full.bg-muted.relative
                             Label(for="password") Contraseña
                             a.ml-auto.inline-block.text-sm.underline(href="https://login.redcollege.net/recover") ¿Olvidaste tu contraseña?
                         Input#password(type="password" v-model="password" required)
+                    Separator
+                    div.grid.gap-2
+                        Label(for="email") Correo del Usuario
+                        Input#email(type="email" v-model="correoUsuario" placeholder="m@micolegio.com" required)
                     Button.w-full.flex.gap-2(type="submit")
                         Loader.w-4.h-4.mr-2.animate-spin(v-if="isLoginLoading")
                         span Iniciar Sesión
-                    p.text-center.text-sm.text-red-500.font-medium(v-if="showErrorMessage")  Credenciales incorrectas
+                    p.text-center.text-sm.text-red-500.font-medium(v-if="showErrorMessage") Usted no tiene acceso o las credenciales son incorrectas
                 div.mt-4.text-center.text-sm
                     | ¿Aún no eres partes de RedCollege?
                     a.underline(href="https://www.redcollege.cl/") Contáctanos
@@ -77,12 +59,4 @@ div.w-full.bg-muted.relative
             div.flex.justify-center.items-center.h-full
                 img(src="https://nido.redcollege.net/_nuxt/bgLogin.QiXsjYcd.svg" alt="Image"  class="object-cover dark:brightness-[0.2] dark:grayscale")
     .absolute.bottom-0.left-0.right-0.h-8.bg-sky-700
-    CommandDialog(v-model:open="open")
-        CommandInput(placeholder="Busca alguno de los comandos disponibles")
-        CommandList
-            CommandEmpty No se encontraron resultados
-            CommandGroup(heading="Accesos Rápidos")
-                CommandItem(value="Login SuperAdmin", @click="useRouter().push('/login-admin')") Login SuperAdmin
-            CommandGroup(heading="Debugging")
-                CommandItem(value="Logs", :disabled="true") Copiar Logs
 </template>

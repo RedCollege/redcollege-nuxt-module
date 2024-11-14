@@ -168,7 +168,7 @@ const logout = () => {
                 .flex.gap-4.items-center
                     SidebarSheetMenu
                     .flex.gap-2.items-center
-                        img(:src="logoUrl", width="40")
+                        img(:src="logoUrl", width="30")
                         h5.text-primary.font-bold {{ titulo }}
                     NavigationMenu
                         NavigationMenuList

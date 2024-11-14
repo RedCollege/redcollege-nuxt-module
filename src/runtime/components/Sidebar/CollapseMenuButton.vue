@@ -27,7 +27,7 @@ div
                 div.w-full.flex.justify-between.items-center
                     div.flex.items-center
                         span.mr-4
-                            Icon.text-primary(:size="18", :name="`tabler:${icon}`")
+                            Icon.text-primary(size="20", :name="`tabler:${icon}`")
                         p(
                             :class="['max-w-[150px] truncate',isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0']"
                         ) {{ label }}
@@ -45,7 +45,7 @@ div
             )
                 NuxtLink(:href="href")
                     span.mr-4.ml-2
-                        Icon(:size="10", name="tabler:point-filled")
+                        Icon(size="10", name="tabler:point-filled")
                     p(
                         :class="['max-w-[170px] truncate', isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0']"
                     ) {{ label }}
@@ -55,7 +55,7 @@ div
                 div.w-full.flex.justify-between.items-center
                     div.flex.items-center
                         span(:class="isOpen === false ? '' : 'mr-4'")
-                            Icon.text-primary(:size="18", :name="`tabler:${icon}`")
+                            Icon.text-primary(size="20", :name="`tabler:${icon}`")
                         p(:class="[ 'max-w-[200px] truncate', isOpen === false ? 'opacity-0' : 'opacity-100' ]")
                             | {{ label }}
         DropdownMenuContent(side="right" :sideOffset="25" align="start")

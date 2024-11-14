@@ -11,7 +11,11 @@ module.exports = {
         './app/**/*.{ts,tsx,vue}',
         './src/**/*.{ts,tsx,vue}',
     ],
-
+    configViewer: {
+        themeReplacements: {
+            'hsl(var(--sky))': '#22A3E6'
+        }
+    },
     theme: {
         container: {
             center: true,

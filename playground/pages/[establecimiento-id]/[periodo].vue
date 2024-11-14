@@ -11,9 +11,7 @@ const showConfetti = () => {
 </script>
 
 <template lang="pug">
-    .w-64
         Card
             Button(@click="showConfetti") Show confetti
-            Calendar(v-model="value" :weekday-format="'short'" locale="es" class="rounded-md border")
             NuxtPage
 </template>

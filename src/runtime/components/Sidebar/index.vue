@@ -17,10 +17,10 @@ function updateState(){
 </script>
 
 <template lang="pug">
-aside(class="fixed bg-background top-0 left-0 z-20 h-screen -translate-x-full lg:translate-x-0 transition-[width] ease-in-out duration-300", :class="[ isOpen ? 'w-72' : 'w-[90px]' ]")
+aside(class="fixed bg-background top-0 left-0 z-20 h-screen -translate-x-full lg:translate-x-0 transition-[width] ease-in-out duration-300", :class="[ isOpen ? 'w-72' : 'w-[70px]' ]")
     .invisible(class="lg:visible absolute top-[12px] -right-[16px] z-20")
         Button(class="w-8 h-8 p-2 text-primary", variant="outline", @click="updateState")
             Icon.h-4.w-4.transition-transform.ease-in-out.duration-700(:class="rotateIcon", name="tabler:chevron-left")
-    .relative.h-full.flex.flex-col.px-3.py-4.overflow-y-auto.shadow-md(class="dark:shadow-zinc-800")
+    .relative.h-full.flex.flex-col.px-1.py-4.overflow-y-auto.shadow-md(class="dark:shadow-zinc-800")
         SidebarMenu(:isOpen="isOpen")
 </template>
