@@ -1,6 +1,6 @@
 import type { $Fetch } from 'ofetch';
 import type { IUnidad, IUnidadForm } from '~/src/runtime/models/Planificacion';
-import { IItemEntradaCurricular } from '../../../models';
+import type { IItemEntradaCurricular } from '../../../models';
 
 export default class UnidadModule {
     constructor(private fetcher: $Fetch) { }
