@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useAuthStore } from '../stores/authStore';
-import { useNotification } from '#imports';
+import { useNotification, useRouter } from '#imports';
 import { useMagicKeys } from '@vueuse/core'
 
 const emit = defineEmits(['successLogin'])
@@ -44,6 +44,11 @@ async function login() {
     }
 }
 
+
+const redirect = () => {
+    useRouter().push('/login-admin')
+}
+
 </script>
 
 <template lang="pug">
@@ -82,7 +87,7 @@ div.w-full.bg-muted.relative
         CommandList
             CommandEmpty No se encontraron resultados
             CommandGroup(heading="Accesos Rápidos")
-                CommandItem(value="Login SuperAdmin", @click="useRouter().push('/login-admin')") Login SuperAdmin
+                CommandItem(value="Login SuperAdmin", @click="redirect") Login SuperAdmin
             CommandGroup(heading="Debugging")
                 CommandItem(value="Logs", :disabled="true") Copiar Logs
 </template>
