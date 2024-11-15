@@ -95,14 +95,5 @@ export default class PlanificacionModule {
         })
     }
 
-    async relateItemsUnidades(planificacionId: number, unidadId: number, itemEntradaCurricularId: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/relateUnidadesItems/${planificacionId}`, {
-            method: 'POST',
-            body: {
-                unidadId: unidadId,
-                itemEntradaCurricularId: itemEntradaCurricularId
-            }
-        })
-    }
-
+   
 }
