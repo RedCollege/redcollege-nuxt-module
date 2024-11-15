@@ -33,7 +33,7 @@ export default class UnidadModule {
         })
     }
 
-    async relateItemsUnidades(planificacionId: number, unidadId: number, itemEntradaCurricularId: number[], itemId: number): Promise<IItemEntradaCurricular[]> {
+    async relateItemsUnidades(planificacionId: number, unidadId: number, itemEntradaCurricularId: number[], itemId: number): Promise<IItemEntradaCurricular> {
         return this.fetcher(`/unidades/relateItemUnidad/${planificacionId}/${itemId}`, {
             method: 'POST',
             body: {
