@@ -23,6 +23,7 @@ export interface IPlanificacion {
     curso: ICurso;
     establecimiento: IEstablecimiento;
     usuario: IUsuario;
+    profesor: IUsuario;
     colaboradores: Array<IUsuario>;
     asignaturas: Array<ICursoAsignatura>;
     unidades: Array<IUnidad>;
