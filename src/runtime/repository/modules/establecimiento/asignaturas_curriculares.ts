@@ -4,8 +4,8 @@ import type { IAsignaturaCurricular } from '../../../models/Establecimiento/asig
 export default class AsignaturaCurricularModule {
     constructor(private fetcher: $Fetch) { }
 
-    async getAsignaturaCurricularSige(codigoSige: number, sigeId: number, establecimientoId: number): Promise<IAsignaturaCurricular> {
-        return this.fetcher(`/asignatura/obtenerAsignaturaCurricular/${codigoSige}/${sigeId}/${establecimientoId}`, {
+    async getAsignaturaCurricularSige(cursoAsignaturaId: number, establecimientoId: number): Promise<IAsignaturaCurricular> {
+        return this.fetcher(`/asignatura/obtenerAsignaturaCurricular/${cursoAsignaturaId}/${establecimientoId}`, {
             method: 'GET'
         })
     }
