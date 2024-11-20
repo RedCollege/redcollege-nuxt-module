@@ -226,7 +226,7 @@ const logout = () => {
                         NavigationMenuItem
                             DropdownMenu
                                 DropdownMenuTrigger(as-child)
-                                    Button(variant="ghost")
+                                    Button(variant="ghost", size="icon")
                                         Avatar(class="!h-8 !w-8")
                                             AvatarImage(:src="user.avatarUrl")
                                             AvatarFallback
