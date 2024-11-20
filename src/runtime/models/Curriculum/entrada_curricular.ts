@@ -13,4 +13,5 @@ export interface IEntradaCurricular {
     createdAt: DateTime;
     updatedAt: DateTime;
     itemsEntradaCurricular: Array<IItemEntradaCurricular>;
+    asignaturaCurricular: IAsignaturaCurricular;
 }
