@@ -13,9 +13,10 @@ export interface IUnidad {
     createdAt: DateTime;
     updatedAt: DateTime;
     deletedAt: DateTime;
+    itemsEntradaCurricular: Array<IItemEntradaCurricular>;
     planificacion: IPlanificacion;
-    itemsEntradasCurriculares: Array<IItemEntradaCurricular>
 }
+
 
 export interface IUnidadForm {
     planificacionId: number,
