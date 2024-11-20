@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import type { IItemEntradaCurricular } from "./item_entrada_curricular";
+import type { IAsignaturaCurricular } from "../Establecimiento/asignatura_curricular";
 
 export interface IEntradaCurricular {
     id: number;
@@ -13,4 +14,5 @@ export interface IEntradaCurricular {
     createdAt: DateTime;
     updatedAt: DateTime;
     itemsEntradaCurricular: Array<IItemEntradaCurricular>;
+    asignaturaCurricular: IAsignaturaCurricular;
 }
