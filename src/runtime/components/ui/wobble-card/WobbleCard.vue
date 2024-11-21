@@ -19,7 +19,7 @@ const mousePosition = reactive({ x: 0, y: 0 })
 const card = ref(null)
 const innerCard = ref(null)
 
-const { apply : animateCard } = useMotion(card, {
+const { apply : animateCard, stop } = useMotion(card, {
     initial: {
         transform: "translate3d(0px, 0px, 0) scale3d(1, 1, 1)",
     }
@@ -44,6 +44,9 @@ const getPosition = async (event) => {
         transform: `translate3d(${-x}px, ${-y}px, 0) scale3d(1.03, 1.03, 1)`,
         transition: { duration: 0.1, ease: "ease-out" },
     })
+}
+
+const resetAnimation = async(event) => {
     await animateCard('initial')
     await animateInnerCard('initial')
 }
@@ -51,7 +54,7 @@ const getPosition = async (event) => {
 </script>
 
 <template>
-    <div ref="card" class="mx-auto w-full bg-indigo-800 relative rounded-2xl overflow-hidden" @mousemove="getPosition"  :class="containerClassName">
+    <div ref="card" class="mx-auto w-full bg-indigo-800 relative rounded-2xl overflow-hidden" @mousemove="getPosition" @mouseleave="resetAnimation" :class="containerClassName">
         <div
             class="relative h-full [background-image:radial-gradient(88%_100%_at_top,rgba(255,255,255,0.5),rgba(255,255,255,0))] sm:mx-0 sm:rounded-2xl overflow-hidden"
             style="
