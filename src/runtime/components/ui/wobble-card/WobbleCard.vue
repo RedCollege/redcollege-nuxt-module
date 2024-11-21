@@ -44,8 +44,8 @@ const getPosition = async (event) => {
         transform: `translate3d(${-x}px, ${-y}px, 0) scale3d(1.03, 1.03, 1)`,
         transition: { duration: 0.1, ease: "ease-out" },
     })
-    //await animateCard('initial')
-    //await animateInnerCard('initial')
+    await animateCard('initial')
+    await animateInnerCard('initial')
 }
 
 </script>
