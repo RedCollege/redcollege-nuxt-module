@@ -1,6 +1,12 @@
 import type { $Fetch } from 'ofetch';
 import type { IUnidad, IUnidadForm } from '~/src/runtime/models/Planificacion';
 import type { IItemEntradaCurricular } from '../../../models';
+import type { IArchivo } from '../../../models/General/archivo';
+
+interface ArchivoResponse {
+    message: string;
+    archivo: IArchivo;
+}
 
 export default class UnidadModule {
     constructor(private fetcher: $Fetch) { }
@@ -42,10 +48,37 @@ export default class UnidadModule {
             }
         })
     }
+
     async getUnidadesByPlanificacion(planificacionId: number): Promise<IUnidad[]> {
         return this.fetcher(`/unidades/getUnidadesByPlanificacion/${planificacionId}`, {
             method: 'GET'
         })
     }
 
+    async asociarArchivo(unidadId: number, archivoId: number): Promise<ArchivoResponse> {
+        return this.fetcher(`/unidades/${unidadId}/asociar-archivo`, {
+            method: 'POST',
+            body: {
+                archivoId
+            }
+        })
+    }
+
+    async softDeleteArchivoAsociado(unidadId: number, archivoId: number): Promise<IArchivo> {
+        return this.fetcher(`/unidades/${unidadId}/soft-delete-archivo`, {
+            method: 'DELETE',
+            body: {
+                archivoId
+            }
+        })
+    }
+
+    async destroyArchivo(unidadId: number, archivoId: number): Promise<IArchivo> {
+        return this.fetcher(`/unidades/${unidadId}/destroy-archivo`, {
+            method: 'DELETE',
+            body: {
+                archivoId
+            }
+        })
+    }
 }
