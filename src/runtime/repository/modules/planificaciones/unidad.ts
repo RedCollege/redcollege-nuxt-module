@@ -3,10 +3,7 @@ import type { IUnidad, IUnidadForm } from '~/src/runtime/models/Planificacion';
 import type { IItemEntradaCurricular } from '../../../models';
 import type { IArchivo } from '../../../models/General/archivo';
 
-interface ArchivoResponse {
-    message: string;
-    archivo: IArchivo;
-}
+
 
 export default class UnidadModule {
     constructor(private fetcher: $Fetch) { }
@@ -55,7 +52,7 @@ export default class UnidadModule {
         })
     }
 
-    async asociarArchivo(unidadId: number, archivoId: number): Promise<ArchivoResponse> {
+    async asociarArchivo(unidadId: number, archivoId: number): Promise<IArchivo> {
         return this.fetcher(`/unidades/${unidadId}/asociar-archivo`, {
             method: 'POST',
             body: {
