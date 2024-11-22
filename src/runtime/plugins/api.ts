@@ -1,7 +1,7 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
 import type { FetchOptions, $Fetch } from 'ofetch';
 import { createApiModules } from '../utils/apiModuleFactory';
-import type { ApiModules, InformesModules, PlanificacionesModules, EstablecimientoModules, MatriculasModules, CurriculumModules } from '../utils/apiModuleFactory';
+import type { ApiModules, InformesModules, PlanificacionesModules, EstablecimientoModules, MatriculasModules, CurriculumModules, GeneralModules } from '../utils/apiModuleFactory';
 import { useAuthStore } from '../stores/authStore';
 
 // Definir tipos de API
@@ -12,7 +12,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     const apiFetcher = $fetch.create({
         baseURL,
-        async onRequest({ options }){
+        async onRequest({ options }) {
             options.headers = {
                 ...options.headers,
                 Authorization: useAuthStore().bearerToken
@@ -25,7 +25,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         informes: createApiModules('informes', apiFetcher) as InformesModules,
         establecimiento: createApiModules('establecimiento', apiFetcher) as EstablecimientoModules,
         matriculas: createApiModules('matriculas', apiFetcher) as MatriculasModules,
-        curriculum: createApiModules('curriculum', apiFetcher) as CurriculumModules
+        curriculum: createApiModules('curriculum', apiFetcher) as CurriculumModules,
+        general: createApiModules('general', apiFetcher) as GeneralModules
     };
 
     return {

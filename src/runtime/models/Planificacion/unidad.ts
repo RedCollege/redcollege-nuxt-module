@@ -1,6 +1,7 @@
 import type { DateTime } from 'luxon';
 import type { IPlanificacion } from './planificacion';
 import type { IItemEntradaCurricular } from '../Curriculum/item_entrada_curricular';
+import type { IArchivo } from '../General/archivo';
 
 export interface IUnidad {
     id: number;
@@ -15,8 +16,8 @@ export interface IUnidad {
     deletedAt: DateTime;
     itemsEntradaCurricular: Array<IItemEntradaCurricular>;
     planificacion: IPlanificacion;
+    archivos: Array<IArchivo>;
 }
-
 
 export interface IUnidadForm {
     planificacionId: number,

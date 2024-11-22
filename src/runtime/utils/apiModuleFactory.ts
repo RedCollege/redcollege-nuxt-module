@@ -8,6 +8,7 @@ import AsignaturaCurricularModule from '../repository/modules/establecimiento/as
 import PeriodoEscolarModule from '../repository/modules/establecimiento/periodo_escolar';
 import MatriculaModule from '../repository/modules/matricula/matricula';
 import { ItemEntradaCurricularModule } from '../repository/modules';
+import AuxiliarModule from '../repository/modules/general/auxiliar';
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
@@ -33,6 +34,10 @@ export type EstablecimientoModules = {
     periodoEscolar: PeriodoEscolarModule
 };
 
+export type GeneralModules = {
+    auxiliar: AuxiliarModule
+}
+
 
 // agrupación de modulos
 export type ApiModules = {
@@ -41,9 +46,10 @@ export type ApiModules = {
     establecimiento: EstablecimientoModules;
     matriculas: MatriculasModules;
     curriculum: CurriculumModules;
+    general: GeneralModules;
 };
 
-export function createApiModules(apiType: 'planificaciones' | 'informes' | 'establecimiento' | 'matriculas' | 'curriculum', apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules | CurriculumModules {
+export function createApiModules(apiType: 'planificaciones' | 'informes' | 'establecimiento' | 'matriculas' | 'curriculum' | 'general', apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules | CurriculumModules | GeneralModules {
     switch (apiType) {
         case 'planificaciones':
             return {
@@ -72,6 +78,9 @@ export function createApiModules(apiType: 'planificaciones' | 'informes' | 'esta
                 asignaturaCurricular: new AsignaturaCurricularModule(apiFetcher)
                 // ... inicializar otros submódulos de establecimiento
             };
-
+        case 'general':
+            return {
+                auxiliar: new AuxiliarModule(apiFetcher)
+            };
     }
 }
