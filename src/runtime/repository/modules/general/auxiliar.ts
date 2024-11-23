@@ -10,14 +10,14 @@ async subirArchivo(file: File, folder: string): Promise<IArchivo> {
         formData.append('file', file);
         formData.append('folder', folder);
 
-        return this.fetcher('/auxiliar/upload', {
+        return this.fetcher('general/auxiliar/upload', {
             method: 'POST',
             body: formData
         });
     }
 
     async eliminarArchivo(url: string): Promise<{ success: boolean; message: string }> {
-        return this.fetcher('/auxiliar/delete', {
+        return this.fetcher('general/auxiliar/delete', {
             method: 'DELETE',
             body: {
                 url
