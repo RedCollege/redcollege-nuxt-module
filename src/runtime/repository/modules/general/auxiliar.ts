@@ -1,18 +1,11 @@
 import type { $Fetch } from 'ofetch';
+import type { IArchivo } from '~/src/runtime/models/General/archivo';
 
-interface ArchivoResponse {
-    message: string;
-    archivo: {
-        nombre: string;
-        url: string;
-        peso: number;
-    }
-}
 
 export default class AuxiliarModule {
     constructor(private fetcher: $Fetch) { }
 
-    async subirArchivo(file: File, folder: string): Promise<ArchivoResponse> {
+async subirArchivo(file: File, folder: string): Promise<IArchivo> {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('folder', folder);
