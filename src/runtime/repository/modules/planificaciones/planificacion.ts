@@ -1,5 +1,6 @@
 import type { $Fetch } from 'ofetch';
 import type { IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
+import type { ICantidadComponentes } from '../../../models';
 
 
 interface GetAllProps {
@@ -94,7 +95,7 @@ export default class PlanificacionModule {
             }
         })
     }
-    async obtenerTotalComponentesByPlanificacion(planificacionId: number): Promise<{ cantidadComponentes: number }> {
+    async obtenerTotalComponentesByPlanificacion(planificacionId: number): Promise<ICantidadComponentes> {
         return this.fetcher(`/planificacion/obtenerTotalComponentes/${planificacionId}`, {
             method: 'GET'
         })
