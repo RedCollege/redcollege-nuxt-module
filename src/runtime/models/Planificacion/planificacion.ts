@@ -58,3 +58,7 @@ interface Meta {
     nextPageUrl: string | null,
     previousPageUrl: string | null
 }
+
+export interface IEstadisticasPlanificacion {
+    cantidadComponentes: number
+}

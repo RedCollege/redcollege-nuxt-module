@@ -53,7 +53,7 @@ export default class UnidadModule {
     }
 
     async asociarArchivo(unidadId: number, archivoId: number): Promise<IArchivo> {
-        return this.fetcher(`/unidades/${unidadId}/asociar-archivo`, {
+        return this.fetcher(`/unidades/${unidadId}/archivos/asociar-archivo`, {
             method: 'POST',
             body: {
                 archivoId
@@ -62,7 +62,7 @@ export default class UnidadModule {
     }
 
     async softDeleteArchivoAsociado(unidadId: number, archivoId: number): Promise<IArchivo> {
-        return this.fetcher(`/unidades/${unidadId}/soft-delete-archivo`, {
+        return this.fetcher(`/unidades/${unidadId}/archivos/delete`, {
             method: 'DELETE',
             body: {
                 archivoId
@@ -71,7 +71,7 @@ export default class UnidadModule {
     }
 
     async destroyArchivo(unidadId: number, archivoId: number): Promise<IArchivo> {
-        return this.fetcher(`/unidades/${unidadId}/destroy-archivo`, {
+        return this.fetcher(`/unidades/${unidadId}/archivos/destroy`, {
             method: 'DELETE',
             body: {
                 archivoId
