@@ -1,5 +1,6 @@
 import type { $Fetch } from 'ofetch';
 import type { IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
+import type { IEstadisticasPlanificacion } from '../../../models';
 
 
 interface GetAllProps {
@@ -94,6 +95,10 @@ export default class PlanificacionModule {
             }
         })
     }
+    async obtenerEstadisticasPlanificacion(planificacionId: number): Promise<IEstadisticasPlanificacion> {
+        return this.fetcher(`/planificacion/obtenerEstadisticasPlanificacion/${planificacionId}`, {
+            method: 'GET'
+        })
+    }
 
-   
 }
