@@ -58,6 +58,6 @@ interface Meta {
     previousPageUrl: string | null
 }
 
-export interface ICantidadComponentes {
+export interface IEstadisticasPlanificacion {
     cantidadComponentes: number
 }
