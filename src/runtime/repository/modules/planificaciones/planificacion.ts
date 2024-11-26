@@ -94,7 +94,7 @@ export default class PlanificacionModule {
             }
         })
     }
-    async obtenerTotalComponentesByPlanificacion(planificacionId: number): Promise<{ totalComponentes: number }> {
+    async obtenerTotalComponentesByPlanificacion(planificacionId: number): Promise<{ cantidadComponentes: number }> {
         return this.fetcher(`/planificacion/obtenerTotalComponentes/${planificacionId}`, {
             method: 'GET'
         })
