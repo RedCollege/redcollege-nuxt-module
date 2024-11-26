@@ -94,6 +94,10 @@ export default class PlanificacionModule {
             }
         })
     }
+    async obtenerTotalComponentesByPlanificacion(planificacionId: number): Promise<{ totalComponentes: number }> {
+        return this.fetcher(`/planificacion/obtenerTotalComponentes/${planificacionId}`, {
+            method: 'GET'
+        })
+    }
 
-   
 }
