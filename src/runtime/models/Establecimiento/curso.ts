@@ -1,5 +1,6 @@
 import type { DateTime } from 'luxon';
 import type { IGradosSige } from './grados_sige';
+import type { ILibro } from '../LibroDigital'
 
 export interface ICurso {
     id: number;
@@ -12,6 +13,7 @@ export interface ICurso {
     periodo: string;
     establecimientoId: number;
     sigeId: number;
+    libro: ILibro;
     createdAt: DateTime;
     updatedAt: DateTime;
     sige?: IGradosSige;
