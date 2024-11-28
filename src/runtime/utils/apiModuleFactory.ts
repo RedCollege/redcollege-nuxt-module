@@ -9,10 +9,12 @@ import PeriodoEscolarModule from '../repository/modules/establecimiento/periodo_
 import MatriculaModule from '../repository/modules/matricula/matricula';
 import { ItemEntradaCurricularModule } from '../repository/modules';
 import AuxiliarModule from '../repository/modules/general/auxiliar';
+import ContenidoModule from '../repository/modules/planificaciones/contenido';
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
-    unidades: UnidadModule
+    unidades: UnidadModule;
+    contenidos: ContenidoModule;
 };
 
 export type MatriculasModules = {
@@ -54,8 +56,8 @@ export function createApiModules(apiType: 'planificaciones' | 'informes' | 'esta
         case 'planificaciones':
             return {
                 planificacion: new PlanificacionModule(apiFetcher),
-                unidades: new UnidadModule(apiFetcher)
-                // ... inicializar otros submódulos de planificaciones
+                unidades: new UnidadModule(apiFetcher),
+                contenidos: new ContenidoModule(apiFetcher)
             };
         case 'matriculas':
             return {
