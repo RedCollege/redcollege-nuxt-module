@@ -19,7 +19,6 @@ onMounted(() => {
             "transform-origin": "center",
             transition: { duration: 1, ease: "ease-in" },
         })
-        console.log(color.value)
     })
 })
 
