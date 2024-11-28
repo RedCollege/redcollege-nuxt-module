@@ -12,6 +12,6 @@ const showConfetti = () => {
 
 <template lang="pug">
         Card
-            Button(@click="showConfetti") Show confetti
+            Button(@click="showConfetti", variant="secondary") Show confetti
             NuxtPage
 </template>
