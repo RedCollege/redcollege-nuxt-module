@@ -4,3 +4,6 @@ export { default as UnidadModule } from './planificaciones/unidad'
 export { default as MatriculaModule } from './matricula/matricula'
 export { default as ItemEntradaCurricularModule } from './curriculum/item_entrada_curricular'
 export { default as ContenidoModule } from './planificaciones/contenido'
+export { default as ContenidoActividadModule } from './planificaciones/contenido_actividad'
+export { default as ContenidoRecursoModule } from './planificaciones/contenido_recurso'
+
