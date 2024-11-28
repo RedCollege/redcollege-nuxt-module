@@ -10,11 +10,13 @@ import MatriculaModule from '../repository/modules/matricula/matricula';
 import { ItemEntradaCurricularModule } from '../repository/modules';
 import AuxiliarModule from '../repository/modules/general/auxiliar';
 import ContenidoModule from '../repository/modules/planificaciones/contenido';
+import ContenidoActividadModule from '../repository/modules/planificaciones/contenido_actividad';
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
     unidades: UnidadModule;
     contenidos: ContenidoModule;
+    contenidoActividades: ContenidoActividadModule;
 };
 
 export type MatriculasModules = {
@@ -57,7 +59,8 @@ export function createApiModules(apiType: 'planificaciones' | 'informes' | 'esta
             return {
                 planificacion: new PlanificacionModule(apiFetcher),
                 unidades: new UnidadModule(apiFetcher),
-                contenidos: new ContenidoModule(apiFetcher)
+                contenidos: new ContenidoModule(apiFetcher),
+                contenidoActividades: new ContenidoActividadModule(apiFetcher)
             };
         case 'matriculas':
             return {
