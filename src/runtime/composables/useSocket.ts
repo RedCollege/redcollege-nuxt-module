@@ -26,7 +26,9 @@ export const useSocket = (): { socket: Ref<Socket<ClientToServerEvents, ServerTo
 
     // Inicializamos la conexión al socket en onMounted
     onMounted(() => {
-        socket.value = io(socketURL)
+        socket.value = io(socketURL, {
+            withCredentials: true
+        })
     })
 
     // Desconectamos el socket en onUnmounted
