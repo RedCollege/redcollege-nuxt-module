@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useThrottleFn } from '@vueuse/core'
+//import { useThrottleFn } from '@vueuse/core'
 import { useMotion } from "@vueuse/motion";
 
 const { socket } = useSocket();
-const { x, y } = useMouse();
+//const { x, y } = useMouse();
 const { randomColor } = useRandomColor();
 const mouseHandler = ref(null);
 const color = ref(randomColor.value)
 
-onMounted(() => {
+/*onMounted(() => {
     socket.value?.on('mouse-position', data => {
         color.value = data.color
         animateMousePosition({
@@ -43,7 +43,7 @@ const sendMousePosition = useThrottleFn(() => {
 const { apply : animateMousePosition, stop } = useMotion(mouseHandler, {
 })
 
-watch([x, y], sendMousePosition)
+watch([x, y], sendMousePosition)*/
 
 </script>
 

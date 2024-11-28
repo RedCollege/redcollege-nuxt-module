@@ -75,8 +75,6 @@ export default defineNuxtModule<ModuleOptions>({
             }
         })
 
-        await installModule('@vueuse/nuxt')
-
         addImportsDir(resolver.resolve('runtime/composables'))
         addLayout(resolver.resolve('runtime/layouts', 'dashboard.vue'), 'dashboard')
 
