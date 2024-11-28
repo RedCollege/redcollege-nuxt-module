@@ -4,7 +4,6 @@ import type { IEstablecimiento } from "../Establecimiento/establecimiento";
 import type { IUsuario } from "../Auth/usuario";
 import type { IUnidad } from './unidad';
 import type { IItemEntradaCurricular } from '../Curriculum/item_entrada_curricular';
-import type { ILibro } from '../LibroDigital';
 
 export interface IPlanificacion {
     id: number;
@@ -24,7 +23,6 @@ export interface IPlanificacion {
     curso: ICurso;
     establecimiento: IEstablecimiento;
     usuario: IUsuario;
-    libro: ILibro;
     colaboradores: Array<IUsuario>;
     asignaturas: Array<ICursoAsignatura>;
     unidades: Array<IUnidad>;
