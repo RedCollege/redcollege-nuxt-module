@@ -3,6 +3,7 @@ import { defineNuxtModule, addLayout, addPlugin, addTemplate, addComponentsDir, 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
     baseURL: string;
+    socketURL: string;
     logoURL: string;
     nombreModulo: string;
     shouldRedirect: boolean;
@@ -20,6 +21,7 @@ export default defineNuxtModule<ModuleOptions>({
         const resolver = createResolver(import.meta.url)
         nuxt.options.runtimeConfig.public.redcollege = defu(nuxt.options.runtimeConfig.public.redcollege, {
             baseURL: options.baseURL,
+            socketURL: options.socketURL,
             logoURL: options.logoURL,
             nombreModulo: options.nombreModulo,
             redirectTo: options.redirectTo,
@@ -72,6 +74,7 @@ export default defineNuxtModule<ModuleOptions>({
                 collections: ['tabler']
             }
         })
+
         addImportsDir(resolver.resolve('runtime/composables'))
         addLayout(resolver.resolve('runtime/layouts', 'dashboard.vue'), 'dashboard')
 
