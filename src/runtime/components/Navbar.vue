@@ -166,7 +166,7 @@ const logout = () => {
         .flex.items-center.gap-4
             .grow
                 .flex.gap-4.items-center
-                    SidebarSheetMenu
+                    SidebarSheetMenu(:logo-url="logoUrl", :titulo="titulo")
                     .flex.gap-2.items-center
                         img(:src="logoUrl", width="30")
                         h5.text-primary.font-bold {{ titulo }}

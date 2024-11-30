@@ -13,7 +13,7 @@ export const buttonVariants = cva(
                 outline:
                     'border border-input bg-background  hover:bg-accent hover:text-accent-foreground',
                 secondary:
-                    'bg-sky/10 text-primary  hover:bg-sky/30',
+                    'bg-sky/10 text-primary  hover:bg-sky/15',
                 sky: 'bg-sky text-primary-foreground  hover:bg-primary/90',
                 purple: 'bg-purple text-primary-foreground  hover:bg-primary/90',
                 gold: 'bg-gold text-primary-foreground  hover:bg-primary/90',
