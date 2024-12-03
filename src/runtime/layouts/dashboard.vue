@@ -11,3 +11,4 @@ div
     MainLayout(:logoUrl="logoURL", :titulo="nombreModulo")
         slot
 </template>
+

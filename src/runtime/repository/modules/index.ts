@@ -7,3 +7,4 @@ export { default as ContenidoModule } from './planificaciones/contenido'
 export { default as ContenidoActividadModule } from './planificaciones/contenido_actividad'
 export { default as ContenidoRecursoModule } from './planificaciones/contenido_recurso'
 
+export { default as HealthModule } from './health/health'

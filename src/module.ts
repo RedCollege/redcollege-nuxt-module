@@ -1,5 +1,6 @@
 import defu from 'defu'
 import { defineNuxtModule, addLayout, addPlugin, addTemplate, addComponentsDir, createResolver, installModule, addImportsDir } from '@nuxt/kit'
+import { readdirSync } from 'fs';
 // Module options TypeScript interface definition
 export interface ModuleOptions {
     baseURL: string;
@@ -27,6 +28,36 @@ export default defineNuxtModule<ModuleOptions>({
             redirectTo: options.redirectTo,
             redirectToAdmin: options.redirectToAdmin,
             shouldRedirect: options.shouldRedirect
+        })
+
+        /*nuxt.hook('pages:extend', (pages) => {
+            pages.push({
+                name: 'health',
+                path: '/health',
+                file: resolver.resolve('./runtime/pages/health.vue')
+            })
+        })*/
+
+        nuxt.hook('pages:extend', (pages) => {
+            // Ruta al directorio de páginas
+            const pagesDir = resolver.resolve('./runtime/pages')
+
+            // Leer todos los archivos del directorio
+            const pageFiles = readdirSync(pagesDir)
+
+            // Filtrar solo archivos .vue
+            pageFiles
+                .filter(file => file.endsWith('.vue'))
+                .forEach(file => {
+                    // Remover la extensión .vue para crear el nombre de la ruta
+                    const routeName = file.replace('.vue', '').toLowerCase()
+
+                    pages.push({
+                        name: routeName,
+                        path: `/${routeName}`,
+                        file: resolver.resolve(`./runtime/pages/${file}`)
+                    })
+                })
         })
 
         // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`

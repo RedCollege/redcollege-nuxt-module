@@ -12,6 +12,7 @@ import AuxiliarModule from '../repository/modules/general/auxiliar';
 import ContenidoModule from '../repository/modules/planificaciones/contenido';
 import ContenidoActividadModule from '../repository/modules/planificaciones/contenido_actividad';
 import ContenidoRecursoModule from '../repository/modules/planificaciones/contenido_recurso';
+import HealthModule from '../repository/modules/health/health';
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
@@ -44,6 +45,9 @@ export type GeneralModules = {
     auxiliar: AuxiliarModule
 }
 
+export type HealthModules = {
+    health: HealthModule
+}
 
 // agrupación de modulos
 export type ApiModules = {
@@ -53,9 +57,17 @@ export type ApiModules = {
     matriculas: MatriculasModules;
     curriculum: CurriculumModules;
     general: GeneralModules;
+    health: HealthModules;
 };
 
-export function createApiModules(apiType: 'planificaciones' | 'informes' | 'establecimiento' | 'matriculas' | 'curriculum' | 'general', apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules | CurriculumModules | GeneralModules {
+export function createApiModules(apiType: 'planificaciones'
+                                        | 'informes'
+                                        | 'establecimiento'
+                                        | 'matriculas'
+                                        | 'curriculum'
+                                        | 'general'
+                                        | 'health'
+                                        , apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules | CurriculumModules | GeneralModules | HealthModules {
     switch (apiType) {
         case 'planificaciones':
             return {
@@ -90,5 +102,9 @@ export function createApiModules(apiType: 'planificaciones' | 'informes' | 'esta
             return {
                 auxiliar: new AuxiliarModule(apiFetcher)
             };
+        case 'health':
+            return{
+                health: new HealthModule(apiFetcher)
+            }
     }
 }
