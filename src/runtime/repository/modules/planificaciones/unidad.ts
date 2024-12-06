@@ -78,4 +78,13 @@ export default class UnidadModule {
             }
         })
     }
+
+    async relacionarItemsUnidad(itemsIds: number[], unidadId: number): Promise<IUnidad> {
+        return this.fetcher(`/unidades/relacionarItemsUnidad/${unidadId}`, {
+            method: "POST",
+            body: {
+                itemIds: itemsIds
+            }
+        })
+    }
 }
