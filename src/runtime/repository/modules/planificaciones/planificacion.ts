@@ -11,6 +11,8 @@ interface GetAllProps {
     estado?: string;
     colaborativa?: boolean;
     asignatura?: string;
+    nivel?: string;
+    profesor?: string;
     page?: number;
     titulo?: string;
     establecimiento: number;
