@@ -7,11 +7,15 @@ export default class ContenidoModule {
     constructor(private fetcher: $Fetch) { }
 
     async obtenerContenidosPorUnidad(unidadId: number): Promise<IContenido[]> {
-        return this.fetcher(`/contenidos/unidad/${unidadId}`);
+        return this.fetcher(`/contenidos/unidad/${unidadId}`, {
+            method: 'GET'
+        });
     }
 
     async obtenerContenidoPorId(id: number): Promise<IContenido> {
-        return this.fetcher(`/contenidos/${id}`);
+        return this.fetcher(`/contenidos/${id}`, {
+            method: 'GET'
+        });
     }
 
     async crearNuevoContenido(data: IContenidoForm): Promise<IContenido> {
@@ -21,7 +25,7 @@ export default class ContenidoModule {
         });
     }
 
-    async actualizarContenido(id: number, data: IContenidoForm): Promise<IContenido> {
+    async actualizarContenido(id: number, data: Partial<IContenidoForm>): Promise<IContenido> {
         return this.fetcher(`/contenidos/${id}`, {
             method: 'PATCH',
             body: data
@@ -35,7 +39,9 @@ export default class ContenidoModule {
     }
 
     async obtenerItemsEntrada(id: number): Promise<IItemEntradaCurricular[]> {
-        return this.fetcher(`/contenidos/${id}/items`);
+        return this.fetcher(`/contenidos/${id}/items`, {
+            method: 'GET'
+        });
     }
 
     async asociarItemsAContenido(id: number, itemsIds: number[]): Promise<IContenido> {
