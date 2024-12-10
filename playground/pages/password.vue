@@ -77,7 +77,6 @@ const schema = z.object({
 })
 
 function onSubmit(values: Record<string, any>) {
-    console.log(values)
 }
 </script>
 

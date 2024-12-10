@@ -27,6 +27,7 @@ export const useSocket = (): { socket: Ref<Socket<ClientToServerEvents, ServerTo
     // Inicializamos la conexión al socket en onMounted
     onMounted(() => {
         socket.value = io(socketURL, {
+            transports: ["websocket", "polling"],
             withCredentials: true
         })
     })
