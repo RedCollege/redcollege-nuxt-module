@@ -5,10 +5,11 @@ export interface IContenido {
     id: number;
     unidadId: number;
     titulo: string;
-    fechaInicio: Date | null;     // Cambiado de fechaPlanificada
-    fechaFin: Date | null;        // Nuevo campo
-    contenidoPlanificado: string | null;  // Nuevo campo (reemplaza descripcion)
-    evaluacion: string | null;     // Nuevo campo
+    fechaInicio: Date | null;     
+    fechaFin: Date | null;        
+    contenidoPlanificado: string | null;  
+    evaluacion: string | null;   
+    is_cumplido:boolean;  
     createdAt: Date;
     updatedAt: Date;
     deletedAt?: Date;
@@ -25,7 +26,8 @@ export interface IContenidoForm {
     fechaInicio: Date | null;    
     fechaFin: Date | null;        
     contenidoPlanificado: string | null; 
-    evaluacion: string | null;     
+    evaluacion: string | null;  
+    is_cumplido:boolean;   
 }
 
 
