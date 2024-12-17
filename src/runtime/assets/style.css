@@ -5,13 +5,13 @@
 
 .page-enter-from {
     opacity: 0;
-    transform: translateY(50px) scale(1);
+    transform: translateY(20px) scale(1);
     filter: blur(10px);
 }
 
 .page-leave-to {
     opacity: 0;
-    transform: translateY(-50px) scale(1);
+    transform: translateY(0px) scale(1);
     filter: blur(10px);
 }
 
