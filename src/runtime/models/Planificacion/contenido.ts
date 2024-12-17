@@ -1,5 +1,6 @@
 import type { IArchivo } from '../General/archivo';
 import type { IItemEntradaCurricular } from '../Curriculum/item_entrada_curricular';
+import type { DateTime } from 'luxon';
 
 export interface IContenido {
     id: number;
@@ -9,10 +10,10 @@ export interface IContenido {
     fechaFin: Date | null;        
     contenidoPlanificado: string | null;  
     evaluacion: string | null;   
-    is_cumplido:boolean;  
-    createdAt: Date;
-    updatedAt: Date;
-    deletedAt?: Date;
+    isCumplido:boolean;  
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: DateTime;
     deletedBy?: number;
     archivos?: IArchivo[];
     itemsEntrada?: IItemEntradaCurricular[];
@@ -27,7 +28,7 @@ export interface IContenidoForm {
     fechaFin: Date | null;        
     contenidoPlanificado: string | null; 
     evaluacion: string | null;  
-    is_cumplido:boolean;   
+    isCumplido:boolean;   
 }
 
 
