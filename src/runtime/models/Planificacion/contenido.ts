@@ -9,7 +9,7 @@ export interface IContenido {
     fechaFin: Date | null;        
     contenidoPlanificado: string | null;  
     evaluacion: string | null;   
-    is_cumplido:boolean;  
+    isCumplido:boolean;  
     createdAt: Date;
     updatedAt: Date;
     deletedAt?: Date;
@@ -27,7 +27,7 @@ export interface IContenidoForm {
     fechaFin: Date | null;        
     contenidoPlanificado: string | null; 
     evaluacion: string | null;  
-    is_cumplido:boolean;   
+    isCumplido:boolean;   
 }
 
 
