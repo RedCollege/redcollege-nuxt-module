@@ -6,11 +6,11 @@ export interface IContenido {
     id: number;
     unidadId: number;
     titulo: string;
-    fechaInicio: Date | null;     
-    fechaFin: Date | null;        
-    contenidoPlanificado: string | null;  
-    evaluacion: string | null;   
-    isCumplido:boolean;  
+    fechaInicio: Date | null;
+    fechaFin: Date | null;
+    contenidoPlanificado: string | null;
+    evaluacion: string | null;
+    isCumplido: boolean;
     createdAt: DateTime;
     updatedAt: DateTime;
     deletedAt?: DateTime;
@@ -24,11 +24,11 @@ export interface IContenido {
 export interface IContenidoForm {
     unidadId: number | null;
     titulo: string | null;
-    fechaInicio: Date | null;    
-    fechaFin: Date | null;        
-    contenidoPlanificado: string | null; 
-    evaluacion: string | null;  
-    isCumplido:boolean;   
+    fechaInicio: Date | null;
+    fechaFin: Date | null;
+    contenidoPlanificado: string | null;
+    evaluacion: string | null;
+    isCumplido: boolean;
 }
 
 
@@ -36,9 +36,9 @@ export interface IContenidoActividad {
     id: number;
     contenidoId: number;
     descripcion: string;
-    createdAt: Date;
-    updatedAt: Date;
-    deletedAt?: Date;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: DateTime;
     deletedBy?: number;
 }
 
@@ -46,8 +46,8 @@ export interface IContenidoRecurso {
     id: number;
     contenidoId: number;
     descripcion: string;
-    createdAt: Date;
-    updatedAt: Date;
-    deletedAt?: Date;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    deletedAt?: DateTime;
     deletedBy?: number;
 }
