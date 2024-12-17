@@ -7,6 +7,7 @@ useNavbar().setHideCursos(true)
 </script>
 
 <template lang="pug">
-NuxtLayout(name="dashboard")
-    NuxtPage
+div
+    NuxtLayout(name="dashboard")
+        NuxtPage
 </template>

@@ -8,5 +8,4 @@ const { data } = await useAsyncData('matriculas',  () => {
 
 <template lang="pug">
 h1 hola
-pre {{ data }}
 </template>

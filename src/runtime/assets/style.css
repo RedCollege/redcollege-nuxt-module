@@ -1,0 +1,24 @@
+.page-enter-active,
+.page-leave-active {
+    transition: all 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+.page-enter-from {
+    opacity: 0;
+    transform: translateY(50px) scale(1);
+    filter: blur(10px);
+}
+
+.page-leave-to {
+    opacity: 0;
+    transform: translateY(-50px) scale(1);
+    filter: blur(10px);
+}
+
+.page-enter-active {
+    transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.page-leave-active {
+    transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+}

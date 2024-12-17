@@ -30,14 +30,6 @@ export default defineNuxtModule<ModuleOptions>({
             shouldRedirect: options.shouldRedirect
         })
 
-        /*nuxt.hook('pages:extend', (pages) => {
-            pages.push({
-                name: 'health',
-                path: '/health',
-                file: resolver.resolve('./runtime/pages/health.vue')
-            })
-        })*/
-
         nuxt.hook('pages:extend', (pages) => {
             // Ruta al directorio de páginas
             const pagesDir = resolver.resolve('./runtime/pages')
@@ -135,6 +127,8 @@ export default defineNuxtModule<ModuleOptions>({
         nuxt.hook('prepare:types', ({ references }) => {
             references.push({ path: resolver.resolve(nuxt.options.buildDir, 'types/redcollege-ui.d.ts') })
         })
+
+        nuxt.options.css.push(resolver.resolve('./runtime/assets/style.css'))
 
     },
 })
