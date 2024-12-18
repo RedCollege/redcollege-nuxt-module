@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
     const user = ref<IAuthUsuarioResponse>()
     const userId = useCookie<number>('userId', { domain: cookieDomain })
     const isLoggedIn = useCookie<boolean>('isLoggedIn', { domain: cookieDomain })
-    const bearerToken = useCookie<string>('auth._token.local', { domain: cookieDomain })
+    const bearerToken = useCookie<string>('auth._token.local_redcollege', { domain: cookieDomain })
     const isSuperAdmin = ref(false)
     const isAdmin = ref(false)
     const isProfesor = ref(false)
