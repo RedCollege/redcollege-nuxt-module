@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IMatriculaResponse } from '~/src/runtime/models/Matricula';
+import type { IMatriculaResponse, IMatriculaUpdate } from '~/src/runtime/models/Matricula';
 
 interface GetAllProps {
     trashed?: boolean;
@@ -19,6 +19,19 @@ export default class MatriculaModule {
         return this.fetcher('establecimiento/matriculas/getByEstablecimiento', {
             params: props,
             method: 'GET'
+        });
+    }
+
+    async actualizarMatricula(matricula: IMatriculaUpdate): Promise<IMatriculaResponse> {
+        return this.fetcher('establecimiento/matriculas/actualizarMatricula', {
+            method: 'PATCH',
+            body: matricula
+        });
+    }
+
+    async destroyMatricula(matriculaId: number): Promise<IMatriculaResponse> {
+        return this.fetcher(`establecimiento/matriculas/destroyMatricula/${matriculaId}`, {
+            method: 'DELETE'
         });
     }
 }

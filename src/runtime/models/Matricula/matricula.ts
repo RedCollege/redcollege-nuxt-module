@@ -32,6 +32,12 @@ export interface IMatricula {
     updatedAt: DateTime;
 }
 
+export interface IMatriculaUpdate {
+    matriculaId: number;
+    rut: string;
+    estadoMatriculaId: number;
+}
+
 export interface IMatriculaResponse {
     meta: Meta,
     data: IMatricula[]
