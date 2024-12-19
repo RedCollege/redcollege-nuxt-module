@@ -7,6 +7,7 @@ export interface IUsuario {
     id: number;
     correo: string;
     clave: string;
+    rut: string;
     nombre: string;
     segundoNombre: string;
     apellidoPaterno: string;
