@@ -1,7 +1,8 @@
 import { DateTime } from "luxon";
-import type { IUsuario } from "../../../types";
+
 import type { IContenido } from "../contenido";
 import type { ISugerencia } from "./sugerencia";
+import type { IUsuario } from "../../Auth/usuario";
 
 
 export interface IRegistroDua {
