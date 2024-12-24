@@ -20,6 +20,8 @@ export default defineNuxtModule<ModuleOptions>({
     // Default configuration options of the Nuxt module
     async setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
+        const pagesDir = resolver.resolve('./runtime/pages')
+
         nuxt.options.runtimeConfig.public.redcollege = defu(nuxt.options.runtimeConfig.public.redcollege, {
             baseURL: options.baseURL,
             socketURL: options.socketURL,
@@ -30,26 +32,63 @@ export default defineNuxtModule<ModuleOptions>({
             shouldRedirect: options.shouldRedirect
         })
 
+        try {
+            readdirSync(pagesDir)
+        } catch (error) {
+            console.warn(`Directory ${pagesDir} does not exist. Skipping page generation.`)
+            return
+        }
+
         nuxt.hook('pages:extend', (pages) => {
-            // Ruta al directorio de páginas
-            const pagesDir = resolver.resolve('./runtime/pages')
+            const items = readdirSync(pagesDir, { withFileTypes: true })
 
-            // Leer todos los archivos del directorio
-            const pageFiles = readdirSync(pagesDir)
+            function addPagesRecursively(dir: string, basePath: string = '') {
+                const items = readdirSync(dir, { withFileTypes: true })
+                const currentLevelPages: any[] = []
 
-            // Filtrar solo archivos .vue
-            pageFiles
-                .filter(file => file.endsWith('.vue'))
-                .forEach(file => {
-                    // Remover la extensión .vue para crear el nombre de la ruta
-                    const routeName = file.replace('.vue', '').toLowerCase()
+                // Primero procesar archivos .vue en el nivel actual
+                items.forEach(item => {
+                    const fullPath = `${dir}/${item.name}`
+                    if (!item.isDirectory() && item.name.endsWith('.vue')) {
+                        const routeName = item.name.replace('.vue', '').toLowerCase()
+                        const fullRouteName = `${basePath}/${routeName}`.substring(1)
 
-                    pages.push({
-                        name: routeName,
-                        path: `/${routeName}`,
-                        file: resolver.resolve(`./runtime/pages/${file}`)
-                    })
+                        currentLevelPages.push({
+                            name: fullRouteName.replace(/\//g, '-'),
+                            path: `${basePath}/${routeName}`,
+                            file: fullPath,
+                            children: []
+                        })
+                    }
                 })
+
+                // Luego procesar subdirectorios
+                items.forEach(item => {
+                    const fullPath = `${dir}/${item.name}`
+                    if (item.isDirectory()) {
+                        // Buscar si existe una página padre para este directorio
+                        const parentPage = currentLevelPages.find(
+                            page => page.name === item.name || page.path.endsWith(item.name)
+                        )
+
+                        const childBasePath = `${basePath}/${item.name}`
+                        const childPages = addPagesRecursively(fullPath, childBasePath)
+
+                        if (parentPage) {
+                            // Si existe página padre, agregar páginas hijas como children
+                            parentPage.children.push(...childPages)
+                        } else {
+                            // Si no hay página padre, agregar páginas al nivel actual
+                            currentLevelPages.push(...childPages)
+                        }
+                    }
+                })
+
+                return currentLevelPages
+            }
+
+            const generatedPages = addPagesRecursively(pagesDir)
+            pages.push(...generatedPages)
         })
 
         // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
@@ -100,6 +139,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         addImportsDir(resolver.resolve('runtime/composables'))
         addLayout(resolver.resolve('runtime/layouts', 'dashboard.vue'), 'dashboard')
+        addLayout(resolver.resolve('runtime/layouts', 'settings.vue'), 'settings')
 
         addTemplate({
             filename: 'types/redcollege-ui.d.ts',

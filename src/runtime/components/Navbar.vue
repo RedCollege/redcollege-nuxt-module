@@ -3,7 +3,6 @@ import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { applicationModules as modules } from '../config/modules'
 import type { IPeriodoEscolar } from '../models'
-//import type { ICursoEstablecimientoResponse } from '../models/Curso'
 import { useAuthStore } from '../stores/authStore'
 import { useRuntimeConfig, useRoute, useRouter, useNuxtApp } from '#app'
 import { useNavbar } from '../composables/states'
@@ -12,7 +11,8 @@ interface Props {
     logoUrl: string,
     titulo: string,
     hideCursos?: boolean,
-    hidePeriodos?: boolean
+    hidePeriodos?: boolean,
+    hideEstablecimientos?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -20,6 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
     titulo: '',
     hideCursos: false,
     hidePeriodos: false,
+    hideEstablecimientos: false
 })
 
 const { $apis } = useNuxtApp()
@@ -32,7 +33,6 @@ const authStore = useAuthStore()
 const { user, isLoggedIn } = storeToRefs(authStore)
 const { redirectTo } = useRuntimeConfig().public.redcollege
 const periodos = ref<Array<IPeriodoEscolar>>([])
-//const cursos = ref<Array<ICursoEstablecimientoResponse>>([])
 
 const arePeriodosLoaded = ref(false)
 const areCursosLoaded = ref(false)
@@ -192,7 +192,7 @@ const logout = () => {
             .flex-none
                 NavigationMenu
                     NavigationMenuList(class="gap-2")
-                        NavigationMenuItem
+                        NavigationMenuItem(v-if="!hideEstablecimientos")
                             Select(v-model="selectedEstablecimientoId")
                                 SelectTrigger
                                     SelectValue(placeholder="Elige un establecimiento")
