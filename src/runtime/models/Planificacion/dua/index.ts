@@ -1,0 +1,5 @@
+import './estrategia'
+import './pauta'
+import './principio'
+import './registro_dua'
+import './sugerencia'

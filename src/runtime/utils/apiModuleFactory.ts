@@ -13,6 +13,7 @@ import ContenidoModule from '../repository/modules/planificaciones/contenido';
 import ContenidoActividadModule from '../repository/modules/planificaciones/contenido_actividad';
 import ContenidoRecursoModule from '../repository/modules/planificaciones/contenido_recurso';
 import HealthModule from '../repository/modules/health/health';
+import RegistroDuaModule from '../repository/modules/planificaciones/dua/registro_dua';
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
@@ -20,6 +21,7 @@ export type PlanificacionesModules = {
     contenidos: ContenidoModule;
     contenidoActividades: ContenidoActividadModule;
     contenidoRecursos: ContenidoRecursoModule;
+    registroDua: RegistroDuaModule
 };
 
 export type MatriculasModules = {
@@ -61,13 +63,13 @@ export type ApiModules = {
 };
 
 export function createApiModules(apiType: 'planificaciones'
-                                        | 'informes'
-                                        | 'establecimiento'
-                                        | 'matriculas'
-                                        | 'curriculum'
-                                        | 'general'
-                                        | 'health'
-                                        , apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules | CurriculumModules | GeneralModules | HealthModules {
+    | 'informes'
+    | 'establecimiento'
+    | 'matriculas'
+    | 'curriculum'
+    | 'general'
+    | 'health'
+    , apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules | CurriculumModules | GeneralModules | HealthModules {
     switch (apiType) {
         case 'planificaciones':
             return {
@@ -75,7 +77,8 @@ export function createApiModules(apiType: 'planificaciones'
                 unidades: new UnidadModule(apiFetcher),
                 contenidos: new ContenidoModule(apiFetcher),
                 contenidoActividades: new ContenidoActividadModule(apiFetcher),
-                contenidoRecursos: new ContenidoRecursoModule(apiFetcher)
+                contenidoRecursos: new ContenidoRecursoModule(apiFetcher),
+                registroDua: new RegistroDuaModule(apiFetcher),
             };
         case 'matriculas':
             return {
@@ -103,7 +106,7 @@ export function createApiModules(apiType: 'planificaciones'
                 auxiliar: new AuxiliarModule(apiFetcher)
             };
         case 'health':
-            return{
+            return {
                 health: new HealthModule(apiFetcher)
             }
     }
