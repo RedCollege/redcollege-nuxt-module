@@ -8,6 +8,10 @@ const { randomColor } = useRandomColor();
 const mouseHandler = ref(null);
 const color = ref(randomColor.value)
 
+const { establecimiento } = useNuxtApp().$apis
+const estudiantes = await establecimiento.curso.obtenerEstudiantes(10533)
+console.log(estudiantes)
+
 onMounted(() => {
     socket.value?.on('mouse-position', data => {
         color.value = data.color

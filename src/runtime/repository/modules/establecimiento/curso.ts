@@ -1,5 +1,6 @@
 import type { $Fetch } from 'ofetch';
 import type { ICursoAsignatura, IGradosSige } from '../../../models';
+import type { IUsuario } from '~/src/runtime/models/Auth/usuario';
 
 
 export default class CursoModule {
@@ -16,4 +17,11 @@ export default class CursoModule {
             method: 'GET'
         })
     }
+
+    async obtenerEstudiantes(cursoId: number): Promise<IUsuario[]> {
+        return this.fetcher(`/curso/obtenerEstudiantes/${cursoId}`, {
+            method: 'GET'
+        })
+    }
+
 }
