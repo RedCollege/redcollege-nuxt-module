@@ -1,21 +1,30 @@
 import type { $Fetch } from "ofetch";
-import type { IAdecuacionCurricular } from "~/src/runtime/models";
+import type {
+    IAdecuacionCurricular,
+    IAdecuacionCurricularPaginated,
+} from "~/src/runtime/models";
 
 export default class AdecuacionCurricularModule {
     constructor(private fetcher: $Fetch) {}
     async obtenerAdecuacionesPorUnidad(
         unidadId: number,
         page: number = 1
-    ): Promise<IAdecuacionCurricular[]> {
+    ): Promise<IAdecuacionCurricularPaginated> {
         return this.fetcher(`/adecuaciones-curriculares/unidad/${unidadId}`, {
             method: "GET",
             query: { page },
         });
     }
-    async obtenerAdecuacionPorContenidoId(
+    async obtenerAdecuacionesPorContenidoId(
         id: number
-    ): Promise<IAdecuacionCurricular> {
+    ): Promise<IAdecuacionCurricular[]> {
         return this.fetcher(`/adecuaciones-curriculares/contenido/${id}`, {
+            method: "GET",
+        });
+    }
+
+    async obtenerAdecuacionPorId(id: number): Promise<IAdecuacionCurricular> {
+        return this.fetcher(`/adecuaciones-curriculares/${id}`, {
             method: "GET",
         });
     }
