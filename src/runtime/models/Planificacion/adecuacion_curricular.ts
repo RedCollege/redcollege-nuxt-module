@@ -12,7 +12,35 @@ export interface IAdecuacionCurricular {
     updatedAt: DateTime;
     deletedAt?: DateTime;
     deletedBy?: number;
-    cursoAsignaturasIds: Array<ICursoAsignatura>;
-    estudiantesIds: Array<IUsuario>;
-    itemsIds: Array<IItemEntradaCurricular>;
+    asignaturas: Array<ICursoAsignatura>;
+    estudiantes: Array<IUsuario>;
+    itemsCurriculares: Array<IItemEntradaCurricular>;
+}
+
+export interface IAdecuacionCurricularForm {
+    contenidoId: number;
+    actividad: string | null;
+    fechaInicio: DateTime;
+    fechaFin: DateTime;
+    estudiantes: Array<number>;
+    asignaturas: Array<number>;
+    itemsCurriculares: Array<number>;
+    adecuacionCurricular: string;
+}
+
+interface Meta {
+    total: number | null;
+    perPage: number | null;
+    currentPage: number | null;
+    lastPage: number | null;
+    firstPage: number | null;
+    firstPageUrl: string | null;
+    lastPageUrl: string | null;
+    nextPageUrl: string | null;
+    previousPageUrl: string | null;
+}
+
+export interface IAdecuacionCurricularPaginated {
+    meta: Meta;
+    data: IAdecuacionCurricular[];
 }
