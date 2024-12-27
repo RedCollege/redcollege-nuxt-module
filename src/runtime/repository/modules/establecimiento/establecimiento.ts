@@ -3,9 +3,6 @@ import type { ICursoAsignatura } from '../../../models/Establecimiento';
 import type { ICurso } from '~/src/runtime/models/Establecimiento/curso';
 import type { IUsuario } from '~/src/runtime/models/Auth/usuario';
 
-
-
-
 export default class EstablecimientoModule {
     constructor(private fetcher: $Fetch) { }
 

@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IUsuario } from '~/src/runtime/models/Auth/usuario';
+import type { IUsuario, IUsuarioUpdate } from '~/src/runtime/models/Auth/usuario';
 
 
 export default class UsuarioModule {
@@ -9,6 +9,13 @@ export default class UsuarioModule {
         return this.fetcher(`/auth/obtenerColaboradorById/${usuarioId}`, {
             method: 'GET'
         })
+    }
+
+    async actualizarUsuarioById(usuarioId: number, usuario: IUsuarioUpdate): Promise<IUsuario> {
+        return this.fetcher(`auth/actualizarUsuarioById/${usuarioId}`, {
+            method: 'PATCH',
+            body: usuario
+        });
     }
 
 }

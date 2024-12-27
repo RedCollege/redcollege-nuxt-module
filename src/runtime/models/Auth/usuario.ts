@@ -25,3 +25,13 @@ export interface IUsuario {
     matriculas: Array<IMatricula>;
     especialidades: Array<IEspecialidad>;
 }
+
+export interface IUsuarioUpdate {
+    nombre: string;
+    segundoNombre: string;
+    apellidoPaterno: string;
+    apellidoMaterno: string;
+    rut: string;
+    correo: string;
+    especialidadesIds: Array<number>;
+}
