@@ -7,7 +7,7 @@ import CursoModule from '../repository/modules/establecimiento/curso';
 import AsignaturaCurricularModule from '../repository/modules/establecimiento/asignaturas_curriculares';
 import PeriodoEscolarModule from '../repository/modules/establecimiento/periodo_escolar';
 import MatriculaModule from '../repository/modules/matricula/matricula';
-import { ItemEntradaCurricularModule, UsuarioModule } from '../repository/modules';
+import { EspecialidadModule, ItemEntradaCurricularModule, UsuarioModule } from '../repository/modules';
 import AuxiliarModule from '../repository/modules/general/auxiliar';
 import ContenidoModule from '../repository/modules/planificaciones/contenido';
 import ContenidoActividadModule from '../repository/modules/planificaciones/contenido_actividad';
@@ -44,7 +44,8 @@ export type EstablecimientoModules = {
     establecimiento: EstablecimientoModule;
     curso: CursoModule;
     asignaturaCurricular: AsignaturaCurricularModule,
-    periodoEscolar: PeriodoEscolarModule
+    periodoEscolar: PeriodoEscolarModule,
+    especialidad: EspecialidadModule
 };
 
 export type GeneralModules = {
@@ -109,7 +110,8 @@ export function createApiModules(apiType:
                 periodoEscolar: new PeriodoEscolarModule(apiFetcher),
                 establecimiento: new EstablecimientoModule(apiFetcher),
                 curso: new CursoModule(apiFetcher),
-                asignaturaCurricular: new AsignaturaCurricularModule(apiFetcher)
+                asignaturaCurricular: new AsignaturaCurricularModule(apiFetcher),
+                especialidad: new EspecialidadModule(apiFetcher)
                 // ... inicializar otros submódulos de establecimiento
             };
         case 'general':

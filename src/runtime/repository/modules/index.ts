@@ -9,3 +9,4 @@ export { default as ContenidoRecursoModule } from './planificaciones/contenido_r
 export { default as RegistroDuaModule } from './planificaciones/dua/registro_dua'
 export { default as HealthModule } from './health/health'
 export { default as UsuarioModule } from './auth/usuario'
+export { default as EspecialidadModule } from './establecimiento/especialidad'
