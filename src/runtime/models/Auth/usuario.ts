@@ -4,6 +4,7 @@ import type { IPerfil } from "./perfil";
 import type { IRol } from '../Establecimiento/rol';
 import type { ICurso } from "../Establecimiento/curso";
 import type { IMatricula } from '../Matricula';
+import type { IEspecialidad } from '../Establecimiento/especialidad';
 export interface IUsuario {
     id: number;
     correo: string;
@@ -22,4 +23,5 @@ export interface IUsuario {
     roles: Array<IRol>;
     cursos: Array<ICurso>;
     matriculas: Array<IMatricula>;
+    especialidades: Array<IEspecialidad>;
 }
