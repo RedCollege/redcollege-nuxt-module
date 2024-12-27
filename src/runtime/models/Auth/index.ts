@@ -24,3 +24,6 @@ export interface IRoleResponse {
     nombre: string
 }
 
+export * from './usuario'
+export * from './perfil'
+
