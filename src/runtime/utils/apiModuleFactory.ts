@@ -7,13 +7,17 @@ import CursoModule from '../repository/modules/establecimiento/curso';
 import AsignaturaCurricularModule from '../repository/modules/establecimiento/asignaturas_curriculares';
 import PeriodoEscolarModule from '../repository/modules/establecimiento/periodo_escolar';
 import MatriculaModule from '../repository/modules/matricula/matricula';
-import { ItemEntradaCurricularModule } from '../repository/modules';
+import { ItemEntradaCurricularModule, UsuarioModule } from '../repository/modules';
 import AuxiliarModule from '../repository/modules/general/auxiliar';
 import ContenidoModule from '../repository/modules/planificaciones/contenido';
 import ContenidoActividadModule from '../repository/modules/planificaciones/contenido_actividad';
 import ContenidoRecursoModule from '../repository/modules/planificaciones/contenido_recurso';
 import HealthModule from '../repository/modules/health/health';
 import RegistroDuaModule from '../repository/modules/planificaciones/dua/registro_dua';
+
+export type AuthModules = {
+    usuario: UsuarioModule
+}
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
@@ -53,6 +57,7 @@ export type HealthModules = {
 
 // agrupación de modulos
 export type ApiModules = {
+    auth: AuthModules,
     planificaciones: PlanificacionesModules;
     informes: InformesModules;
     establecimiento: EstablecimientoModules;
@@ -62,15 +67,21 @@ export type ApiModules = {
     health: HealthModules;
 };
 
-export function createApiModules(apiType: 'planificaciones'
+export function createApiModules(apiType:
+    'auth'
+    | 'planificaciones'
     | 'informes'
     | 'establecimiento'
     | 'matriculas'
     | 'curriculum'
     | 'general'
     | 'health'
-    , apiFetcher: $Fetch): PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules | CurriculumModules | GeneralModules | HealthModules {
+    , apiFetcher: $Fetch): AuthModules | PlanificacionesModules | InformesModules | EstablecimientoModules | MatriculasModules | CurriculumModules | GeneralModules | HealthModules {
     switch (apiType) {
+        case 'auth':
+            return {
+                usuario: new UsuarioModule(apiFetcher)
+            };
         case 'planificaciones':
             return {
                 planificacion: new PlanificacionModule(apiFetcher),

@@ -1,11 +1,8 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
 import type { FetchOptions, $Fetch } from 'ofetch';
 import { createApiModules } from '../utils/apiModuleFactory';
-import type { ApiModules, InformesModules, PlanificacionesModules, HealthModules, EstablecimientoModules, MatriculasModules, CurriculumModules, GeneralModules } from '../utils/apiModuleFactory';
+import type { ApiModules, InformesModules, PlanificacionesModules, HealthModules, EstablecimientoModules, MatriculasModules, CurriculumModules, GeneralModules, AuthModules } from '../utils/apiModuleFactory';
 import { useAuthStore } from '../stores/authStore';
-
-// Definir tipos de API
-type ApiType = 'planificaciones' | 'informes' | 'establecimiento';
 
 export default defineNuxtPlugin((nuxtApp) => {
     const { baseURL } = useRuntimeConfig().public.redcollege
@@ -21,6 +18,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     }) as $Fetch;
 
     const apis: ApiModules = {
+        auth: createApiModules('auth', apiFetcher) as AuthModules,
         planificaciones: createApiModules('planificaciones', apiFetcher) as PlanificacionesModules,
         informes: createApiModules('informes', apiFetcher) as InformesModules,
         establecimiento: createApiModules('establecimiento', apiFetcher) as EstablecimientoModules,

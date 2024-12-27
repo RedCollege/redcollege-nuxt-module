@@ -10,6 +10,7 @@ export interface IUsuario {
     clave: string;
     rut: string;
     nombre: string;
+    cargo: string;
     segundoNombre: string;
     apellidoPaterno: string;
     apellidoMaterno: string;
