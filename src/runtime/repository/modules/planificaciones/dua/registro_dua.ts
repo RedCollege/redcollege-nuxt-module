@@ -24,7 +24,7 @@ export default class RegistroDuaModule {
         })
     }
 
-    async create(usuariosIds: number[], sugerenciasIds: number, contenidoId: number): Promise<IRegistroDua> {
+    async create(usuariosIds: number[], sugerenciasIds: number[], contenidoId: number): Promise<IRegistroDua> {
         return this.fetcher(`/registroDua/create`, {
             method: "POST",
             body: {
