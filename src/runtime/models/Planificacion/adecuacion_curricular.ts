@@ -25,8 +25,8 @@ interface IItemCurricular {
 export interface IAdecuacionCurricularForm {
     contenidoId: number;
     actividad: string;
-    fechaInicio: string | Date;
-    fechaFin: string | Date;
+    fechaInicio: DateTime;
+    fechaFin: DateTime;
     estudiantes: number[];
     asignaturas: number[];
     itemsCurriculares: IItemCurricular[];
