@@ -19,7 +19,7 @@ export interface IAdecuacionCurricular {
 
 interface IItemCurricular {
     id: number;
-    adecuacion_curricular: string;
+    adecuacionCurricular: string;
 }
 
 export interface IAdecuacionCurricularForm {
