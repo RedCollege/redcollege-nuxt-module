@@ -17,15 +17,19 @@ export interface IAdecuacionCurricular {
     itemsCurriculares: Array<IItemEntradaCurricular>;
 }
 
+interface IItemCurricular {
+    id: number;
+    adecuacion_curricular: string;
+}
+
 export interface IAdecuacionCurricularForm {
     contenidoId: number;
-    actividad: string | null;
-    fechaInicio: DateTime;
-    fechaFin: DateTime;
-    estudiantes: Array<number>;
-    asignaturas: Array<number>;
-    itemsCurriculares: Array<number>;
-    adecuacionCurricular: string;
+    actividad: string;
+    fechaInicio: string | Date;
+    fechaFin: string | Date;
+    estudiantes: number[];
+    asignaturas: number[];
+    itemsCurriculares: IItemCurricular[];
 }
 
 interface Meta {
