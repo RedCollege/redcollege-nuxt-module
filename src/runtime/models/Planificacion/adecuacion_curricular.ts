@@ -17,7 +17,7 @@ export interface IAdecuacionCurricular {
     itemsCurriculares: Array<IItemEntradaCurricular>;
 }
 
-interface IItemCurricular {
+interface IItemAdecuacion {
     id: number;
     adecuacionCurricular: string;
 }
@@ -29,7 +29,7 @@ export interface IAdecuacionCurricularForm {
     fechaFin: DateTime;
     estudiantes: number[];
     asignaturas: number[];
-    itemsCurriculares: IItemCurricular[];
+    itemsAdecuaciones: IItemAdecuacion[];
 }
 
 interface Meta {
