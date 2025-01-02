@@ -1,1 +1,1 @@
-export * from './archivo' 
+export * from './archivo'

@@ -19,6 +19,9 @@ import ContenidoRecursoModule from "../repository/modules/planificaciones/conten
 import HealthModule from "../repository/modules/health/health";
 import RegistroDuaModule from "../repository/modules/planificaciones/dua/registro_dua";
 import AdecuacionCurricularModule from "../repository/modules/planificaciones/adecuacion_curricular";
+import AdjuntoModule from "../repository/modules/comunicacion/adjunto";
+import MensajeModule from "../repository/modules/comunicacion/mensaje";
+import UsuarioMensajeModule from "../repository/modules/comunicacion/usuario_mensaje";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -61,6 +64,12 @@ export type HealthModules = {
     health: HealthModule;
 };
 
+export type ComunicacionesModules = {
+    adjunto: AdjuntoModule;
+    mensaje: MensajeModule;
+    usuarioMensaje: UsuarioMensajeModule;
+}
+
 // agrupación de modulos
 export type ApiModules = {
     auth: AuthModules;
@@ -71,6 +80,7 @@ export type ApiModules = {
     curriculum: CurriculumModules;
     general: GeneralModules;
     health: HealthModules;
+    comunicaciones: ComunicacionesModules;
 };
 
 export function createApiModules(
@@ -82,7 +92,8 @@ export function createApiModules(
         | "matriculas"
         | "curriculum"
         | "general"
-        | "health",
+        | "health"
+        | "comunicaciones",
     apiFetcher: $Fetch
 ):
     | AuthModules
@@ -92,7 +103,8 @@ export function createApiModules(
     | MatriculasModules
     | CurriculumModules
     | GeneralModules
-    | HealthModules {
+    | HealthModules
+    | ComunicacionesModules {
     switch (apiType) {
         case "auth":
             return {
@@ -144,5 +156,11 @@ export function createApiModules(
             return {
                 health: new HealthModule(apiFetcher),
             };
+        case "comunicaciones":
+            return {
+                adjunto: new AdjuntoModule(apiFetcher),
+                mensaje: new MensajeModule(apiFetcher),
+                usuarioMensaje: new UsuarioMensajeModule(apiFetcher),
+            }
     }
 }

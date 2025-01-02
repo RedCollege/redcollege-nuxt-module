@@ -1,7 +1,7 @@
 import { defineNuxtPlugin, useRuntimeConfig } from '#app';
 import type { FetchOptions, $Fetch } from 'ofetch';
 import { createApiModules } from '../utils/apiModuleFactory';
-import type { ApiModules, InformesModules, PlanificacionesModules, HealthModules, EstablecimientoModules, MatriculasModules, CurriculumModules, GeneralModules, AuthModules } from '../utils/apiModuleFactory';
+import type { ApiModules, InformesModules, PlanificacionesModules, HealthModules, EstablecimientoModules, MatriculasModules, CurriculumModules, GeneralModules, AuthModules, ComunicacionesModules } from '../utils/apiModuleFactory';
 import { useAuthStore } from '../stores/authStore';
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -25,7 +25,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         matriculas: createApiModules('matriculas', apiFetcher) as MatriculasModules,
         curriculum: createApiModules('curriculum', apiFetcher) as CurriculumModules,
         general: createApiModules('general', apiFetcher) as GeneralModules,
-        health: createApiModules('health', apiFetcher) as HealthModules
+        health: createApiModules('health', apiFetcher) as HealthModules,
+        comunicaciones: createApiModules('comunicaciones', apiFetcher) as ComunicacionesModules,
     };
 
     return {

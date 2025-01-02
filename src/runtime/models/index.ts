@@ -6,3 +6,4 @@ export * from './LibroDigital';
 export * from './General';
 export * from './Health'
 export * from './Auth'
+export * from './Comunicacion'
