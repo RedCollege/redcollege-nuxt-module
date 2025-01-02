@@ -11,3 +11,6 @@ export { default as HealthModule } from "./health/health";
 export { default as UsuarioModule } from "./auth/usuario";
 export { default as EspecialidadModule } from "./establecimiento/especialidad";
 export { default as AdecuacionCurricularModule } from "./planificaciones/adecuacion_curricular";
+export { default as MensajeModule } from "./comunicacion/mensaje";
+export { default as UsuarioMensajeModule } from "./comunicacion/usuario_mensaje";
+export { default as AdjuntoModule } from "./comunicacion/adjunto";
