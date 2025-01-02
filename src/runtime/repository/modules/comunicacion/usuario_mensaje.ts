@@ -3,8 +3,8 @@ import type { IUsuarioMensajeResponse } from '~/src/runtime/models/Comunicacion'
 
 interface GetAllProps {
     trashed?: boolean;
-    periodo?: string;
-    estado?: string;
+    periodo?: number;
+    estado?: number;
     page?: number;
     buscar?: string;
     establecimiento: number;
