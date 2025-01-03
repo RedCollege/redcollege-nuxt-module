@@ -8,11 +8,13 @@ export default class AdecuacionCurricularModule {
     constructor(private fetcher: $Fetch) {}
     async obtenerAdecuacionesPorUnidad(
         unidadId: number,
-        page: number = 1
+        page: number = 1,
+        nombre?: string,
+        asignatura?: string
     ): Promise<IAdecuacionCurricularPaginated> {
         return this.fetcher(`/adecuaciones-curriculares/unidad/${unidadId}`, {
             method: "GET",
-            query: { page },
+            query: { page, nombre, asignatura },
         });
     }
     async obtenerAdecuacionesPorContenidoId(
