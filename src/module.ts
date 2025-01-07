@@ -156,7 +156,7 @@ export default defineNuxtModule<ModuleOptions>({
         nuxt.options.alias['@redcollege/ui-nuxt-module'] = resolver.resolve('.')
         nuxt.options.build.transpile.push('@redcollege/ui-nuxt-module')
 
-        nuxt.options.build.transpile.push('zod', '@vee-validate/zod')
+        nuxt.options.build.transpile.push('zod', '@vee-validate/zod', 'quill', 'vue-quilly')
 
         // Añadir auto-imports para zod y @vee-validate/zod
         nuxt.options.imports.imports = nuxt.options.imports.imports || []
