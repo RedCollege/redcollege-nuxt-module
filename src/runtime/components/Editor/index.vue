@@ -99,7 +99,7 @@ const onEditorChange = (eventName: string) => {
 
 .ql-toolbar{
     border-radius: .5rem .5rem 0 0;
-    z-index: 999;
+    z-index: 2;
     position: sticky;
     top: 0;
     background-color: white;

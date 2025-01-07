@@ -22,7 +22,7 @@ export const applicationModules: Module[] = [
         doHighlight: false
     },
     {
-        link: "https://planificacion.redcollege.net",
+        link: "https://planificaciones.redcollege.net/",
         title: "Planificaciones Gantt",
         img: "https://login.redcollege.net/logos/modulos/planificacion.svg",
         subtitle: "",
