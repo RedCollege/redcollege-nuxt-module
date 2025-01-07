@@ -13,6 +13,12 @@ const editorData = ref("")
                     CardDescription.text-green 0 Destinatarios Seleccionados
                 CardContent
                     ScrollArea(class="h-[calc(100vh_-_295px)]")
+                        Tabs(default-value="account")
+                            TabsList
+                                TabsTrigger(value="account") Cuenta
+                                TabsTrigger(value="pass") Password
+                            TabsContent(value="account") make changes aksdh kajshdjkash jkdashjkdh asjkdhajskdhjkashd kjashdkjas hdjk ashdjkashjdk ahsjkdhasjkdhasjk dhasjkdh
+                            TabsContent(value="pass") Your password here
                         Accordion.space-y-2(type="multiple", collapsible, :default-value="1")
                             AccordionItem.border-none(v-for="i in 10", :value="i + 1")
                                 Card

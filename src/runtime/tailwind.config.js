@@ -94,12 +94,23 @@ module.exports = {
                     from: { height: 'var(--radix-collapsible-content-height)' },
                     to: { height: 0 },
                 },
+                "fade-left": {
+                    "0%": {
+                        opacity: "0",
+                        transform: "translateX(2rem)"
+                    },
+                    "100%": {
+                        opacity: "1",
+                        transform: "translateX(0)"
+                    }
+            }
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
                 "collapsible-down": "collapsible-down 0.2s ease-in-out",
                 "collapsible-up": "collapsible-up 0.2s ease-in-out",
+                "fade-left": "fade-left 0.2s ease"
             },
         },
     },
