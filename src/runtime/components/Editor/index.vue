@@ -3,10 +3,11 @@ import { onMounted, ref, defineEmits, watch } from 'vue'
 import { QuillyEditor } from 'vue-quilly'
 import { Delta, Range } from 'quill/core'
 import { useNuxtApp, useRoute } from '#app';
-import ImageUploader from 'quill-image-uploader';
-import BlotFormatter from 'quill-blot-formatter';
+import ImageUploader from "quill2-image-uploader";
+import BlotFormatter from '@enzedonline/quill-blot-formatter2';
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
+import '@enzedonline/quill-blot-formatter2/dist/css/quill-blot-formatter2.css'
 import { useNotification } from '../../composables/states';
 
 const editor = ref<InstanceType<typeof QuillyEditor>>()
@@ -37,7 +38,19 @@ const options = ref({
 
         },
         imageUploader: {
-            upload: (file: any) => {
+            upload: async(file: File) => {
+                try {
+                    const data = await general.auxiliar.subirArchivo(file, `editor${Number(useRoute().params.establecimientoid) > 0 ? '/' + Number(useRoute().params.establecimientoid) : ''}`)
+                    const { url } = data?.archivo
+                    if(url) return url
+                } catch(error : any){
+                    useNotification().toast({
+                        title: 'Hubo un inconveniente',
+                        description: 'No se pudo subir el archivo, intente nuevamente.',
+                    })
+                }
+            }
+            /*upload: (file: any) => {
                 return new Promise((resolve, reject) => {
                     general.auxiliar.subirArchivo(file, `editor${Number(useRoute().params.establecimientoid) > 0 ? '/' + Number(useRoute().params.establecimientoid) : ''}`)
                     .then((data: any) => {
@@ -53,7 +66,7 @@ const options = ref({
                         })
                     })
                 });
-            }
+            }*/
         }
     },
     placeholder: 'Escribir aquí ...',
