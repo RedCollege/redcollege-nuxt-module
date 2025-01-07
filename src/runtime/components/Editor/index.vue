@@ -82,10 +82,27 @@ const onEditorChange = (eventName: string) => {
     display: flex;
     flex-flow: column nowrap;
     border-radius: 0 0 .5rem .5rem;
+    border: 0;
+    background-color: white;
+}
+
+.ql-container.ql-snow{
+    border: 0;
+}
+
+.ql-toolbar.ql-snow{
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid hsl(201.3 30% 82%);
 }
 
 .ql-toolbar{
     border-radius: .5rem .5rem 0 0;
+    z-index: 999;
+    position: sticky;
+    top: 0;
+    background-color: white;
 }
 
 </style>
