@@ -92,12 +92,14 @@ export default defineNuxtModule<ModuleOptions>({
         })
 
         // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
+        addPlugin(resolver.resolve('./runtime/plugins/auth'))
         addPlugin(resolver.resolve('./runtime/plugin'))
         addPlugin(resolver.resolve('./runtime/plugins/lucide'))
         addPlugin(resolver.resolve('./runtime/plugins/vue-table'))
         addPlugin(resolver.resolve('./runtime/plugins/middleware'))
         addPlugin(resolver.resolve('./runtime/plugins/api'))
         addPlugin(resolver.resolve('./runtime/plugins/form'))
+        addPlugin(resolver.resolve('./runtime/plugins/quill.client'))
 
         addComponentsDir({
             path: resolver.resolve('runtime/components')
@@ -128,7 +130,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         await installModule('@formkit/auto-animate/nuxt')
 
-        addPlugin(resolver.resolve('./runtime/plugins/auth'))
+
 
         await installModule('nuxt-icon-tw')
         await installModule('@nuxt/icon', {
