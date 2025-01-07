@@ -117,8 +117,7 @@ export default defineNuxtModule<ModuleOptions>({
                 content: [
                     resolver.resolve('runtime/components/**/*.{vue,js,ts}'),
                     resolver.resolve('runtime/**/*.{vue,js,ts}')
-                ],
-                important: true
+                ]
             }
         })
 
