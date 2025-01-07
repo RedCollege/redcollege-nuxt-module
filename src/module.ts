@@ -15,12 +15,18 @@ export interface ModuleOptions {
 export default defineNuxtModule<ModuleOptions>({
     meta: {
         name: '@redcollege/ui-nuxt-module',
-        configKey: 'redcollege',
+        configKey: 'redcollege'
     },
     // Default configuration options of the Nuxt module
     async setup(options, nuxt) {
         const resolver = createResolver(import.meta.url)
         const pagesDir = resolver.resolve('./runtime/pages')
+
+        nuxt.options.vite = {
+            optimizeDeps: {
+                include: ['quill', '@enzedonline/quill-blot-formatter2']
+            }
+        }
 
         nuxt.options.runtimeConfig.public.redcollege = defu(nuxt.options.runtimeConfig.public.redcollege, {
             baseURL: options.baseURL,
@@ -99,7 +105,6 @@ export default defineNuxtModule<ModuleOptions>({
         addPlugin(resolver.resolve('./runtime/plugins/middleware'))
         addPlugin(resolver.resolve('./runtime/plugins/api'))
         addPlugin(resolver.resolve('./runtime/plugins/form'))
-        addPlugin(resolver.resolve('./runtime/plugins/quill.client'))
 
         addComponentsDir({
             path: resolver.resolve('runtime/components')
@@ -156,7 +161,7 @@ export default defineNuxtModule<ModuleOptions>({
         nuxt.options.alias['@redcollege/ui-nuxt-module'] = resolver.resolve('.')
         nuxt.options.build.transpile.push('@redcollege/ui-nuxt-module')
 
-        nuxt.options.build.transpile.push('zod', '@vee-validate/zod', 'quill', 'vue-quilly')
+        nuxt.options.build.transpile.push('zod', '@vee-validate/zod', 'quill', 'vue-quilly', 'quill-delta')
 
         // Añadir auto-imports para zod y @vee-validate/zod
         nuxt.options.imports.imports = nuxt.options.imports.imports || []
