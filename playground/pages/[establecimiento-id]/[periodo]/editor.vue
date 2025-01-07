@@ -15,5 +15,4 @@ const editorData = ref("")
                 .grid.gap-2
                     .min-h-32
                         Editor(v-model="editorData")
-                    Button hola mundo
 </template>
