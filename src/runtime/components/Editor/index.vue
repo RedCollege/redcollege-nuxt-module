@@ -11,7 +11,7 @@ import { useNotification } from '../../composables/states';
 import { useField } from 'vee-validate';
 
 interface Props {
-    value: string;
+    value?: string;
     name: string;
 }
 

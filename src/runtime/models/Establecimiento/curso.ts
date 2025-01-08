@@ -17,4 +17,5 @@ export interface ICurso {
     createdAt: DateTime;
     updatedAt: DateTime;
     sige?: IGradosSige;
+    totalEstudiantes: number
 }
