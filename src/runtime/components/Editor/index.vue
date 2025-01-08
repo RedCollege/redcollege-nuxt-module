@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, defineEmits, watch } from 'vue'
+import { onMounted, ref, defineEmits, watch, toRef } from 'vue'
 import { QuillyEditor } from 'vue-quilly'
 import { useNuxtApp, useRoute } from '#app';
 import ImageUploader from "quill2-image-uploader";
@@ -8,10 +8,29 @@ import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import '@enzedonline/quill-blot-formatter2/dist/css/quill-blot-formatter2.css'
 import { useNotification } from '../../composables/states';
+import { useField } from 'vee-validate';
 
+interface Props {
+    value: string;
+    name: string;
+}
+
+const props = defineProps<Props>()
+const name = toRef(props, 'name');
 const editor = ref<InstanceType<typeof QuillyEditor>>()
 const model = defineModel()
 const { general } = useNuxtApp().$apis
+
+const {
+    value: inputValue,
+    errorMessage,
+    handleBlur,
+    handleChange,
+    meta,
+} = useField(name, undefined, {
+    initialValue: props.value,
+});
+
 
 let quill: Quill | null = null
 Quill.register('modules/imageUploader', ImageUploader)
@@ -35,12 +54,12 @@ const options = ref({
 
         },
         imageUploader: {
-            upload: async(file: File) => {
+            upload: async (file: File) => {
                 try {
                     const data = await general.auxiliar.subirArchivo(file, `editor${Number(useRoute().params.establecimientoid) > 0 ? '/' + Number(useRoute().params.establecimientoid) : ''}`)
                     const { url } = data?.archivo
-                    if(url) return url
-                } catch(error : any){
+                    if (url) return url
+                } catch (error: any) {
                     useNotification().toast({
                         title: 'Hubo un inconveniente',
                         description: 'No se pudo subir el archivo, intente nuevamente.',
@@ -61,11 +80,13 @@ onMounted(() => {
 const emit = defineEmits(['update:modelValue'])
 
 const onModelValueChange = (value: string) => {
-
+    //handleChange(model.value)
 }
-const onTextChange = () => {}
-const onSelectionChange = () => {}
+const onTextChange = () => { }
+const onSelectionChange = () => { }
 const onEditorChange = (eventName: string) => {
+    handleChange(model.value)
+    //handleChange(model)
 }
 
 </script>
@@ -86,23 +107,22 @@ const onEditorChange = (eventName: string) => {
     background-color: white;
 }
 
-.ql-container.ql-snow{
+.ql-container.ql-snow {
     border: 0;
 }
 
-.ql-toolbar.ql-snow{
+.ql-toolbar.ql-snow {
     border-top: 0;
     border-left: 0;
     border-right: 0;
     border-bottom: 1px solid hsl(201.3 30% 82%);
 }
 
-.ql-toolbar{
+.ql-toolbar {
     border-radius: .5rem .5rem 0 0;
     z-index: 2;
     position: sticky;
     top: 0;
     background-color: white;
 }
-
 </style>
