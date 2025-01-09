@@ -7,6 +7,8 @@ import { z } from 'zod';
 const authStore = useAuthStore()
 const { user, isLoggedIn } = storeToRefs(authStore)
 
+console.log(user.value?.nombre)
+
 const perfilFormSchema = z.object({
     avatarUrl: z.string().optional(),
     nombre: z.string({

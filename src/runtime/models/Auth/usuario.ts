@@ -10,10 +10,26 @@ export interface IUsuario {
     correo: string;
     clave: string;
     rut: string;
+    /**
+     * Solo contiene el primer nombre del usuario.
+     * Es preferible usar `nombreCompleto` si necesitas todo el nombre.
+     */
     nombre: string;
     cargo: string;
+    /**
+     * Solo contiene el segundo nombre del usuario.
+     * Es preferible usar `nombreCompleto` si necesitas todo el nombre.
+     */
     segundoNombre: string;
+    /**
+     * Solo contiene el apellido paterno del usuario.
+     * Es preferible usar `nombreCompleto` si necesitas todo el nombre.
+     */
     apellidoPaterno: string;
+    /**
+     * Solo contiene el apellido materno del usuario.
+     * Es preferible usar `nombreCompleto` si necesitas todo el nombre.
+     */
     apellidoMaterno: string;
     avatarUrl: string;
     createdAt: DateTime;
@@ -24,6 +40,14 @@ export interface IUsuario {
     cursos: Array<ICurso>;
     matriculas: Array<IMatricula>;
     especialidades: Array<IEspecialidad>;
+    /**
+     * Contiene el nombre completo del usuario.
+     */
+    nombreCompleto: string;
+    /**
+     * Contiene las inciales del usuario.
+     */
+    iniciales: string;
 }
 
 export interface IUsuarioUpdate {
