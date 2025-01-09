@@ -55,8 +55,6 @@ const updateRoute = (establecimientoId: string, periodoId: string) => {
                 router.push(newPath)
             }
         } else {
-            // Si estamos en una subruta (ej: /establecimiento/periodo/blog)
-            // Solo actualizamos los parámetros de establecimiento y periodo
             const remainingPath = pathParts.slice(3).join('/')
             const newPath = periodoId
                 ? `/${establecimientoId}/${periodoId}/${remainingPath}`
