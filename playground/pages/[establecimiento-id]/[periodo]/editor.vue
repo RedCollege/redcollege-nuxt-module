@@ -63,6 +63,8 @@ const onSubmit = form.handleSubmit((values) => {
         ResizableHandle.mx-2(with-handle)
         ResizablePanel(:default-size="60", :min-size="50")
             Card
+                .ql-editor
+                    .ql-image-align-center hola
                 form(@submit.prevent="onSubmit")
                     CardHeader
                         CardTitle Asunto
