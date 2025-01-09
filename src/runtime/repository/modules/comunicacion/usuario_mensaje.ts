@@ -9,6 +9,7 @@ interface GetAllProps {
     buscar?: string;
     usuario?: string;
     establecimiento: number;
+    isDestinatario: boolean;
 }
 
 export default class UsuarioMensajeModule {
