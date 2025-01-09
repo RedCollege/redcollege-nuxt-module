@@ -9,6 +9,7 @@ import PeriodoEscolarModule from "../repository/modules/establecimiento/periodo_
 import MatriculaModule from "../repository/modules/matricula/matricula";
 import {
     EspecialidadModule,
+    GrupoModule,
     ItemEntradaCurricularModule,
     UsuarioModule,
 } from "../repository/modules";
@@ -68,6 +69,7 @@ export type ComunicacionesModules = {
     adjunto: AdjuntoModule;
     mensaje: MensajeModule;
     usuarioMensaje: UsuarioMensajeModule;
+    grupo: GrupoModule;
 }
 
 // agrupación de modulos
@@ -161,6 +163,7 @@ export function createApiModules(
                 adjunto: new AdjuntoModule(apiFetcher),
                 mensaje: new MensajeModule(apiFetcher),
                 usuarioMensaje: new UsuarioMensajeModule(apiFetcher),
+                grupo: new GrupoModule(apiFetcher)
             }
     }
 }

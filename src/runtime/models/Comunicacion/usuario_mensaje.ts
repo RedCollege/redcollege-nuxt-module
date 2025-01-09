@@ -35,3 +35,18 @@ export interface IUsuarioMensaje {
     mensaje: IMensaje;
     usuario: IUsuario;
 }
+
+export interface GrupoDestinatario {
+    id: string;
+    type: 'curso' | 'grupo' | 'personal';
+    nombre: string;
+    totalDestinatarios: number;
+    areAllSelected: boolean;
+    destinatarios: Destinatario[]
+}
+
+export interface Destinatario {
+    id: number;
+    nombre: string;
+    isSelected: boolean;
+}

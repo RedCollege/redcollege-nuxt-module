@@ -14,3 +14,4 @@ export { default as AdecuacionCurricularModule } from "./planificaciones/adecuac
 export { default as MensajeModule } from "./comunicacion/mensaje";
 export { default as UsuarioMensajeModule } from "./comunicacion/usuario_mensaje";
 export { default as AdjuntoModule } from "./comunicacion/adjunto";
+export { default as GrupoModule } from './comunicacion/grupo'

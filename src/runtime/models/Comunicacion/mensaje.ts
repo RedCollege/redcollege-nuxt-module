@@ -10,7 +10,7 @@ export interface IMensaje {
     fechaEnvio: DateTime;
     deletedAt: DateTime | null;
     deletedBy: number | null;
-    periodo: string;
+    periodo: number;
     parentMensajeId: number;
     establecimientoId: number;
     createdAt: DateTime;
@@ -18,4 +18,14 @@ export interface IMensaje {
     creador: IUsuario;
     adjuntos: Array<IAdjunto>;
     mensajePreview: string;
+    totalDestinatarios: number;
+    totalEnviados: number;
+    estadoEnvioId: number;
+}
+
+export interface IMensajeForm {
+    asunto: string;
+    mensaje: string;
+    periodo: number;
+    establecimientoId: number;
 }

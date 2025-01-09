@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IMensaje } from '~/src/runtime/models/Comunicacion';
+import type { GrupoDestinatario, IMensaje, IMensajeForm } from '~/src/runtime/models/Comunicacion';
 
 export default class MensajeModule {
     constructor(private fetcher: $Fetch) { }
@@ -9,4 +9,15 @@ export default class MensajeModule {
             method: 'GET'
         });
     }
+
+    async enviarMensaje(mensaje: IMensajeForm, gruposDestinatarios: GrupoDestinatario[]): Promise<IMensaje> {
+        return this.fetcher(`comunicaciones/mensaje/enviarMensaje`, {
+            method: 'POST',
+            body: {
+                mensaje,
+                gruposDestinatarios
+            }
+        });
+    }
+
 }
