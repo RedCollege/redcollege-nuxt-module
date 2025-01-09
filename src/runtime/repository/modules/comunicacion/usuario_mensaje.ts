@@ -7,6 +7,7 @@ interface GetAllProps {
     estado?: number;
     page?: number;
     buscar?: string;
+    usuario?: string;
     establecimiento: number;
 }
 
