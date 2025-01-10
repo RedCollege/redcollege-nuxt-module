@@ -2,6 +2,7 @@ import type { DateTime } from "luxon";
 import type { ICursoAsignatura } from "../Establecimiento/curso_asignatura";
 import type { IUsuario } from "../Auth/usuario";
 import type { IItemEntradaCurricular } from "../Curriculum/item_entrada_curricular";
+import type { IContenido } from "./contenido";
 export interface IAdecuacionCurricular {
     id: number;
     contenidoId: number;
@@ -14,6 +15,7 @@ export interface IAdecuacionCurricular {
     deletedBy?: number;
     asignaturas: Array<ICursoAsignatura>;
     estudiantes: Array<IUsuario>;
+    contenido: IContenido | null;
     itemsCurriculares: Array<IItemEntradaCurricular>;
 }
 
