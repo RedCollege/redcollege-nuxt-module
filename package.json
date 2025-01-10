@@ -30,6 +30,7 @@
         "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
     },
     "dependencies": {
+        "@adonisjs/transmit-client": "^1.0.0",
         "@enzedonline/quill-blot-formatter2": "^2.2.3",
         "@formkit/auto-animate": "^0.8.2",
         "@nuxt/icon": "^1.4.5",
