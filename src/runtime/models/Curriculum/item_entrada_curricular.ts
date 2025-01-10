@@ -18,4 +18,5 @@ export interface IItemEntradaCurricular {
     unidadesRelacionadas: Array<IUnidad>;
     planificaciones: Array<IPlanificacion>;
     entradaCurricular: IEntradaCurricular;
+    adecuacionCurricular?: string;
 }
