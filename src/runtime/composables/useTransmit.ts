@@ -14,19 +14,19 @@ export const useTransmit = () => {
         })
 
         transmitInstance.on('connected', (event) => {
-
+            console.log('connected to the server', event)
         })
 
         transmitInstance.on('disconnected', () => {
-
+            console.log('disconnected')
         })
 
         transmitInstance.on('initializing', (event) => {
-
+            console.log('initializing the server', event)
         })
 
         transmitInstance.on('reconnecting', (error) => {
-
+            console.log(error)
         })
     }
 
