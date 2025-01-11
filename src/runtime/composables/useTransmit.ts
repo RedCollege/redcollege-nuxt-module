@@ -1,31 +1,36 @@
-
 import { onMounted } from "vue";
 import { Transmit } from '@adonisjs/transmit-client'
 import { useRuntimeConfig } from "#app";
-const { socketURL } = useRuntimeConfig().public.redcollege
+
+// Store the single instance outside the composable
+let transmitInstance: Transmit | null = null
 
 export const useTransmit = () => {
-    const transmit = new Transmit({
-        baseUrl: "http://localhost:3334"
-    })
+    const { socketURL } = useRuntimeConfig().public.redcollege
 
-    transmit.on('connected', (event) => {
-        console.log('connected to the server', event)
-    })
+    if (!transmitInstance) {
+        transmitInstance = new Transmit({
+            baseUrl: socketURL
+        })
 
-    transmit.on('disconnected', () => {
-        console.log('disconnected')
-    })
+        transmitInstance.on('connected', (event) => {
 
-    transmit.on('initializing', (event) => {
-        console.log('initializing the server', event)
-    })
+        })
 
-    transmit.on('reconnecting', (error) => {
-        console.log(error)
-    })
+        transmitInstance.on('disconnected', () => {
+
+        })
+
+        transmitInstance.on('initializing', (event) => {
+
+        })
+
+        transmitInstance.on('reconnecting', (error) => {
+
+        })
+    }
 
     return {
-        transmit
+        transmit: transmitInstance
     }
 }
