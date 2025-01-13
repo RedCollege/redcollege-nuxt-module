@@ -8,8 +8,9 @@ interface GetAllProps {
     page?: number;
     buscar?: string;
     usuario?: string;
-    establecimiento: number;
-    isDestinatario: boolean;
+    establecimiento?: number;
+    isDestinatario?: boolean;
+    estadoVisualizacion?: 'all' | 'leido' | 'no-leido'
 }
 
 export default class UsuarioMensajeModule {
@@ -17,6 +18,13 @@ export default class UsuarioMensajeModule {
 
     async getAll(props?: GetAllProps): Promise<IUsuarioMensajeResponse> {
         return this.fetcher('comunicaciones/usuarioMensaje/', {
+            params: props,
+            method: 'GET'
+        });
+    }
+
+    async obtenerInformacionByMensajeId(mensajeId: number, props: GetAllProps): Promise<IUsuarioMensajeResponse> {
+        return this.fetcher(`comunicaciones/usuarioMensaje/obtenerInformacionByMensajeId/${mensajeId}`, {
             params: props,
             method: 'GET'
         });
