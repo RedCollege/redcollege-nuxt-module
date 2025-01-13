@@ -6,6 +6,7 @@ import ImageUploader from "quill2-image-uploader";
 import BlotFormatter from '@enzedonline/quill-blot-formatter2';
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
+import '@enzedonline/quill-blot-formatter2/dist/css/quill-blot-formatter2.css'
 import { useNotification } from '../../composables/states';
 import { useField } from 'vee-validate';
 

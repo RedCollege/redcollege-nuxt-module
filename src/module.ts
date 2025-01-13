@@ -175,7 +175,6 @@ export default defineNuxtModule<ModuleOptions>({
         })
 
         nuxt.options.css.push(resolver.resolve('./runtime/assets/style.css'))
-        nuxt.options.css.push('@enzedonline/quill-blot-formatter2/dist/css/quill-blot-formatter2.css')
 
     },
 })
