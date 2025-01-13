@@ -16,7 +16,6 @@ interface NumberTickerProps {
 }
 
 const spanRef = ref<HTMLSpanElement>();
-
 const props = withDefaults(defineProps<NumberTickerProps>(), {
     value: 0,
     direction: "up",
@@ -26,7 +25,9 @@ const props = withDefaults(defineProps<NumberTickerProps>(), {
     transition: "easeOutCubic",
 });
 
-const transitionValue = ref(props.direction === "down" ? props.value : 0);
+// Keep track of the previous value
+const previousValue = ref(props.value);
+const transitionValue = ref(props.value);
 
 const transitionOutput = useTransition(transitionValue, {
     delay: props.delay,
@@ -41,15 +42,25 @@ const output = computed(() => {
     }).format(Number(transitionOutput.value.toFixed(props.decimalPlaces)));
 });
 
+// Watch for changes in the value prop
+watch(
+    () => props.value,
+    (newValue) => {
+        previousValue.value = transitionValue.value;
+        transitionValue.value = newValue;
+    }
+);
+
 const isInView = useElementVisibility(spanRef, {
     threshold: 0,
 });
 
+// Modified visibility watcher to use previous value
 watch(
     isInView,
     (isVisible) => {
         if (isVisible) {
-            transitionValue.value = props.direction === "down" ? 0 : props.value;
+            transitionValue.value = props.value;
         }
     },
     { immediate: true },
