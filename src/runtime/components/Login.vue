@@ -52,9 +52,11 @@ const redirect = () => {
 </script>
 
 <template lang="pug">
-div.w-full.bg-muted.relative
-    .container(class="lg:grid  lg:grid-cols-6 ")
-        div.flex.items-center.justify-center.py-12(class="lg:col-span-2")
+div.w-full.bg-muted.relative.h-screen.place-items-center.overflow-hidden
+    .absolute.top-0.bottom-0.left-0.right-0
+        Tetris(class="w-full h-full [mask-image:radial-gradient(550px_circle_at_center,#00C16A,transparent)]", :base="15", square-color="#0369a1")
+    .relative.container.h-full.z-1(class="lg:grid  lg:grid-cols-6")
+        div.flex.items-center.justify-center.py-12.h-screen(class="lg:h-full lg:col-span-2")
             div.mx-auto.grid(class="gap-6")
                 div.grid.gap-2.text-center
                     .flex.justify-center
@@ -81,7 +83,6 @@ div.w-full.bg-muted.relative
         div.hidden.h-screen(class="lg:block lg:col-span-4")
             div.flex.justify-center.items-center.h-full
                 img(src="https://nido.redcollege.net/_nuxt/bgLogin.QiXsjYcd.svg" alt="Image"  class="object-cover dark:brightness-[0.2] dark:grayscale")
-    .absolute.bottom-0.left-0.right-0.h-8.bg-sky-700
     CommandDialog(v-model:open="open")
         CommandInput(placeholder="Busca alguno de los comandos disponibles")
         CommandList

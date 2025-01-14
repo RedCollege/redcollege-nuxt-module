@@ -58,6 +58,7 @@
         "socket.io-client": "^4.8.1",
         "tailwind-merge": "^2.5.2",
         "tailwindcss-animate": "^1.0.7",
+        "theme-colors": "^0.1.0",
         "vee-validate": "^4.14.7",
         "vite-plugin-pug": "^0.3.2",
         "vue-confetti-explosion": "^1.0.2",
