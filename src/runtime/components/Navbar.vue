@@ -167,8 +167,8 @@ const logout = () => {
                     SidebarSheetMenu(:logo-url="logoUrl", :titulo="titulo")
                     .flex.gap-2.items-center
                         img(:src="logoUrl", width="30")
-                        h5.text-primary.font-bold {{ titulo }}
-                    NavigationMenu
+                        h5.text-primary.font-bold(class="hidden md:block") {{ titulo }}
+                    NavigationMenu(class="hidden md:block")
                         NavigationMenuList
                             NavigationMenuItem
                                 NavigationMenuTrigger
