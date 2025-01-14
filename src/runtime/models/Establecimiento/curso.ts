@@ -8,14 +8,19 @@ export interface ICurso {
     curso: string;
     seccion: string;
     isDinamico: boolean;
-    isReciclado: boolean;
-    tags: string;
     periodo: string;
     establecimientoId: number;
     sigeId: number;
     libro: ILibro;
     createdAt: DateTime;
     updatedAt: DateTime;
+    /**
+     * Contiene la información del codigo sige del curso
+     */
     sige?: IGradosSige;
-    totalEstudiantes: number
+    totalEstudiantes: number;
+    /**
+     * Contiene el nombre completo del curso.
+     */
+    nombreCompleto: string;
 }
