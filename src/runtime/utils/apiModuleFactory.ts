@@ -11,6 +11,7 @@ import {
     EspecialidadModule,
     GrupoModule,
     ItemEntradaCurricularModule,
+    PermisoModule,
     UsuarioModule,
 } from "../repository/modules";
 import AuxiliarModule from "../repository/modules/general/auxiliar";
@@ -70,6 +71,7 @@ export type ComunicacionesModules = {
     mensaje: MensajeModule;
     usuarioMensaje: UsuarioMensajeModule;
     grupo: GrupoModule;
+    permiso: PermisoModule
 }
 
 // agrupación de modulos
@@ -163,7 +165,8 @@ export function createApiModules(
                 adjunto: new AdjuntoModule(apiFetcher),
                 mensaje: new MensajeModule(apiFetcher),
                 usuarioMensaje: new UsuarioMensajeModule(apiFetcher),
-                grupo: new GrupoModule(apiFetcher)
+                grupo: new GrupoModule(apiFetcher),
+                permiso: new PermisoModule(apiFetcher)
             }
     }
 }
