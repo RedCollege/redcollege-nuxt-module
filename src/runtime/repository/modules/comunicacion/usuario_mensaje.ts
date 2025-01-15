@@ -16,6 +16,7 @@ interface GetAllProps {
 interface EstadisticasProps {
     establecimientoId: number;
     periodo: number;
+    mes?: string
 }
 
 export default class UsuarioMensajeModule {
