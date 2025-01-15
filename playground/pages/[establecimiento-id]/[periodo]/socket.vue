@@ -21,7 +21,6 @@ const handleMessageStatusUpdate = (data: IMensaje) => {
 
 // Suscribirse al mensaje en mounted
 onMounted(() => {
-    throw new Error("aljdjkasdlksajdlk as")
     subscribeToMessage(messageId, handleMessageStatusUpdate);
 });
 

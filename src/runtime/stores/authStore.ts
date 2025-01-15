@@ -88,6 +88,12 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    function updateAvatar(url: string){
+        if(user.value){
+            user.value.avatarUrl = url
+        }
+    }
+
     async function loadUser(){
         const usuario = await $fetch<IAuthUsuarioResponse>(`${baseURL}/auth/usuario/logged`, {
             method: 'GET',
@@ -147,6 +153,6 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     return {
-        user, loadUser, logout, isLoggedIn, login, init, bearerToken, isAdmin, isSuperAdmin, isProfesor, loginPasswordless
+        user, loadUser, logout, isLoggedIn, login, init, bearerToken, isAdmin, isSuperAdmin, isProfesor, loginPasswordless, updateAvatar
     }
 })
