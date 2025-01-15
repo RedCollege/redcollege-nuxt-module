@@ -9,6 +9,7 @@ const { x, y } = useMouse();
 const { randomColor } = useRandomColor();
 const mouseHandler = ref(null);
 const color = ref(randomColor.value)
+const rollbar = useRollbar();
 
 const { establecimiento } = useNuxtApp().$apis
 const messageId = 5203;
@@ -20,6 +21,7 @@ const handleMessageStatusUpdate = (data: IMensaje) => {
 
 // Suscribirse al mensaje en mounted
 onMounted(() => {
+    throw new Error("aljdjkasdlksajdlk as")
     subscribeToMessage(messageId, handleMessageStatusUpdate);
 });
 

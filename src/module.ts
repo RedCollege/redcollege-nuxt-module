@@ -5,6 +5,7 @@ import { readdirSync } from 'fs';
 export interface ModuleOptions {
     baseURL: string;
     socketURL: string;
+    rollbarToken?: string;
     logoURL: string;
     nombreModulo: string;
     shouldRedirect: boolean;
@@ -35,7 +36,8 @@ export default defineNuxtModule<ModuleOptions>({
             nombreModulo: options.nombreModulo,
             redirectTo: options.redirectTo,
             redirectToAdmin: options.redirectToAdmin,
-            shouldRedirect: options.shouldRedirect
+            shouldRedirect: options.shouldRedirect,
+            rollbarToken: options.rollbarToken
         })
 
         try {
@@ -122,7 +124,9 @@ export default defineNuxtModule<ModuleOptions>({
         })
 
         await installModule('@vueuse/motion/nuxt')
-
+        await installModule('nuxt-rollbar', {
+            clientAccessToken: options.rollbarToken
+        })
         await installModule('@vee-validate/nuxt')
 
         await installModule('shadcn-nuxt', {
