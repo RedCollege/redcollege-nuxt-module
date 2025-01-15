@@ -111,6 +111,11 @@ export default defineNuxtModule<ModuleOptions>({
         addComponentsDir({
             path: resolver.resolve('runtime/components')
         })
+
+        await installModule('nuxt-rollbar', {
+            clientAccessToken: options.rollbarToken
+        })
+
         await installModule('@nuxtjs/tailwindcss', {
             cssPath: resolver.resolve('./runtime/assets/tailwind.css'),
             configPath: resolver.resolve('./runtime/tailwind.config.js'),
@@ -124,9 +129,7 @@ export default defineNuxtModule<ModuleOptions>({
         })
 
         await installModule('@vueuse/motion/nuxt')
-        await installModule('nuxt-rollbar', {
-            clientAccessToken: options.rollbarToken
-        })
+
         await installModule('@vee-validate/nuxt')
 
         await installModule('shadcn-nuxt', {
