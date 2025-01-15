@@ -11,6 +11,7 @@ import {
     EspecialidadModule,
     GrupoModule,
     ItemEntradaCurricularModule,
+    RegistroAtencionModule,
     UsuarioModule,
 } from "../repository/modules";
 import AuxiliarModule from "../repository/modules/general/auxiliar";
@@ -72,6 +73,10 @@ export type ComunicacionesModules = {
     grupo: GrupoModule;
 }
 
+export type EnfermeriaModules = {
+    registroAtencion: RegistroAtencionModule
+}
+
 // agrupación de modulos
 export type ApiModules = {
     auth: AuthModules;
@@ -83,6 +88,7 @@ export type ApiModules = {
     general: GeneralModules;
     health: HealthModules;
     comunicaciones: ComunicacionesModules;
+    enfermeria: EnfermeriaModules
 };
 
 export function createApiModules(
@@ -95,7 +101,8 @@ export function createApiModules(
         | "curriculum"
         | "general"
         | "health"
-        | "comunicaciones",
+        | "comunicaciones"
+        | "enfermeria",
     apiFetcher: $Fetch
 ):
     | AuthModules
@@ -106,7 +113,8 @@ export function createApiModules(
     | CurriculumModules
     | GeneralModules
     | HealthModules
-    | ComunicacionesModules {
+    | ComunicacionesModules
+    | EnfermeriaModules {
     switch (apiType) {
         case "auth":
             return {
@@ -164,6 +172,10 @@ export function createApiModules(
                 mensaje: new MensajeModule(apiFetcher),
                 usuarioMensaje: new UsuarioMensajeModule(apiFetcher),
                 grupo: new GrupoModule(apiFetcher)
+            }
+        case "enfermeria":
+            return {
+                registroAtencion: new RegistroAtencionModule(apiFetcher)
             }
     }
 }
