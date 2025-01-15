@@ -12,7 +12,7 @@ export default class PermisoModule {
 
     async actualizarPermisos(permiso: IPermiso): Promise<IPermiso> {
         return this.fetcher(`comunicaciones/permisos/actualizarPermisos`, {
-            method: 'POST',
+            method: 'PATCH',
             body: permiso
         });
     }
