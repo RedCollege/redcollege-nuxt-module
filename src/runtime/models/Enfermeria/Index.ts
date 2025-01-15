@@ -1,1 +1,1 @@
-export * from "./registro_atencion"
+export * from "../Enfermeria/registro_atencion"
