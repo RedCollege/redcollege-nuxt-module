@@ -24,7 +24,7 @@ export default class RegistroAtencionModule{
             method: 'GET'
         });
     }
-    async getByEstablecimiento(registroAtencionId: number|string): Promise<IRegistroAtencion> {
+    async getById(registroAtencionId: number|string): Promise<IRegistroAtencion> {
         return this.fetcher(`/enfermeria/registro_atencion/${registroAtencionId}`, {
             method: 'GET'
         });
