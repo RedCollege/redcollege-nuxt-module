@@ -18,7 +18,7 @@ interface Props {
 const props = defineProps<Props>()
 const name = toRef(props, 'name');
 const editor = ref<InstanceType<typeof QuillyEditor>>()
-const model = defineModel()
+const editorData = ref("")
 const { general } = useNuxtApp().$apis
 
 const {
@@ -36,9 +36,22 @@ let quill: Quill | null = null
 Quill.register('modules/imageUploader', ImageUploader)
 Quill.register('modules/blotFormatter', BlotFormatter);
 
+const keyBinders = {
+    custom: {
+        key: ['#'],
+        handler: function(range, context) {
+            console.log(range, context)
+        // Handle shift+b
+        }
+    },
+}
+
 const options = ref({
     theme: 'snow',
     modules: {
+        keyboard: {
+            bindings: keyBinders
+        },
         toolbar: [
             [{ font: [] }, { size: [] }],
             ['bold', 'italic', 'underline', 'strike'],
@@ -79,20 +92,21 @@ onMounted(() => {
 const emit = defineEmits(['update:modelValue'])
 
 const onModelValueChange = (value: string) => {
-    //handleChange(model.value)
+    handleChange(value)
 }
-const onTextChange = () => { }
+const onTextChange = (content: string) => {
+
+}
 const onSelectionChange = () => { }
 const onEditorChange = (eventName: string) => {
-    handleChange(model.value)
-    //handleChange(model)
+
 }
 
 </script>
 
 <template lang="pug">
     .flex.flex-col.h-full
-        QuillyEditor(ref="editor", v-model="model", :options="options" @update:model-value="onModelValueChange"
+        QuillyEditor(ref="editor", v-model="editorData", :options="options" @update:model-value="onModelValueChange"
         @text-change="onTextChange" @selection-change="onSelectionChange" @editor-change="onEditorChange")
 </template>
 

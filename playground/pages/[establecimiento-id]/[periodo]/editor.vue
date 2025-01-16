@@ -31,7 +31,7 @@ const onSubmit = form.handleSubmit((values) => {
 <template lang="pug">
     ResizablePanelGroup(direction="horizontal")
         ResizablePanel(:default-size="40", :min-size="25", collapsible)
-            Card
+            //-Card
                 CardHeader
                     CardTitle Destinatarios
                     CardDescription.text-green 0 Destinatarios Seleccionados
@@ -63,8 +63,6 @@ const onSubmit = form.handleSubmit((values) => {
         ResizableHandle.mx-2(with-handle)
         ResizablePanel(:default-size="60", :min-size="50")
             Card
-                .ql-editor
-                    .ql-image-align-center hola
                 form(@submit.prevent="onSubmit")
                     CardHeader
                         CardTitle Asunto
