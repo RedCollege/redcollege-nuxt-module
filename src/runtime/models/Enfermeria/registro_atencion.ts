@@ -1,5 +1,5 @@
 import type { DateTime } from "luxon"
-import type { ICurso, IUsuario } from ".."
+import type { ICurso, ILugar, IMotivo, ITratamiento, IUsuario } from ".."
 
 export interface IRegistroAtencion {
     id: number
@@ -9,13 +9,17 @@ export interface IRegistroAtencion {
     periodo: number
     pacienteId: number
     fechaIngreso: DateTime
-    origen: string
-    motivo: string
+    origenId: number
+    origen: ILugar
+    motivoId: number
+    motivo: IMotivo
     diagnostico: string
     isFinalizada?: boolean
     fechaSalida?: DateTime
-    destino?: string
-    tratamiento?: string
+    destinoId?: number
+    destino?: ILugar
+    tratamientoId?: number
+    tratamiento?: ITratamiento
     indicaciones?: string
     paciente: IUsuario
     usuario: IUsuario
@@ -42,12 +46,12 @@ export interface IRegistroAtencionForm {
     periodo: number
     pacienteId: number
     fechaIngreso: DateTime
-    origen: string
-    motivo: string
+    origenId: number
+    motivoId: number
     diagnostico: string
     isFinalizada?: boolean
     fechaSalida?: DateTime
-    destino?: string
-    tratamiento?: string
-    indicaciones?: string
+    destinoId?:  number
+    tratamientoId?: number
+    indicaciones?: number
 }
