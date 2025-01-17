@@ -11,7 +11,7 @@ export interface IRegistroAtencion {
     fechaIngreso: DateTime
     origenId: number
     origen: ILugar
-    motivo: IMotivo
+    motivo: IMotivo[]
     diagnostico: string
     isFinalizada?: boolean
     fechaSalida?: DateTime
