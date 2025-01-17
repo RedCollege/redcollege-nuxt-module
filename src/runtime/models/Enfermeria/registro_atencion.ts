@@ -11,7 +11,6 @@ export interface IRegistroAtencion {
     fechaIngreso: DateTime
     origenId: number
     origen: ILugar
-    motivoId: number
     motivo: IMotivo
     diagnostico: string
     isFinalizada?: boolean
@@ -47,7 +46,7 @@ export interface IRegistroAtencionForm {
     pacienteId: number
     fechaIngreso: DateTime
     origenId: number
-    motivoId: number
+    motivoId: number[]
     diagnostico: string
     isFinalizada?: boolean
     fechaSalida?: DateTime
