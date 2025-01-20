@@ -35,10 +35,13 @@
             />
         </div>
         <Select v-if="withPeriod" v-model="period" class="w-20" >
-            <Label for="periodRef" class="text-xs">Horario</Label>
-            <SelectTrigger ref="periodRef" @keydown.arrow-left="focusLeftConditional" >
-                <SelectValue />
-            </SelectTrigger>
+            <div class="flex flex-col items-center gap-1">
+                <Label for="periodRef" class="text-xs">Horario</Label>
+                <SelectTrigger ref="periodRef" @keydown.arrow-left="focusLeftConditional" >
+                    <SelectValue />
+                </SelectTrigger>
+            </div>
+
             <SelectContent>
                 <SelectGroup>
                     <SelectItem value="PM">
