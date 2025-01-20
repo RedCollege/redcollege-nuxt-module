@@ -7,7 +7,7 @@
                 :picker="withPeriod ? '12hours' : 'hours'" 
                 :period="period"
                 :date="internalDate" 
-                @rightFocus="focusMinuteRef" 
+                @right-focus="focusMinuteRef" 
                 @update:date="updateDate" 
             />
         </div>
@@ -18,8 +18,8 @@
                 ref="minuteRef" 
                 picker="minutes" 
                 :date="internalDate" 
-                @leftFocus="focusHourRef"
-                @rightFocus="focusRightConditional" 
+                @left-focus="focusHourRef"
+                @right-focus="focusRightConditional" 
                 @update:date="updateDate" 
             />
         </div>
@@ -29,8 +29,8 @@
             <TimePickerInput 
                 ref="secondRef" picker="seconds" 
                 :date="internalDate" 
-                @leftFocus="focusMinuteRef"
-                @rightFocus="focusPeriodRef" 
+                @left-focus="focusMinuteRef"
+                @right-focus="focusPeriodRef" 
                 @update:date="updateDate" 
             />
         </div>

@@ -4,7 +4,7 @@
         :name="picker" 
         :class="inputClasses" 
         :value="calculatedValue" 
-        :defaultValue="calculatedValue"
+        :default-value="calculatedValue"
         :type="type" inputmode="decimal" @keydown="handleKeyDown" 
     />
 </template>
@@ -19,19 +19,34 @@ import {
 import { cn } from '@/lib/utils';
 
 const props = defineProps({
-    picker: String,
+    picker: {
+        type: String,
+        default: '',
+    },
     date: {
         type: Date,
         default: () => new Date(new Date().setHours(0, 0, 0, 0)),
     },
-    period: String,
-    class: String,
+    period: {
+        type: String,
+        default: 'am',
+    },
+    class: {
+        type: String,
+        default: '',
+    },
     type: {
         type: String,
         default: 'tel',
     },
-    id: String,
-    name: String,
+    id: {
+        type: String,
+        default: '',
+    },
+    name: {
+        type: String,
+        default: '',
+    },
 });
 
 const emit = defineEmits(['update:date', 'rightFocus', 'leftFocus']);
