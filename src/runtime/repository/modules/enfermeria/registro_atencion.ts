@@ -56,7 +56,7 @@ export default class RegistroAtencionModule{
         })
     }
 
-    async deletePlanificacion(registroAtencionId: number): Promise<IRegistroAtencion> {
+    async deleteRegistroAtencion(registroAtencionId: number): Promise<IRegistroAtencion> {
         return this.fetcher(`/enfermeria/registro_atencion/${registroAtencionId}/destroy`, {
             method: 'DELETE'
         })

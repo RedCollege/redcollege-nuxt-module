@@ -24,6 +24,9 @@ import AdecuacionCurricularModule from "../repository/modules/planificaciones/ad
 import AdjuntoModule from "../repository/modules/comunicacion/adjunto";
 import MensajeModule from "../repository/modules/comunicacion/mensaje";
 import UsuarioMensajeModule from "../repository/modules/comunicacion/usuario_mensaje";
+import LugarModule from "../repository/modules/enfermeria/lugar";
+import TratamientoModule from "../repository/modules/enfermeria/tratamiento";
+import MotivoAtencionModule from "../repository/modules/enfermeria/motivo_atencion";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -75,6 +78,9 @@ export type ComunicacionesModules = {
 
 export type EnfermeriaModules = {
     registroAtencion: RegistroAtencionModule
+    lugar: LugarModule
+    tratamiento: TratamientoModule
+    motivo: MotivoAtencionModule
 }
 
 // agrupación de modulos
@@ -175,7 +181,10 @@ export function createApiModules(
             }
         case "enfermeria":
             return {
-                registroAtencion: new RegistroAtencionModule(apiFetcher)
+                registroAtencion: new RegistroAtencionModule(apiFetcher),
+                lugar: new LugarModule(apiFetcher),
+                tratamiento: new TratamientoModule(apiFetcher),
+                motivo: new MotivoAtencionModule(apiFetcher)
             }
     }
 }

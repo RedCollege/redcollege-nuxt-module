@@ -3,3 +3,8 @@ export interface ITratamiento {
     nombre: string
     establecimientoId: number
 }
+
+export interface ITratamientoForm {
+    establecimientoId: number
+    nombre: string
+}

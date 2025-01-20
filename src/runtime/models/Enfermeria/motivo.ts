@@ -3,3 +3,8 @@ export interface IMotivo {
     nombre: string
     establecimientoId: number
 }
+
+export interface IMotivoForm {
+    establecimientoId: number
+    nombre: string
+}

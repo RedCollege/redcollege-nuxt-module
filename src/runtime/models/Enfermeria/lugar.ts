@@ -3,3 +3,8 @@ export interface ILugar {
     nombre: string
     establecimientoId: number
 }
+
+export interface ILugarForm {
+    establecimientoId: number
+    nombre: string
+}
