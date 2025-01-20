@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { Input } from '@/components/ui/input';
+import { Input } from '../input';
 import {
     getArrowByType,
     getDateByType,
