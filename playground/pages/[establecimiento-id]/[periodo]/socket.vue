@@ -9,6 +9,7 @@ const { x, y } = useMouse();
 const { randomColor } = useRandomColor();
 const mouseHandler = ref(null);
 const color = ref(randomColor.value)
+const rollbar = useRollbar();
 
 const { establecimiento } = useNuxtApp().$apis
 const messageId = 5203;

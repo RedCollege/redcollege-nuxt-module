@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IUsuarioMensajeResponse } from '~/src/runtime/models/Comunicacion';
+import type { IEstadisticas, IUsuarioMensajeResponse } from '~/src/runtime/models/Comunicacion';
 
 interface GetAllProps {
     trashed?: boolean;
@@ -11,6 +11,12 @@ interface GetAllProps {
     establecimiento?: number;
     isDestinatario?: boolean;
     estadoVisualizacion?: 'all' | 'leido' | 'no-leido'
+}
+
+interface EstadisticasProps {
+    establecimientoId: number;
+    periodo: number;
+    mes?: string
 }
 
 export default class UsuarioMensajeModule {
@@ -25,6 +31,13 @@ export default class UsuarioMensajeModule {
 
     async obtenerInformacionByMensajeId(mensajeId: number, props: GetAllProps): Promise<IUsuarioMensajeResponse> {
         return this.fetcher(`comunicaciones/usuarioMensaje/obtenerInformacionByMensajeId/${mensajeId}`, {
+            params: props,
+            method: 'GET'
+        });
+    }
+
+    async obtenerEstadisticas(props: EstadisticasProps): Promise<IEstadisticas> {
+        return this.fetcher(`comunicaciones/usuarioMensaje/obtenerEstadisticas`, {
             params: props,
             method: 'GET'
         });

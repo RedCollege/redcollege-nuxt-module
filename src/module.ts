@@ -5,6 +5,7 @@ import { readdirSync } from 'fs';
 export interface ModuleOptions {
     baseURL: string;
     socketURL: string;
+    rollbarToken?: string;
     logoURL: string;
     nombreModulo: string;
     shouldRedirect: boolean;
@@ -35,7 +36,8 @@ export default defineNuxtModule<ModuleOptions>({
             nombreModulo: options.nombreModulo,
             redirectTo: options.redirectTo,
             redirectToAdmin: options.redirectToAdmin,
-            shouldRedirect: options.shouldRedirect
+            shouldRedirect: options.shouldRedirect,
+            rollbarToken: options.rollbarToken
         })
 
         try {
@@ -109,6 +111,11 @@ export default defineNuxtModule<ModuleOptions>({
         addComponentsDir({
             path: resolver.resolve('runtime/components')
         })
+
+        await installModule('nuxt-rollbar', {
+            clientAccessToken: options.rollbarToken
+        })
+
         await installModule('@nuxtjs/tailwindcss', {
             cssPath: resolver.resolve('./runtime/assets/tailwind.css'),
             configPath: resolver.resolve('./runtime/tailwind.config.js'),

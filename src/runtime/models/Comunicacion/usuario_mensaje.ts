@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon';
 import type { IMensaje } from "./mensaje.ts";
 import type { IUsuario } from "../Auth/usuario.ts";
-
+import type { IGrupo } from './grupo.js';
+import type { ICurso } from '../index.js';
 interface Meta {
     total: number | null,
     perPage: number | null,
@@ -36,6 +37,17 @@ export interface IUsuarioMensaje {
     usuario: IUsuario;
 }
 
+type ICursoConTotal = ICurso & { totalComunicados: number };
+type IGrupoConTotal = IGrupo & { totalComunicados: number };
+type IUsuarioConTotal = IUsuario & { totalComunicados: number };
+
+// Extender la interfaz IEstadisticas
+export interface IEstadisticas{
+    mensajesPorCurso: ICursoConTotal[];
+    mensajesPorGrupo: IGrupoConTotal[];
+    usuarios: IUsuarioConTotal[];
+}
+
 export interface GrupoDestinatario {
     id: string;
     type: 'curso' | 'grupo' | 'personal';
@@ -50,3 +62,4 @@ export interface Destinatario {
     nombre: string;
     isSelected: boolean;
 }
+
