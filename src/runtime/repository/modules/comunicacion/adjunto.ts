@@ -16,10 +16,9 @@ export default class AdjuntoModule {
     }
 
     async eliminarAdjunto(
-        url: string,
-        id: number
+        url: string
     ): Promise<{ success: boolean; message: string }> {
-        return this.fetcher(`comunicacion/adjuntos/deleteAdjunto${id}`, {
+        return this.fetcher(`comunicacion/adjuntos/deleteAdjunto`, {
             method: "DELETE",
             body: {
                 url,
