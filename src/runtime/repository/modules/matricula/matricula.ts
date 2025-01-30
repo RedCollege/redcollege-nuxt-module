@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IMatriculaResponse, IMatriculaUpdate } from '~/src/runtime/models/Matricula';
+import type { IMatricula, IMatriculaResponse, IMatriculaUpdate } from '~/src/runtime/models/Matricula';
 
 interface GetAllProps {
     trashed?: boolean;
@@ -17,6 +17,13 @@ export default class MatriculaModule {
 
     async getByEstablecimiento(props?: GetAllProps): Promise<IMatriculaResponse> {
         return this.fetcher('establecimiento/matriculas/getByEstablecimiento', {
+            params: props,
+            method: 'GET'
+        });
+    }
+
+    async getAllByEstablecimiento(props?: GetAllProps): Promise<IMatricula[]> {
+        return this.fetcher('establecimiento/matriculas/getAllByEstablecimiento', {
             params: props,
             method: 'GET'
         });
