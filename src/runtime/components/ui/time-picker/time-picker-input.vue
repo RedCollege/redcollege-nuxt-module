@@ -3,6 +3,7 @@
         :id="picker" 
         :name="picker" 
         :class="inputClasses" 
+        :disabled="disabled"
         :value="calculatedValue" 
         :default-value="calculatedValue"
         :type="type" inputmode="decimal" @keydown="handleKeyDown" 
@@ -47,6 +48,11 @@ const props = defineProps({
         type: String,
         default: '',
     },
+    disabled: {
+        type: Boolean,
+        default: false
+    }
+
 });
 
 const emit = defineEmits(['update:date', 'rightFocus', 'leftFocus']);

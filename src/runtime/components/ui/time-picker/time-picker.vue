@@ -4,7 +4,8 @@
             <Label v-if="withLabels" for="hours" class="text-xs">Horas</Label>
             <TimePickerInput 
                 ref="hourRef" 
-                :picker="withPeriod ? '12hours' : 'hours'" 
+                :picker="withPeriod ? '12hours' : 'hours'"
+                :disabled="disabled"
                 :period="period"
                 :date="internalDate" 
                 @right-focus="focusMinuteRef" 
@@ -17,6 +18,7 @@
             <TimePickerInput 
                 ref="minuteRef" 
                 picker="minutes" 
+                :disabled="disabled"
                 :date="internalDate" 
                 @left-focus="focusHourRef"
                 @right-focus="focusRightConditional" 
@@ -27,14 +29,16 @@
         <div v-if="withSeconds" class="flex flex-col items-center gap-1">
             <Label v-if="withLabels" for="seconds" class="text-xs">Segundos</Label>
             <TimePickerInput 
-                ref="secondRef" picker="seconds" 
+                ref="secondRef" picker="seconds"
+                :disabled="disabled" 
                 :date="internalDate" 
                 @left-focus="focusMinuteRef"
                 @right-focus="focusPeriodRef" 
                 @update:date="updateDate" 
             />
         </div>
-        <Select v-if="withPeriod" v-model="period" class="w-20" >
+        <Select v-if="withPeriod" v-model="period" class="w-20" :disabled="disabled"
+        >
             <div class="flex flex-col items-center gap-1">
                 <Label for="periodRef" class="text-xs">Horario</Label>
                 <SelectTrigger ref="periodRef" @keydown.arrow-left="focusLeftConditional" >
@@ -76,6 +80,10 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    disabled: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 const emit = defineEmits(['update:date']);
