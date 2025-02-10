@@ -22,13 +22,6 @@ export default class MatriculaModule {
         });
     }
 
-    async getAllByEstablecimiento(props?: GetAllProps): Promise<IMatricula[]> {
-        return this.fetcher('establecimiento/matriculas/getAllByEstablecimiento', {
-            params: props,
-            method: 'GET'
-        });
-    }
-
     async actualizarMatricula(matricula: IMatriculaUpdate): Promise<IMatriculaResponse> {
         return this.fetcher('establecimiento/matriculas/actualizarMatricula', {
             method: 'PATCH',
