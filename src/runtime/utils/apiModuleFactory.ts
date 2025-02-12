@@ -24,6 +24,8 @@ import AdecuacionCurricularModule from "../repository/modules/planificaciones/ad
 import AdjuntoModule from "../repository/modules/comunicacion/adjunto";
 import MensajeModule from "../repository/modules/comunicacion/mensaje";
 import UsuarioMensajeModule from "../repository/modules/comunicacion/usuario_mensaje";
+import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_plantilla";
+import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -71,7 +73,9 @@ export type ComunicacionesModules = {
     mensaje: MensajeModule;
     usuarioMensaje: UsuarioMensajeModule;
     grupo: GrupoModule;
-    permiso: PermisoModule
+    permiso: PermisoModule;
+    usuarioPlantilla: UsuarioPlantillaModule;
+    sistemaPlantilla: SistemaPlantillaModule
 }
 
 // agrupación de modulos
@@ -166,7 +170,9 @@ export function createApiModules(
                 mensaje: new MensajeModule(apiFetcher),
                 usuarioMensaje: new UsuarioMensajeModule(apiFetcher),
                 grupo: new GrupoModule(apiFetcher),
-                permiso: new PermisoModule(apiFetcher)
+                permiso: new PermisoModule(apiFetcher),
+                usuarioPlantilla: new UsuarioPlantillaModule(apiFetcher),
+                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher)
             }
     }
 }
