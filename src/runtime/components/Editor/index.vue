@@ -31,6 +31,7 @@ const {
     initialValue: props.value,
 });
 
+console.log(props.value)
 
 let quill: Quill | null = null
 Quill.register('modules/imageUploader', ImageUploader)
@@ -39,9 +40,9 @@ Quill.register('modules/blotFormatter', BlotFormatter);
 const keyBinders = {
     custom: {
         key: ['#'],
-        handler: function(range, context) {
+        handler: function (range, context) {
             console.log(range, context)
-        // Handle shift+b
+            // Handle shift+b
         }
     },
 }
@@ -86,28 +87,27 @@ const options = ref({
 let isProcessing = false;
 onMounted(() => {
     quill = editor.value?.initialize(Quill)!
+    editorData.value = inputValue.value
     //model.value = quill.getText()
 })
 
-const emit = defineEmits(['update:modelValue'])
 
-const onModelValueChange = (value: string) => {
+watch(editorData, (value) => {
     handleChange(value)
-}
-const onTextChange = (content: string) => {
+}, { deep: true })
 
-}
-const onSelectionChange = () => { }
-const onEditorChange = (eventName: string) => {
-
-}
+watch(() => props.value, (newValue) => {
+    if (newValue !== editorData.value) {
+        editorData.value = newValue || ''
+    }
+}, { immediate: true })
 
 </script>
 
 <template lang="pug">
     .flex.flex-col.h-full
-        QuillyEditor(ref="editor", v-model="editorData", :options="options" @update:model-value="onModelValueChange"
-        @text-change="onTextChange" @selection-change="onSelectionChange" @editor-change="onEditorChange")
+        pre {{value }}
+        QuillyEditor(ref="editor", v-model="editorData", :options="options")
 </template>
 
 <style lang="css">
