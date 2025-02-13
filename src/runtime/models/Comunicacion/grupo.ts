@@ -8,8 +8,16 @@ export interface IGrupo {
     color: string;
     establecimientoId: number;
     totalUsuarios: number;
+    periodo: number;
     createdAt: DateTime;
     updatedAt: DateTime;
     creador: IUsuario;
     usuarios: Array<IUsuario>;
 }
+
+export interface IGrupoForm {
+    nombre: string;
+    establecimientoId: number;
+    periodo: number;
+}
+
