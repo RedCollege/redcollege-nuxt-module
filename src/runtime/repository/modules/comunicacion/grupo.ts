@@ -10,9 +10,10 @@ export default class GrupoModule {
         });
     }
 
-    async obtenerUsuarios(grupoId: number): Promise<IUsuario[]> {
+    async obtenerUsuarios(grupoId: number, periodo: number): Promise<IUsuario[]> {
         return this.fetcher(`comunicaciones/grupos/obtenerUsuarios/${grupoId}`, {
-            method: 'GET'
+            method: 'GET',
+            params: { periodo }
         });
     }
 
