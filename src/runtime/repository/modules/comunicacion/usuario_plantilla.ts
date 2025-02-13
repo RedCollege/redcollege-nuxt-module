@@ -25,7 +25,7 @@ export default class UsuarioPlantillaModule {
     }
 
     async eliminarPlantillaUsuario(usuarioPlantillaId: number): Promise<Array<IUsuarioPlantilla>> {
-        return this.fetcher(`comunicaciones/eliminarPlantillaUsuario/${usuarioPlantillaId}`, {
+        return this.fetcher(`comunicaciones/usuarioPlantillas/eliminarPlantillaUsuario/${usuarioPlantillaId}`, {
             method: 'DELETE'
         });
     }
