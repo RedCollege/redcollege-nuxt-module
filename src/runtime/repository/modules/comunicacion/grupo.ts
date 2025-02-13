@@ -24,6 +24,15 @@ export default class GrupoModule {
         });
     }
 
+    async actualizarGrupo(grupoId: number, usuarios: number[]): Promise<IGrupo> {
+        return this.fetcher(`comunicaciones/grupos/actualizarGrupo/${grupoId}`, {
+            method: 'PATCH',
+            body: {
+                usuarios
+            }
+        });
+    }
+
     async eliminarGrupo(grupoId: number): Promise<IGrupo> {
         return this.fetcher(`comunicaciones/grupos/eliminarGrupo/${grupoId}`, {
             method: 'DELETE'
