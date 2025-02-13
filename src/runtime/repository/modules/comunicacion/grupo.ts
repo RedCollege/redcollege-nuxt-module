@@ -4,16 +4,16 @@ import type { IGrupo, IUsuario } from '~/src/runtime/models';
 export default class GrupoModule {
     constructor(private fetcher: $Fetch) { }
 
-    async obtenerGruposByUsuario(): Promise<IGrupo[]> {
+    async obtenerGruposByUsuario(periodo: number): Promise<IGrupo[]> {
         return this.fetcher(`comunicaciones/grupos/obtenerGruposByUsuario`, {
-            method: 'GET'
+            method: 'GET',
+            params: { periodo }
         });
     }
 
-    async obtenerUsuarios(grupoId: number, periodo: number): Promise<IUsuario[]> {
+    async obtenerUsuarios(grupoId: number): Promise<IUsuario[]> {
         return this.fetcher(`comunicaciones/grupos/obtenerUsuarios/${grupoId}`, {
-            method: 'GET',
-            params: { periodo }
+            method: 'GET'
         });
     }
 
