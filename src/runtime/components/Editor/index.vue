@@ -106,7 +106,6 @@ watch(() => props.value, (newValue) => {
 
 <template lang="pug">
     .flex.flex-col.h-full
-        pre {{value }}
         QuillyEditor(ref="editor", v-model="editorData", :options="options")
 </template>
 
