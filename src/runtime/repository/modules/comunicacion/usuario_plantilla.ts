@@ -17,6 +17,13 @@ export default class UsuarioPlantillaModule {
         });
     }
 
+    async actualizarPlantillaUsuario(plantillaId: number, usuarioPlantilla: IUsuarioPlantillaForm): Promise<IUsuarioPlantilla> {
+        return this.fetcher(`comunicaciones/usuarioPlantillas/actualizarPlantillaUsuario/${plantillaId}`, {
+            method: 'PATCH',
+            body: usuarioPlantilla
+        });
+    }
+
     async eliminarPlantillaUsuario(usuarioPlantillaId: number): Promise<Array<IUsuarioPlantilla>> {
         return this.fetcher(`comunicaciones/eliminarPlantillaUsuario/${usuarioPlantillaId}`, {
             method: 'DELETE'
