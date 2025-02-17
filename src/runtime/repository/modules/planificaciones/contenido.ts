@@ -6,6 +6,12 @@ import type { IContenido, IContenidoForm } from '../../../models/Planificacion/c
 export default class ContenidoModule {
     constructor(private fetcher: $Fetch) { }
 
+    async obtenerContenidosPorPlanificacion(planificacionId: number): Promise<IContenido[]> {
+        return this.fetcher(`/contenidos/obtenerContenidosPorPlanificacion/${planificacionId}`, {
+            method: 'GET'
+        });
+    }
+
     async obtenerContenidosPorUnidad(unidadId: number): Promise<IContenido[]> {
         return this.fetcher(`/contenidos/unidad/${unidadId}`, {
             method: 'GET'
@@ -79,4 +85,4 @@ export default class ContenidoModule {
             }
         });
     }
-} 
+}
