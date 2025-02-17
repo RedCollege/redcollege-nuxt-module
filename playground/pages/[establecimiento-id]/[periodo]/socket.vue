@@ -70,9 +70,10 @@ watch([x, y], sendMousePosition)*/
 
 <template lang="pug">
 div
-    h1 {{ }}
-    //-.flex.relative.gap-2.items-center(ref="mouseHandler")
-        Icon(name="tabler:pointer-filled", :style="`color: ${color}`")
-        .flex.gap-2.max-w-24.rounded-xl.px-2.py-1.justify-center.shadow(:style="`background-color: ${ color }`")
-            p.text-xs.text-white.font-medium José Puma
+    .h-12
+        h1 hola
+        //-.flex.relative.gap-2.items-center(ref="mouseHandler")
+            Icon(name="tabler:pointer-filled", :style="`color: ${color}`")
+            .flex.gap-2.max-w-24.rounded-xl.px-2.py-1.justify-center.shadow(:style="`background-color: ${ color }`")
+                p.text-xs.text-white.font-medium José Puma
 </template>
