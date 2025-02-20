@@ -2,6 +2,7 @@ import type { $Fetch } from 'ofetch';
 import type { IItemEntradaCurricular } from '../../../models';
 import type { IArchivo } from '../../../models/General/archivo';
 import type { IContenido, IContenidoForm } from '../../../models/Planificacion/contenido';
+import type { DateTime } from 'luxon';
 
 export default class ContenidoModule {
     constructor(private fetcher: $Fetch) { }
@@ -83,6 +84,12 @@ export default class ContenidoModule {
             body: {
                 archivoId
             }
+        });
+    }
+
+    async obtenerDiasHabilesContenido(contenidoId: number): Promise<DateTime[]> {
+        return this.fetcher(`/contenidos/obtenerDiasHabilesContenido/${contenidoId}`, {
+            method: 'GET'
         });
     }
 }
