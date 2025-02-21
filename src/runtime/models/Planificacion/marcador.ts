@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 
 export interface IMarcador {
     id: number;
-    fecha: string;
+    fecha: DateTime;
     color: string;
     icon: string;
     iconColor: string;
