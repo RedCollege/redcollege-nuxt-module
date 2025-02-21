@@ -26,6 +26,7 @@ import MensajeModule from "../repository/modules/comunicacion/mensaje";
 import UsuarioMensajeModule from "../repository/modules/comunicacion/usuario_mensaje";
 import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_plantilla";
 import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
+import MarcadorModule from "../repository/modules/planificaciones/marcador";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -38,6 +39,7 @@ export type PlanificacionesModules = {
     contenidoRecursos: ContenidoRecursoModule;
     registroDua: RegistroDuaModule;
     adecuacionCurricular: AdecuacionCurricularModule;
+    marcadores: MarcadorModule;
 };
 
 export type MatriculasModules = {
@@ -126,6 +128,7 @@ export function createApiModules(
                 contenidoActividades: new ContenidoActividadModule(apiFetcher),
                 contenidoRecursos: new ContenidoRecursoModule(apiFetcher),
                 registroDua: new RegistroDuaModule(apiFetcher),
+                marcadores: new MarcadorModule(apiFetcher),
                 adecuacionCurricular: new AdecuacionCurricularModule(
                     apiFetcher
                 ),
