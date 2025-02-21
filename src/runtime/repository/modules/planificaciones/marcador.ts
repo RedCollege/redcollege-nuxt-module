@@ -28,13 +28,15 @@ export default class MarcadorModule {
 
     async crearMarcador(unidadId: number, marcadorFormData: IFormDataMarcador): Promise<IMarcador> {
         return this.fetcher(`/marcadores/${unidadId}`, {
-            method: "POST"
+            method: "POST",
+            body: marcadorFormData
         })
     }
 
     async actualizarMarcador(marcadorId: number, marcadorFormData: IFormDataMarcador): Promise<IMarcador> {
         return this.fetcher(`/marcadores/${marcadorId}`, {
-            method: "PATCH"
+            method: "PATCH",
+            body: marcadorFormData
         })
     }
     async eliminarMarcador(marcadorId: number): Promise<IMarcador> {
