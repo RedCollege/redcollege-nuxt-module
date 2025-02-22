@@ -71,7 +71,12 @@ watch([x, y], sendMousePosition)*/
 <template lang="pug">
 div
     .h-12
-        h1 hola
+        NumberField(id="age" :default-value="18" :min="0")
+            Label(for="age") Age
+            NumberFieldContent
+                NumberFieldDecrement
+                NumberFieldInput
+                NumberFieldIncrement
         //-.flex.relative.gap-2.items-center(ref="mouseHandler")
             Icon(name="tabler:pointer-filled", :style="`color: ${color}`")
             .flex.gap-2.max-w-24.rounded-xl.px-2.py-1.justify-center.shadow(:style="`background-color: ${ color }`")
