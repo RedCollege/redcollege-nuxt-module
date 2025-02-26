@@ -54,6 +54,7 @@ export interface GrupoDestinatario {
     nombre: string;
     totalDestinatarios: number;
     areAllSelected: boolean;
+    hasLoadedData: boolean;
     destinatarios: Destinatario[]
 }
 
