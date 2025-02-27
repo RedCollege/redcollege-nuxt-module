@@ -38,7 +38,7 @@ export default class UsuarioMensajeModule {
         });
     }
 
-    async obtenerContadoresEnvioMensaje(mensajeId: number, props: GetAllProps): Promise<IContadoresEnvioMensaje> {
+    async obtenerContadoresEnvioMensaje(mensajeId: number): Promise<IContadoresEnvioMensaje> {
         return this.fetcher(`comunicaciones/usuarioMensaje/obtenerContadoresEnvioMensaje/${mensajeId}`, {
             method: 'GET'
         });
