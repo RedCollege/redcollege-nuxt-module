@@ -7,6 +7,7 @@ import type { IPais } from "./antecedente_personal/pais";
 import type { IRegion } from "./antecedente_personal/region";
 import type { IReligion } from "./antecedente_personal/religion";
 import type { ITipoDocumento } from "./antecedente_personal/tipo_documento";
+import type { IOrigenIndigena } from "./antecedente_personal/origen_indigena";
 
 export interface IAntecedentePersonal {
     id: number;
@@ -46,6 +47,7 @@ export interface IAntecedentePersonal {
     region: IRegion;
     religiones: IReligion;
     estadoCivil: IEstadoCivil;
+    origenIndigena: IOrigenIndigena;
     ciudad: ICiudad;
     pais: IPais;
     nacionalidad: IPais;
