@@ -1,20 +1,20 @@
 import type { IUsuario } from "../Auth/usuario";
 import type { IEstadoMatricula } from "./estado_matricula";
 import type { ICondicionMatricula } from "./condicion_matricula";
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
+import type { IAntecedentePersonal } from "./antecedente_personal";
 
 interface Meta {
-    total: number | null,
-    perPage: number | null,
-    currentPage: number | null,
-    lastPage: number | null,
-    firstPage: number | null,
-    firstPageUrl: string | null,
-    lastPageUrl: string | null,
-    nextPageUrl: string | null,
-    previousPageUrl: string | null
+    total: number | null;
+    perPage: number | null;
+    currentPage: number | null;
+    lastPage: number | null;
+    firstPage: number | null;
+    firstPageUrl: string | null;
+    lastPageUrl: string | null;
+    nextPageUrl: string | null;
+    previousPageUrl: string | null;
 }
-
 
 export interface IMatricula {
     id: number;
@@ -28,6 +28,7 @@ export interface IMatricula {
     usuario: IUsuario;
     estadoMatricula: IEstadoMatricula;
     condicionMatricula: ICondicionMatricula;
+    antecedentePersonal: IAntecedentePersonal;
     createdAt: DateTime;
     updatedAt: DateTime;
 }
@@ -39,6 +40,6 @@ export interface IMatriculaUpdate {
 }
 
 export interface IMatriculaResponse {
-    meta: Meta,
-    data: IMatricula[]
+    meta: Meta;
+    data: IMatricula[];
 }

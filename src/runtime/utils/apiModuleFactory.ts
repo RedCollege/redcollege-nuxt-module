@@ -13,6 +13,7 @@ import {
     ItemEntradaCurricularModule,
     RegistroAtencionModule,
     UsuarioModule,
+    AntecedentePersonalModule,
 } from "../repository/modules";
 import AuxiliarModule from "../repository/modules/general/auxiliar";
 import ContenidoModule from "../repository/modules/planificaciones/contenido";
@@ -74,14 +75,15 @@ export type ComunicacionesModules = {
     mensaje: MensajeModule;
     usuarioMensaje: UsuarioMensajeModule;
     grupo: GrupoModule;
-}
+};
 
 export type EnfermeriaModules = {
-    registroAtencion: RegistroAtencionModule
-    lugar: LugarModule
-    tratamiento: TratamientoModule
-    motivo: MotivoAtencionModule
-}
+    registroAtencion: RegistroAtencionModule;
+    lugar: LugarModule;
+    tratamiento: TratamientoModule;
+    motivo: MotivoAtencionModule;
+    antecedentePersonal: AntecedentePersonalModule;
+};
 
 // agrupación de modulos
 export type ApiModules = {
@@ -94,7 +96,7 @@ export type ApiModules = {
     general: GeneralModules;
     health: HealthModules;
     comunicaciones: ComunicacionesModules;
-    enfermeria: EnfermeriaModules
+    enfermeria: EnfermeriaModules;
 };
 
 export function createApiModules(
@@ -177,14 +179,15 @@ export function createApiModules(
                 adjunto: new AdjuntoModule(apiFetcher),
                 mensaje: new MensajeModule(apiFetcher),
                 usuarioMensaje: new UsuarioMensajeModule(apiFetcher),
-                grupo: new GrupoModule(apiFetcher)
-            }
+                grupo: new GrupoModule(apiFetcher),
+            };
         case "enfermeria":
             return {
                 registroAtencion: new RegistroAtencionModule(apiFetcher),
                 lugar: new LugarModule(apiFetcher),
                 tratamiento: new TratamientoModule(apiFetcher),
-                motivo: new MotivoAtencionModule(apiFetcher)
-            }
+                motivo: new MotivoAtencionModule(apiFetcher),
+                antecedentePersonal: new AntecedentePersonalModule(apiFetcher),
+            };
     }
 }
