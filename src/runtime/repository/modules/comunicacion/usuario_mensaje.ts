@@ -10,7 +10,7 @@ interface GetAllProps {
     usuario?: string;
     establecimiento?: number;
     isDestinatario?: boolean;
-    fechas?: { fechaInicio: string; fechaFin: string };
+    fechas?: string[];
     curso?: number;
     estadoVisualizacion?: 'all' | 'leido' | 'no-leido'
 }
