@@ -64,3 +64,8 @@ export interface Destinatario {
     isSelected: boolean;
 }
 
+export interface IContadoresEnvioMensaje {
+    destinatariosLeidos: number;
+    destinatariosNoLeidos: number;
+    totalDestinatarios: number;
+}
