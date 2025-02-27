@@ -1,4 +1,12 @@
 import { DateTime } from "luxon";
+import type { ICiudad } from "./antecedente_personal/ciudad";
+import type { IComuna } from "./antecedente_personal/comuna";
+import type { IEstadoCivil } from "./antecedente_personal/estado_civil";
+import type { IGenero } from "./antecedente_personal/genero";
+import type { IPais } from "./antecedente_personal/pais";
+import type { IRegion } from "./antecedente_personal/region";
+import type { IReligion } from "./antecedente_personal/religion";
+import type { ITipoDocumento } from "./antecedente_personal/tipo_documento";
 
 export interface IAntecedentePersonal {
     id: number;
@@ -32,4 +40,13 @@ export interface IAntecedentePersonal {
     fotografiaUrl: string;
     createdAt: DateTime;
     updatedAt: DateTime;
+    tipoDocumento: ITipoDocumento;
+    genero: IGenero;
+    comuna: IComuna;
+    region: IRegion;
+    religiones: IReligion;
+    estadoCivil: IEstadoCivil;
+    ciudad: ICiudad;
+    pais: IPais;
+    nacionalidad: IPais;
 }

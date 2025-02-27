@@ -1,5 +1,6 @@
 import type { $Fetch } from "ofetch";
 import type {
+    IAntecedentePersonal,
     IMatriculaResponse,
     IMatriculaUpdate,
 } from "~/src/runtime/models/Matricula";
@@ -27,6 +28,14 @@ export default class AntecedentePersonal {
                 params: props,
                 method: "GET",
             }
+        );
+    }
+
+    async getAntecedentesByMatriculaId(
+        matriculaId: number
+    ): Promise<IAntecedentePersonal> {
+        return this.fetcher(
+            `enfermeria/ficha_salud/antecedente_personal/getAntecedentesByMatriculaId${matriculaId}`
         );
     }
 }
