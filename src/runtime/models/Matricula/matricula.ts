@@ -6,6 +6,7 @@ import type { IAntecedentePersonal } from "./antecedente_personal";
 import type { ITipoMatricula } from "./tipo_matricula";
 import type { IEstablecimiento } from "../Establecimiento";
 import type { IProcedencia } from "../Establecimiento/procedencia";
+import type { IAntecedenteEscolarSocial } from "../Establecimiento/antecedente_escolar_social";
 
 interface Meta {
     total: number | null;
@@ -42,6 +43,7 @@ export interface IMatricula {
     establecimiento: IEstablecimiento;
     tipoMatricula: ITipoMatricula;
     procedencia: IProcedencia;
+    antecedenteEscolarSocial: IAntecedenteEscolarSocial;
     createdAt: DateTime;
     updatedAt: DateTime;
 }
