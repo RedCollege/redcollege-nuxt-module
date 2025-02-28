@@ -2,7 +2,6 @@
   "$schema": "https://shadcn-vue.com/schema.json",
   "style": "new-york",
   "typescript": true,
-  "tsConfigPath": ".nuxt/tsconfig.json",
   "tailwind": {
     "config": "tailwind.config.js",
     "css": "assets/css/tailwind.css",
@@ -11,7 +10,10 @@
   },
   "framework": "nuxt",
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils"
+   "components": "@/src/runtime/components",
+    "utils": "@/src/runtime/lib/utils",
+    "ui": "@/src/runtime/components/ui",
+    "lib": "@/src/runtime/lib",
+    "composables": "@/src/runtime/composables"
   }
 }

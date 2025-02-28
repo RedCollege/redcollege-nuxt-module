@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type HTMLAttributes, computed } from 'vue'
-import { ToastClose, type ToastCloseProps } from 'radix-vue'
+import { ToastClose, type ToastCloseProps } from 'reka-ui'
 import { Cross2Icon } from '@radix-icons/vue'
 import { cn } from '../../../lib/utils'
 

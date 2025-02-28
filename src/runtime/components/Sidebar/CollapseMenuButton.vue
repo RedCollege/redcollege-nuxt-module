@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { DropdownMenuArrow } from 'radix-vue';
+import { DropdownMenuArrow } from 'reka-ui';
 const props = defineProps({
     icon: String,
     label: String,
