@@ -5,6 +5,7 @@ import { DateTime } from "luxon";
 import type { IAntecedentePersonal } from "./antecedente_personal";
 import type { ITipoMatricula } from "./tipo_matricula";
 import type { IEstablecimiento } from "../Establecimiento";
+import type { IProcedencia } from "../Establecimiento/procedencia";
 
 interface Meta {
     total: number | null;
@@ -27,6 +28,7 @@ export interface IMatricula {
     condicionMatricula_Id: number;
     estadoMatriculaId: number;
     tipoMatriculaId: number;
+    procedenciaId: number;
     periodo: number;
     fechaRetiro: DateTime;
     colegioProcedencia: string;
@@ -39,6 +41,7 @@ export interface IMatricula {
     condicionMatricula: ICondicionMatricula;
     establecimiento: IEstablecimiento;
     tipoMatricula: ITipoMatricula;
+    procedencia: IProcedencia;
     createdAt: DateTime;
     updatedAt: DateTime;
 }
