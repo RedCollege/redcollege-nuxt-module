@@ -25,7 +25,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         nuxt.options.vite = {
             optimizeDeps: {
-                include: ['quill', '@enzedonline/quill-blot-formatter2']
+                include: ['quill', '@enzedonline/quill-blot-formatter2', '@unovis/ts', '@unovis/vue']
             }
         }
 
