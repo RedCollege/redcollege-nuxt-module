@@ -16,8 +16,10 @@ const data2 = [
 ]
 </script>
 
-<template lang="pug">
-    p Hola
-    div.w-auto.h-72
-        AreaChart( :data="data2" index="name" :categories="['total', 'predicted']")
+<template>
+    <BarChart :data="data2" index="name" :categories="['total', 'predicted']" :y-formatter="(tick, i) => {
+        return typeof tick === 'number'
+            ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`
+            : ''
+    }" />
 </template>
