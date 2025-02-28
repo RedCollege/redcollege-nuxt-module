@@ -30,12 +30,4 @@ export default class AntecedentePersonal {
             }
         );
     }
-
-    async getAntecedentesByMatriculaId(
-        matriculaId: number
-    ): Promise<IAntecedentePersonal> {
-        return this.fetcher(
-            `enfermeria/ficha_salud/antecedente_personal/getAntecedentesByMatriculaId/${matriculaId}`
-        );
-    }
 }
