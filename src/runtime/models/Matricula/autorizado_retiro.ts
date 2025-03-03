@@ -7,6 +7,7 @@ export interface IAutorizadoRetiro {
     Rut: string;
     usuarioId: number;
     matriculaId: number;
+    relacion: string;
     createdAt: DateTime;
     updatedAt: DateTime;
     matricula: IMatricula;

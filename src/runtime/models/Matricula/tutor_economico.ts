@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import type { IMatricula } from "./matricula";
+import type { IParentesco } from "./antecedente_familiar/parentesco";
 
 export interface ITutorEconomico {
     id: number;
@@ -30,4 +31,5 @@ export interface ITutorEconomico {
     createdAt: DateTime;
     updatedAt: DateTime;
     matricula: IMatricula;
+    parentesco: IParentesco;
 }
