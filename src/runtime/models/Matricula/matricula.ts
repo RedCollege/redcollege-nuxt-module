@@ -7,6 +7,9 @@ import type { ITipoMatricula } from "./tipo_matricula";
 import type { IEstablecimiento } from "../Establecimiento";
 import type { IProcedencia } from "../Establecimiento/procedencia";
 import type { IAntecedenteEscolarSocial } from "../Establecimiento/antecedente_escolar_social";
+import type { IAntecedenteFamiliar } from "./antecedente_familiar";
+import type { IAutorizadoRetiro } from "./autorizado_retiro";
+import type { ITutorEconomico } from "./tutor_economico";
 
 interface Meta {
     total: number | null;
@@ -36,6 +39,8 @@ export interface IMatricula {
     anioIngreso: string;
     harepetidoCurso: boolean;
     observaciones: string;
+    createdAt: DateTime;
+    updatedAt: DateTime;
     usuario: IUsuario;
     antecedentePersonal: IAntecedentePersonal;
     estadoMatricula: IEstadoMatricula;
@@ -44,8 +49,9 @@ export interface IMatricula {
     tipoMatricula: ITipoMatricula;
     procedencia: IProcedencia;
     antecedenteEscolarSocial: IAntecedenteEscolarSocial;
-    createdAt: DateTime;
-    updatedAt: DateTime;
+    antecedenteFamiliar: Array<IAntecedenteFamiliar>;
+    tutorEconomico: Array<ITutorEconomico>;
+    autorizadoRetiro: Array<IAutorizadoRetiro>;
 }
 
 export interface IMatriculaUpdate {
