@@ -5,6 +5,7 @@ import type { IRol } from "../Establecimiento/rol";
 import type { ICurso } from "../Establecimiento/curso";
 import type { IMatricula } from "../Matricula";
 import type { IEspecialidad } from "../Establecimiento/especialidad";
+import type { IApoderadoUsuario } from "../Establecimiento/apoderado_usuario";
 export interface IUsuario {
     id: number;
     correo: string;
@@ -41,6 +42,7 @@ export interface IUsuario {
     cursos: Array<ICurso>;
     matriculas: Array<IMatricula>;
     especialidades: Array<IEspecialidad>;
+    apoderados: Array<IApoderadoUsuario>;
     /**
      * Contiene el nombre completo del usuario.
      */
