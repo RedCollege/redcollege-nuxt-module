@@ -34,11 +34,18 @@ const fillData = (() => {
     editorData.value = "<h1>hola mundo</h1>"
 })
 
+const isOpem = ref(true)
 </script>
 
 <template lang="pug">
     ResizablePanelGroup(direction="horizontal")
         ResizablePanel(:default-size="40", :min-size="25", collapsible)
+            NavigationMenu
+                NavigationMenuList
+                    NavigationMenuItem
+                        NavigationMenuTrigger hola
+                        NavigationMenuContent
+                            h1 hola mundo
             //-Card
                 CardHeader
                     CardTitle Destinatarios
