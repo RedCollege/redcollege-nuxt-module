@@ -13,7 +13,7 @@ import {
     ItemEntradaCurricularModule,
     RegistroAtencionModule,
     UsuarioModule,
-    AntecedentePersonalModule,
+    AntecedenteSaludModule,
 } from "../repository/modules";
 import AuxiliarModule from "../repository/modules/general/auxiliar";
 import ContenidoModule from "../repository/modules/planificaciones/contenido";
@@ -82,7 +82,7 @@ export type EnfermeriaModules = {
     lugar: LugarModule;
     tratamiento: TratamientoModule;
     motivo: MotivoAtencionModule;
-    antecedentePersonal: AntecedentePersonalModule;
+    antecedenteSalud: AntecedenteSaludModule;
 };
 
 // agrupación de modulos
@@ -187,7 +187,7 @@ export function createApiModules(
                 lugar: new LugarModule(apiFetcher),
                 tratamiento: new TratamientoModule(apiFetcher),
                 motivo: new MotivoAtencionModule(apiFetcher),
-                antecedentePersonal: new AntecedentePersonalModule(apiFetcher),
+                antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
             };
     }
 }
