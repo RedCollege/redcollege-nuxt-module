@@ -219,6 +219,11 @@ const logout = () => {
             .flex-none
                 NavigationMenu
                     NavigationMenuList(class="gap-2")
+                        NavigationMenuItem
+                            Button(variant="secondary", as-child)
+                                a.flex.gap-2.items-center(href="https://redcollege.freshdesk.com/support/solutions", target="_blank")
+                                    img.w-4.h-4(src="../assets/images/help.svg")
+                                    span Tutoriales
                         NavigationMenuItem(v-if="!hideEstablecimientos")
                             Select(v-model="selectedEstablecimientoId")
                                 SelectTrigger

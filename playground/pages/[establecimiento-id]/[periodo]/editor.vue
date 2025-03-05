@@ -71,8 +71,6 @@ const fillData = (() => {
         ResizableHandle.mx-2(with-handle)
         ResizablePanel(:default-size="60", :min-size="50")
             Card
-                pre {{ form.values }}
-                button(type="button", @click="fillData") fill data
                 form(@submit.prevent="onSubmit")
                     CardHeader
                         CardTitle Asunto
