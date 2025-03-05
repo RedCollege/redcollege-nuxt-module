@@ -10,6 +10,7 @@ import type { IAntecedenteEscolarSocial } from "../Establecimiento/antecedente_e
 import type { IAntecedenteFamiliar } from "./antecedente_familiar";
 import type { IAutorizadoRetiro } from "./autorizado_retiro";
 import type { ITutorEconomico } from "./tutor_economico";
+import type { IAntecedenteSalud } from "./antecedente_salud";
 
 interface Meta {
     total: number | null;
@@ -50,6 +51,7 @@ export interface IMatricula {
     procedencia: IProcedencia;
     antecedenteEscolarSocial: IAntecedenteEscolarSocial;
     antecedenteFamiliar: Array<IAntecedenteFamiliar>;
+    antecedenteSalud: Array<IAntecedenteSalud>;
     tutorEconomico: Array<ITutorEconomico>;
     autorizadoRetiro: Array<IAutorizadoRetiro>;
 }
