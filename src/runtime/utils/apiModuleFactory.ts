@@ -28,6 +28,7 @@ import UsuarioMensajeModule from "../repository/modules/comunicacion/usuario_men
 import LugarModule from "../repository/modules/enfermeria/lugar";
 import TratamientoModule from "../repository/modules/enfermeria/tratamiento";
 import MotivoAtencionModule from "../repository/modules/enfermeria/motivo_atencion";
+import EnfermedadDiscapacidadModule from "../repository/modules/enfermeria/enfermedad_discapacidad";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -83,6 +84,7 @@ export type EnfermeriaModules = {
     tratamiento: TratamientoModule;
     motivo: MotivoAtencionModule;
     antecedenteSalud: AntecedenteSaludModule;
+    enfermedadDiscapacidad: EnfermedadDiscapacidadModule
 };
 
 // agrupación de modulos
@@ -188,6 +190,7 @@ export function createApiModules(
                 tratamiento: new TratamientoModule(apiFetcher),
                 motivo: new MotivoAtencionModule(apiFetcher),
                 antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
+                enfermedadDiscapacidad: new EnfermedadDiscapacidadModule(apiFetcher)
             };
     }
 }
