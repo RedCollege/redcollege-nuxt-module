@@ -51,7 +51,7 @@ export interface IMatricula {
     procedencia: IProcedencia;
     antecedenteEscolarSocial: IAntecedenteEscolarSocial;
     antecedenteFamiliar: Array<IAntecedenteFamiliar>;
-    antecedenteSalud: Array<IAntecedenteSalud>;
+    antecedenteSalud: IAntecedenteSalud;
     tutorEconomico: Array<ITutorEconomico>;
     autorizadoRetiro: Array<IAutorizadoRetiro>;
 }
