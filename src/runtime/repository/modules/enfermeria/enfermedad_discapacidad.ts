@@ -4,20 +4,20 @@ import type { IEnfermedadDiscapacidad, IEnfermedadDiscapacidadForm } from '~/src
 export default class EnfermedadDiscapacidadModule{
     constructor(private fetcher: $Fetch) { }
  
-    async getAllLugaresByEstablecimiento(establecimientoId: number|string): Promise<IEnfermedadDiscapacidad[]> {
+    async getAllEnfermedadDiscapacidadByEstablecimiento(establecimientoId: number|string): Promise<IEnfermedadDiscapacidad[]> {
         return this.fetcher(`/enfermeria/enfermedad/${establecimientoId}`, {
             method: 'GET'
         });
     }
 
-   async saveLugar(data: IEnfermedadDiscapacidadForm): Promise<IEnfermedadDiscapacidad> {
+   async saveEnfermedadDiscapacidad(data: IEnfermedadDiscapacidadForm): Promise<IEnfermedadDiscapacidad> {
         return this.fetcher('/enfermeria/enfermedad', {
             method: 'POST',
             body: data
         })
     }
 
-    async deleteLugar(id: number): Promise<IEnfermedadDiscapacidad> {
+    async deleteEnfermedadDiscapacidad(id: number): Promise<IEnfermedadDiscapacidad> {
         return this.fetcher(`/enfermeria/enfermedad/${id}/destroy`, {
             method: 'DELETE'
         })
