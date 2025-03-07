@@ -8,7 +8,8 @@ const props = withDefaults(
     defineProps<ProgressRootProps & { class?: HTMLAttributes['class'], variant?: ProgressVariant }>(),
   {
     modelValue: 0,
-      variant: 'success'
+      variant: 'success',
+      class:''
   },
 )
 
