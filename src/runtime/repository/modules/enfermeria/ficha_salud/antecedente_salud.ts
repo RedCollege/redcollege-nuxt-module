@@ -23,7 +23,7 @@ export default class AntecedenteSalud {
         data: IAntecedenteSaludForm
     ): Promise<IAntecedenteSalud> {
         return this.fetcher(
-            `enfermeria/ficha_salud/antecedente_salud/actualizarAntecedenteSalud${id}`,
+            `enfermeria/ficha_salud/antecedente_salud/actualizarAntecedenteSalud/${id}`,
             {
                 method: "PATCH",
                 body: data,

@@ -31,7 +31,6 @@ export interface IAntecedenteSalud {
 }
 
 export interface IAntecedenteSaludForm {
-    id: number;
     enfermedades: string;
     alergias: string;
     tipoVision: string;
