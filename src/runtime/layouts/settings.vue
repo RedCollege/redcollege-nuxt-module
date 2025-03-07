@@ -1,5 +1,5 @@
 <template lang="pug">
-main(class="min-h-[calc(100vh_-_0px)] py-6 bg-muted dark:bg-zinc-900")
+main(class=" min-h-[calc(100vh_-_0px)] py-6 bg-muted dark:bg-zinc-900")
     .container
         Card
             CardHeader

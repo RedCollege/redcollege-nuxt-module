@@ -46,10 +46,10 @@ watch([Meta_B, Ctrl_B], (v) => {
 
 <template lang="pug">
 div
-    Sidebar
-    main(class="min-h-[calc(100vh_-_0px)] bg-muted dark:bg-zinc-900 transition-[margin-left] ease-in-out duration-300", :class="[isOpen === false ? 'lg:ml-[70px]' : 'lg:ml-72']")
-        Navbar(:logoUrl="logoUrl", :titulo="titulo", :hideCursos="hideCursos", :hidePeriodos="hidePeriodos")
-        .container
+    Sidebar(class="print:hidden")
+    main(class="min-h-[calc(100vh_-_0px)] print:m-0 print:p-0 bg-muted print:bg-white dark:bg-zinc-900 transition-[margin-left] ease-in-out duration-300", :class="[isOpen === false ? 'lg:ml-[70px]' : 'lg:ml-72']")
+        Navbar(class="print:hidden" :logoUrl="logoUrl", :titulo="titulo", :hideCursos="hideCursos", :hidePeriodos="hidePeriodos")
+        div(class="container print:m-0 print:p-0 print:w-screen")
             slot
     template(v-if="isSuperAdmin")
         CommandDialog(v-model:open="isCommandOpen")
