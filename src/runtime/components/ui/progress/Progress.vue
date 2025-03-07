@@ -36,9 +36,10 @@ const delegatedProps = computed(() => {
             :class="cn(progressVariants({variant}))"
             :style="{ width: `${props.modelValue}%` }"
         />
-
-        <div v-if="props.modelValue >=5" :style="{ left: `${props.modelValue -2}%` }"
-             class="absolute items-center left-0 inset-0 flex text-xs font-semibold text-white">
+        <div v-if="props.modelValue >=5"
+             :style="{ left: `${props.modelValue -2}%` }"
+             class="absolute items-center left-0 inset-0 flex text-xs font-semibold text-white"
+        >
             {{ props.modelValue }}%
         </div>
     </ProgressRoot>
