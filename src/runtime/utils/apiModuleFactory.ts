@@ -82,7 +82,7 @@ export type ComunicacionesModules = {
     grupo: GrupoModule;
     permiso: PermisoModule;
     usuarioPlantilla: UsuarioPlantillaModule;
-    sistemaPlantilla: SistemaPlantillaModule
+    sistemaPlantilla: SistemaPlantillaModule;
 };
 
 export type EnfermeriaModules = {
@@ -188,10 +188,10 @@ export function createApiModules(
                 adjunto: new AdjuntoModule(apiFetcher),
                 mensaje: new MensajeModule(apiFetcher),
                 usuarioMensaje: new UsuarioMensajeModule(apiFetcher),
-                grupo: new GrupoModule(apiFetcher),,
+                grupo: new GrupoModule(apiFetcher),
                 permiso: new PermisoModule(apiFetcher),
                 usuarioPlantilla: new UsuarioPlantillaModule(apiFetcher),
-                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher)
+                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher),
             };
         case "enfermeria":
             return {
