@@ -41,10 +41,15 @@ export default class PlanificacionModule {
         });
     }
 
-    async duplicatePlanificacion(planificacionId: number): Promise<IPlanificacion> {
+    async duplicatePlanificacion(planificacionId: number, titulo: string, periodo: string, cursoId: number, isColaborativa: boolean): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/duplicate/${planificacionId}`, {
             method: 'POST',
-            body: {}
+            body: {
+                titulo: titulo,
+                isColaborativa: isColaborativa,
+                cursoId: cursoId,
+                periodo: periodo
+            }
         })
     }
 
