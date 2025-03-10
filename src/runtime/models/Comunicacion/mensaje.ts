@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
 import type { IUsuario } from "../Auth/usuario.ts";
 import type { IAdjunto } from "./adjunto.ts";
 
@@ -28,4 +28,5 @@ export interface IMensajeForm {
     mensaje: string;
     periodo: number;
     establecimientoId: number;
+    adjuntosIds: Array<number>;
 }

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 
-const editorData = ref("")
+const editorData = ref("<h1>hola</h1>")
 const mensajeSchema = toTypedSchema(z.object({
     asunto: z.string({
         required_error: "Por favor, ingrese un asunto"
@@ -19,19 +19,34 @@ const mensajeSchema = toTypedSchema(z.object({
 }));
 
 const form = useForm({
-    validationSchema: mensajeSchema
+    validationSchema: mensajeSchema,
+    initialValues: {
+        asunto: "asas",
+        mensaje: "<h1>hola</h1>",
+    },
 })
 
 const onSubmit = form.handleSubmit((values) => {
     console.log('Form submitted!', values)
 })
 
+const fillData = (() => {
+    editorData.value = "<h1>hola mundo</h1>"
+})
+
+const isOpem = ref(true)
 </script>
 
 <template lang="pug">
     ResizablePanelGroup(direction="horizontal")
         ResizablePanel(:default-size="40", :min-size="25", collapsible)
-            Card
+            NavigationMenu
+                NavigationMenuList
+                    NavigationMenuItem
+                        NavigationMenuTrigger hola
+                        NavigationMenuContent
+                            h1 hola mundo
+            //-Card
                 CardHeader
                     CardTitle Destinatarios
                     CardDescription.text-green 0 Destinatarios Seleccionados
@@ -63,8 +78,6 @@ const onSubmit = form.handleSubmit((values) => {
         ResizableHandle.mx-2(with-handle)
         ResizablePanel(:default-size="60", :min-size="50")
             Card
-                .ql-editor
-                    .ql-image-align-center hola
                 form(@submit.prevent="onSubmit")
                     CardHeader
                         CardTitle Asunto
@@ -76,10 +89,11 @@ const onSubmit = form.handleSubmit((values) => {
                     CardContent
                         FormField(v-slot="{ componentField }", name="mensaje")
                             FormItem
+                                pre {{ form.values.mensaje }}
                                 FormControl
                                     Card(class="pt-[1px] pb-[1px]")
                                         ScrollArea(class="h-[calc(100vh_-_375px)]")
-                                            Editor(v-bind="componentField", class="min-h-[calc(100vh_-_375px)]")
+                                            Editor(v-bind="componentField", :value="editorData" class="min-h-[calc(100vh_-_375px)]")
                                 FormMessage
                     CardFooter
                         div

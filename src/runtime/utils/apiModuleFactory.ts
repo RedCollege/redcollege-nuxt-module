@@ -12,6 +12,7 @@ import {
     GrupoModule,
     ItemEntradaCurricularModule,
     RegistroAtencionModule,
+    PermisoModule,
     UsuarioModule,
     AntecedenteSaludModule,
 } from "../repository/modules";
@@ -28,6 +29,9 @@ import UsuarioMensajeModule from "../repository/modules/comunicacion/usuario_men
 import LugarModule from "../repository/modules/enfermeria/lugar";
 import TratamientoModule from "../repository/modules/enfermeria/tratamiento";
 import MotivoAtencionModule from "../repository/modules/enfermeria/motivo_atencion";
+import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_plantilla";
+import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
+import MarcadorModule from "../repository/modules/planificaciones/marcador";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -40,6 +44,7 @@ export type PlanificacionesModules = {
     contenidoRecursos: ContenidoRecursoModule;
     registroDua: RegistroDuaModule;
     adecuacionCurricular: AdecuacionCurricularModule;
+    marcadores: MarcadorModule;
 };
 
 export type MatriculasModules = {
@@ -75,6 +80,9 @@ export type ComunicacionesModules = {
     mensaje: MensajeModule;
     usuarioMensaje: UsuarioMensajeModule;
     grupo: GrupoModule;
+    permiso: PermisoModule;
+    usuarioPlantilla: UsuarioPlantillaModule;
+    sistemaPlantilla: SistemaPlantillaModule
 };
 
 export type EnfermeriaModules = {
@@ -136,6 +144,7 @@ export function createApiModules(
                 contenidoActividades: new ContenidoActividadModule(apiFetcher),
                 contenidoRecursos: new ContenidoRecursoModule(apiFetcher),
                 registroDua: new RegistroDuaModule(apiFetcher),
+                marcadores: new MarcadorModule(apiFetcher),
                 adecuacionCurricular: new AdecuacionCurricularModule(
                     apiFetcher
                 ),
@@ -179,7 +188,10 @@ export function createApiModules(
                 adjunto: new AdjuntoModule(apiFetcher),
                 mensaje: new MensajeModule(apiFetcher),
                 usuarioMensaje: new UsuarioMensajeModule(apiFetcher),
-                grupo: new GrupoModule(apiFetcher),
+                grupo: new GrupoModule(apiFetcher),,
+                permiso: new PermisoModule(apiFetcher),
+                usuarioPlantilla: new UsuarioPlantillaModule(apiFetcher),
+                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher)
             };
         case "enfermeria":
             return {

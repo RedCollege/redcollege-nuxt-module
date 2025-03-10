@@ -2,6 +2,7 @@ import type { DateTime } from 'luxon';
 import type { IPlanificacion } from './planificacion';
 import type { IItemEntradaCurricular } from '../Curriculum/item_entrada_curricular';
 import type { IArchivo } from '../General/archivo';
+import type { IMarcador } from './marcador';
 
 export interface IUnidad {
     id: number;
@@ -17,6 +18,7 @@ export interface IUnidad {
     itemsEntradaCurricular: Array<IItemEntradaCurricular>;
     planificacion: IPlanificacion;
     archivos: Array<IArchivo>;
+    marcadores: Array<IMarcador>
 }
 
 export interface IUnidadForm {

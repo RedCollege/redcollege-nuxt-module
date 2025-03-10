@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { type HTMLAttributes, computed } from 'vue'
-import { RangeCalendarNext, type RangeCalendarNextProps, useForwardProps } from 'radix-vue'
+import { RangeCalendarNext, type RangeCalendarNextProps, useForwardProps } from 'reka-ui'
 import { ChevronRightIcon } from '@radix-icons/vue'
 import { cn } from '../../../lib/utils'
 import { buttonVariants } from '../button'
