@@ -32,7 +32,14 @@ export default class EnfermedadDiscapacidadModule{
         })
     } 
 
-    async deleteEnfermedadDiscapacidad(id: number): Promise<IEnfermedadDiscapacidad> {
+    async deleteEnfermedadDiscapacidad(id: number | string | (string | number)[]): Promise<IEnfermedadDiscapacidad | IEnfermedadDiscapacidad[]> {
+        if (Array.isArray(id)) {
+            return this.fetcher('/enfermeria/enfermedad/destroy', {
+                method: 'DELETE',
+                body: JSON.stringify({ ids: id })
+            })
+        }
+    
         return this.fetcher(`/enfermeria/enfermedad/${id}/destroy`, {
             method: 'DELETE'
         })
