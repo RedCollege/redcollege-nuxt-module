@@ -32,6 +32,7 @@ import MotivoAtencionModule from "../repository/modules/enfermeria/motivo_atenci
 import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_plantilla";
 import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
 import MarcadorModule from "../repository/modules/planificaciones/marcador";
+import MatriculaAntecedenteModule from "../repository/modules/enfermeria/ficha_salud/matricula_antecedente";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -91,6 +92,7 @@ export type EnfermeriaModules = {
     tratamiento: TratamientoModule;
     motivo: MotivoAtencionModule;
     antecedenteSalud: AntecedenteSaludModule;
+    matriculaAntecedente: MatriculaAntecedenteModule;
 };
 
 // agrupación de modulos
@@ -200,6 +202,9 @@ export function createApiModules(
                 tratamiento: new TratamientoModule(apiFetcher),
                 motivo: new MotivoAtencionModule(apiFetcher),
                 antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
+                matriculaAntecedente: new MatriculaAntecedenteModule(
+                    apiFetcher
+                ),
             };
     }
 }

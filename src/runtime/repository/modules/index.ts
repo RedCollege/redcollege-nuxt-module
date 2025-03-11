@@ -18,3 +18,4 @@ export { default as GrupoModule } from "./comunicacion/grupo";
 export { default as RegistroAtencionModule } from "./enfermeria/registro_atencion";
 export { default as AntecedenteSaludModule } from "./enfermeria/ficha_salud/antecedente_salud";
 export { default as PermisoModule } from "./comunicacion/permiso";
+export { default as MatriculaAntecedenteModule } from "./enfermeria/ficha_salud/matricula_antecedente";

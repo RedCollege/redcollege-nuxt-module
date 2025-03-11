@@ -24,6 +24,7 @@ export interface IAntecedenteSalud {
     trasladar: string;
     observaciones: string;
     contactosEmergencia: object;
+    imc: string | number;
     createdAt: DateTime;
     updatedAt: DateTime;
     matricula: IMatricula;
