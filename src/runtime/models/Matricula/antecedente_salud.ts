@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import type { IGrupoSanguineo } from "./antecedente_salud/grupo_sanguineo";
 import type { IMatricula } from "./matricula";
+import type { IEnfermedad } from "../Enfermeria/enfermedad";
 
 export interface IAntecedenteSalud {
     id: number;
@@ -29,6 +30,7 @@ export interface IAntecedenteSalud {
     updatedAt: DateTime;
     matricula: IMatricula;
     grupoSanguineo: IGrupoSanguineo;
+    enfermedadesYAlergias: Array<IEnfermedad>;
 }
 
 export interface IAntecedenteSaludForm {
