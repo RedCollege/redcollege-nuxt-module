@@ -9,6 +9,7 @@ import PeriodoEscolarModule from "../repository/modules/establecimiento/periodo_
 import MatriculaModule from "../repository/modules/matricula/matricula";
 import {
     EspecialidadModule,
+    EvaluacionCursoModule,
     GrupoModule,
     ItemEntradaCurricularModule,
     PermisoModule,
@@ -80,6 +81,10 @@ export type ComunicacionesModules = {
     sistemaPlantilla: SistemaPlantillaModule
 }
 
+export type EvaluacionesModules = {
+    evaluacionCurso: EvaluacionCursoModule
+}
+
 // agrupación de modulos
 export type ApiModules = {
     auth: AuthModules;
@@ -91,6 +96,7 @@ export type ApiModules = {
     general: GeneralModules;
     health: HealthModules;
     comunicaciones: ComunicacionesModules;
+    evaluaciones: EvaluacionesModules
 };
 
 export function createApiModules(
@@ -103,7 +109,8 @@ export function createApiModules(
         | "curriculum"
         | "general"
         | "health"
-        | "comunicaciones",
+        | "comunicaciones"
+        | "evaluaciones",
     apiFetcher: $Fetch
 ):
     | AuthModules
@@ -114,7 +121,8 @@ export function createApiModules(
     | CurriculumModules
     | GeneralModules
     | HealthModules
-    | ComunicacionesModules {
+    | ComunicacionesModules
+    | EvaluacionesModules {
     switch (apiType) {
         case "auth":
             return {
@@ -176,6 +184,10 @@ export function createApiModules(
                 permiso: new PermisoModule(apiFetcher),
                 usuarioPlantilla: new UsuarioPlantillaModule(apiFetcher),
                 sistemaPlantilla: new SistemaPlantillaModule(apiFetcher)
+            }
+        case "evaluaciones":
+            return {
+                evaluacionCurso: new EvaluacionCursoModule(apiFetcher)
             }
     }
 }

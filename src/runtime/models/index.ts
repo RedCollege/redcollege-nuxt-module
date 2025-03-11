@@ -7,3 +7,4 @@ export * from './General';
 export * from './Health'
 export * from './Auth'
 export * from './Comunicacion'
+export * from './Evaluacion'
