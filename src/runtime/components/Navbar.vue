@@ -5,7 +5,7 @@ import { applicationModules as modules } from '../config/modules'
 import type { IPeriodoEscolar } from '../models'
 import { useAuthStore } from '../stores/authStore'
 import { useRuntimeConfig, useRoute, useRouter, useNuxtApp } from '#app'
-import { useNavbar } from '../composables/states'
+import { useNavbar, useNotification } from '../composables/states'
 
 interface Props {
     logoUrl: string,
@@ -26,9 +26,11 @@ const props = withDefaults(defineProps<Props>(), {
 const { $apis } = useNuxtApp()
 const route = useRoute()
 const router = useRouter()
+const fileInput = ref<HTMLInputElement | null>(null)
 const selectedEstablecimientoId = ref("")
 const selectedPeriodoId = ref("")
 const selectedCursoId = ref("")
+const isUploadingAvatar = ref(false)
 const authStore = useAuthStore()
 const { user, isLoggedIn } = storeToRefs(authStore)
 const { redirectTo } = useRuntimeConfig().public.redcollege
@@ -101,6 +103,33 @@ const resetSelects = (resetPeriodo: boolean = true, resetCurso: boolean = true) 
         selectedCursoId.value = ""
         //cursos.value = []
         areCursosLoaded.value = false
+    }
+}
+
+const openFilePicker = (): void => {
+    fileInput.value?.click()
+}
+
+// Maneja la carga de archivos
+const handleFileUpload = async (event: Event) => {
+    isUploadingAvatar.value = true
+    const target = event.target as HTMLInputElement
+    const file = target.files?.[0]
+    if (file) {
+        try{
+            const { url } = await $apis.auth.usuario.actualizarAvatar(file)
+            authStore.updateAvatar(url)
+            isUploadingAvatar.value = false
+            useNotification().toast({
+                title: 'Avatar Actualizado'
+            })
+        }catch(error){
+            isUploadingAvatar.value = false
+            useNotification().toast({
+                title: 'Revisa la imagen adjuntada, no puede pesar más de 10mb',
+                variant: 'destructive'
+            })
+        }
     }
 }
 
@@ -190,6 +219,11 @@ const logout = () => {
             .flex-none
                 NavigationMenu
                     NavigationMenuList(class="gap-2")
+                        NavigationMenuItem
+                            Button(variant="secondary", as-child)
+                                a.flex.gap-2.items-center(href="https://redcollege.freshdesk.com/support/solutions", target="_blank")
+                                    img.w-4.h-4(src="../assets/images/help.svg")
+                                    span Tutoriales
                         NavigationMenuItem(v-if="!hideEstablecimientos")
                             Select(v-model="selectedEstablecimientoId")
                                 SelectTrigger
@@ -225,9 +259,10 @@ const logout = () => {
                             DropdownMenu
                                 DropdownMenuTrigger(as-child)
                                     Button(variant="ghost", size="icon")
-                                        Avatar(class="!h-8 !w-8")
+                                        Loader.animate-spin(v-if="isUploadingAvatar")
+                                        Avatar(class="h-8 w-8", v-else)
                                             AvatarImage(:src="user.avatarUrl")
-                                            AvatarFallback
+                                            AvatarFallback {{ user.iniciales }}
                                 DropdownMenuContent.w-56
                                     DropdownMenuLabel Mi Cuenta
                                     DropdownMenuSeparator
@@ -236,6 +271,11 @@ const logout = () => {
                                             a.flex.gap-2.items-center(href="https://login.redcollege.net/")
                                                 Icon(name="tabler:home", size="20")
                                                 span Inicio
+                                        DropdownMenuItem
+                                            .cursor-pointer.flex.gap-2.items-center(href="https://login.redcollege.net/", @click="openFilePicker")
+                                                Icon(name="tabler:photo", size="20")
+                                                span Subir Avatar
+                                            input.hidden(type="file", ref="fileInput", accept="image/*", @change="handleFileUpload")
                                         DropdownMenuItem
                                             a.flex.gap-2.items-center(href="https://redcollege.freshdesk.com/support/home", target="_blank")
                                                 Icon(name="tabler:help", size="20")

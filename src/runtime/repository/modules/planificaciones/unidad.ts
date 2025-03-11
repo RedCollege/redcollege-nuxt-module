@@ -2,6 +2,7 @@ import type { $Fetch } from 'ofetch';
 import type { IUnidad, IUnidadForm } from '~/src/runtime/models/Planificacion';
 import type { IItemEntradaCurricular } from '../../../models';
 import type { IArchivo } from '../../../models/General/archivo';
+import type { DateTime } from 'luxon';
 
 
 
@@ -87,4 +88,11 @@ export default class UnidadModule {
             }
         })
     }
+
+    async obtenerDiasHabilesUnidad(unidadId: number): Promise<DateTime[]> {
+        return this.fetcher(`/unidades/obtenerDiasHabilesPlanificacion/${unidadId}`, {
+            method: "GET"
+        })
+    }
+
 }

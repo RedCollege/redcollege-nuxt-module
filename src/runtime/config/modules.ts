@@ -43,7 +43,7 @@ export const applicationModules: Module[] = [
         doHighlight: false
     },
     {
-        link: "https://comunicaciones.redcollege.net/bandeja/recibidos",
+        link: "https://comunicacion.redcollege.net",
         title: "Visto, +Comunicación",
         img: "https://login.redcollege.net/logos/modulos/comunicacion.svg",
         subtitle: "",

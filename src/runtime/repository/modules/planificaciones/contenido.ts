@@ -2,9 +2,16 @@ import type { $Fetch } from 'ofetch';
 import type { IItemEntradaCurricular } from '../../../models';
 import type { IArchivo } from '../../../models/General/archivo';
 import type { IContenido, IContenidoForm } from '../../../models/Planificacion/contenido';
+import type { DateTime } from 'luxon';
 
 export default class ContenidoModule {
     constructor(private fetcher: $Fetch) { }
+
+    async obtenerContenidosPorPlanificacion(planificacionId: number): Promise<IContenido[]> {
+        return this.fetcher(`/contenidos/obtenerContenidosPorPlanificacion/${planificacionId}`, {
+            method: 'GET'
+        });
+    }
 
     async obtenerContenidosPorUnidad(unidadId: number): Promise<IContenido[]> {
         return this.fetcher(`/contenidos/unidad/${unidadId}`, {
@@ -79,4 +86,10 @@ export default class ContenidoModule {
             }
         });
     }
-} 
+
+    async obtenerDiasHabilesContenido(contenidoId: number): Promise<DateTime[]> {
+        return this.fetcher(`/contenidos/obtenerDiasHabilesContenido/${contenidoId}`, {
+            method: 'GET'
+        });
+    }
+}
