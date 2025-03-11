@@ -19,3 +19,4 @@ export { default as RegistroAtencionModule } from "./enfermeria/registro_atencio
 export { default as AntecedenteSaludModule } from "./enfermeria/ficha_salud/antecedente_salud";
 export { default as EnfermedadDiscapacidadModule } from "./enfermeria/enfermedad_discapacidad";
 export { default as PermisoModule } from "./comunicacion/permiso";
+export { default as MatriculaAntecedenteModule } from "./enfermeria/ficha_salud/matricula_antecedente";

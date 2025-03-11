@@ -93,7 +93,7 @@ export type EnfermeriaModules = {
     tratamiento: TratamientoModule;
     motivo: MotivoAtencionModule;
     antecedenteSalud: AntecedenteSaludModule;
-    enfermedadDiscapacidad: EnfermedadDiscapacidadModule
+    enfermedadDiscapacidad: EnfermedadDiscapacidadModule;
     matriculaAntecedente: MatriculaAntecedenteModule;
 };
 
@@ -204,7 +204,9 @@ export function createApiModules(
                 tratamiento: new TratamientoModule(apiFetcher),
                 motivo: new MotivoAtencionModule(apiFetcher),
                 antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
-                enfermedadDiscapacidad: new EnfermedadDiscapacidadModule(apiFetcher)
+                enfermedadDiscapacidad: new EnfermedadDiscapacidadModule(
+                    apiFetcher
+                ),
                 matriculaAntecedente: new MatriculaAntecedenteModule(
                     apiFetcher
                 ),
