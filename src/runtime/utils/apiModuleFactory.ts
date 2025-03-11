@@ -33,6 +33,7 @@ import EnfermedadDiscapacidadModule from "../repository/modules/enfermeria/enfer
 import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_plantilla";
 import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
 import MarcadorModule from "../repository/modules/planificaciones/marcador";
+import MatriculaAntecedenteModule from "../repository/modules/enfermeria/ficha_salud/matricula_antecedente";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -83,7 +84,7 @@ export type ComunicacionesModules = {
     grupo: GrupoModule;
     permiso: PermisoModule;
     usuarioPlantilla: UsuarioPlantillaModule;
-    sistemaPlantilla: SistemaPlantillaModule
+    sistemaPlantilla: SistemaPlantillaModule;
 };
 
 export type EnfermeriaModules = {
@@ -93,6 +94,7 @@ export type EnfermeriaModules = {
     motivo: MotivoAtencionModule;
     antecedenteSalud: AntecedenteSaludModule;
     enfermedadDiscapacidad: EnfermedadDiscapacidadModule
+    matriculaAntecedente: MatriculaAntecedenteModule;
 };
 
 // agrupación de modulos
@@ -193,7 +195,7 @@ export function createApiModules(
                 grupo: new GrupoModule(apiFetcher),
                 permiso: new PermisoModule(apiFetcher),
                 usuarioPlantilla: new UsuarioPlantillaModule(apiFetcher),
-                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher)
+                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher),
             };
         case "enfermeria":
             return {
@@ -203,6 +205,9 @@ export function createApiModules(
                 motivo: new MotivoAtencionModule(apiFetcher),
                 antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
                 enfermedadDiscapacidad: new EnfermedadDiscapacidadModule(apiFetcher)
+                matriculaAntecedente: new MatriculaAntecedenteModule(
+                    apiFetcher
+                ),
             };
     }
 }
