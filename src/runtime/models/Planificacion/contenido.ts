@@ -1,6 +1,7 @@
 import type { IArchivo } from '../General/archivo';
 import type { IItemEntradaCurricular } from '../Curriculum/item_entrada_curricular';
 import type { DateTime } from 'luxon';
+import type { IRegistroDua } from './dua';
 
 export interface IContenido {
     id: number;
@@ -19,6 +20,7 @@ export interface IContenido {
     itemsEntrada?: IItemEntradaCurricular[];
     actividades?: IContenidoActividad[];
     recursos?: IContenidoRecurso[];
+    registrosDua: Array<IRegistroDua>;
 }
 
 export interface IContenidoForm {
