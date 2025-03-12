@@ -41,8 +41,8 @@ export default class PlanificacionModule {
         });
     }
 
-    async duplicatePlanificacion(planificacionId: number, titulo: string, periodo: string, cursoId: number, isColaborativa: boolean, asignaturasIds: number[], colaboradoresIds: number[]): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/duplicate/${planificacionId}`, {
+    async duplicarCompartirPlanificacion(planificacionId: number, titulo: string, periodo: string, cursoId: number, isColaborativa: boolean, asignaturasIds: number[], colaboradoresIds: number[], action:number): Promise<IPlanificacion> {
+        return this.fetcher(`/planificacion/duplicarCompartirPlanificacion/${planificacionId}?action=${action}`, {
             method: 'POST',
             body: {
                 titulo: titulo,
