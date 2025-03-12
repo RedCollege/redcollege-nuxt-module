@@ -23,13 +23,13 @@ interface IAsignaturaEvalua {
     promedioTotal: number;
 }
 
-interface ICursoEvalua {
+export interface ICursoEvalua {
     id: number;
     nombre: string;
     asignaturas: IAsignaturaEvalua[];
 }
 
-interface ICursoComponenteEvalua {
+export interface ICursoComponenteEvalua {
     curso_id: number;
     curso_nombre: string;
     items: IEntradaEvalua[];
