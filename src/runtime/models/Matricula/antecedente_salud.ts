@@ -47,4 +47,5 @@ export interface IAntecedenteSaludForm {
     problemasCardiacos: boolean;
     problemasColumna: boolean;
     observaciones: string;
+    enfermedadesDiagnosticoIds: number[];
 }
