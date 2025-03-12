@@ -41,10 +41,17 @@ export default class PlanificacionModule {
         });
     }
 
-    async duplicatePlanificacion(planificacionId: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/duplicate/${planificacionId}`, {
+    async duplicarCompartirPlanificacion(planificacionId: number, titulo: string, periodo: string, cursoId: number, isColaborativa: boolean, asignaturasIds: number[], colaboradoresIds: number[], action: 1 | 2): Promise<IPlanificacion> {
+        return this.fetcher(`/planificacion/duplicarCompartirPlanificacion/${planificacionId}?action=${action}`, {
             method: 'POST',
-            body: {}
+            body: {
+                titulo: titulo,
+                isColaborativa: isColaborativa,
+                cursoId: cursoId,
+                periodo: periodo,
+                asignaturasIds: asignaturasIds,
+                colaboradoresIds: colaboradoresIds
+            }
         })
     }
 

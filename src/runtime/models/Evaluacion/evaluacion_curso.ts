@@ -32,10 +32,15 @@ export interface ICursoEvalua {
 export interface ICursoComponenteEvalua {
     curso_id: number;
     curso_nombre: string;
-    items: IEntradaEvalua[];
+    asignaturas: IAsignaturaCursoComponenteEvalua[];
 }
 
-interface IEntradaEvalua {
+export interface IAsignaturaCursoComponenteEvalua {
+    entrada: string;
+    entradas: IEntradaEvalua[];
+}
+
+export interface IEntradaEvalua {
     entrada: string;
     items: IItemInformeEvalua[];
 }

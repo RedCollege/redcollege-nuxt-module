@@ -3,6 +3,7 @@ import type { IPlanificacion } from './planificacion';
 import type { IItemEntradaCurricular } from '../Curriculum/item_entrada_curricular';
 import type { IArchivo } from '../General/archivo';
 import type { IMarcador } from './marcador';
+import type { IContenido } from './contenido';
 
 export interface IUnidad {
     id: number;
@@ -19,6 +20,7 @@ export interface IUnidad {
     planificacion: IPlanificacion;
     archivos: Array<IArchivo>;
     marcadores: Array<IMarcador>
+    contenidos: Array<IContenido>;
 }
 
 export interface IUnidadForm {

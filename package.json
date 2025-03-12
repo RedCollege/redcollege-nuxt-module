@@ -37,6 +37,7 @@
         "@nuxt/kit": "^3.12.4",
         "@pinia/nuxt": "^0.5.3",
         "@radix-icons/vue": "^1.0.0",
+        "@redcollege/ui-nuxt-module": "file:redcollege-ui-nuxt-module-0.0.190.tgz",
         "@tanstack/vue-table": "^8.20.4",
         "@types/node": "^20.14.11",
         "@types/quill": "^2.0.14",
