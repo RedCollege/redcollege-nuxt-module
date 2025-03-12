@@ -30,7 +30,7 @@ export interface IAntecedenteSalud {
     updatedAt: DateTime;
     matricula: IMatricula;
     grupoSanguineo: IGrupoSanguineo;
-    enfermedadesYAlergias: Array<IEnfermedad>;
+    enfermedadesDiagnostico: Array<IEnfermedad>;
 }
 
 export interface IAntecedenteSaludForm {
