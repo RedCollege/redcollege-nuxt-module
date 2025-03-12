@@ -36,7 +36,7 @@ export interface ICursoComponenteEvalua {
 }
 
 export interface IAsignaturaCursoComponenteEvalua {
-    entrada: string;
+    asignaturaNombre: string;
     entradas: IEntradaEvalua[];
 }
 
