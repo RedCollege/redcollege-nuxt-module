@@ -16,13 +16,14 @@ export interface ICursoGlobalEvalua {
 interface IAsignaturaGlobalEvalua {
     id: number;
     nombre: string;
-    porcentajeInsuficiente: string;
-    porcentajeElemental: string;
-    porcentajeAdecuado: string;
-    cantidadInsuficientes: string;
+    cantidadAlumnos: number;
+    porcentajeInsuficiente: number;
+    porcentajeElemental: number;
+    porcentajeAdecuado: number;
+    cantidadInsuficientes: number;
     promedioTotal: number;
-    promedioSimceHombres: string;
-    promedioSimceMujeres: string;
+    promedioSimceHombres: number;
+    promedioSimceMujeres: number;
 }
 
 /**
@@ -45,12 +46,12 @@ interface IAsignaturaEvalua {
     id: number;
     nombre: string;
     ensayos: IEnsayoEvalua[];
-    porcentajeInsuficiente: string;
-    porcentajeElemental: string;
-    porcentajeAdecuado: string;
-    cantidadInsuficientes: string;
-    cantidadHombres: string;
-    cantidadMujeres: string;
+    porcentajeInsuficiente: number;
+    porcentajeElemental: number;
+    porcentajeAdecuado: number;
+    cantidadInsuficientes: number;
+    cantidadHombres: number;
+    cantidadMujeres: number;
     promedioTotal: number;
 }
 
