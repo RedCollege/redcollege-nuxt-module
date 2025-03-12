@@ -1,3 +1,34 @@
+/**
+ * Interfaces Informe Global (evalua 360)
+ */
+
+export interface IInformeGlobalEvalua {
+    informacionGeneralCursosGlobal: Array<ICursoGlobalEvalua>;
+    informeComponentesGlobal: Array<ICursoComponenteEvalua>;
+}
+
+export interface ICursoGlobalEvalua {
+    sigeId: number;
+    sigeNombre: string;
+    asignaturas: IAsignaturaGlobalEvalua[];
+}
+
+interface IAsignaturaGlobalEvalua {
+    id: number;
+    nombre: string;
+    porcentajeInsuficiente: string;
+    porcentajeElemental: string;
+    porcentajeAdecuado: string;
+    cantidadInsuficientes: string;
+    promedioTotal: number;
+    promedioSimceHombres: string;
+    promedioSimceMujeres: string;
+}
+
+/**
+ * Interfaces Informe Curso (evalua 360)
+ */
+
 export interface IInformeCursoEvalua {
     informacionGeneralCursos: Array<ICursoEvalua>;
     informeComponentes: Array<ICursoComponenteEvalua>;
