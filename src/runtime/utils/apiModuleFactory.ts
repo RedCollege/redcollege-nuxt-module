@@ -15,6 +15,9 @@ import {
     PermisoModule,
     UsuarioModule,
     AntecedenteSaludModule,
+    OcupacionModule,
+    TipoActividadModule,
+    TipoAccidenteModule,
 } from "../repository/modules";
 import AuxiliarModule from "../repository/modules/general/auxiliar";
 import ContenidoModule from "../repository/modules/planificaciones/contenido";
@@ -95,6 +98,9 @@ export type EnfermeriaModules = {
     antecedenteSalud: AntecedenteSaludModule;
     enfermedadDiscapacidad: EnfermedadDiscapacidadModule;
     matriculaAntecedente: MatriculaAntecedenteModule;
+    ocupacion: OcupacionModule;
+    tipoActividad: TipoActividadModule;
+    tipoAccidente: TipoAccidenteModule;
 };
 
 // agrupación de modulos
@@ -210,6 +216,9 @@ export function createApiModules(
                 matriculaAntecedente: new MatriculaAntecedenteModule(
                     apiFetcher
                 ),
+                ocupacion: new OcupacionModule(apiFetcher),
+                tipoAccidente: new TipoAccidenteModule(apiFetcher),
+                tipoActividad: new TipoActividadModule(apiFetcher)
             };
     }
 }
