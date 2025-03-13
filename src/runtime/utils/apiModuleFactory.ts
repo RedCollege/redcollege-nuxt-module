@@ -34,7 +34,6 @@ import EnfermedadDiscapacidadModule from "../repository/modules/enfermeria/enfer
 import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_plantilla";
 import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
 import MarcadorModule from "../repository/modules/planificaciones/marcador";
-import MatriculaAntecedenteModule from "../repository/modules/enfermeria/ficha_salud/matricula_antecedente";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -52,6 +51,7 @@ export type PlanificacionesModules = {
 
 export type MatriculasModules = {
     matricula: MatriculaModule;
+    antecedenteSalud: AntecedenteSaludModule;
 };
 
 export type CurriculumModules = {
@@ -95,7 +95,6 @@ export type EnfermeriaModules = {
     motivo: MotivoAtencionModule;
     antecedenteSalud: AntecedenteSaludModule;
     enfermedadDiscapacidad: EnfermedadDiscapacidadModule;
-    matriculaAntecedente: MatriculaAntecedenteModule;
 };
 
 export type EvaluacionesModules = {
@@ -164,6 +163,7 @@ export function createApiModules(
         case "matriculas":
             return {
                 matricula: new MatriculaModule(apiFetcher),
+                antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
             };
         case "curriculum":
             return {
@@ -213,9 +213,6 @@ export function createApiModules(
                 motivo: new MotivoAtencionModule(apiFetcher),
                 antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
                 enfermedadDiscapacidad: new EnfermedadDiscapacidadModule(
-                    apiFetcher
-                ),
-                matriculaAntecedente: new MatriculaAntecedenteModule(
                     apiFetcher
                 ),
             };
