@@ -1,9 +1,9 @@
 import type { $Fetch } from 'ofetch';
-import type { ContextEnum, IConfiguracionItem, IConfiguracionItemForm } from '~/src/runtime/models';
+import type { IConfiguracionItem, IConfiguracionItemForm } from '~/src/runtime/models';
 
 interface Props {
     establecimientoId : string | number
-    context: ContextEnum
+    context: string 
 }
 
 export default class ConfiguracionItemModule{
@@ -12,7 +12,7 @@ export default class ConfiguracionItemModule{
     async getAllConfiguracionItemByEstablecimiento({establecimientoId, context }: Props): Promise<IConfiguracionItem[]> {
         return this.fetcher(`/enfermeria/configuracion-item/${establecimientoId}`, {
             method: 'GET',
-            params: context.valueOf
+            params: { context },
         });
     }
 
