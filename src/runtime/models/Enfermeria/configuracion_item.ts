@@ -6,7 +6,8 @@ export enum ContextEnum {
     TRATAMIENTO = 'tratamiento',
     MEDICAMENTO = 'medicamento',
     ALERGIA = 'alergia',
-    MOTIVO = 'motivo'
+    MOTIVO = 'motivo',
+    LUGAR = 'lugar'
 }
 
 export interface IConfiguracionItem {
