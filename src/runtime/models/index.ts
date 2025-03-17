@@ -8,3 +8,4 @@ export * from './Health';
 export * from './Auth';
 export * from './Comunicacion';
 export * from './Enfermeria';
+export * from './Evaluacion'

@@ -21,3 +21,4 @@ export { default as EnfermedadDiscapacidadModule } from "./enfermeria/enfermedad
 export { default as PermisoModule } from "./comunicacion/permiso";
 export { default as MatriculaAntecedenteModule } from "./enfermeria/ficha_salud/matricula_antecedente";
 export {default as  ConfiguracionItemModule } from "./enfermeria/configuracion_item"
+export { default as EvaluacionCursoModule } from './evaluacion/evaluacion_curso'
