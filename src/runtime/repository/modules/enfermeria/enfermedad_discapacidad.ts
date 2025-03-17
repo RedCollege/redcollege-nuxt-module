@@ -2,11 +2,11 @@ import type { $Fetch } from 'ofetch';
 import type { IEnfermedadDiscapacidad, IEnfermedadDiscapacidadForm } from '~/src/runtime/models';
 
 interface FilterParams {
-    tipo_id?: number | string;
+    tipo?: string;
 }
 
 export default class EnfermedadDiscapacidadModule{
-    constructor(private fetcher: $Fetch) { }
+    constructor(private fetcher: $Fetch) {}
  
     async getAllEnfermedadDiscapacidadByEstablecimiento(establecimientoId: number|string, filters?: FilterParams): Promise<IEnfermedadDiscapacidad[]> {
         return this.fetcher(`/enfermeria/enfermedad/${establecimientoId}`, {

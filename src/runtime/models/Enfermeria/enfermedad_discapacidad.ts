@@ -1,19 +1,18 @@
-interface TipoEnfermedad {
-    id: number
-    nombre: string
+export enum TipoEnfermedadEnum{
+    ENFERMEDAD = 'enfermedad',
+    DISCAPACIDAD = 'discapacidad'
 }
 
 export interface IEnfermedadDiscapacidad {
     id: number
     nombre: string
     establecimientoId: number
-    tipoId: number
-    tipo: TipoEnfermedad
+    tipo: TipoEnfermedadEnum
 }
 
 export interface IEnfermedadDiscapacidadForm {
     establecimientoId: number
     nombre: string
     alias: string
-    tipoId: number | string
+    tipo: string
 }
