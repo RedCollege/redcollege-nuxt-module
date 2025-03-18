@@ -27,13 +27,12 @@ import AdecuacionCurricularModule from "../repository/modules/planificaciones/ad
 import AdjuntoModule from "../repository/modules/comunicacion/adjunto";
 import MensajeModule from "../repository/modules/comunicacion/mensaje";
 import UsuarioMensajeModule from "../repository/modules/comunicacion/usuario_mensaje";
-import LugarModule from "../repository/modules/enfermeria/lugar";
-import TratamientoModule from "../repository/modules/enfermeria/tratamiento";
-import MotivoAtencionModule from "../repository/modules/enfermeria/motivo_atencion";
 import EnfermedadDiscapacidadModule from "../repository/modules/enfermeria/enfermedad_discapacidad";
 import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_plantilla";
 import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
 import MarcadorModule from "../repository/modules/planificaciones/marcador";
+import MatriculaAntecedenteModule from "../repository/modules/enfermeria/ficha_salud/matricula_antecedente";
+import ConfiguracionItemModule from "../repository/modules/enfermeria/configuracion_item";
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -90,11 +89,10 @@ export type ComunicacionesModules = {
 
 export type EnfermeriaModules = {
     registroAtencion: RegistroAtencionModule;
-    lugar: LugarModule;
-    tratamiento: TratamientoModule;
-    motivo: MotivoAtencionModule;
     antecedenteSalud: AntecedenteSaludModule;
     enfermedadDiscapacidad: EnfermedadDiscapacidadModule;
+    matriculaAntecedente: MatriculaAntecedenteModule;
+    configuracionItem: ConfiguracionItemModule;
 };
 
 export type EvaluacionesModules = {
@@ -112,8 +110,6 @@ export type ApiModules = {
     general: GeneralModules;
     health: HealthModules;
     comunicaciones: ComunicacionesModules;
-    enfermeria: EnfermeriaModules;
-    evaluaciones: EvaluacionesModules;
 };
 
 export function createApiModules(
@@ -208,13 +204,14 @@ export function createApiModules(
         case "enfermeria":
             return {
                 registroAtencion: new RegistroAtencionModule(apiFetcher),
-                lugar: new LugarModule(apiFetcher),
-                tratamiento: new TratamientoModule(apiFetcher),
-                motivo: new MotivoAtencionModule(apiFetcher),
                 antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
                 enfermedadDiscapacidad: new EnfermedadDiscapacidadModule(
                     apiFetcher
                 ),
+                matriculaAntecedente: new MatriculaAntecedenteModule(
+                    apiFetcher
+                ),
+                configuracionItem: new ConfiguracionItemModule(apiFetcher),
             };
         case "evaluaciones":
             return {

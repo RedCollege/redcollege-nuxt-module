@@ -5,7 +5,7 @@ import type {
 } from "~/src/runtime/models";
 
 interface FilterParams {
-    tipoId?: number | string;
+    tipo?: string;
 }
 
 export default class EnfermedadDiscapacidadModule {

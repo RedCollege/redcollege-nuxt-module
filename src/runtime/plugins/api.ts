@@ -55,14 +55,6 @@ export default defineNuxtPlugin((nuxtApp) => {
             "comunicaciones",
             apiFetcher
         ) as ComunicacionesModules,
-        enfermeria: createApiModules(
-            "enfermeria",
-            apiFetcher
-        ) as EnfermeriaModules,
-        evaluaciones: createApiModules(
-            "evaluaciones",
-            apiFetcher
-        ) as EvaluacionesModules,
     };
 
     return {
