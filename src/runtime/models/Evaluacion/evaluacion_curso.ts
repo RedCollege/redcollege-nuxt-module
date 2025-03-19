@@ -4,13 +4,24 @@
 
 export interface IInformeGlobalEvalua {
     informacionGeneralCursosGlobal: Array<ICursoGlobalEvalua>;
-    informeComponentesGlobal: Array<ICursoComponenteEvalua>;
+    informeComponentesGlobal: Array<IComponenteGlobalEvalua>;
 }
 
 export interface ICursoGlobalEvalua {
     sigeId: number;
     sigeNombre: string;
     asignaturas: IAsignaturaGlobalEvalua[];
+}
+
+export interface IComponenteGlobalEvalua {
+    sigeId: number;
+    sigeNombre: string;
+    asignaturas: IAsignaturaGlobalEvalua[];
+}
+
+export interface IAsignaturaComponenteGlobalEvalua {
+    asignaturaNombre: string;
+    entradas: IEntradaEvalua[]
 }
 
 interface IAsignaturaGlobalEvalua {
@@ -73,6 +84,7 @@ export interface ICursoEvalua {
 export interface ICursoComponenteEvalua {
     curso_id: number;
     curso_nombre: string;
+    promedio?: number;
     asignaturas: IAsignaturaCursoComponenteEvalua[];
 }
 
@@ -90,4 +102,6 @@ interface IItemInformeEvalua {
     item_id: number;
     nombre: string;
     promedio: number;
+    alias: string;
+    cursos?: ICursoComponenteEvalua[]
 }
