@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+
+
 const { $apis } = useNuxtApp()
 const { data } = await useAsyncData('matriculas', () => {
     return $apis.comunicaciones.usuarioMensaje.getAll()
@@ -8,6 +10,6 @@ const { data } = await useAsyncData('matriculas', () => {
 </script>
 
 <template lang="pug">
-    div 
-        p Hola
+Card.p-4
+    Progress.h-12(as-progress :model-value="50" variant="success" )
 </template>

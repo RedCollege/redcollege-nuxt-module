@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
-import {
-  ProgressIndicator,
-  ProgressRoot,
-  type ProgressRootProps,
-} from 'reka-ui'
-import { cn } from '../../../lib/utils'
+import {computed, type HTMLAttributes} from 'vue'
+import {ProgressIndicator, ProgressRoot, type ProgressRootProps,} from 'reka-ui'
+import {cn} from '../../../lib/utils'
+import {type ProgressVariant, progressVariants} from "../progress/index";
 
 const props = withDefaults(
-  defineProps<ProgressRootProps & { class?: HTMLAttributes['class'] }>(),
+    defineProps<ProgressRootProps & { class?: HTMLAttributes['class'], variant?: ProgressVariant }>(),
   {
     modelValue: 0,
+      variant: 'success',
+      class:''
   },
 )
 
@@ -19,21 +18,29 @@ const delegatedProps = computed(() => {
 
   return delegated
 })
+
 </script>
 
 <template>
-  <ProgressRoot
-    v-bind="delegatedProps"
-    :class="
+    <ProgressRoot
+        v-bind="delegatedProps"
+        :class="
       cn(
-        'relative h-2 w-full overflow-hidden rounded-full bg-primary/20',
-        props.class,
+        'relative h-6 w-full overflow-hidden rounded-full bg-primary/20',
+        props.class
       )
     "
-  >
-    <ProgressIndicator
-      class="h-full w-full flex-1 bg-primary transition-all"
-      :style="`transform: translateX(-${100 - (props.modelValue ?? 0)}%);`"
-    />
-  </ProgressRoot>
+    >
+        <ProgressIndicator
+            class="h-full  transition-all"
+            :class="cn(progressVariants({variant}))"
+            :style="{ width: `${props.modelValue}%` }"
+        />
+        <div v-if="props.modelValue >=5"
+             :style="{ left: `${props.modelValue -2}%` }"
+             class="absolute items-center left-0 inset-0 flex text-xs font-semibold text-white"
+        >
+            {{ props.modelValue }}%
+        </div>
+    </ProgressRoot>
 </template>
