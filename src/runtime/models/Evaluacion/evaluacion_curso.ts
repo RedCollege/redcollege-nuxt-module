@@ -24,6 +24,15 @@ interface IAsignaturaGlobalEvalua {
     promedioTotal: number;
     promedioSimceHombres: number;
     promedioSimceMujeres: number;
+    ensayos: IAsignaturaEnsayoGlobalEvalua[];
+}
+
+interface IAsignaturaEnsayoGlobalEvalua {
+    nEnsayo: number;
+    promedio: number;
+    promedioHombres: number;
+    promedioMujeres: number;
+    cantidadAlumnos: number;
 }
 
 /**
