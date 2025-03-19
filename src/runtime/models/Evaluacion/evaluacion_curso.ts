@@ -24,7 +24,7 @@ export interface IAsignaturaComponenteGlobalEvalua {
     entradas: IEntradaEvalua[]
 }
 
-interface IAsignaturaGlobalEvalua {
+export interface IAsignaturaGlobalEvalua {
     id: number;
     nombre: string;
     cantidadAlumnos: number;
@@ -38,7 +38,7 @@ interface IAsignaturaGlobalEvalua {
     ensayos: IAsignaturaEnsayoGlobalEvalua[];
 }
 
-interface IAsignaturaEnsayoGlobalEvalua {
+export interface IAsignaturaEnsayoGlobalEvalua {
     nEnsayo: number;
     promedio: number;
     promedioHombres: number;
