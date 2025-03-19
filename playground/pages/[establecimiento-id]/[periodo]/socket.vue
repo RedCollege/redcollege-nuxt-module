@@ -66,11 +66,14 @@ const { apply : animateMousePosition, stop } = useMotion(mouseHandler, {
 
 watch([x, y], sendMousePosition)*/
 
+const value = ref(70)
+
 </script>
 
 <template lang="pug">
 div
     .h-12
+        Progress(v-model="value", :variant="`${value < 5 ? 'destructive' : '' }`")
         NumberField(id="age" :default-value="18" :min="0")
             Label(for="age") Age
             NumberFieldContent

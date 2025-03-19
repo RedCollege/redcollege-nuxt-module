@@ -16,7 +16,7 @@ export interface ICursoGlobalEvalua {
 export interface IComponenteGlobalEvalua {
     sigeId: number;
     sigeNombre: string;
-    asignaturas: IAsignaturaGlobalEvalua[];
+    asignaturas: IAsignaturaComponenteGlobalEvalua[];
 }
 
 export interface IAsignaturaComponenteGlobalEvalua {
