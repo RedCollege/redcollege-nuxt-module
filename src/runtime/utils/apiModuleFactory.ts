@@ -109,6 +109,7 @@ export type ApiModules = {
     general: GeneralModules;
     health: HealthModules;
     comunicaciones: ComunicacionesModules;
+    evaluaciones: EvaluacionesModules;
 };
 
 export function createApiModules(
