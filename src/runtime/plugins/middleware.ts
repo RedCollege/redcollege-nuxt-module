@@ -1,4 +1,4 @@
-import { addRouteMiddleware, defineNuxtPlugin, navigateTo, useRuntimeConfig } from "#app";
+import { addRouteMiddleware, defineNuxtPlugin, navigateTo, useRoute, useRuntimeConfig } from "#app";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "../stores/authStore";
 import { DateTime } from 'luxon'
@@ -27,7 +27,7 @@ export default defineNuxtPlugin(() => {
 
         if(bearerToken.value && shouldRedirect && to.name === 'index'){
             const establecimiento = user.value?.establecimientos?.at(0)
-            const currentYear =  DateTime.now().year
+            const currentYear = Number(useRoute().params.periodo) > 0 ? Number(useRoute().params.periodo) : DateTime.now().year
 
             if(establecimiento){
                 return navigateTo(`/${establecimiento.id}/${currentYear}/${ isAdmin.value || isSuperAdmin.value ? redirectToAdmin : redirectTo }`)
