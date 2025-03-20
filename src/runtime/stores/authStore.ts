@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('auth', () => {
     const isSuperAdmin = ref(false)
     const isAdmin = ref(false)
     const isProfesor = ref(false)
-
+    const periodosEstablecimiento = ref<IPeriodoEscolar[]>([])
 
     // Función de inicialización asíncrona
     async function init() {
@@ -120,6 +120,7 @@ export const useAuthStore = defineStore('auth', () => {
                     }
                 })
                 if(periodos?.length > 0){
+                    periodosEstablecimiento.value = periodos
                     const currentPeriodo = periodos.find(p => p.periodo === DateTime.now().year)
                     if(currentPeriodo){
                         return navigateTo(`/${startEstablecimiento.id}/${currentPeriodo.periodo}/${ isAdmin.value || isSuperAdmin.value ? redirectToAdmin : redirectTo }`)
@@ -153,6 +154,8 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     return {
-        user, loadUser, logout, isLoggedIn, login, init, bearerToken, isAdmin, isSuperAdmin, isProfesor, loginPasswordless, updateAvatar
+        user, loadUser, logout, isLoggedIn, login, init, bearerToken,
+        isAdmin, isSuperAdmin, isProfesor, loginPasswordless, updateAvatar,
+        periodos: periodosEstablecimiento
     }
 })

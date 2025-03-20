@@ -6,7 +6,7 @@ import { DateTime } from 'luxon'
 export default defineNuxtPlugin(() => {
     const { redirectTo, redirectToAdmin, shouldRedirect } = useRuntimeConfig().public.redcollege
     addRouteMiddleware('auth', (to, from) => {
-        const { isLoggedIn, bearerToken, isAdmin, isSuperAdmin, isProfesor, user } = storeToRefs(useAuthStore())
+        const { isLoggedIn, periodos, bearerToken, isAdmin, isSuperAdmin, isProfesor, user } = storeToRefs(useAuthStore())
 
         const excludedRoutes = ["/login-admin"];
 
@@ -27,7 +27,8 @@ export default defineNuxtPlugin(() => {
 
         if(bearerToken.value && shouldRedirect && to.name === 'index'){
             const establecimiento = user.value?.establecimientos?.at(0)
-            const currentYear = Number(useRoute().params.periodo) > 0 ? Number(useRoute().params.periodo) : DateTime.now().year
+            const ultimoPeriodo = periodos.value.at(0)
+            const currentYear = ultimoPeriodo ? ultimoPeriodo.periodo : DateTime.now().year
 
             if(establecimiento){
                 return navigateTo(`/${establecimiento.id}/${currentYear}/${ isAdmin.value || isSuperAdmin.value ? redirectToAdmin : redirectTo }`)
