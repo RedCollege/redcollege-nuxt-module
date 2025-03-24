@@ -143,6 +143,7 @@ export interface IAsignaturaEstablecimientoComponenteEvalua {
 
 export interface IItemEstablecimientoEvalua {
     item_id: number;
+    item_alias: string;
     nombre: string;
     establecimientos: IEstablecimientoItemEvalua[];
 }
