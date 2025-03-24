@@ -150,6 +150,7 @@ export interface IItemEstablecimientoEvalua {
 export interface IEstablecimientoItemEvalua {
     establecimiento_id: number;
     establecimiento_nombre: string;
+    establecimiento_logo: string;
     promedio: number;
 }
 
