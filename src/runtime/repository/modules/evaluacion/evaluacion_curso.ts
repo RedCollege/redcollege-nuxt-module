@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IInformeCursoEvalua, IInformeGlobalEvalua } from '~/src/runtime/models/Evaluacion';
+import type { IInformeCursoEvalua, IInformeGlobalEvalua, IInformeEstablecimientoEvalua } from '~/src/runtime/models/Evaluacion';
 
 
 export default class EvaluacionCursoModule {
@@ -13,6 +13,13 @@ export default class EvaluacionCursoModule {
 
     async obtenerInformeGlobalByEstablecimientoId(establecimientoId: number, periodo: number): Promise<IInformeGlobalEvalua> {
         return this.fetcher(`/evaluacion_curso/obtenerInformeGlobalByEstablecimientoId/${establecimientoId}?periodo=${periodo}`, {
+            method: 'GET'
+        })
+    }
+
+    async obtenerInformeEstablecimientosComparativo(periodo: number, establecimientoIds: number[]): Promise<IInformeEstablecimientoEvalua> {
+        const idsParam = establecimientoIds.join(',');
+        return this.fetcher(`/evaluacion_curso/obtenerInformeResumidoMultiEstablecimiento?periodo=${periodo}&establecimientoIds=${idsParam}`, {
             method: 'GET'
         })
     }

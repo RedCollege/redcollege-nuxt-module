@@ -105,3 +105,63 @@ interface IItemInformeEvalua {
     alias: string;
     cursos?: ICursoComponenteEvalua[]
 }
+
+/**
+ * Interfaces Informe Establecimientos (evalua 360)
+ */
+export interface IInformeEstablecimientoEvalua {
+    informacionGeneralEstablecimientos: Array<IEstablecimientoEvalua>;
+    informeComponentes: Array<IComponenteEstablecimientoEvalua>;
+}
+
+export interface IEstablecimientoEvalua {
+    establecimientoId: number;
+    establecimientoNombre: string;
+    establecimientoLogo: string;
+    ensayos: IEnsayoEstablecimientoEvalua[];
+    promedioTotal: number;
+    porcentajeAdecuado: number;
+    porcentajeElemental: number;
+    porcentajeInsuficiente: number;
+}
+
+export interface IEnsayoEstablecimientoEvalua {
+    nEnsayo: number;
+    promedio: number;
+    tendencia?: 'subida' | 'bajada' | 'estable';
+}
+
+export interface IComponenteEstablecimientoEvalua {
+    entrada_descripcion: string;
+    asignaturas: IAsignaturaEstablecimientoComponenteEvalua[];
+}
+
+export interface IAsignaturaEstablecimientoComponenteEvalua {
+    asignaturaNombre: string;
+    items: IItemEstablecimientoEvalua[];
+}
+
+export interface IItemEstablecimientoEvalua {
+    item_id: number;
+    nombre: string;
+    establecimientos: IEstablecimientoItemEvalua[];
+}
+
+export interface IEstablecimientoItemEvalua {
+    establecimiento_id: number;
+    establecimiento_nombre: string;
+    promedio: number;
+}
+
+/**
+ * Interfaces para el controlador de Evaluación
+ */
+export interface IRequestEstablecimientoEvalua {
+    periodo: number;
+    establecimientoIds: number[];
+}
+
+export interface IResponseEstablecimientoEvalua {
+    informacionGeneralEstablecimientos: IEstablecimientoEvalua[];
+    informeComponentes: IComponenteEstablecimientoEvalua[];
+}
