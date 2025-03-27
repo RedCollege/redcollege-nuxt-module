@@ -101,7 +101,29 @@ const internalDate = computed({
     set: (value) => emit("update:date", value),
 });
 
-const period = ref("PM");
+const currentPeriod = computed(() => {
+    if (!props.date) return "AM";
+    return props.date.getHours() >= 12 ? "PM" : "AM";
+});
+
+const period = computed({
+    get: () => currentPeriod.value,
+    set: (newPeriod) => {
+        if (!internalDate.value) return;
+        
+        const newDate = new Date(internalDate.value);
+        const currentHours = newDate.getHours();
+        
+        if (newPeriod === "PM" && currentHours < 12) {
+            newDate.setHours(currentHours + 12);
+        } else if (newPeriod === "AM" && currentHours >= 12) {
+            newDate.setHours(currentHours - 12);
+        }
+        
+        internalDate.value = newDate;
+    }
+});
+
 const hourRef = ref(null);
 const minuteRef = ref(null);
 const secondRef = ref(null);
@@ -128,6 +150,17 @@ const focusRightConditional = () => {
 };
 
 const updateDate = (newDate) => {
+    if (!newDate) return;
+    
+    const hours = newDate.getHours();
+    const isPM = period.value === "PM";
+    
+    if (isPM && hours < 12) {
+        newDate.setHours(hours + 12);
+    } else if (!isPM && hours >= 12) {
+        newDate.setHours(hours - 12);
+    }
+
     internalDate.value = newDate;
 };
 </script>

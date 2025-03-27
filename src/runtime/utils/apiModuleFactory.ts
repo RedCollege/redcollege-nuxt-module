@@ -32,6 +32,8 @@ import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_p
 import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
 import MarcadorModule from "../repository/modules/planificaciones/marcador";
 import ConfiguracionItemModule from "../repository/modules/enfermeria/configuracion_item";
+import RegistroAccidenteModule from "../repository/modules/enfermeria/registro_accidente";
+
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -91,6 +93,7 @@ export type EnfermeriaModules = {
     antecedenteSalud: AntecedenteSaludModule;
     enfermedadDiscapacidad: EnfermedadDiscapacidadModule;
     configuracionItem: ConfiguracionItemModule;
+    registroAccidente: RegistroAccidenteModule;
 };
 
 export type EvaluacionesModules = {
@@ -208,8 +211,8 @@ export function createApiModules(
                 enfermedadDiscapacidad: new EnfermedadDiscapacidadModule(
                     apiFetcher
                 ),
-
                 configuracionItem: new ConfiguracionItemModule(apiFetcher),
+                registroAccidente: new RegistroAccidenteModule(apiFetcher)
             };
         case "evaluaciones":
             return {
