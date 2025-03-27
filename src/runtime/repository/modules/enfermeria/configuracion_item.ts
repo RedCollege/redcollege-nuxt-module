@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { ContextEnum, IConfiguracionItem, IConfiguracionItemForm } from '~/src/runtime/models';
+import type { ContextEnum, IConfiguracionItem, IConfiguracionItemForm, IConfiguracionItemGrouped } from '~/src/runtime/models';
 
 interface Props {
     establecimientoId : string | number
@@ -7,9 +7,9 @@ interface Props {
 }
 
 export default class ConfiguracionItemModule{
-    constructor(private fetcher: $Fetch) { }
+    constructor(private fetcher: $Fetch) {}
  
-    async getAllConfiguracionItemByEstablecimiento({establecimientoId, context }: Props): Promise<IConfiguracionItem[]> {
+    async getAllConfiguracionItemByEstablecimiento({establecimientoId, context }: Props): Promise<IConfiguracionItemGrouped> {
 
         const params: Record<string, any> = {}
 
