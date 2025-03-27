@@ -19,6 +19,10 @@ export interface IConfiguracionItem {
     establecimientoId: number
 }
 
+export type IConfiguracionItemGrouped = {
+    [K in ContextEnum]?: IConfiguracionItem[]
+}
+
 export interface IConfiguracionItemForm {
     establecimientoId: number
     nombre: string

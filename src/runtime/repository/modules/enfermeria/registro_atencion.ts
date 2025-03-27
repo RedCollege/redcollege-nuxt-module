@@ -2,28 +2,15 @@ import type { $Fetch } from "ofetch";
 import type { IRegistroAtencionAdjunto } from "~/src/runtime/models/Enfermeria/adjunto";
 import type {
     IRegistroAtencion,
+    IRegistroAtencionFilters,
     IRegistroAtencionForm,
     IRegistroAtencionResponse,
 } from "~/src/runtime/models/Enfermeria/registro_atencion";
 
-interface GetAllProps {
-    trashed?: boolean;
-    page?: number;
-    periodo?: string | number;
-    establecimiento?: number | string;
-    rangoFecha?: string;
-    paciente?: number | string;
-    curso?: string | number;
-    motivo?: string;
-    origen?: string;
-    destino?: string;
-    estado?: boolean;
-}
-
 export default class RegistroAtencionModule {
     constructor(private fetcher: $Fetch) {}
 
-    async getAll(props?: GetAllProps): Promise<IRegistroAtencionResponse> {
+    async getAll(props?: IRegistroAtencionFilters): Promise<IRegistroAtencionResponse> {
         return this.fetcher("/enfermeria/registro_atencion", {
             params: props,
             method: "GET",

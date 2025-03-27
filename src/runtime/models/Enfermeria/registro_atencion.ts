@@ -54,3 +54,18 @@ export interface IRegistroAtencionForm {
     tratamientoId?: number
     indicaciones?: number
 }
+
+export interface IRegistroAtencionFilters {
+    trashed?: boolean;
+    searchTerm?: string;
+    page?: number;
+    periodo?: string | number;
+    establecimiento?: number | string;
+    rangoFecha?: string;
+    paciente?: number | string;
+    curso?: string | number;
+    motivo?: string;
+    origen?: string;
+    destino?: string;
+    estado?: boolean;
+}
