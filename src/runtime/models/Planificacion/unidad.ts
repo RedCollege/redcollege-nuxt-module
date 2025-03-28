@@ -10,7 +10,7 @@ export interface IUnidad {
     planificacionId: number;
     titulo: string;
     numero: number;
-    contenidosAsociados: number;
+    cantidadContenidosAsociados: number;
     descripcion: string | null;
     fechaInicio: DateTime | null | string;
     fechaFin: DateTime | null | string;
