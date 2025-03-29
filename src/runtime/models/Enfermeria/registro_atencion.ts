@@ -55,13 +55,17 @@ export interface IRegistroAtencionForm {
     indicaciones?: number
 }
 
+interface IRangoFecha {
+    start: Date | string
+    end: Date | string
+}
 export interface IRegistroAtencionFilters {
     trashed?: boolean;
     searchTerm?: string;
     page?: number;
     periodo?: string | number;
     establecimiento?: number | string;
-    rangoFecha?: string;
+    rangoFecha?: IRangoFecha;
     paciente?: number | string;
     curso?: string | number;
     motivo?: string;
