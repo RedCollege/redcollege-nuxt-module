@@ -67,13 +67,17 @@ export interface IRegistroAccidenteForm {
     testigos: ITestigoForm[]
 }
 
+interface IRangoFecha {
+    start: Date | string
+    end: Date | string
+}
 export interface IRegistroAccidenteFilter {
     trashed?: boolean;
     searchTerm?: string;
     page?: number;
     periodo?: string | number;
     establecimiento?: number | string;
-    rangoFecha?: string;
+    rangoFecha?: IRangoFecha;
     paciente?: number | string;
     curso?: string | number;
     gravedad?: string | number
