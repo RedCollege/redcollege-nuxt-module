@@ -14,6 +14,7 @@ interface GetAllProps {
     page?: number;
     buscar?: string;
     establecimiento: number;
+    usuarioId?: number
 }
 
 export default class MatriculaModule {
