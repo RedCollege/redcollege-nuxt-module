@@ -34,15 +34,21 @@ function handleOpenChange() {
 async function login() {
     isLoginLoading.value = true
     showErrorMessage.value = false
-    const isLogged = await authStore.login(correo.value, password.value)
-    if (isLogged) {
-        showErrorMessage.value = false
-        emit('successLogin')
-    } else {
-        showErrorMessage.value = true
-        isLoginLoading.value = false
+    try {
+
+        const isLogged = await authStore.login(correo.value, password.value)
+        if (isLogged) {
+            showErrorMessage.value = false
+            emit('successLogin')
+        } else {
+            showErrorMessage.value = true
+            isLoginLoading.value = false
+        }
+    } catch (e) {
+        console.log(e);
     }
 }
+
 
 
 const redirect = () => {

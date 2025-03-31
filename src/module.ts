@@ -128,7 +128,7 @@ export default defineNuxtModule<ModuleOptions>({
             }
         })
 
-        await installModule('@vueuse/motion/nuxt')
+        await installModule('motion-v/nuxt')
 
         await installModule('@vee-validate/nuxt')
 

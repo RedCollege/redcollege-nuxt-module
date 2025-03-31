@@ -13,7 +13,7 @@ export default class EstablecimientoModule {
         });
     }
 
-    async getAllCursosByEstablecimiento(establecimientoId: number, periodo: number, isDinamico: boolean): Promise<ICurso[]> {
+    async getAllCursosByEstablecimiento(establecimientoId: number, periodo: number, isDinamico?: boolean): Promise<ICurso[]> {
         return this.fetcher(`/establecimiento/${establecimientoId}/cursos`, {
             method: 'GET',
             params: { periodo, isDinamico }
