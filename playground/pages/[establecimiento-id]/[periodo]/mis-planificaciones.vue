@@ -11,5 +11,6 @@ const { data } = await useAsyncData('matriculas', () => {
 
 <template lang="pug">
 Card.p-4
+    p Test
     Progress.h-12(as-progress :model-value="50" variant="success" )
 </template>

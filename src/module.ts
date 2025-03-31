@@ -141,7 +141,7 @@ export default defineNuxtModule<ModuleOptions>({
 
         await installModule('@formkit/auto-animate/nuxt')
 
-
+        await installModule('@nuxt/test-utils/module')
 
         await installModule('nuxt-icon-tw')
         await installModule('@nuxt/icon', {
@@ -173,7 +173,7 @@ export default defineNuxtModule<ModuleOptions>({
         nuxt.options.imports.imports = nuxt.options.imports.imports || []
         nuxt.options.imports.imports.push(
             { from: 'zod', name: 'z' },
-            { from: '@vee-validate/zod', name: 'toTypedSchema' }
+            { from: '@vee-validate/zod', name: 'toTypedSchema' },
         )
 
         // Añadir los tipos al array de tipos de Nuxt
