@@ -6,8 +6,4 @@ export interface IRegistroAtencionAdjunto {
     nombre: string;
     url: string;
     tipo: string;
-    deletedBy?: number;
-    deletedAt?: DateTime;
-    createdAt: DateTime;
-    updatedAt: DateTime;
 }
