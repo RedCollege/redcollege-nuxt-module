@@ -141,7 +141,12 @@ export default defineNuxtModule<ModuleOptions>({
 
         await installModule('@formkit/auto-animate/nuxt')
 
-        await installModule('@nuxt/test-utils/module')
+        await installModule('@nuxt/test-utils/module', {
+            vitestConfig: {
+                environment: 'nuxt',
+                globals: true,
+            },
+        })
 
         await installModule('nuxt-icon-tw')
         await installModule('@nuxt/icon', {
