@@ -123,11 +123,15 @@ export interface IEstablecimientoEvalua {
     porcentajeAdecuado: number;
     porcentajeElemental: number;
     porcentajeInsuficiente: number;
+    tendenciaPromedio: 'subida' | 'bajada' | 'estable' | undefined;
 }
 
 export interface IEnsayoEstablecimientoEvalua {
+    id: number;
+    nombre: string;
     nEnsayo: number;
     promedio: number;
+    nivelNombre: string;
     tendencia?: 'subida' | 'bajada' | 'estable';
 }
 
