@@ -1,63 +1,70 @@
-import type { DateTime } from "luxon"
-import type { ICurso, IConfiguracionItem, IUsuario } from ".."
+import type { DateTime } from "luxon";
+import type {
+    ICurso,
+    IConfiguracionItem,
+    IUsuario,
+    IRegistroAtencionAdjunto,
+} from "..";
 
 export interface IRegistroAtencion {
-    id: number
-    establecimientoId: number
-    usuarioId: number
-    cursoId: number
-    periodo: number
-    pacienteId: number
-    fechaIngreso: DateTime
-    origenId: number
-    origen: IConfiguracionItem
-    motivo: IConfiguracionItem[]
-    diagnostico: string
-    isFinalizada?: boolean
-    fechaSalida?: DateTime
-    destinoId?: number
-    destino?: IConfiguracionItem
-    tratamientoId?: number
-    tratamiento?: IConfiguracionItem
-    indicaciones?: string
-    paciente: IUsuario
-    usuario: IUsuario
-    curso: ICurso
-    deletedBy?: number
-    deletedAt?: DateTime
-    createdAt: DateTime
-    updatedAt: DateTime
+    id: number;
+    establecimientoId: number;
+    usuarioId: number;
+    cursoId: number;
+    periodo: number;
+    pacienteId: number;
+    fechaIngreso: DateTime;
+    origenId: number;
+    origen: IConfiguracionItem;
+    motivo: IConfiguracionItem[];
+    diagnostico: string;
+    isFinalizada?: boolean;
+    fechaSalida?: DateTime;
+    destinoId?: number;
+    destino?: IConfiguracionItem;
+    tratamientoId?: number;
+    tratamiento?: IConfiguracionItem;
+    indicaciones?: string;
+    paciente: IUsuario;
+    usuario: IUsuario;
+    curso: ICurso;
+    deletedBy?: number;
+    deletedAt?: DateTime;
+    createdAt: DateTime;
+    updatedAt: DateTime;
+    adjuntos: IRegistroAtencionAdjunto[];
 }
 
 export interface IRegistroAtencionResponse {
     meta: {
-        total: number
-        perPage: number
-        currentPage: number
-    }
-    data: IRegistroAtencion[]
+        total: number;
+        perPage: number;
+        currentPage: number;
+    };
+    data: IRegistroAtencion[];
 }
 
 export interface IRegistroAtencionForm {
-    establecimientoId: number
-    usuarioId: number
-    cursoId: number
-    periodo: number
-    pacienteId: number
-    fechaIngreso: DateTime
-    origenId: number
-    motivoId: number[]
-    diagnostico: string
-    isFinalizada?: boolean
-    fechaSalida?: DateTime
-    destinoId?:  number
-    tratamientoId?: number
-    indicaciones?: number
+    establecimientoId: number;
+    usuarioId: number;
+    cursoId: number;
+    periodo: number;
+    pacienteId: number;
+    fechaIngreso: DateTime;
+    origenId: number;
+    motivoId: number[];
+    diagnostico: string;
+    isFinalizada?: boolean;
+    fechaSalida?: DateTime;
+    destinoId?: number;
+    tratamientoId?: number;
+    indicaciones?: number;
+    adjuntosIds?: number[];
 }
 
 interface IRangoFecha {
-    start: Date | string
-    end: Date | string
+    start: Date | string;
+    end: Date | string;
 }
 export interface IRegistroAtencionFilters {
     trashed?: boolean;
