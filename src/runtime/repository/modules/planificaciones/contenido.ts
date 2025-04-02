@@ -92,4 +92,10 @@ export default class ContenidoModule {
             method: 'GET'
         });
     }
+
+    async duplicarContenido(contenidoId: number): Promise<IContenido> {
+        return this.fetcher(`/contenidos/duplicarContenido/${contenidoId}`, {
+            method: "POST"
+        })
+    }
 }
