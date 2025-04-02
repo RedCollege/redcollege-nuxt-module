@@ -2,54 +2,66 @@
     <div class="flex items-center gap-2">
         <div class="flex flex-col items-center gap-1">
             <Label v-if="withLabels" for="hours" class="text-xs">Horas</Label>
-            <TimePickerInput 
-                ref="hourRef" 
-                :picker="withPeriod ? '12hours' : 'hours'" 
+            <TimePickerInput
+                ref="hourRef"
+                :picker="withPeriod ? '12hours' : 'hours'"
+                :disabled="disabled"
                 :period="period"
-                :date="internalDate" 
-                @right-focus="focusMinuteRef" 
-                @update:date="updateDate" 
+                :date="internalDate"
+                @right-focus="focusMinuteRef"
+                @update:date="updateDate"
             />
         </div>
         <div v-if="!withLabels">:</div>
         <div class="flex flex-col items-center gap-1">
-            <Label v-if="withLabels" for="minutes" class="text-xs">Minutos</Label>
-            <TimePickerInput 
-                ref="minuteRef" 
-                picker="minutes" 
-                :date="internalDate" 
+            <Label v-if="withLabels" for="minutes" class="text-xs"
+                >Minutos</Label
+            >
+            <TimePickerInput
+                ref="minuteRef"
+                picker="minutes"
+                :disabled="disabled"
+                :date="internalDate"
                 @left-focus="focusHourRef"
-                @right-focus="focusRightConditional" 
-                @update:date="updateDate" 
+                @right-focus="focusRightConditional"
+                @update:date="updateDate"
             />
         </div>
         <div v-if="!withLabels && withSeconds">:</div>
         <div v-if="withSeconds" class="flex flex-col items-center gap-1">
-            <Label v-if="withLabels" for="seconds" class="text-xs">Segundos</Label>
-            <TimePickerInput 
-                ref="secondRef" picker="seconds" 
-                :date="internalDate" 
+            <Label v-if="withLabels" for="seconds" class="text-xs"
+                >Segundos</Label
+            >
+            <TimePickerInput
+                ref="secondRef"
+                picker="seconds"
+                :disabled="disabled"
+                :date="internalDate"
                 @left-focus="focusMinuteRef"
-                @right-focus="focusPeriodRef" 
-                @update:date="updateDate" 
+                @right-focus="focusPeriodRef"
+                @update:date="updateDate"
             />
         </div>
-        <Select v-if="withPeriod" v-model="period" class="w-20" >
+        <Select
+            v-if="withPeriod"
+            v-model="period"
+            class="w-20"
+            :disabled="disabled"
+        >
             <div class="flex flex-col items-center gap-1">
                 <Label for="periodRef" class="text-xs">Horario</Label>
-                <SelectTrigger ref="periodRef" @keydown.arrow-left="focusLeftConditional" >
+                <SelectTrigger
+                    ref="periodRef"
+                    @keydown.arrow-left="focusLeftConditional"
+                >
                     <SelectValue />
                 </SelectTrigger>
             </div>
 
             <SelectContent>
                 <SelectGroup>
-                    <SelectItem value="PM">
-                        PM
-                    </SelectItem>
-                    <SelectItem value="AM">
-                        AM
-                    </SelectItem>
+                    <SelectItem value="PM"> PM </SelectItem>
+                    <SelectItem value="AM"> AM </SelectItem>
                 </SelectGroup>
             </SelectContent>
         </Select>
@@ -57,7 +69,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref } from "vue";
 
 const props = defineProps({
     date: {
@@ -76,16 +88,42 @@ const props = defineProps({
         type: Boolean,
         default: false,
     },
+    disabled: {
+        type: Boolean,
+        default: false,
+    },
 });
 
-const emit = defineEmits(['update:date']);
+const emit = defineEmits(["update:date"]);
 
 const internalDate = computed({
     get: () => props.date,
-    set: (value) => emit('update:date', value),
+    set: (value) => emit("update:date", value),
 });
 
-const period = ref("PM");
+const currentPeriod = computed(() => {
+    if (!props.date) return "AM";
+    return props.date.getHours() >= 12 ? "PM" : "AM";
+});
+
+const period = computed({
+    get: () => currentPeriod.value,
+    set: (newPeriod) => {
+        if (!internalDate.value) return;
+        
+        const newDate = new Date(internalDate.value);
+        const currentHours = newDate.getHours();
+        
+        if (newPeriod === "PM" && currentHours < 12) {
+            newDate.setHours(currentHours + 12);
+        } else if (newPeriod === "AM" && currentHours >= 12) {
+            newDate.setHours(currentHours - 12);
+        }
+        
+        internalDate.value = newDate;
+    }
+});
+
 const hourRef = ref(null);
 const minuteRef = ref(null);
 const secondRef = ref(null);
@@ -112,6 +150,17 @@ const focusRightConditional = () => {
 };
 
 const updateDate = (newDate) => {
+    if (!newDate) return;
+    
+    const hours = newDate.getHours();
+    const isPM = period.value === "PM";
+    
+    if (isPM && hours < 12) {
+        newDate.setHours(hours + 12);
+    } else if (!isPM && hours >= 12) {
+        newDate.setHours(hours - 12);
+    }
+
     internalDate.value = newDate;
 };
 </script>
