@@ -46,14 +46,27 @@ export default class EnfermedadDiscapacidadModule {
         id: number | string | (string | number)[]
     ): Promise<IEnfermedadDiscapacidad | IEnfermedadDiscapacidad[]> {
         if (Array.isArray(id)) {
-            return this.fetcher("/enfermeria/enfermedad/destroy", {
+            return this.fetcher("/enfermeria/enfermedad/delete", {
                 method: "DELETE",
                 body: JSON.stringify({ ids: id }),
             });
         }
 
+        return this.fetcher(`/enfermeria/enfermedad/${id}/delete`, {
+            method: "DELETE",
+        });
+    }
+
+    async destroyEnfermedadDiscapacidad(id: number | string): Promise<void> {
         return this.fetcher(`/enfermeria/enfermedad/${id}/destroy`, {
             method: "DELETE",
         });
     }
+    
+    async restoreEnfermedadDiscapacidad(id: number | string): Promise<IEnfermedadDiscapacidad> {
+        return this.fetcher(`/enfermeria/enfermedad/${id}/restore`, {
+            method: "PATCH",
+        });
+    }
+
 }
