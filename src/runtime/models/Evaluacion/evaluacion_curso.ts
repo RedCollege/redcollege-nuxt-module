@@ -44,6 +44,7 @@ export interface IAsignaturaEnsayoGlobalEvalua {
     promedioHombres: number;
     promedioMujeres: number;
     cantidadAlumnos: number;
+    alumnosInsuficientes?: IAlumnoInsuficienteDetalle[];
 }
 
 /**
@@ -73,6 +74,7 @@ interface IAsignaturaEvalua {
     cantidadHombres: number;
     cantidadMujeres: number;
     promedioTotal: number;
+    alumnosInsuficientes?: IAlumnoInsuficienteDetalle[];
 }
 
 export interface ICursoEvalua {
@@ -170,4 +172,36 @@ export interface IRequestEstablecimientoEvalua {
 export interface IResponseEstablecimientoEvalua {
     informacionGeneralEstablecimientos: IEstablecimientoEvalua[];
     informeComponentes: IComponenteEstablecimientoEvalua[];
+}
+
+
+/**
+ * Tipados alumnos insuficientes
+ */
+
+export interface IAlumnoDetalle {
+    id: number;
+    rut: string;
+    nombreCompleto: string;
+    cursoId: number;
+    grupoAsignaturaId: number;
+    nEnsayo: number;
+    nombreEnsayo: string;
+    porcentajeLogro: number;
+    puntajeSimce: number;
+}
+
+export interface IAlumnoInsuficienteDetalle {
+    id: number;
+    rut: string;
+    nombreCompleto: string;
+    ensayos: Array<{
+        nEnsayo: number;
+        nombreEnsayo: string;
+        puntaje: number;
+        porcentajeLogro: number;
+        tendencia?: 'subida' | 'bajada' | 'estable'; // Tendencia respecto al ensayo anterior
+    }>;
+    promedio: number;
+    tendenciaPromedio?: 'subida' | 'bajada' | 'estable'; // Tendencia general
 }
