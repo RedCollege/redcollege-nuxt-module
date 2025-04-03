@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { ContextEnum, IConfiguracionItem, IConfiguracionItemForm, IConfiguracionItemGrouped } from '~/src/runtime/models';
+import type { ConfigItemEnum, IConfiguracionItem, IConfiguracionItemForm, IConfiguracionItemGrouped } from '~/src/runtime/models';
 
 interface Props {
     establecimientoId : string | number
