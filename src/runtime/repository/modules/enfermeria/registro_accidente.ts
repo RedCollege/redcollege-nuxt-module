@@ -5,7 +5,7 @@ export default class RegistroAccidenteModule {
     constructor(private fetcher: $Fetch) {}
 
     async getAll(props?: IRegistroAccidenteFilter): Promise<IRegistroAccidente> {
-            return this.fetcher("/enfermeria/registro_accidente", {
+            return this.fetcher("/enfermeria/registro-accidente", {
                 params: props,
                 method: "GET",
             });
@@ -14,7 +14,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number | string
         ): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro_accidente/${registroAccidenteId}`,
+                `/enfermeria/registro-accidente/${registroAccidenteId}`,
                 {
                     method: "GET",
                 }
@@ -24,7 +24,7 @@ export default class RegistroAccidenteModule {
         async saveRegistroAccidente(
             data: IRegistroAccidenteForm
         ): Promise<IRegistroAccidente> {
-            return this.fetcher("/enfermeria/registro_accidente", {
+            return this.fetcher("/enfermeria/registro-accidente", {
                 method: "POST",
                 body: data,
             });
@@ -38,7 +38,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number;
         }): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro_accidente/${registroAccidenteId}`,
+                `/enfermeria/registro-accidente/${registroAccidenteId}`,
                 {
                     method: "PATCH",
                     body: data,
@@ -50,7 +50,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number
         ): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro_accidente/${registroAccidenteId}`,
+                `/enfermeria/registro-accidente/${registroAccidenteId}`,
                 {
                     method: "DELETE",
                 }
@@ -61,7 +61,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number
         ): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro_accidente/${registroAccidenteId}/restore`,
+                `/enfermeria/registro-accidente/${registroAccidenteId}/restore`,
                 {
                     method: "PATCH",
                 }
@@ -72,7 +72,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number
         ): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro_accidente/${registroAccidenteId}/destroy`,
+                `/enfermeria/registro-accidente/${registroAccidenteId}/destroy`,
                 {
                     method: "DELETE",
                 }
