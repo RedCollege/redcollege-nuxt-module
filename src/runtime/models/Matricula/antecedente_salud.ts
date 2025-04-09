@@ -28,6 +28,8 @@ export interface IAntecedenteSalud {
     imc: string | number;
     createdAt: DateTime;
     updatedAt: DateTime;
+    deletedAt: DateTime | null;
+    deletedBy: number | null;
     matricula: IMatricula;
     grupoSanguineo: IGrupoSanguineo;
     enfermedadesDiagnostico: Array<IEnfermedad>;
