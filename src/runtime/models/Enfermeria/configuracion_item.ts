@@ -17,6 +17,10 @@ export interface IConfiguracionItem {
     nombre: string
     context: ConfigItemEnum
     establecimientoId: number
+    deletedBy: number | null
+    deletedAt: string | null
+    createdAt: string
+    updatedAt: string
 }
 
 export type IConfiguracionItemGrouped = {

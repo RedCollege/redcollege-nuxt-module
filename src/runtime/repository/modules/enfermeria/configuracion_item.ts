@@ -33,6 +33,18 @@ export default class ConfiguracionItemModule{
     }
 
     async deleteConfiguracionItem(id: number): Promise<IConfiguracionItem> {
+        return this.fetcher(`/enfermeria/configuracion-item/${id}`, {
+            method: 'DELETE'
+        })
+    }
+
+    async restoreConfiguracionItem(id: number): Promise<IConfiguracionItem> {
+        return this.fetcher(`/enfermeria/configuracion-item/${id}/restore`, {
+            method: 'PATCH'
+        })
+    }
+
+    async destroyConfiguracionItem(id: number): Promise<IConfiguracionItem> {
         return this.fetcher(`/enfermeria/configuracion-item/${id}/destroy`, {
             method: 'DELETE'
         })
