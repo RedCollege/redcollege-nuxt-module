@@ -29,4 +29,10 @@ export default class EvaluacionCursoModule {
             method: 'GET'
         })
     }
+
+    async obtenerEvaluacionesSimceByEstablecimientoId(establecimientoId: number, periodo: number): Promise<IInformeDetallado> {
+        return this.fetcher(`/evaluacion_curso/obtenerEvaluacionesSimceByEstablecimientoId/${establecimientoId}?periodo=${periodo}`, {
+            method: 'GET'
+        })
+    }
 }
