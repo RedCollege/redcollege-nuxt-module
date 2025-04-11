@@ -1,4 +1,28 @@
 /**
+ * Main Interfaces
+ */
+
+import type { ICurso } from "..";
+import type { IEvaluacion } from "./evaluacion";
+
+export interface IEvaluacionCurso {
+    id: number;
+    inicioOnline: string;
+    finOnline: string;
+    isHabilitada: boolean;
+    cursoId: number;
+    evaluacionId: number;
+    isProgramada: boolean;
+    createdAt: string;
+    updatedAt: string;
+    showCronometro: boolean;
+    isRevisada: boolean;
+    willFinishOnTime: boolean;
+    evaluacion: IEvaluacion;
+    curso: ICurso;
+}
+
+/**
  * Interfaces Informe Global (evalua 360)
  */
 
