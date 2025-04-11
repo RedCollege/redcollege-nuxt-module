@@ -98,6 +98,7 @@ export interface IInformeDetallado {
     establecimiento: string;
     curso: string;
     asignatura: string;
+    establecimientoLogo: string;
     nombresEntradasCurriculares: string[];
     antecedentesGeneralesEvaluacion: IAntecedentesEvaluacion;
     antecedentesGeneralesResultados: IAntecedentesResultados;
