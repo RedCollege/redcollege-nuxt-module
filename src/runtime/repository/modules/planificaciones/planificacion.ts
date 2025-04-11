@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
+import type { IObtenerDescargableDeUnidad, IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
 import type { IEstadisticasPlanificacion } from '../../../models';
 
 
@@ -104,8 +104,15 @@ export default class PlanificacionModule {
             }
         })
     }
+
     async obtenerEstadisticasPlanificacion(planificacionId: number): Promise<IEstadisticasPlanificacion> {
         return this.fetcher(`/planificacion/obtenerEstadisticasPlanificacion/${planificacionId}`, {
+            method: 'GET'
+        })
+    }
+
+    async obtenerDescargableDeUnidad(planificacionId: number, unidadId: number): Promise<IObtenerDescargableDeUnidad> {
+        return this.fetcher(`/planificacion/obtenerDescargableDeUnidad/${planificacionId}/${unidadId}`, {
             method: 'GET'
         })
     }
