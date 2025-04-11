@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInformeEstablecimientoEvalua, IEvaluacionCurso } from '~/src/runtime/models/Evaluacion';
+import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInformeEstablecimientoEvalua, IEvaluacionCurso, IEstudianteEvaluacion } from '~/src/runtime/models/Evaluacion';
 
 
 export default class EvaluacionCursoModule {
@@ -32,6 +32,12 @@ export default class EvaluacionCursoModule {
 
     async obtenerEvaluacionesSimceByEstablecimientoId(establecimientoId: number, periodo: number): Promise<IEvaluacionCurso[]> {
         return this.fetcher(`/evaluacion_curso/obtenerEvaluacionesSimceByEstablecimientoId/${establecimientoId}?periodo=${periodo}`, {
+            method: 'GET'
+        })
+    }
+
+    async obtenerInformeEvaluacionesSimceByCursoId(cursoId: number, grupoAsignaturaId: number): Promise<IEstudianteEvaluacion[]> {
+        return this.fetcher(`/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}?grupoAsignaturaId=${grupoAsignaturaId}`, {
             method: 'GET'
         })
     }

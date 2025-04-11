@@ -109,3 +109,25 @@ export interface IInformeDetallado {
     analisisEntradasCurriculares: IAnalisisEntradaCurricular[];
     analisisTendenciasPregunta: ITendenciaPregunta[];
 }
+
+//Individual
+interface IEnsayo {
+    numero: number;
+    porcentajeLogro: number | null;
+    puntajeSimce: number | null;
+    nota: number | null;
+    tendencia: 'subida' | 'bajada' | 'estable' | null;
+    rendido: boolean;
+}
+
+export interface IEstudianteEvaluacion {
+    id: number;
+    nombre: string;
+    ensayos: IEnsayo[];
+    promedio: {
+        porcentajeLogro: number;
+        puntajeSimce: number;
+        nota: number;
+        tendencia: 'subida' | 'bajada' | 'estable';
+    }
+}
