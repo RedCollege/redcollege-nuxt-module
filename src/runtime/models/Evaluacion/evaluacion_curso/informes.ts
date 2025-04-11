@@ -99,6 +99,7 @@ export interface IInformeDetallado {
     curso: string;
     asignatura: string;
     establecimientoLogo: string;
+    establecimientoRbd: string;
     nombresEntradasCurriculares: string[];
     antecedentesGeneralesEvaluacion: IAntecedentesEvaluacion;
     antecedentesGeneralesResultados: IAntecedentesResultados;
