@@ -2,7 +2,7 @@ import type { $Fetch } from 'ofetch';
 import type { ConfigItemEnum, IConfiguracionItem, IConfiguracionItemForm, IConfiguracionItemGrouped } from '~/src/runtime/models';
 
 interface Props {
-    establecimientoId : string | number
+    establecimientoId : number
     context: string | string[]
 }
 

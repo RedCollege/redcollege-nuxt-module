@@ -12,7 +12,7 @@ export default class EnfermedadDiscapacidadModule {
     constructor(private fetcher: $Fetch) {}
 
     async getAllEnfermedadDiscapacidadByEstablecimiento(
-        establecimientoId: number | string,
+        establecimientoId: number,
         filters?: FilterParams
     ): Promise<IEnfermedadDiscapacidad[]> {
         return this.fetcher(`/enfermeria/enfermedad/${establecimientoId}`, {
@@ -43,7 +43,7 @@ export default class EnfermedadDiscapacidadModule {
     }
 
     async deleteEnfermedadDiscapacidad(
-        id: number | string | (string | number)[]
+        id: number | number[]
     ): Promise<IEnfermedadDiscapacidad | IEnfermedadDiscapacidad[]> {
         if (Array.isArray(id)) {
             return this.fetcher("/enfermeria/enfermedad/delete", {
@@ -57,13 +57,13 @@ export default class EnfermedadDiscapacidadModule {
         });
     }
 
-    async destroyEnfermedadDiscapacidad(id: number | string): Promise<void> {
+    async destroyEnfermedadDiscapacidad(id: number ): Promise<void> {
         return this.fetcher(`/enfermeria/enfermedad/${id}/destroy`, {
             method: "DELETE",
         });
     }
     
-    async restoreEnfermedadDiscapacidad(id: number | string): Promise<IEnfermedadDiscapacidad> {
+    async restoreEnfermedadDiscapacidad(id: number ): Promise<IEnfermedadDiscapacidad> {
         return this.fetcher(`/enfermeria/enfermedad/${id}/restore`, {
             method: "PATCH",
         });

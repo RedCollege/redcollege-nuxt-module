@@ -17,7 +17,7 @@ export default class RegistroAtencionModule {
         });
     }
     async getById(
-        registroAtencionId: number | string
+        registroAtencionId: number
     ): Promise<IRegistroAtencion> {
         return this.fetcher(
             `/enfermeria/registro-atencion/${registroAtencionId}`,
