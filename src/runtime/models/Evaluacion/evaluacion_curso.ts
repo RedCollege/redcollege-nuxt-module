@@ -161,6 +161,7 @@ export interface IEnsayoEstablecimientoEvalua {
     tendencia?: 'subida' | 'bajada' | 'estable';
     asignaturaNombre: string
     grupoAsignaturaId: number
+    sigeId: number
 }
 
 export interface IComponenteEstablecimientoEvalua {
