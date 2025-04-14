@@ -30,6 +30,13 @@ export default class EvaluacionCursoModule {
         })
     }
 
+    async obtenerEvaluacionesSimceByMultiEstablecimientoId(establecimientoIds: number[], periodo: number): Promise<IEvaluacionCurso[]> {
+        const idsParam = establecimientoIds.join(',');
+        return this.fetcher(`/evaluacion_curso/obtenerEvaluacionesSimceByMultiEstablecimientoId?&establecimientoIds=${idsParam}&periodo=${periodo}`, {
+            method: 'GET'
+        })
+    }
+
     async obtenerEvaluacionesSimceByEstablecimientoId(establecimientoId: number, periodo: number): Promise<IEvaluacionCurso[]> {
         return this.fetcher(`/evaluacion_curso/obtenerEvaluacionesSimceByEstablecimientoId/${establecimientoId}?periodo=${periodo}`, {
             method: 'GET'
