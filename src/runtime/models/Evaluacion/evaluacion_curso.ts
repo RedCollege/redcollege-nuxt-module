@@ -159,6 +159,8 @@ export interface IEnsayoEstablecimientoEvalua {
     promedio: number;
     nivelNombre: string;
     tendencia?: 'subida' | 'bajada' | 'estable';
+    asignaturaNombre: string
+    grupoAsignaturaId: number
 }
 
 export interface IComponenteEstablecimientoEvalua {
