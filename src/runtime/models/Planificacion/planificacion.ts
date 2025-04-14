@@ -61,3 +61,8 @@ interface Meta {
 export interface IEstadisticasPlanificacion {
     cantidadComponentes: number
 }
+
+export interface IObtenerDescargableDeUnidad {
+    planificacion: IPlanificacion;
+    unidad: IUnidad
+}
