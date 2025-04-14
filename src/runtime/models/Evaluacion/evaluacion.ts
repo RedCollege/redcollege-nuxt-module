@@ -1,3 +1,4 @@
+import type { IAsignaturaCurricular } from "..";
 
 export interface IEvaluacion {
     id: number;
@@ -19,4 +20,5 @@ export interface IEvaluacion {
     isSimce: boolean;
     nEnsayo: string;
     grupoAsignaturaId: number;
+    asignatura: IAsignaturaCurricular
 }
