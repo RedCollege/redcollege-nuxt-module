@@ -17,9 +17,9 @@ export default class EvaluacionCursoModule {
         })
     }
 
-    async obtenerInformeEstablecimientosComparativo(periodo: number, establecimientoIds: number[]): Promise<IInformeEstablecimientoEvalua> {
+    async obtenerInformeEstablecimientosComparativo(periodo: number, establecimientoIds: number[], sigeId: number, grupoAsignaturaId: number): Promise<IInformeEstablecimientoEvalua> {
         const idsParam = establecimientoIds.join(',');
-        return this.fetcher(`/evaluacion_curso/obtenerInformeResumidoMultiEstablecimiento?periodo=${periodo}&establecimientoIds=${idsParam}`, {
+        return this.fetcher(`/evaluacion_curso/obtenerInformeResumidoMultiEstablecimiento?periodo=${periodo}&establecimientoIds=${idsParam}&sigeId=${sigeId}&grupoAsignaturaId=${grupoAsignaturaId}`, {
             method: 'GET'
         })
     }
