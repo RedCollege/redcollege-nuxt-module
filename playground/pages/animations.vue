@@ -9,4 +9,5 @@
     p Hola 2
     p Hola 2
     p Hola 2
+    p Hola 2
 </template>
