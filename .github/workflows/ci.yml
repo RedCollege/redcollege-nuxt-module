@@ -23,7 +23,7 @@ jobs:
           echo "Actor: $ACTOR"
 
           # Lista de usuarios autorizados (nombres de usuario de GitHub)
-          if [[ "$ACTOR" == "josepuma" || "$ACTOR" == "marcosdguilarte" ]]; then
+          if [[ "$ACTOR" == "josepuma" || "$ACTOR" == "marcosdgi" ]]; then
             echo "Usuario autorizado detectado: $ACTOR"
             echo "is-authorized=true" >> $GITHUB_OUTPUT
           else
