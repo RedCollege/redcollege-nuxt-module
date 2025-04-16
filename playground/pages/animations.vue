@@ -6,4 +6,5 @@
 .grid.grid-cols-3.h-screen.w-screen.gap-4
     p Hola
     p Hola
+    p Hola 2
 </template>
