@@ -1,5 +1,10 @@
 import type { DateTime } from "luxon"
-import type { IConfiguracionItem, ICurso, IUsuario } from ".."
+import type { 
+    IConfiguracionItem, 
+    ICurso, 
+    IEstablecimiento, 
+    IUsuario 
+} from ".."
 
 export interface ITestigo {
     id: number
@@ -49,6 +54,17 @@ export interface IRegistroAccidenteResponse {
         currentPage: number
         en_trayecto: number
         en_establecimiento: number
+    }
+    data: IRegistroAccidente[]
+}
+
+export interface IRegistroAccidenteDescargable {
+    meta: {
+        total: number;
+        en_trayecto: number;
+        en_establecimiento: number;
+        establecimiento: IEstablecimiento;
+        usuario: IUsuario
     }
     data: IRegistroAccidente[]
 }
