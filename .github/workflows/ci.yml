@@ -54,7 +54,6 @@ jobs:
   publish-package:
     runs-on: ubuntu-latest
     needs: [check-author, build]
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.check-author.outputs.is-authorized == 'true' }}
     steps:
       - name: Debug condition
         run: |
