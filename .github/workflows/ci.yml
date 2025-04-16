@@ -12,13 +12,26 @@ jobs:
     outputs:
       is-authorized: ${{ steps.check.outputs.is-authorized }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: Check commit author
         id: check
         run: |
-          AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
-          if [[ "$AUTHOR_EMAIL" == "josepuma@sayrin.cl" || "$AUTHOR_EMAIL" == "marcosdguilarte74@gmail.com" ]]; then
-            echo "is-authorized=true" >> $GITHUB_OUTPUT
+          # Para push events, usamos github.event.head_commit.author.email
+          # Para pull_request events, usamos github.event.pull_request.user.login
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            AUTHOR_EMAIL="${{ github.event.head_commit.author.email }}"
+            echo "Author email: $AUTHOR_EMAIL"
+            if [[ "$AUTHOR_EMAIL" == "josepuma@sayrin.cl" || "$AUTHOR_EMAIL" == "marcosdguilarte74@gmail.com" ]]; then
+              echo "is-authorized=true" >> $GITHUB_OUTPUT
+            else
+              echo "is-authorized=false" >> $GITHUB_OUTPUT
+            fi
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "Pull request detected, not authorizing for deployment"
+            echo "is-authorized=false" >> $GITHUB_OUTPUT
           else
+            echo "Unknown event, not authorizing for deployment"
             echo "is-authorized=false" >> $GITHUB_OUTPUT
           fi
 
