@@ -54,15 +54,8 @@ jobs:
   publish-package:
     runs-on: ubuntu-latest
     needs: [check-author, build]
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.check-author.outputs.is-authorized == 'true' }}
     steps:
-      - name: Debug condition
-        run: |
-          echo "Event name: ${{ github.event_name }}"
-          echo "Ref: ${{ github.ref }}"
-          echo "Is authorized: ${{ needs.check-author.outputs.is-authorized }}"
-          echo "Actor: ${{ github.actor }}"
-          echo "Event JSON:"
-          echo "${{ toJSON(github.event) }}"
       - name: Checkout code
         uses: actions/checkout@v4
         with:
