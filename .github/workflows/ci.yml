@@ -63,7 +63,7 @@ jobs:
           echo "Is authorized: ${{ needs.check-author.outputs.is-authorized }}"
           echo "Actor: ${{ github.actor }}"
           echo "Event JSON:"
-          echo '${{ toJSON(github.event) }}'
+          echo "${{ toJSON(github.event) }}"
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -83,42 +83,12 @@ jobs:
         run: npm run prepack
       - name: Update Version
         run: |
-            git config --local user.email "josepuma@sayrin.cl"
-            git config --local user.name "Jose Puma"
-            git add .
-            git commit -m "Commit changes before version bump" || echo "No changes to commit"
-            npm version patch
-            git push && git push --tags
-      - name: Publish package
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_REDCOLLEGE_ACCESS }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Enable Corepack
-        run: corepack enable
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          registry-url: https://registry.npmjs.org/
-      - name: Install dependencies
-        run: npx npm@latest install
-      - name: Build
-        run: npm run dev:prepare
-      - name: Build
-        run: npm run prepack
-      - name: Update Version
-        run: |
-            git config --local user.email "josepuma@sayrin.cl"
-            git config --local user.name "Jose Puma"
-            git add .
-            git commit -m "Commit changes before version bump" || echo "No changes to commit"
-            npm version patch
-            git push && git push --tags
+          git config --local user.email "josepuma@sayrin.cl"
+          git config --local user.name "Jose Puma"
+          git add .
+          git commit -m "Commit changes before version bump" || echo "No changes to commit"
+          npm version patch
+          git push && git push --tags
       - name: Publish package
         run: npm publish
         env:
