@@ -36,6 +36,7 @@ export interface IContenidoForm {
     contenidoPlanificado: string | null;
     evaluacion: string | null;
     isCumplido: boolean;
+    isVisible:boolean
 }
 
 
