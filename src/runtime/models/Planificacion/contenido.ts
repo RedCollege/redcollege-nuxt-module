@@ -20,6 +20,7 @@ export interface IContenido {
     updatedAt: DateTime;
     deletedAt: DateTime;
     unidad: IUnidad;
+    haveAdecuaciones: boolean
     actividades: Array<IContenidoActividad>;
     recursos: Array<IContenidoRecurso>;
     archivos: Array<IArchivo>;
@@ -33,6 +34,7 @@ export interface IContenidoForm {
     titulo: string | null;
     fechaInicio: Date | null;
     fechaFin: Date | null;
+    haveAdecuaciones?: boolean
     contenidoPlanificado: string | null;
     evaluacion: string | null;
     isCumplido: boolean;
