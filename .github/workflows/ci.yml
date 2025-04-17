@@ -14,24 +14,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Check commit author
+      - name: Check author or merger
         id: check
         run: |
-          # Para push events, usamos github.event.head_commit.author.email
-          # Para pull_request events, usamos github.event.pull_request.user.login
-          if [[ "${{ github.event_name }}" == "push" ]]; then
-            AUTHOR_EMAIL="${{ github.event.head_commit.author.email }}"
-            echo "Author email: $AUTHOR_EMAIL"
-            if [[ "$AUTHOR_EMAIL" == "josepuma@sayrin.cl" || "$AUTHOR_EMAIL" == "marcosdguilarte74@gmail.com" ]]; then
-              echo "is-authorized=true" >> $GITHUB_OUTPUT
-            else
-              echo "is-authorized=false" >> $GITHUB_OUTPUT
-            fi
-          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "Pull request detected, not authorizing for deployment"
-            echo "is-authorized=false" >> $GITHUB_OUTPUT
+          # Para merges de PR o commits directos, verificamos quién realizó la acción
+          # github.actor es quien realizó la acción (commit directo o merge de PR)
+          ACTOR="${{ github.actor }}"
+          echo "Actor: $ACTOR"
+
+          # Lista de usuarios autorizados (nombres de usuario de GitHub)
+          if [[ "$ACTOR" == "josepuma" || "$ACTOR" == "marcosdgi" ]]; then
+            echo "Usuario autorizado detectado: $ACTOR"
+            echo "is-authorized=true" >> $GITHUB_OUTPUT
           else
-            echo "Unknown event, not authorizing for deployment"
+            echo "Usuario no autorizado: $ACTOR"
             echo "is-authorized=false" >> $GITHUB_OUTPUT
           fi
 
@@ -58,10 +54,7 @@ jobs:
   publish-package:
     runs-on: ubuntu-latest
     needs: [check-author, build]
-    if: |
-      github.event_name == 'push' && 
-      github.ref == 'refs/heads/main' && 
-      needs.check-author.outputs.is-authorized == 'true'
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.check-author.outputs.is-authorized == 'true' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -82,12 +75,12 @@ jobs:
         run: npm run prepack
       - name: Update Version
         run: |
-            git config --local user.email "josepuma@sayrin.cl"
-            git config --local user.name "Jose Puma"
-            git add .
-            git commit -m "Commit changes before version bump" || echo "No changes to commit"
-            npm version patch
-            git push && git push --tags
+          git config --local user.email "josepuma@sayrin.cl"
+          git config --local user.name "Jose Puma"
+          git add .
+          git commit -m "Commit changes before version bump" || echo "No changes to commit"
+          npm version patch
+          git push && git push --tags
       - name: Publish package
         run: npm publish
         env:
