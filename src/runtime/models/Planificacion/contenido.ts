@@ -34,11 +34,12 @@ export interface IContenidoForm {
     titulo: string | null;
     fechaInicio: Date | null;
     fechaFin: Date | null;
-    haveAdecuaciones?: boolean
     contenidoPlanificado: string | null;
     evaluacion: string | null;
     isCumplido: boolean;
     isVisible: boolean;
+    haveAdecuaciones?: boolean
+    itemsEntrada?: IItemEntradaCurricular[]
 }
 
 
