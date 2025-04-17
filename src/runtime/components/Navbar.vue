@@ -47,20 +47,20 @@ const updateRoute = (establecimientoId: string, periodoId: string) => {
         const currentPath = route.path
         const pathParts = currentPath.split('/')
 
+        // Importante: nunca usar 0 como periodoId en la URL
+        const safePerioId = periodoId && periodoId !== "0" ? periodoId :
+            (periodos.value.length > 0 ? String(periodos.value[0].periodo) : String(new Date().getFullYear()))
+
         // Si estamos en la ruta inicial o solo con establecimiento
         if (pathParts.length <= 2) {
-            const newPath = periodoId
-                ? `/${establecimientoId}/${periodoId}/${redirectTo}`
-                : `/${establecimientoId}/0`
+            const newPath = `/${establecimientoId}/${safePerioId}/${redirectTo}`
 
             if (currentPath !== newPath) {
                 router.push(newPath)
             }
         } else {
             const remainingPath = pathParts.slice(3).join('/')
-            const newPath = periodoId
-                ? `/${establecimientoId}/${periodoId}/${remainingPath}`
-                : `/${establecimientoId}/0/${remainingPath}`
+            const newPath = `/${establecimientoId}/${safePerioId}/${remainingPath}`
 
             if (currentPath !== newPath) {
                 router.push(newPath)
@@ -74,6 +74,16 @@ const loadPeriodos = async (establecimientoId: number) => {
     try {
         periodos.value = await $apis.establecimiento.periodoEscolar.getByEstablecimiento(establecimientoId)
         arePeriodosLoaded.value = true
+
+        // Si después de cargar los periodos, el periodo seleccionado no está en la lista o es 0
+        // seleccionamos el primer periodo disponible para evitar el 0
+        if (selectedPeriodoId.value === "0" || selectedPeriodoId.value === "" ||
+            !periodos.value.some(p => String(p.periodo) === selectedPeriodoId.value)) {
+            if (periodos.value.length > 0) {
+                selectedPeriodoId.value = String(periodos.value[0].periodo)
+                useNavbar().setSelectedPeriodo(periodos.value[0].periodo)
+            }
+        }
     } catch (error) {
         console.error('Error al cargar periodos:', error)
         periodos.value = []
@@ -93,11 +103,20 @@ const loadCursos = async (establecimientoId: number, year: string) => {
     }
 }
 
-// Función para resetear los selects
+// Función para resetear los selects - modificada para NO usar 0 como valor
 const resetSelects = (resetPeriodo: boolean = true, resetCurso: boolean = true) => {
     if (resetPeriodo) {
-        selectedPeriodoId.value = ""
-        useNavbar().setSelectedPeriodo(0)
+        // En lugar de usar valor vacío, verificamos si hay periodos disponibles
+        if (periodos.value.length > 0) {
+            // Usamos el primer periodo disponible en lugar de valor vacío
+            selectedPeriodoId.value = String(periodos.value[0].periodo)
+            useNavbar().setSelectedPeriodo(periodos.value[0].periodo)
+        } else {
+            // Si no hay periodos, utilizamos el año actual como respaldo
+            const currentYear = new Date().getFullYear()
+            selectedPeriodoId.value = String(currentYear)
+            useNavbar().setSelectedPeriodo(currentYear)
+        }
     }
     if (resetCurso) {
         selectedCursoId.value = ""
@@ -116,14 +135,14 @@ const handleFileUpload = async (event: Event) => {
     const target = event.target as HTMLInputElement
     const file = target.files?.[0]
     if (file) {
-        try{
+        try {
             const { url } = await $apis.auth.usuario.actualizarAvatar(file)
             authStore.updateAvatar(url)
             isUploadingAvatar.value = false
             useNotification().toast({
                 title: 'Avatar Actualizado'
             })
-        }catch(error){
+        } catch (error) {
             isUploadingAvatar.value = false
             useNotification().toast({
                 title: 'Revisa la imagen adjuntada, no puede pesar más de 10mb',
@@ -145,10 +164,34 @@ onMounted(async () => {
         // Cargar periodos primero
         await loadPeriodos(establecimientoIdParam)
 
-        // Si hay un periodo en la ruta y existe en los periodos cargados
-        if (periodoParam > 0 && periodos.value.some(p => p.periodo === periodoParam)) {
-            selectedPeriodoId.value = String(periodoParam)
-            useNavbar().setSelectedPeriodo(periodoParam)
+        // Si hay un periodo en la ruta
+        if (periodoParam > 0) {
+            // Verificar si existe en los periodos cargados
+            if (periodos.value.some(p => p.periodo === periodoParam)) {
+                selectedPeriodoId.value = String(periodoParam)
+                useNavbar().setSelectedPeriodo(periodoParam)
+            } else if (periodos.value.length > 0) {
+                // Si el periodo no existe pero hay periodos disponibles, usar el primero
+                selectedPeriodoId.value = String(periodos.value[0].periodo)
+                useNavbar().setSelectedPeriodo(periodos.value[0].periodo)
+
+                // Actualizar la URL para reflejar el periodo correcto
+                updateRoute(String(establecimientoIdParam), selectedPeriodoId.value)
+            }
+        } else {
+            // Si el periodo es 0 o undefined y hay periodos disponibles
+            if (periodos.value.length > 0) {
+                selectedPeriodoId.value = String(periodos.value[0].periodo)
+                useNavbar().setSelectedPeriodo(periodos.value[0].periodo)
+
+                // Actualizar la URL para reflejar el periodo correcto
+                updateRoute(String(establecimientoIdParam), selectedPeriodoId.value)
+            }
+        }
+
+        // Cargar cursos si necesario
+        if (selectedPeriodoId.value) {
+            await loadCursos(establecimientoIdParam, selectedPeriodoId.value)
         }
     }
 })
@@ -156,17 +199,22 @@ onMounted(async () => {
 // Watch para establecimiento
 watch(selectedEstablecimientoId, async (newVal) => {
     if (newVal) {
-        resetSelects()
         useNavbar().setSelectedEstablecimientoId(Number(newVal))
         await loadPeriodos(Number(newVal))
+
+        // Solo resetear los selects después de cargar los periodos
+        resetSelects()
+
+        // Asegurarse de que selectedPeriodoId tenga un valor válido antes de actualizar la ruta
         updateRoute(newVal, selectedPeriodoId.value)
         emit('selectedFilters', newVal, selectedPeriodoId.value, selectedCursoId.value)
     }
 })
 
 // Watch para periodo
-watch(selectedPeriodoId, async (newVal) => {
-    if (newVal) {
+watch(selectedPeriodoId, async (newVal, oldVal) => {
+    // Solo proceder si hay un nuevo valor y es diferente de 0
+    if (newVal && newVal !== "0") {
         resetSelects(false, true)
         useNavbar().setSelectedPeriodo(Number(newVal))
         if (selectedEstablecimientoId.value) {
@@ -174,6 +222,9 @@ watch(selectedPeriodoId, async (newVal) => {
             updateRoute(selectedEstablecimientoId.value, newVal)
         }
         emit('selectedFilters', selectedEstablecimientoId.value, newVal, selectedCursoId.value)
+    } else if (newVal === "0" && periodos.value.length > 0) {
+        // Si el nuevo valor es 0 y hay periodos disponibles, establecer al primer periodo
+        selectedPeriodoId.value = String(periodos.value[0].periodo)
     }
 })
 

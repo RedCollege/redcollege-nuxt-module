@@ -1,6 +1,6 @@
 {
     "name": "@redcollege/ui-nuxt-module",
-    "version": "0.0.217",
+    "version": "0.0.242",
     "description": "RedCollege Nuxt module",
     "repository": "RedCollege/redcollege-ui-module",
     "license": "MIT",
@@ -48,6 +48,7 @@
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
         "defu": "^6.1.4",
+        "html2canvas": "^1.4.1",
         "lucide-vue-next": "^0.428.0",
         "luxon": "^3.5.0",
         "motion-v": "^0.13.1",
