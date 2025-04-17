@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { ConfigItemEnum, IConfiguracionItem, IConfiguracionItemForm, IConfiguracionItemGrouped } from '~/src/runtime/models';
+import type { IConfiguracionItem, IConfiguracionItemForm, IConfiguracionItemGrouped } from '~/src/runtime/models';
 
 interface Props {
     establecimientoId : number
@@ -19,33 +19,33 @@ export default class ConfiguracionItemModule{
             params.context = context
         }
 
-        return this.fetcher(`/enfermeria/configuracion-item/${establecimientoId}`, {
+        return this.fetcher(`/enfermeria/configuracion_item/${establecimientoId}`, {
             method: 'GET',
             params,
         });
     }
 
    async saveConfiguracionItem(data: IConfiguracionItemForm): Promise<IConfiguracionItem> {
-        return this.fetcher('/enfermeria/configuracion-item', {
+        return this.fetcher('/enfermeria/configuracion_item', {
             method: 'POST',
             body: data
         })
     }
 
     async deleteConfiguracionItem(id: number): Promise<IConfiguracionItem> {
-        return this.fetcher(`/enfermeria/configuracion-item/${id}`, {
+        return this.fetcher(`/enfermeria/configuracion_item/${id}`, {
             method: 'DELETE'
         })
     }
 
     async restoreConfiguracionItem(id: number): Promise<IConfiguracionItem> {
-        return this.fetcher(`/enfermeria/configuracion-item/${id}/restore`, {
+        return this.fetcher(`/enfermeria/configuracion_item/${id}/restore`, {
             method: 'PATCH'
         })
     }
 
     async destroyConfiguracionItem(id: number): Promise<IConfiguracionItem> {
-        return this.fetcher(`/enfermeria/configuracion-item/${id}/destroy`, {
+        return this.fetcher(`/enfermeria/configuracion_item/${id}/destroy`, {
             method: 'DELETE'
         })
     }
