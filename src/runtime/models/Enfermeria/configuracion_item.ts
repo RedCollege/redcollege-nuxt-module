@@ -1,4 +1,4 @@
-export enum ContextEnum {
+export enum ConfigItemEnum {
     GRAVEDAD_ACCIDENTE = 'gravedad_accidente',
     OCUPACION = 'ocupacion',
     TIPO_ACCIDENTE = 'tipo_accidente',
@@ -15,16 +15,20 @@ export enum ContextEnum {
 export interface IConfiguracionItem {
     id: number
     nombre: string
-    context: ContextEnum
+    context: ConfigItemEnum
     establecimientoId: number
+    deletedBy: number | null
+    deletedAt: string | null
+    createdAt: string
+    updatedAt: string
 }
 
 export type IConfiguracionItemGrouped = {
-    [K in ContextEnum]?: IConfiguracionItem[]
+    [K in ConfigItemEnum]?: IConfiguracionItem[]
 }
 
 export interface IConfiguracionItemForm {
     establecimientoId: number
     nombre: string
-    context: ContextEnum
+    context: ConfigItemEnum
 }

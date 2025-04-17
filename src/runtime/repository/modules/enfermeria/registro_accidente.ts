@@ -11,7 +11,7 @@ export default class RegistroAccidenteModule {
             });
         }
         async getById(
-            registroAccidenteId: number | string
+            registroAccidenteId: number
         ): Promise<IRegistroAccidente> {
             return this.fetcher(
                 `/enfermeria/registro_accidente/${registroAccidenteId}`,

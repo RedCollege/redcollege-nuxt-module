@@ -8,6 +8,10 @@ export interface IEnfermedadDiscapacidad {
     nombre: string
     establecimientoId: number
     tipo: TipoEnfermedadEnum
+    deletedBy: number | null
+    deletedAt: string | null
+    createdAt: string
+    updatedAt: string
 }
 
 export interface IEnfermedadDiscapacidadForm {
