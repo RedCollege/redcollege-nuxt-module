@@ -43,7 +43,6 @@ export interface IRegistroAtencionResponse {
         currentPage: number;
         finalizadas: number;
         abiertas: number;
-        usuario: IUsuario
     };
     data: IRegistroAtencion[];
 }

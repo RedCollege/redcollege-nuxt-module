@@ -112,7 +112,7 @@ export default class RegistroAtencionModule {
     }
 
     async getDescargable(props?: IRegistroAtencionFilters): Promise<IRegistroAtencionDescargable> {
-        return this.fetcher("/enfermeria/registro-atencion/descargable", {
+        return this.fetcher("/enfermeria/registro_atencion/descargable", {
             params: props,
             method: "GET",
         });
