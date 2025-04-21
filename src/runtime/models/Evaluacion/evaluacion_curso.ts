@@ -1,4 +1,28 @@
 /**
+ * Main Interfaces
+ */
+
+import type { ICurso } from "..";
+import type { IEvaluacion } from "./evaluacion";
+
+export interface IEvaluacionCurso {
+    id: number;
+    inicioOnline: string;
+    finOnline: string;
+    isHabilitada: boolean;
+    cursoId: number;
+    evaluacionId: number;
+    isProgramada: boolean;
+    createdAt: string;
+    updatedAt: string;
+    showCronometro: boolean;
+    isRevisada: boolean;
+    willFinishOnTime: boolean;
+    evaluacion: IEvaluacion;
+    curso: ICurso;
+}
+
+/**
  * Interfaces Informe Global (evalua 360)
  */
 
@@ -44,6 +68,7 @@ export interface IAsignaturaEnsayoGlobalEvalua {
     promedioHombres: number;
     promedioMujeres: number;
     cantidadAlumnos: number;
+    alumnosInsuficientes?: IAlumnoInsuficienteDetalle[];
 }
 
 /**
@@ -73,6 +98,7 @@ interface IAsignaturaEvalua {
     cantidadHombres: number;
     cantidadMujeres: number;
     promedioTotal: number;
+    alumnosInsuficientes?: IAlumnoInsuficienteDetalle[];
 }
 
 export interface ICursoEvalua {
@@ -133,6 +159,9 @@ export interface IEnsayoEstablecimientoEvalua {
     promedio: number;
     nivelNombre: string;
     tendencia?: 'subida' | 'bajada' | 'estable';
+    asignaturaNombre: string
+    grupoAsignaturaId: number
+    sigeId: number
 }
 
 export interface IComponenteEstablecimientoEvalua {
@@ -170,4 +199,36 @@ export interface IRequestEstablecimientoEvalua {
 export interface IResponseEstablecimientoEvalua {
     informacionGeneralEstablecimientos: IEstablecimientoEvalua[];
     informeComponentes: IComponenteEstablecimientoEvalua[];
+}
+
+
+/**
+ * Tipados alumnos insuficientes
+ */
+
+export interface IAlumnoDetalle {
+    id: number;
+    rut: string;
+    nombreCompleto: string;
+    cursoId: number;
+    grupoAsignaturaId: number;
+    nEnsayo: number;
+    nombreEnsayo: string;
+    porcentajeLogro: number;
+    puntajeSimce: number;
+}
+
+export interface IAlumnoInsuficienteDetalle {
+    id: number;
+    rut: string;
+    nombreCompleto: string;
+    ensayos: Array<{
+        nEnsayo: number;
+        nombreEnsayo: string;
+        puntaje: number;
+        porcentajeLogro: number;
+        tendencia?: 'subida' | 'bajada' | 'estable'; // Tendencia respecto al ensayo anterior
+    }>;
+    promedio: number;
+    tendenciaPromedio?: 'subida' | 'bajada' | 'estable'; // Tendencia general
 }

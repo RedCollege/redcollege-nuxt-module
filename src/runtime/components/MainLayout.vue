@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue';
 import { useMagicKeys } from '@vueuse/core'
 import { useAuthStore } from "../stores/authStore";
+import { useDebugReportGenerator } from "../composables/useDebugReportGenerator";
 
 const sidebar = useSidebar()
 const navbarStore = useNavbar()
@@ -12,6 +13,7 @@ const { hideCursos, hidePeriodos } = storeToRefs(navbarStore)
 const isCommandOpen = ref(false)
 const isModalStatusOpen = ref(false)
 const { isSuperAdmin } = storeToRefs(useAuthStore())
+const { copyDebugReportToClipboard } = useDebugReportGenerator()
 
 interface Props {
     logoUrl: string;
@@ -37,6 +39,10 @@ const openStatusPlataforma = () => {
     isModalStatusOpen.value = true
 }
 
+const generarReporte = async () => {
+    await copyDebugReportToClipboard(false)
+}
+
 watch([Meta_B, Ctrl_B], (v) => {
     if (v[0] || v[1])
         handleOpenChange()
@@ -58,7 +64,7 @@ div
                 CommandEmpty No se encontraron resultados
                 CommandGroup(heading="Debugging")
                     CommandItem(value="Ver Estadisticas de Plataforma", @click="openStatusPlataforma") Ver Estadísticas de Plataforma
-                    CommandItem(value="Logs", :disabled="true") Copiar Logs
+                    CommandItem(value="Logs", @click="generarReporte") Copiar Logs De Reporte de Error
 
         Dialog(v-model:open="isModalStatusOpen")
             DialogScrollContent.w-96(class="lg:max-w-[796px]")

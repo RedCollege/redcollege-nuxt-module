@@ -5,8 +5,8 @@ export default defineNuxtConfig({
         pageTransition: { name: 'page', mode: 'out-in' }
     },
     redcollege: {
-        baseURL: 'http://localhost:3334/api/v3',
-        socketURL: 'http://localhost:3334',
+        baseURL: 'http://localhost:3333/api/v3',
+        socketURL: 'http://localhost:3333',
         logoURL: 'https://redcollege.nyc3.digitaloceanspaces.com/docs/components/planificaciones-logo.svg',
         nombreModulo: 'Planificaciones',
         redirectTo: 'mis-planificaciones',
