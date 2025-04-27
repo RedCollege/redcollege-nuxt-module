@@ -11,7 +11,7 @@ export interface ICurso {
     periodo: string;
     establecimientoId: number;
     sigeId: number;
-    libro: ILibro;
+    libro?: ILibro;
     createdAt: DateTime;
     updatedAt: DateTime;
     /**

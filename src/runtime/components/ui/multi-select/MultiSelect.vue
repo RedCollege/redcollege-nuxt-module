@@ -37,6 +37,7 @@ interface MultiSelectProps {
     asChild?: boolean
     className?: string
     variant?: 'default' | 'secondary' | 'destructive' | 'inverted'
+    disabled?: boolean
 }
 
 const props = defineProps<MultiSelectProps>()
@@ -105,8 +106,8 @@ const setIsPopoverOpen = (value: boolean) => {
 
 <template>
     <Popover>
-        <PopoverTrigger  class="w-full">
-            <Button type="button" :class="[
+        <PopoverTrigger :disabled="disabled" class="w-full">
+            <Button :disabled="disabled" type="button" :class="[
                 'flex w-full p-1 rounded-md border border-input min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit',
                 className
             ]">

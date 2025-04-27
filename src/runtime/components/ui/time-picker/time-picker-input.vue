@@ -1,27 +1,30 @@
 <template>
-    <Input 
-        :id="picker" 
-        :name="picker" 
-        :class="inputClasses" 
-        :value="calculatedValue" 
+    <Input
+        :id="picker"
+        :name="picker"
+        :class="inputClasses"
+        :disabled="disabled"
+        :value="calculatedValue"
         :default-value="calculatedValue"
-        :type="type" inputmode="decimal" @keydown="handleKeyDown" 
+        :type="type"
+        inputmode="decimal"
+        @keydown="handleKeyDown"
     />
 </template>
 
 <script setup>
-import { Input } from '../input';
-import { computed, ref, watch } from 'vue'
+import { Input } from "../input";
+import { computed, ref, watch } from "vue";
 import {
     getArrowByType,
     getDateByType,
-    setDateByType
-} from './time-picker-utils';
-import { cn } from '../../../lib/utils'
+    setDateByType,
+} from "./time-picker-utils";
+import { cn } from "../../../lib/utils";
 const props = defineProps({
     picker: {
         type: String,
-        default: '',
+        default: "",
     },
     date: {
         type: Date,
@@ -29,38 +32,43 @@ const props = defineProps({
     },
     period: {
         type: String,
-        default: 'am',
+        default: "am",
     },
     class: {
         type: String,
-        default: '',
+        default: "",
     },
     type: {
         type: String,
-        default: 'tel',
+        default: "tel",
     },
     id: {
         type: String,
-        default: '',
+        default: "",
     },
     name: {
         type: String,
-        default: '',
+        default: "",
+    },
+    disabled: {
+        type: Boolean,
+        default: false,
     },
 });
 
-const emit = defineEmits(['update:date', 'rightFocus', 'leftFocus']);
+const emit = defineEmits(["update:date", "rightFocus", "leftFocus"]);
 
 const flag = ref(false);
-const prevIntKey = ref('');
+const prevIntKey = ref("");
 
 const inputClasses = computed(() =>
-    cn('w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none', props.class)
+    cn(
+        "w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
+        props.class
+    )
 );
 
-const calculatedValue = computed(() =>
-    getDateByType(props.date, props.picker)
-);
+const calculatedValue = computed(() => getDateByType(props.date, props.picker));
 
 watch(flag, (newFlag) => {
     if (newFlag) {
@@ -71,52 +79,77 @@ watch(flag, (newFlag) => {
     }
 });
 
-watch(() => props.period, (newPeriod) => {
-    if (newPeriod) {
-        const tempDate = new Date(props.date);
-        emit('update:date', setDateByType(tempDate, tempDate.getHours() % 12, props.picker, newPeriod));
+watch(
+    () => props.period,
+    (newPeriod) => {
+        if (newPeriod) {
+            const tempDate = new Date(props.date);
+            emit(
+                "update:date",
+                setDateByType(
+                    tempDate,
+                    tempDate.getHours() % 12,
+                    props.picker,
+                    newPeriod
+                )
+            );
+        }
     }
-});
+);
 
 const calculateNewValue = (key) => {
-    if (props.picker === '12hours') {
-        if (flag.value && prevIntKey.value === '1' && ['0', '1', '2'].includes(key)) {
-            const newValue = '1' + key;
-            prevIntKey.value = '';
+    if (props.picker === "12hours") {
+        if (
+            flag.value &&
+            prevIntKey.value === "1" &&
+            ["0", "1", "2"].includes(key)
+        ) {
+            const newValue = "1" + key;
+            prevIntKey.value = "";
             return newValue;
         }
         if (flag.value) {
-            prevIntKey.value = '';
+            prevIntKey.value = "";
             return prevIntKey.value + key;
         }
         prevIntKey.value = key;
-        return '0' + key;
+        return "0" + key;
     }
-    return !flag.value ? '0' + key : calculatedValue.value.slice(1, 2) + key;
+    return !flag.value ? "0" + key : calculatedValue.value.slice(1, 2) + key;
 };
 
 const handleKeyDown = (e) => {
-    if (e.key === 'Tab') return;
+    if (e.key === "Tab") return;
 
     e.preventDefault();
 
-    if (e.key === 'ArrowRight') emit('rightFocus');
-    if (e.key === 'ArrowLeft') emit('leftFocus');
-    if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
-        const step = e.key === 'ArrowUp' ? 1 : -1;
-        const newValue = getArrowByType(calculatedValue.value, step, props.picker);
+    if (e.key === "ArrowRight") emit("rightFocus");
+    if (e.key === "ArrowLeft") emit("leftFocus");
+    if (["ArrowUp", "ArrowDown"].includes(e.key)) {
+        const step = e.key === "ArrowUp" ? 1 : -1;
+        const newValue = getArrowByType(
+            calculatedValue.value,
+            step,
+            props.picker
+        );
         if (flag.value) flag.value = false;
         const tempDate = new Date(props.date);
-        emit('update:date', setDateByType(tempDate, newValue, props.picker, props.period));
+        emit(
+            "update:date",
+            setDateByType(tempDate, newValue, props.picker, props.period)
+        );
     }
-    if (e.key >= '0' && e.key <= '9') {
+    if (e.key >= "0" && e.key <= "9") {
         const newValue = calculateNewValue(e.key);
-        if (flag.value && (newValue === '10' || newValue === '11')) {
-            emit('rightFocus');
+        if (flag.value && (newValue === "10" || newValue === "11")) {
+            emit("rightFocus");
         }
         flag.value = !flag.value;
         const tempDate = new Date(props.date);
-        emit('update:date', setDateByType(tempDate, newValue, props.picker, props.period));
+        emit(
+            "update:date",
+            setDateByType(tempDate, newValue, props.picker, props.period)
+        );
     }
 };
 </script>

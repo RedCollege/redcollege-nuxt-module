@@ -12,8 +12,10 @@ import {
     EvaluacionCursoModule,
     GrupoModule,
     ItemEntradaCurricularModule,
+    RegistroAtencionModule,
     PermisoModule,
     UsuarioModule,
+    AntecedenteSaludModule,
 } from "../repository/modules";
 import AuxiliarModule from "../repository/modules/general/auxiliar";
 import ContenidoModule from "../repository/modules/planificaciones/contenido";
@@ -25,9 +27,13 @@ import AdecuacionCurricularModule from "../repository/modules/planificaciones/ad
 import AdjuntoModule from "../repository/modules/comunicacion/adjunto";
 import MensajeModule from "../repository/modules/comunicacion/mensaje";
 import UsuarioMensajeModule from "../repository/modules/comunicacion/usuario_mensaje";
+import EnfermedadDiscapacidadModule from "../repository/modules/enfermeria/enfermedad_discapacidad";
 import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_plantilla";
 import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
 import MarcadorModule from "../repository/modules/planificaciones/marcador";
+import ConfiguracionItemModule from "../repository/modules/enfermeria/configuracion_item";
+import RegistroAccidenteModule from "../repository/modules/enfermeria/registro_accidente";
+
 export type AuthModules = {
     usuario: UsuarioModule;
 };
@@ -45,6 +51,7 @@ export type PlanificacionesModules = {
 
 export type MatriculasModules = {
     matricula: MatriculaModule;
+    antecedenteSalud: AntecedenteSaludModule;
 };
 
 export type CurriculumModules = {
@@ -78,12 +85,20 @@ export type ComunicacionesModules = {
     grupo: GrupoModule;
     permiso: PermisoModule;
     usuarioPlantilla: UsuarioPlantillaModule;
-    sistemaPlantilla: SistemaPlantillaModule
-}
+    sistemaPlantilla: SistemaPlantillaModule;
+};
+
+export type EnfermeriaModules = {
+    registroAtencion: RegistroAtencionModule;
+    antecedenteSalud: AntecedenteSaludModule;
+    enfermedadDiscapacidad: EnfermedadDiscapacidadModule;
+    configuracionItem: ConfiguracionItemModule;
+    registroAccidente: RegistroAccidenteModule;
+};
 
 export type EvaluacionesModules = {
-    evaluacionCurso: EvaluacionCursoModule
-}
+    evaluacionCurso: EvaluacionCursoModule;
+};
 
 // agrupación de modulos
 export type ApiModules = {
@@ -92,11 +107,12 @@ export type ApiModules = {
     informes: InformesModules;
     establecimiento: EstablecimientoModules;
     matriculas: MatriculasModules;
+    enfermeria: EnfermeriaModules;
     curriculum: CurriculumModules;
     general: GeneralModules;
     health: HealthModules;
     comunicaciones: ComunicacionesModules;
-    evaluaciones: EvaluacionesModules
+    evaluaciones: EvaluacionesModules;
 };
 
 export function createApiModules(
@@ -110,6 +126,7 @@ export function createApiModules(
         | "general"
         | "health"
         | "comunicaciones"
+        | "enfermeria"
         | "evaluaciones",
     apiFetcher: $Fetch
 ):
@@ -122,6 +139,7 @@ export function createApiModules(
     | GeneralModules
     | HealthModules
     | ComunicacionesModules
+    | EnfermeriaModules
     | EvaluacionesModules {
     switch (apiType) {
         case "auth":
@@ -144,6 +162,7 @@ export function createApiModules(
         case "matriculas":
             return {
                 matricula: new MatriculaModule(apiFetcher),
+                antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
             };
         case "curriculum":
             return {
@@ -183,11 +202,21 @@ export function createApiModules(
                 grupo: new GrupoModule(apiFetcher),
                 permiso: new PermisoModule(apiFetcher),
                 usuarioPlantilla: new UsuarioPlantillaModule(apiFetcher),
-                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher)
-            }
+                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher),
+            };
+        case "enfermeria":
+            return {
+                registroAtencion: new RegistroAtencionModule(apiFetcher),
+                antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
+                enfermedadDiscapacidad: new EnfermedadDiscapacidadModule(
+                    apiFetcher
+                ),
+                configuracionItem: new ConfiguracionItemModule(apiFetcher),
+                registroAccidente: new RegistroAccidenteModule(apiFetcher)
+            };
         case "evaluaciones":
             return {
-                evaluacionCurso: new EvaluacionCursoModule(apiFetcher)
-            }
+                evaluacionCurso: new EvaluacionCursoModule(apiFetcher),
+            };
     }
 }

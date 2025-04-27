@@ -63,7 +63,7 @@ export const useSocket = (): {
         });
 
         socket.value.on('connect_error', (err) => {
-            console.log(err)
+
         })
     })
 
@@ -84,7 +84,6 @@ export const useSocket = (): {
 
             // Escuchar el evento del mensaje
             socket.value.on('mensaje-status', (data) => {
-                console.log(data)
                 if (data.id === id) {
                     callback(data);
                 }
