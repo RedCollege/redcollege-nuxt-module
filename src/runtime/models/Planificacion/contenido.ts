@@ -18,12 +18,13 @@ export interface IContenido {
     deletedBy: number | null;
     createdAt: DateTime;
     updatedAt: DateTime;
-    deletedAt?: DateTime;
-    deletedBy?: number;
-    archivos?: IArchivo[];
-    itemsEntrada?: IItemEntradaCurricular[];
-    actividades?: IContenidoActividad[];
-    recursos?: IContenidoRecurso[];
+    deletedAt: DateTime;
+    unidad: IUnidad;
+    haveAdecuaciones: boolean
+    actividades: Array<IContenidoActividad>;
+    recursos: Array<IContenidoRecurso>;
+    archivos: Array<IArchivo>;
+    itemsEntrada: Array<IItemEntradaCurricular>;
     registrosDua: Array<IRegistroDua>;
     adecuacionesCurriculares: Array<IAdecuacionCurricular>;
 }
