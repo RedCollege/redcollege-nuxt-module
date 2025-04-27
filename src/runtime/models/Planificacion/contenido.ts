@@ -2,17 +2,20 @@ import type { IArchivo } from '../General/archivo';
 import type { IItemEntradaCurricular } from '../Curriculum/item_entrada_curricular';
 import type { DateTime } from 'luxon';
 import type { IRegistroDua } from './dua';
-import { IAdecuacionCurricular } from './adecuacion_curricular';
+import type { IUnidad } from './unidad';
+import type { IAdecuacionCurricular } from './adecuacion_curricular';
 
 export interface IContenido {
     id: number;
     unidadId: number;
     titulo: string;
-    fechaInicio: Date | null;
-    fechaFin: Date | null;
+    fechaInicio: DateTime;
+    fechaFin: DateTime;
     contenidoPlanificado: string | null;
     evaluacion: string | null;
     isCumplido: boolean;
+    isVisible: boolean;
+    deletedBy: number | null;
     createdAt: DateTime;
     updatedAt: DateTime;
     deletedAt?: DateTime;
@@ -21,8 +24,8 @@ export interface IContenido {
     itemsEntrada?: IItemEntradaCurricular[];
     actividades?: IContenidoActividad[];
     recursos?: IContenidoRecurso[];
-    adecuacionesCurriculares?: IAdecuacionCurricular[];
     registrosDua: Array<IRegistroDua>;
+    adecuacionesCurriculares: Array<IAdecuacionCurricular>;
 }
 
 export interface IContenidoForm {
@@ -33,6 +36,9 @@ export interface IContenidoForm {
     contenidoPlanificado: string | null;
     evaluacion: string | null;
     isCumplido: boolean;
+    isVisible: boolean;
+    haveAdecuaciones?: boolean
+    itemsEntrada?: IItemEntradaCurricular[]
 }
 
 
