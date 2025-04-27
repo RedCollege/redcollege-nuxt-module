@@ -99,8 +99,14 @@ const handleInputKeyDown = (event: KeyboardEvent) => {
 }
 
 const setIsPopoverOpen = (value: boolean) => {
-    isPopoverOpen.value = value
+  isPopoverOpen.value = value
 }
+
+defineExpose({
+  setIsPopoverOpen,
+  isPopoverOpen
+})
+
 </script>
 
 
@@ -117,17 +123,17 @@ const setIsPopoverOpen = (value: boolean) => {
                             isAnimating ? 'animate-bounce' : '',
                             multiSelectVariants({ variant })
                         ]" :style="{ animationDuration: `${animation}s` }">
-                            {{ options.find((o) => o.value === value).label }}
+                            {{ options.find((o) => o.value === value)?.label }}
                            <span @click.stop="toggleOption(value)">
                                 <Icon name="tabler:circle-x" class="ml-2 h-4 w-4 cursor-pointer" />
                             </span>
                         </Badge>
-                        <Badge v-if="selectedValues.length > maxCount" :class="[
+                        <Badge v-if="selectedValues.length > maxCount!" :class="[
                             'bg-transparent text-foreground border-foreground/1 hover:bg-transparent',
                             isAnimating ? 'animate-bounce' : '',
                             multiSelectVariants({ variant })
                         ]" :style="{ animationDuration: `${animation}s` }">
-                            + {{ selectedValues.length - maxCount }} más
+                            + {{ selectedValues.length - maxCount! }} más
                             <span @click.stop="clearExtraOptions">
                                 <Icon name="tabler:circle-x" class="ml-2 h-4 w-4 cursor-pointer" />
                             </span>
