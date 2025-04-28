@@ -1,5 +1,5 @@
 import type { $Fetch } from "ofetch";
-import type { IRegistroAccidente, IRegistroAccidenteFilter, IRegistroAccidenteForm } from "~/src/runtime/models";
+import type { IRegistroAccidente, IRegistroAccidenteDescargableIndividual, IRegistroAccidenteFilter, IRegistroAccidenteForm } from "~/src/runtime/models";
 
 export default class RegistroAccidenteModule {
     constructor(private fetcher: $Fetch) {}
@@ -79,7 +79,7 @@ export default class RegistroAccidenteModule {
             );
         }
 
-        async getDescargableIndividual(registroAccidenteId: number): Promise<any> {
+        async getDescargableIndividual(registroAccidenteId: number): Promise<IRegistroAccidenteDescargableIndividual> {
             return this.fetcher(
                 `/enfermeria/registro_accidente/descargable/${registroAccidenteId}`,
                 {

@@ -1,5 +1,5 @@
 import type { DateTime } from "luxon"
-import type { IConfiguracionItem, ICurso, IUsuario } from ".."
+import type { IConfiguracionItem, ICurso, IEstablecimiento, IMatricula, IUsuario } from ".."
 
 export interface ITestigo {
     id: number
@@ -82,4 +82,11 @@ export interface IRegistroAccidenteFilter {
     curso?: string | number;
     gravedad?: string | number
     lugarAccidente?: string | number
+}
+
+export interface IRegistroAccidenteDescargableIndividual {
+    establecimiento: IEstablecimiento
+    matricula: IMatricula
+    registro: IRegistroAccidente
+    numeroOrden: number
 }
