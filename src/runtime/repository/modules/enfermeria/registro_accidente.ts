@@ -79,4 +79,13 @@ export default class RegistroAccidenteModule {
             );
         }
 
+        async getDescargableIndividual(registroAccidenteId: number): Promise<any> {
+            return this.fetcher(
+                `/enfermeria/registro_accidente/descargable/${registroAccidenteId}`,
+                {
+                    method: "GET"
+                }
+            )
+        }
+
 }
