@@ -53,6 +53,17 @@ export interface IRegistroAccidenteResponse {
     data: IRegistroAccidente[]
 }
 
+export interface IRegistroAccidenteDescargable {
+    meta: {
+        total: number;
+        en_trayecto: number;
+        en_establecimiento: number;
+        establecimiento: IEstablecimiento;
+        usuario: IUsuario
+    }
+    data: IRegistroAccidente[]
+}
+
 export interface IRegistroAccidenteForm {
     pacienteId: number | string
     establecimientoId: number | string
