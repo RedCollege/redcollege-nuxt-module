@@ -18,6 +18,11 @@ interface GetAllProps {
     establecimiento: number;
 }
 
+interface GetPlanificacionByIdProps {
+    planificacionId: number,
+    isDescargable?: boolean
+}
+
 export default class PlanificacionModule {
     constructor(private fetcher: $Fetch) { }
 
@@ -35,8 +40,9 @@ export default class PlanificacionModule {
         });
     }
 
-    async getPlanificacionById(planificacionId: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${planificacionId}`, {
+    async getPlanificacionById(props: GetPlanificacionByIdProps): Promise<IPlanificacion> {
+        return this.fetcher(`/planificacion/${props.planificacionId}`, {
+            params: props
             method: 'GET'
         });
     }
