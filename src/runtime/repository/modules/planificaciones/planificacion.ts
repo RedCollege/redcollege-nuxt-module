@@ -36,10 +36,10 @@ export default class PlanificacionModule {
     }
 
     async getPlanificacionById(planificacionId: number, isDescargable?: boolean): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${planificacionId}`, {
-            params: isDescargable !== undefined ? { isDescargable } : {},
+        const query = isDescargable !== undefined ? `?isDescargable=${isDescargable}` : ''
+         return this.fetcher(`/planificacion/${planificacionId}${query}`, {
             method: 'GET'
-        });
+          });
     }
 
     async duplicarCompartirPlanificacion(planificacionId: number, titulo: string, periodo: string, cursoId: number, isColaborativa: boolean, asignaturasIds: number[], colaboradoresIds: number[], action: 1 | 2): Promise<IPlanificacion> {
