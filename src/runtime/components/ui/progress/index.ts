@@ -10,8 +10,10 @@ export const progressVariants = cva(
                 success: 'bg-green',
                 sky: 'bg-sky',
                 destructive: 'bg-destructive',
-                orange: 'bg-orange-200',
-                primary: 'bg-primary'
+                orange: 'bg-orange',
+                primary: 'bg-primary',
+                purple: 'bg-purple',
+                yellow: 'bg-yellow'
             }
         },
         defaultVariants: {
