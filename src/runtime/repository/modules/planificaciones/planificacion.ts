@@ -36,8 +36,7 @@ export default class PlanificacionModule {
     }
 
     async getPlanificacionById(planificacionId: number, isDescargable: boolean = false): Promise<IPlanificacion> {
-        const query = isDescargable ? '?isDescargable=true' : ''
-         return this.fetcher(`/planificacion/${planificacionId}${query}`, {
+         return this.fetcher(`/planificacion/${planificacionId}?isDescargable=${isDescargable}`, {
             method: 'GET'
           });
     }
