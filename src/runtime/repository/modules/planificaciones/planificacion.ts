@@ -35,12 +35,13 @@ export default class PlanificacionModule {
         });
     }
 
-    async getPlanificacionById(planificacionId: number, isDescargable?: boolean): Promise<IPlanificacion> {
-        const query = isDescargable !== undefined ? `?isDescargable=${isDescargable}` : ''
+    async getPlanificacionById(planificacionId: number, isDescargable: boolean = false): Promise<IPlanificacion> {
+        const query = isDescargable ? '?isDescargable=true' : ''
          return this.fetcher(`/planificacion/${planificacionId}${query}`, {
             method: 'GET'
           });
     }
+
 
     async duplicarCompartirPlanificacion(planificacionId: number, titulo: string, periodo: string, cursoId: number, isColaborativa: boolean, asignaturasIds: number[], colaboradoresIds: number[], action: 1 | 2): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/duplicarCompartirPlanificacion/${planificacionId}?action=${action}`, {
