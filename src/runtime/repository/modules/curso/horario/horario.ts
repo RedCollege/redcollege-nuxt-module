@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IHorario } from '~/src/runtime/models/Curso/Horario/horario/horario';
+import type { IHorario } from '~/src/runtime/models/Curso/Horario/horario';
 
 
 export default class HorarioModule {

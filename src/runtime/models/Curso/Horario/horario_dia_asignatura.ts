@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import type { ICursoAsignatura } from "../../../Establecimiento/curso_asignatura";
+import type { ICursoAsignatura } from "../../Establecimiento/curso_asignatura";
 
 export interface IHorarioDiaAsignatura {
     id: number;
