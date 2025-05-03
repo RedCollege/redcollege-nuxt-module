@@ -53,6 +53,8 @@ export interface IUsuario {
     iniciales: string;
     fechaInicioCurso: DateTime;
     fechaRetiroCurso: DateTime;
+    numeroLista: number | null;
+    cursoUsuarioId: number;
 }
 
 export interface IUsuarioUpdate {
