@@ -11,6 +11,12 @@ export default class HorarioModule {
         })
     }
 
+    async obtenerUltimoHorarioActivo(cursoId: number): Promise<IHorario> {
+        return this.fetcher(`curso/horario/obtenerUltimoHorarioActivo/${cursoId}`, {
+            method: 'GET'
+        });
+    }
+
     async obtenerHorariosByCursoId(cursoId: number): Promise<IHorario[]> {
         return this.fetcher(`curso/horario/obtenerHorariosByCursoId/${cursoId}`, {
             method: 'GET'
