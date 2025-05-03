@@ -51,6 +51,8 @@ export interface IUsuario {
      * Contiene las inciales del usuario.
      */
     iniciales: string;
+    fechaInicioCurso: DateTime;
+    fechaRetiroCurso: DateTime;
 }
 
 export interface IUsuarioUpdate {
