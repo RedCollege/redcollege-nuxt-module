@@ -1,12 +1,13 @@
-import type { $Fetch } from "ofetch";
-import PlanificacionModule from "../repository/modules/planificaciones/planificacion";
-import InformesModule from "../repository/modules/informes/informes";
-import UnidadModule from "../repository/modules/planificaciones/unidad";
-import EstablecimientoModule from "../repository/modules/establecimiento/establecimiento";
-import CursoModule from "../repository/modules/establecimiento/curso";
-import AsignaturaCurricularModule from "../repository/modules/establecimiento/asignaturas_curriculares";
-import PeriodoEscolarModule from "../repository/modules/establecimiento/periodo_escolar";
-import MatriculaModule from "../repository/modules/matricula/matricula";
+import type { $Fetch } from 'ofetch'
+import PlanificacionModule from '../repository/modules/planificaciones/planificacion'
+import InformesModule from '../repository/modules/informes/informes'
+import UnidadModule from '../repository/modules/planificaciones/unidad'
+import EstablecimientoModule from '../repository/modules/establecimiento/establecimiento'
+import CursoModule from '../repository/modules/establecimiento/curso'
+import AsignaturaCurricularModule from '../repository/modules/establecimiento/asignaturas_curriculares'
+import PeriodoEscolarModule from '../repository/modules/establecimiento/periodo_escolar'
+import MatriculaModule from '../repository/modules/matricula/matricula'
+import EstadisticaModule from '../repository/modules/enfermeria/estadistica'
 import {
     EspecialidadModule,
     EvaluacionCursoModule,
@@ -15,119 +16,119 @@ import {
     RegistroAtencionModule,
     PermisoModule,
     UsuarioModule,
-    AntecedenteSaludModule,
-} from "../repository/modules";
-import AuxiliarModule from "../repository/modules/general/auxiliar";
-import ContenidoModule from "../repository/modules/planificaciones/contenido";
-import ContenidoActividadModule from "../repository/modules/planificaciones/contenido_actividad";
-import ContenidoRecursoModule from "../repository/modules/planificaciones/contenido_recurso";
-import HealthModule from "../repository/modules/health/health";
-import RegistroDuaModule from "../repository/modules/planificaciones/dua/registro_dua";
-import AdecuacionCurricularModule from "../repository/modules/planificaciones/adecuacion_curricular";
-import AdjuntoModule from "../repository/modules/comunicacion/adjunto";
-import MensajeModule from "../repository/modules/comunicacion/mensaje";
-import UsuarioMensajeModule from "../repository/modules/comunicacion/usuario_mensaje";
-import EnfermedadDiscapacidadModule from "../repository/modules/enfermeria/enfermedad_discapacidad";
-import SistemaPlantillaModule from "../repository/modules/comunicacion/sistema_plantilla";
-import UsuarioPlantillaModule from "../repository/modules/comunicacion/usuario_plantilla";
-import MarcadorModule from "../repository/modules/planificaciones/marcador";
-import ConfiguracionItemModule from "../repository/modules/enfermeria/configuracion_item";
-import RegistroAccidenteModule from "../repository/modules/enfermeria/registro_accidente";
-
+    AntecedenteSaludModule
+} from '../repository/modules'
+import AuxiliarModule from '../repository/modules/general/auxiliar'
+import ContenidoModule from '../repository/modules/planificaciones/contenido'
+import ContenidoActividadModule from '../repository/modules/planificaciones/contenido_actividad'
+import ContenidoRecursoModule from '../repository/modules/planificaciones/contenido_recurso'
+import HealthModule from '../repository/modules/health/health'
+import RegistroDuaModule from '../repository/modules/planificaciones/dua/registro_dua'
+import AdecuacionCurricularModule from '../repository/modules/planificaciones/adecuacion_curricular'
+import AdjuntoModule from '../repository/modules/comunicacion/adjunto'
+import MensajeModule from '../repository/modules/comunicacion/mensaje'
+import UsuarioMensajeModule from '../repository/modules/comunicacion/usuario_mensaje'
+import EnfermedadDiscapacidadModule from '../repository/modules/enfermeria/enfermedad_discapacidad'
+import SistemaPlantillaModule from '../repository/modules/comunicacion/sistema_plantilla'
+import UsuarioPlantillaModule from '../repository/modules/comunicacion/usuario_plantilla'
+import MarcadorModule from '../repository/modules/planificaciones/marcador'
+import ConfiguracionItemModule from '../repository/modules/enfermeria/configuracion_item'
+import RegistroAccidenteModule from '../repository/modules/enfermeria/registro_accidente'
 export type AuthModules = {
-    usuario: UsuarioModule;
-};
+    usuario: UsuarioModule
+}
 
 export type PlanificacionesModules = {
-    planificacion: PlanificacionModule;
-    unidades: UnidadModule;
-    contenidos: ContenidoModule;
-    contenidoActividades: ContenidoActividadModule;
-    contenidoRecursos: ContenidoRecursoModule;
-    registroDua: RegistroDuaModule;
-    adecuacionCurricular: AdecuacionCurricularModule;
-    marcadores: MarcadorModule;
-};
+    planificacion: PlanificacionModule
+    unidades: UnidadModule
+    contenidos: ContenidoModule
+    contenidoActividades: ContenidoActividadModule
+    contenidoRecursos: ContenidoRecursoModule
+    registroDua: RegistroDuaModule
+    adecuacionCurricular: AdecuacionCurricularModule
+    marcadores: MarcadorModule
+}
 
 export type MatriculasModules = {
-    matricula: MatriculaModule;
-    antecedenteSalud: AntecedenteSaludModule;
-};
+    matricula: MatriculaModule
+    antecedenteSalud: AntecedenteSaludModule
+}
 
 export type CurriculumModules = {
-    itemEntradaCurricular: ItemEntradaCurricularModule;
-};
+    itemEntradaCurricular: ItemEntradaCurricularModule
+}
 
 export type InformesModules = {
-    informes: InformesModule;
-};
+    informes: InformesModule
+}
 
 export type EstablecimientoModules = {
-    establecimiento: EstablecimientoModule;
-    curso: CursoModule;
-    asignaturaCurricular: AsignaturaCurricularModule;
-    periodoEscolar: PeriodoEscolarModule;
-    especialidad: EspecialidadModule;
-};
+    establecimiento: EstablecimientoModule
+    curso: CursoModule
+    asignaturaCurricular: AsignaturaCurricularModule
+    periodoEscolar: PeriodoEscolarModule
+    especialidad: EspecialidadModule
+}
 
 export type GeneralModules = {
-    auxiliar: AuxiliarModule;
-};
+    auxiliar: AuxiliarModule
+}
 
 export type HealthModules = {
-    health: HealthModule;
-};
+    health: HealthModule
+}
 
 export type ComunicacionesModules = {
-    adjunto: AdjuntoModule;
-    mensaje: MensajeModule;
-    usuarioMensaje: UsuarioMensajeModule;
-    grupo: GrupoModule;
-    permiso: PermisoModule;
-    usuarioPlantilla: UsuarioPlantillaModule;
-    sistemaPlantilla: SistemaPlantillaModule;
-};
+    adjunto: AdjuntoModule
+    mensaje: MensajeModule
+    usuarioMensaje: UsuarioMensajeModule
+    grupo: GrupoModule
+    permiso: PermisoModule
+    usuarioPlantilla: UsuarioPlantillaModule
+    sistemaPlantilla: SistemaPlantillaModule
+}
 
 export type EnfermeriaModules = {
-    registroAtencion: RegistroAtencionModule;
-    antecedenteSalud: AntecedenteSaludModule;
-    enfermedadDiscapacidad: EnfermedadDiscapacidadModule;
-    configuracionItem: ConfiguracionItemModule;
-    registroAccidente: RegistroAccidenteModule;
-};
+    registroAtencion: RegistroAtencionModule
+    antecedenteSalud: AntecedenteSaludModule
+    enfermedadDiscapacidad: EnfermedadDiscapacidadModule
+    configuracionItem: ConfiguracionItemModule
+    registroAccidente: RegistroAccidenteModule
+    estadistica: EstadisticaModule
+}
 
 export type EvaluacionesModules = {
-    evaluacionCurso: EvaluacionCursoModule;
-};
+    evaluacionCurso: EvaluacionCursoModule
+}
 
 // agrupación de modulos
 export type ApiModules = {
-    auth: AuthModules;
-    planificaciones: PlanificacionesModules;
-    informes: InformesModules;
-    establecimiento: EstablecimientoModules;
-    matriculas: MatriculasModules;
-    enfermeria: EnfermeriaModules;
-    curriculum: CurriculumModules;
-    general: GeneralModules;
-    health: HealthModules;
-    comunicaciones: ComunicacionesModules;
-    evaluaciones: EvaluacionesModules;
-};
+    auth: AuthModules
+    planificaciones: PlanificacionesModules
+    informes: InformesModules
+    establecimiento: EstablecimientoModules
+    matriculas: MatriculasModules
+    enfermeria: EnfermeriaModules
+    curriculum: CurriculumModules
+    general: GeneralModules
+    health: HealthModules
+    comunicaciones: ComunicacionesModules
+    evaluaciones: EvaluacionesModules
+}
 
-export function createApiModules(
+export function createApiModules (
     apiType:
-        | "auth"
-        | "planificaciones"
-        | "informes"
-        | "establecimiento"
-        | "matriculas"
-        | "curriculum"
-        | "general"
-        | "health"
-        | "comunicaciones"
-        | "enfermeria"
-        | "evaluaciones",
+        | 'auth'
+        | 'planificaciones'
+        | 'informes'
+        | 'establecimiento'
+        | 'matriculas'
+        | 'curriculum'
+        | 'general'
+        | 'health'
+        | 'comunicaciones'
+        | 'enfermeria'
+        | 'evaluaciones',
     apiFetcher: $Fetch
 ):
     | AuthModules
@@ -142,11 +143,11 @@ export function createApiModules(
     | EnfermeriaModules
     | EvaluacionesModules {
     switch (apiType) {
-        case "auth":
+        case 'auth':
             return {
-                usuario: new UsuarioModule(apiFetcher),
-            };
-        case "planificaciones":
+                usuario: new UsuarioModule(apiFetcher)
+            }
+        case 'planificaciones':
             return {
                 planificacion: new PlanificacionModule(apiFetcher),
                 unidades: new UnidadModule(apiFetcher),
@@ -155,27 +156,25 @@ export function createApiModules(
                 contenidoRecursos: new ContenidoRecursoModule(apiFetcher),
                 registroDua: new RegistroDuaModule(apiFetcher),
                 marcadores: new MarcadorModule(apiFetcher),
-                adecuacionCurricular: new AdecuacionCurricularModule(
-                    apiFetcher
-                ),
-            };
-        case "matriculas":
+                adecuacionCurricular: new AdecuacionCurricularModule(apiFetcher)
+            }
+        case 'matriculas':
             return {
                 matricula: new MatriculaModule(apiFetcher),
-                antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
-            };
-        case "curriculum":
+                antecedenteSalud: new AntecedenteSaludModule(apiFetcher)
+            }
+        case 'curriculum':
             return {
                 itemEntradaCurricular: new ItemEntradaCurricularModule(
                     apiFetcher
-                ),
-            };
-        case "informes":
+                )
+            }
+        case 'informes':
             return {
-                informes: new InformesModule(apiFetcher),
+                informes: new InformesModule(apiFetcher)
                 // ... inicializar otros submódulos de informes
-            };
-        case "establecimiento":
+            }
+        case 'establecimiento':
             return {
                 periodoEscolar: new PeriodoEscolarModule(apiFetcher),
                 establecimiento: new EstablecimientoModule(apiFetcher),
@@ -183,18 +182,18 @@ export function createApiModules(
                 asignaturaCurricular: new AsignaturaCurricularModule(
                     apiFetcher
                 ),
-                especialidad: new EspecialidadModule(apiFetcher),
+                especialidad: new EspecialidadModule(apiFetcher)
                 // ... inicializar otros submódulos de establecimiento
-            };
-        case "general":
+            }
+        case 'general':
             return {
-                auxiliar: new AuxiliarModule(apiFetcher),
-            };
-        case "health":
+                auxiliar: new AuxiliarModule(apiFetcher)
+            }
+        case 'health':
             return {
-                health: new HealthModule(apiFetcher),
-            };
-        case "comunicaciones":
+                health: new HealthModule(apiFetcher)
+            }
+        case 'comunicaciones':
             return {
                 adjunto: new AdjuntoModule(apiFetcher),
                 mensaje: new MensajeModule(apiFetcher),
@@ -202,9 +201,9 @@ export function createApiModules(
                 grupo: new GrupoModule(apiFetcher),
                 permiso: new PermisoModule(apiFetcher),
                 usuarioPlantilla: new UsuarioPlantillaModule(apiFetcher),
-                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher),
-            };
-        case "enfermeria":
+                sistemaPlantilla: new SistemaPlantillaModule(apiFetcher)
+            }
+        case 'enfermeria':
             return {
                 registroAtencion: new RegistroAtencionModule(apiFetcher),
                 antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
@@ -212,11 +211,12 @@ export function createApiModules(
                     apiFetcher
                 ),
                 configuracionItem: new ConfiguracionItemModule(apiFetcher),
-                registroAccidente: new RegistroAccidenteModule(apiFetcher)
-            };
-        case "evaluaciones":
+                registroAccidente: new RegistroAccidenteModule(apiFetcher),
+                estadistica: new EstadisticaModule(apiFetcher)
+            }
+        case 'evaluaciones':
             return {
-                evaluacionCurso: new EvaluacionCursoModule(apiFetcher),
-            };
+                evaluacionCurso: new EvaluacionCursoModule(apiFetcher)
+            }
     }
 }
