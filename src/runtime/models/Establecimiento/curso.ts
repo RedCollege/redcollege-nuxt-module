@@ -23,4 +23,5 @@ export interface ICurso {
      * Contiene el nombre completo del curso.
      */
     nombreCompleto: string;
+    cupos: number;
 }
