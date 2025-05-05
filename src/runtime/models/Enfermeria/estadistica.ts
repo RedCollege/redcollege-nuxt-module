@@ -11,6 +11,13 @@ export interface IChartData {
     value: number
 }
 
+export interface IResumenCard {
+    titulo: string
+    ToolTipContenido: string
+    variant?: string
+    progressItems: IResumenBase[]
+}
+
 export interface IResumenBase {
     label: string
     value: number | string
