@@ -1,7 +1,6 @@
 import type { $Fetch } from 'ofetch';
-import type { IObtenerDescargableDeUnidad, IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
+import type { IDiaHabilUnidadPlanificacion, IObtenerDescargableDeUnidad, IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
 import type { IEstadisticasPlanificacion } from '../../../models';
-
 
 interface GetAllProps {
     trashed?: boolean;
@@ -85,6 +84,12 @@ export default class PlanificacionModule {
     async deletePlanificacion(id: number): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}/destroy`, {
             method: 'DELETE'
+        })
+    }
+
+    async obtenerDiasHabilesUnidad(planificacionId: number): Promise<IDiaHabilUnidadPlanificacion[]> {
+        return this.fetcher(`/planificacion/obtenerDiasHabilesPlanificacionCompleta/${planificacionId}`, {
+            method: "GET"
         })
     }
 
