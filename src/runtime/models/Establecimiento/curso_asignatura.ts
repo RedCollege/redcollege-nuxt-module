@@ -9,6 +9,7 @@ export interface ICursoAsignatura {
     asignaturaId: number;
     asignaturaSigeId: number;
     alias: string;
+    nombreCompleto: string;
     createdAt: DateTime;
     updatedAt: DateTime;
     curso: ICurso;
