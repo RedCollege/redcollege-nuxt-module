@@ -87,7 +87,7 @@ export default class PlanificacionModule {
         })
     }
 
-    async obtenerDiasHabilesUnidad(planificacionId: number): Promise<IDiaHabilUnidadPlanificacion[]> {
+    async obtenerDiasHabilesPlanificacionCompleta(planificacionId: number): Promise<IDiaHabilUnidadPlanificacion[]> {
         return this.fetcher(`/planificacion/obtenerDiasHabilesPlanificacionCompleta/${planificacionId}`, {
             method: "GET"
         })
