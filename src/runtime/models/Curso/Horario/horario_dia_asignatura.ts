@@ -12,4 +12,5 @@ export interface IHorarioDiaAsignatura {
     createdAt: DateTime;
     updatedAt: DateTime;
     cursoAsignatura: ICursoAsignatura;
+    totalAsistencias: number;
 }
