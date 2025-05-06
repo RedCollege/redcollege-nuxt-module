@@ -1,10 +1,16 @@
 import type { $Fetch } from 'ofetch';
-import type { ICursoAsignatura, IGradosSige } from '../../../models';
+import type { ICurso, ICursoAsignatura, IGradosSige } from '../../../models';
 import type { IUsuario } from '~/src/runtime/models/Auth/usuario';
 
 
 export default class CursoModule {
     constructor(private fetcher: $Fetch) { }
+
+    async obtenerCurso(cursoId: number): Promise<ICurso> {
+        return this.fetcher(`/curso/obtenerCurso/${cursoId}`, {
+            method: 'GET'
+        })
+    }
 
     async getGradosSige(establecimientoId: number, year: number): Promise<IGradosSige[]> {
         return this.fetcher(`/curso/obtenerNivelesSige/${establecimientoId}/?year=${year}`, {
