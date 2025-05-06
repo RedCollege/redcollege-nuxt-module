@@ -107,6 +107,7 @@ export default defineNuxtModule<ModuleOptions>({
         addPlugin(resolver.resolve('./runtime/plugins/middleware'))
         addPlugin(resolver.resolve('./runtime/plugins/api'))
         addPlugin(resolver.resolve('./runtime/plugins/form'))
+        addPlugin(resolver.resolve('./runtime/plugins/favicon'))
 
         addComponentsDir({
             path: resolver.resolve('runtime/components')
