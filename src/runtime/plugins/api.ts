@@ -14,6 +14,7 @@ import type {
     ComunicacionesModules,
     EnfermeriaModules,
     EvaluacionesModules,
+    HorarioModules,
 } from "../utils/apiModuleFactory";
 import { useAuthStore } from "../stores/authStore";
 
@@ -56,8 +57,8 @@ export default defineNuxtPlugin((nuxtApp) => {
             apiFetcher
         ) as ComunicacionesModules,
         enfermeria: createApiModules("enfermeria", apiFetcher) as EnfermeriaModules,
-
         evaluaciones: createApiModules("evaluaciones", apiFetcher) as EvaluacionesModules,
+        horario: createApiModules("horario", apiFetcher) as HorarioModules
     };
 
     return {

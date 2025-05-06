@@ -9,3 +9,4 @@ export * from "./Auth";
 export * from "./Comunicacion";
 export * from "./Enfermeria";
 export * from "./Evaluacion";
+export * from "./Curso"

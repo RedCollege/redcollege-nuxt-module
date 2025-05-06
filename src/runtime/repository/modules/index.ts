@@ -21,3 +21,4 @@ export { default as EvaluacionCursoModule } from "./evaluacion/evaluacion_curso"
 export { default as RegistroAtencionModule } from "./enfermeria/registro_atencion";
 export { default as EnfermedadDiscapacidadModule } from "./enfermeria/enfermedad_discapacidad";
 export { default as ConfiguracionItemModule } from "./enfermeria/configuracion_item";
+export { default as HorarioModule } from './curso/horario/horario'

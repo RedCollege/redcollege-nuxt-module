@@ -2,14 +2,14 @@ import type { $Fetch } from 'ofetch';
 import type { IConfiguracionItem, IConfiguracionItemForm, IConfiguracionItemGrouped } from '~/src/runtime/models';
 
 interface Props {
-    establecimientoId : number
+    establecimientoId: number
     context: string | string[]
 }
 
-export default class ConfiguracionItemModule{
-    constructor(private fetcher: $Fetch) {}
- 
-    async getAllConfiguracionItemByEstablecimiento({establecimientoId, context }: Props): Promise<IConfiguracionItemGrouped> {
+export default class ConfiguracionItemModule {
+    constructor(private fetcher: $Fetch) { }
+
+    async getAllConfiguracionItemByEstablecimiento({ establecimientoId, context }: Props): Promise<IConfiguracionItemGrouped> {
 
         const params: Record<string, any> = {}
 
@@ -25,7 +25,7 @@ export default class ConfiguracionItemModule{
         });
     }
 
-   async saveConfiguracionItem(data: IConfiguracionItemForm): Promise<IConfiguracionItem> {
+    async saveConfiguracionItem(data: IConfiguracionItemForm): Promise<IConfiguracionItem> {
         return this.fetcher('/enfermeria/configuracion_item', {
             method: 'POST',
             body: data
