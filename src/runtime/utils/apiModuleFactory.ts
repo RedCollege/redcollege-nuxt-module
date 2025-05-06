@@ -34,6 +34,7 @@ import MarcadorModule from "../repository/modules/planificaciones/marcador";
 import ConfiguracionItemModule from "../repository/modules/enfermeria/configuracion_item";
 import RegistroAccidenteModule from "../repository/modules/enfermeria/registro_accidente";
 import HorarioModule from "../repository/modules/curso/horario/horario";
+import HorarioDiaAsignaturaModule from "../repository/modules/curso/horario/horario_dia_asignatura";
 
 export type AuthModules = {
     usuario: UsuarioModule;
@@ -72,7 +73,8 @@ export type EstablecimientoModules = {
 };
 
 export type HorarioModules = {
-    horario: HorarioModule
+    horario: HorarioModule;
+    horarioDiaAsignatura: HorarioDiaAsignaturaModule;
 };
 
 export type GeneralModules = {
@@ -228,7 +230,8 @@ export function createApiModules(
         };
         case "horario":
             return {
-                horario: new HorarioModule(apiFetcher)
+                horario: new HorarioModule(apiFetcher),
+                horarioDiaAsignatura: new HorarioDiaAsignaturaModule(apiFetcher)
             }
     }
 }
