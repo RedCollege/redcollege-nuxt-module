@@ -11,6 +11,8 @@ export interface ModuleOptions {
     shouldRedirect: boolean;
     redirectTo: string;
     redirectToAdmin: string;
+    postHogApiKey?: string;
+    postHogApiHost?: string;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -37,7 +39,9 @@ export default defineNuxtModule<ModuleOptions>({
             redirectTo: options.redirectTo,
             redirectToAdmin: options.redirectToAdmin,
             shouldRedirect: options.shouldRedirect,
-            rollbarToken: options.rollbarToken
+            rollbarToken: options.rollbarToken,
+            postHogApiKey: options.postHogApiKey,
+            postHogApiHost: options.postHogApiHost
         })
 
         try {
@@ -115,6 +119,11 @@ export default defineNuxtModule<ModuleOptions>({
 
         await installModule('nuxt-rollbar', {
             clientAccessToken: options.rollbarToken
+        })
+
+        await installModule('nuxt-posthog', {
+            publicKey: options.postHogApiKey,
+            host: options.postHogApiHost
         })
 
         await installModule('@nuxtjs/tailwindcss', {
