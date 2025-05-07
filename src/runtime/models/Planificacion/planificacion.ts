@@ -66,3 +66,8 @@ export interface IObtenerDescargableDeUnidad {
     planificacion: IPlanificacion;
     unidad: IUnidad
 }
+
+export interface IDiaHabilUnidadPlanificacion {
+    unidadId: number;
+    fechas: DateTime[]
+}

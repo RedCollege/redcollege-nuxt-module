@@ -1,7 +1,6 @@
 import type { $Fetch } from 'ofetch';
-import type { IObtenerDescargableDeUnidad, IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
+import type { IDiaHabilUnidadPlanificacion, IObtenerDescargableDeUnidad, IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
 import type { IEstadisticasPlanificacion } from '../../../models';
-
 
 interface GetAllProps {
     trashed?: boolean;
@@ -35,11 +34,12 @@ export default class PlanificacionModule {
         });
     }
 
-    async getPlanificacionById(planificacionId: number): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${planificacionId}`, {
+    async getPlanificacionById(planificacionId: number, isDescargable: boolean = false): Promise<IPlanificacion> {
+        return this.fetcher(`/planificacion/${planificacionId}?isDescargable=${isDescargable}`, {
             method: 'GET'
         });
     }
+
 
     async duplicarCompartirPlanificacion(planificacionId: number, titulo: string, periodo: string, cursoId: number, isColaborativa: boolean, asignaturasIds: number[], colaboradoresIds: number[], action: 1 | 2): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/duplicarCompartirPlanificacion/${planificacionId}?action=${action}`, {
@@ -84,6 +84,12 @@ export default class PlanificacionModule {
     async deletePlanificacion(id: number): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${id}/destroy`, {
             method: 'DELETE'
+        })
+    }
+
+    async obtenerDiasHabilesPlanificacionCompleta(planificacionId: number): Promise<IDiaHabilUnidadPlanificacion[]> {
+        return this.fetcher(`/planificacion/obtenerDiasHabilesPlanificacionCompleta/${planificacionId}`, {
+            method: "GET"
         })
     }
 

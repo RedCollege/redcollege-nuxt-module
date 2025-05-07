@@ -22,3 +22,4 @@ export { default as RegistroAtencionModule } from './enfermeria/registro_atencio
 export { default as EnfermedadDiscapacidadModule } from './enfermeria/enfermedad_discapacidad'
 export { default as ConfiguracionItemModule } from './enfermeria/configuracion_item'
 export { default as EstadisticaModule } from './enfermeria/estadistica'
+export { default as HorarioModule } from './curso/horario/horario'

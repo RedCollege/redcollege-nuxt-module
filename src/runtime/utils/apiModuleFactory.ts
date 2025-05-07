@@ -34,6 +34,9 @@ import UsuarioPlantillaModule from '../repository/modules/comunicacion/usuario_p
 import MarcadorModule from '../repository/modules/planificaciones/marcador'
 import ConfiguracionItemModule from '../repository/modules/enfermeria/configuracion_item'
 import RegistroAccidenteModule from '../repository/modules/enfermeria/registro_accidente'
+import HorarioModule from '../repository/modules/curso/horario/horario'
+import HorarioDiaAsignaturaModule from '../repository/modules/curso/horario/horario_dia_asignatura'
+
 export type AuthModules = {
     usuario: UsuarioModule
 }
@@ -68,6 +71,11 @@ export type EstablecimientoModules = {
     asignaturaCurricular: AsignaturaCurricularModule
     periodoEscolar: PeriodoEscolarModule
     especialidad: EspecialidadModule
+}
+
+export type HorarioModules = {
+    horario: HorarioModule
+    horarioDiaAsignatura: HorarioDiaAsignaturaModule
 }
 
 export type GeneralModules = {
@@ -114,6 +122,7 @@ export type ApiModules = {
     health: HealthModules
     comunicaciones: ComunicacionesModules
     evaluaciones: EvaluacionesModules
+    horario: HorarioModules
 }
 
 export function createApiModules (
@@ -128,7 +137,8 @@ export function createApiModules (
         | 'health'
         | 'comunicaciones'
         | 'enfermeria'
-        | 'evaluaciones',
+        | 'evaluaciones'
+        | 'horario',
     apiFetcher: $Fetch
 ):
     | AuthModules
@@ -141,7 +151,8 @@ export function createApiModules (
     | HealthModules
     | ComunicacionesModules
     | EnfermeriaModules
-    | EvaluacionesModules {
+    | EvaluacionesModules
+    | HorarioModules {
     switch (apiType) {
         case 'auth':
             return {
@@ -217,6 +228,11 @@ export function createApiModules (
         case 'evaluaciones':
             return {
                 evaluacionCurso: new EvaluacionCursoModule(apiFetcher)
+            }
+        case 'horario':
+            return {
+                horario: new HorarioModule(apiFetcher),
+                horarioDiaAsignatura: new HorarioDiaAsignaturaModule(apiFetcher)
             }
     }
 }

@@ -11,7 +11,9 @@ export default defineNuxtConfig({
         nombreModulo: 'Planificaciones',
         redirectTo: 'mis-planificaciones',
         redirectToAdmin: 'socket',
-        shouldRedirect: true
+        shouldRedirect: true,
+        postHogApiKey: process.env.POSTHOG_API_KEY,
+        postHogApiHost: process.env.POSTHOG_API_HOST
     },
     devtools: { enabled: true },
     compatibilityDate: '2024-08-16',
