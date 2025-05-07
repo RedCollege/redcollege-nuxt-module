@@ -69,7 +69,8 @@
         "vite-plugin-pug": "^0.3.2",
         "vue-confetti-explosion": "^1.0.2",
         "vue-quilly": "^1.1.2",
-        "zod": "^3.23.8"
+        "zod": "^3.23.8",
+        "nuxt-posthog": "1.6.3"
     },
     "devDependencies": {
         "@iconify-json/tabler": "^1.2.8",
@@ -88,7 +89,6 @@
         "eslint": "^9.7.0",
         "jsdom": "^26.1.0",
         "nuxt": "^3.12.4",
-        "nuxt-posthog": "1.6.3",
         "typescript": "latest",
         "vitest": "^3.1.2",
         "vue-tsc": "^2.0.26"
