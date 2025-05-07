@@ -34,8 +34,8 @@ export default class PlanificacionModule {
         });
     }
 
-    async getPlanificacionById(planificacionId: number, isDescargable: boolean = false, isUnidad: string | null = null ): Promise<IPlanificacion> {
-        return this.fetcher(`/planificacion/${planificacionId}?isDescargable=${isDescargable}?isUnidad=${isUnidad}`, {
+    async getPlanificacionById(planificacionId: number, isDescargable: boolean = false ): Promise<IPlanificacion> {
+        return this.fetcher(`/planificacion/${planificacionId}?isDescargable=${isDescargable}`, {
             method: 'GET'
         });
     }

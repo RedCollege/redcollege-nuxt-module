@@ -13,8 +13,8 @@ export default class UnidadModule {
         return this.fetcher(`/unidades/planificacion/${planificacionId}`);
     }
 
-    async getUnidadById(unidadId: number): Promise<IUnidad> {
-        return this.fetcher(`/unidades/${unidadId}`);
+    async getUnidadById(unidadId: number, isDescargable: boolean = false): Promise<IUnidad> {
+        return this.fetcher(`/unidades/${unidadId}?isDescargable=${isDescargable}`);
     }
 
     async saveUnidad(data: IUnidadForm): Promise<IUnidad> {
