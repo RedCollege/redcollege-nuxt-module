@@ -4,6 +4,7 @@ import type {
     IConfiguracionItem,
     IUsuario,
     IRegistroAtencionAdjunto,
+    IEstablecimiento,
 } from "..";
 
 export interface IRegistroAtencion {
@@ -40,6 +41,18 @@ export interface IRegistroAtencionResponse {
         total: number;
         perPage: number;
         currentPage: number;
+        finalizadas: number;
+        abiertas: number;
+    };
+    data: IRegistroAtencion[];
+}
+
+export interface IRegistroAtencionDescargable {
+    meta: {
+        total: number;
+        finalizadas: number;
+        abiertas: number;
+        establecimiento: IEstablecimiento
     };
     data: IRegistroAtencion[];
 }

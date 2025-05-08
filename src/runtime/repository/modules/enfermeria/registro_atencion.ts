@@ -2,6 +2,7 @@ import type { $Fetch } from "ofetch";
 import type { IRegistroAtencionAdjunto } from "~/src/runtime/models/Enfermeria/adjunto";
 import type {
     IRegistroAtencion,
+    IRegistroAtencionDescargable,
     IRegistroAtencionFilters,
     IRegistroAtencionForm,
     IRegistroAtencionResponse,
@@ -16,6 +17,7 @@ export default class RegistroAtencionModule {
             method: "GET",
         });
     }
+
     async getById(
         registroAtencionId: number
     ): Promise<IRegistroAtencion> {
@@ -106,6 +108,13 @@ export default class RegistroAtencionModule {
             body: {
                 url,
             },
+        });
+    }
+
+    async getDescargable(props?: IRegistroAtencionFilters): Promise<IRegistroAtencionDescargable> {
+        return this.fetcher("/enfermeria/registro_atencion/descargable", {
+            params: props,
+            method: "GET",
         });
     }
 }
