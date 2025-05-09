@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IDiaHabilUnidadPlanificacion, IObtenerDescargableDeUnidad, IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
+import type { IDiaHabilUnidadPlanificacion, IPlanificacion, IPlanificacionForm, IPlanificacionResponse } from '~/src/runtime/models/Planificacion';
 import type { IEstadisticasPlanificacion } from '../../../models';
 
 interface GetAllProps {
@@ -34,7 +34,7 @@ export default class PlanificacionModule {
         });
     }
 
-    async getPlanificacionById(planificacionId: number, isDescargable: boolean = false): Promise<IPlanificacion> {
+    async getPlanificacionById(planificacionId: number, isDescargable: boolean = false ): Promise<IPlanificacion> {
         return this.fetcher(`/planificacion/${planificacionId}?isDescargable=${isDescargable}`, {
             method: 'GET'
         });
@@ -116,11 +116,4 @@ export default class PlanificacionModule {
             method: 'GET'
         })
     }
-
-    async obtenerDescargableDeUnidad(planificacionId: number, unidadId: number): Promise<IObtenerDescargableDeUnidad> {
-        return this.fetcher(`/planificacion/obtenerDescargableDeUnidad/${planificacionId}/${unidadId}`, {
-            method: 'GET'
-        })
-    }
-
 }
