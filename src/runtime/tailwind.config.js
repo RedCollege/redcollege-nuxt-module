@@ -39,6 +39,8 @@ module.exports = {
                 sky: "hsl(var(--sky))",
                 purple: "hsl(var(--purple))",
                 green: "hsl(var(--green))",
+                yellow: "hsl(var(--yellow))",
+                orange: "hsl(var(--orange))",
                 gold: "hsl(var(--gold))",
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
