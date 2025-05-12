@@ -10,7 +10,7 @@ export default class AuxiliarModule {
         formData.append('file', file);
         formData.append('folder', folder);
 
-        return this.fetcher('general/auxiliar/upload', {
+        return this.fetcher(`general/auxiliar/upload?folder=${folder}`, {
             method: 'POST',
             body: formData
         });
