@@ -2,7 +2,7 @@
 import { onMounted, ref, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { applicationModules as modules } from '../config/modules'
-import type { IPeriodoEscolar } from '../models'
+import type { IEstablecimiento, IPeriodoEscolar } from '../models'
 import { useAuthStore } from '../stores/authStore'
 import { useRuntimeConfig, useRoute, useRouter, useNuxtApp } from '#app'
 import { useNavbar, useNotification } from '../composables/states'
@@ -27,14 +27,17 @@ const { $apis } = useNuxtApp()
 const route = useRoute()
 const router = useRouter()
 const fileInput = ref<HTMLInputElement | null>(null)
+const establecimientosResultados = ref<Array<IEstablecimiento>>([])
 const selectedEstablecimientoId = ref("")
 const selectedPeriodoId = ref("")
 const selectedCursoId = ref("")
 const isUploadingAvatar = ref(false)
 const authStore = useAuthStore()
-const { user, isLoggedIn } = storeToRefs(authStore)
+const { user, isLoggedIn, isSuperAdmin } = storeToRefs(authStore)
 const { redirectTo } = useRuntimeConfig().public.redcollege
 const periodos = ref<Array<IPeriodoEscolar>>([])
+const isBuscadorEstablecimientoOpen = ref(false)
+const isSearching = ref(false)
 
 const arePeriodosLoaded = ref(false)
 const areCursosLoaded = ref(false)
@@ -151,6 +154,18 @@ const handleFileUpload = async (event: Event) => {
         }
     }
 }
+
+const buscarEstablecimiento = (async(event: KeyboardEvent) => {
+    const busqueda = (event.target as HTMLInputElement).value
+    try{
+        isSearching.value = true
+        const data = await $apis.establecimiento.establecimiento.obtenerEstablecimientos(busqueda, 1)
+        establecimientosResultados.value = data.data
+        isSearching.value = false
+    }catch(error){
+
+    }
+})
 
 // Inicialización desde los parámetros de la ruta
 onMounted(async () => {
@@ -275,6 +290,29 @@ const logout = () => {
                                 a.flex.gap-2.items-center(href="https://redcollege.freshdesk.com/support/solutions", target="_blank")
                                     img.w-4.h-4(src="../assets/images/help.svg")
                                     span Tutoriales
+                        //-NavigationMenuItem(v-if="isSuperAdmin")
+                            Popover(v-model:open="isBuscadorEstablecimientoOpen")
+                                PopoverTrigger.w-full(as-child)
+                                    Button.w-full.flex.gap-2.items-center.font-normal(type="button", variant="outline")
+                                        span Buscar establecimiento
+                                        Icon.opacity-50(name="tabler:selector", size="18")
+                                PopoverContent
+                                    Command(:should-filter="false")
+                                        .relative.w-full
+                                            CommandInput(placeholder="Buscar establecimiento", @input="buscarEstablecimiento")
+                                            CommandList
+                                                template(v-if="establecimientosResultados.length === 0")
+                                                    CommandEmpty No se encontraron resultados
+                                                template(v-else)
+                                                    CommandGroup(heading="Establecimientos")
+                                                        CommandItem(v-for="establecimiento in establecimientosResultados", :key="establecimiento.id")
+                                                            .flex.gap-2.items-center
+                                                                Avatar.w-8.h-8
+                                                                    AvatarImage(:src="establecimiento.logo", v-if="establecimiento.logo")
+                                                                    AvatarFallBack(v-else)
+                                                                        Icon.text-gray-400(name="tabler:school", size="18")
+                                                                p.truncate.max-w-48
+                                                                    span {{ establecimiento.nombre }}
                         NavigationMenuItem(v-if="!hideEstablecimientos")
                             Select(v-model="selectedEstablecimientoId")
                                 SelectTrigger

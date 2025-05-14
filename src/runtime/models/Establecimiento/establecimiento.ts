@@ -1,5 +1,17 @@
 import type { DateTime } from 'luxon';
 
+interface Meta {
+    total: number | null;
+    perPage: number | null;
+    currentPage: number | null;
+    lastPage: number | null;
+    firstPage: number | null;
+    firstPageUrl: string | null;
+    lastPageUrl: string | null;
+    nextPageUrl: string | null;
+    previousPageUrl: string | null;
+}
+
 export interface IEstablecimiento {
     id: number;
     nombre: string;
@@ -7,4 +19,9 @@ export interface IEstablecimiento {
     rbd: string;
     createdAt: DateTime;
     updatedAt: DateTime;
+}
+
+export interface IEstablecimientoResponse {
+    meta: Meta;
+    data: IEstablecimiento[];
 }

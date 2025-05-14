@@ -25,7 +25,7 @@ const forwardedProps = useForwardProps(delegatedProps)
   >
     <slot />
     <SelectIcon as-child>
-      <CaretSortIcon class="w-4 h-4 opacity-50" />
+      <Icon name="tabler:selector" class="w-4 h-4 opacity-50"> </Icon>
     </SelectIcon>
   </SelectTrigger>
 </template>
