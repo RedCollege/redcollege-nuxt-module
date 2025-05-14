@@ -10,6 +10,7 @@ export interface IAuthUsuarioResponse {
     segundoNombre: string
     establecimientos: IEstablecimientoResponse[]
     roles: IRoleResponse[]
+    nombreCompleto: string
 }
 
 export interface IEstablecimientoResponse {

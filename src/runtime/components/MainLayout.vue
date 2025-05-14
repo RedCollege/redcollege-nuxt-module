@@ -12,8 +12,9 @@ const { isOpen } = storeToRefs(sidebar)
 const { hideCursos, hidePeriodos } = storeToRefs(navbarStore)
 const isCommandOpen = ref(false)
 const isModalStatusOpen = ref(false)
-const { isSuperAdmin } = storeToRefs(useAuthStore())
+const { isSuperAdmin, user } = storeToRefs(useAuthStore())
 const { copyDebugReportToClipboard } = useDebugReportGenerator()
+const { $clientPosthog } = useNuxtApp();
 
 interface Props {
     logoUrl: string;
@@ -46,6 +47,15 @@ const generarReporte = async () => {
 watch([Meta_B, Ctrl_B], (v) => {
     if (v[0] || v[1])
         handleOpenChange()
+})
+
+onMounted(() => {
+    if(user.value){
+        $clientPosthog?.identify(String(user.value.id), {
+            correo: user.value.correo,
+            nombre: user.value.nombreCompleto
+        })
+    }
 })
 
 </script>

@@ -78,7 +78,7 @@ function moveCellsDown() {
     }
 
     setTimeout(() => {
-        const isFilled = grid.value[rows.value - 1].every((cell) => cell !== null);
+        const isFilled = grid.value[rows.value - 1]?.every((cell) => cell !== null);
         if (Array.isArray(grid.value[rows.value]) && isFilled) {
             for (let col = 0; col < cols.value; col++) {
                 grid.value[rows.value][col] = null;
@@ -88,7 +88,7 @@ function moveCellsDown() {
 }
 
 function clearColumn() {
-    const isFilled = grid.value[rows.value - 1].every((cell) => cell === true);
+    const isFilled = grid.value[rows.value - 1]?.every((cell) => cell === true);
     if (!isFilled) return;
 
     for (let col = 0; col < cols.value; col++) {
