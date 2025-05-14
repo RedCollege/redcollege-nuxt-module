@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useNavbar, useSidebar } from  "../composables/states"
 import { storeToRefs } from 'pinia'
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useMagicKeys } from '@vueuse/core'
 import { useAuthStore } from "../stores/authStore";
 import { useDebugReportGenerator } from "../composables/useDebugReportGenerator";
