@@ -2,24 +2,20 @@
 import { type HTMLAttributes, computed } from 'vue'
 import { TabsList, type TabsListProps } from 'reka-ui'
 import { cn } from '../../../lib/utils'
-
-const props = defineProps<TabsListProps & { class?: HTMLAttributes['class'] }>()
+import { type TabsListVariants, tabsListVariants } from '.'
+const props = defineProps<TabsListProps & { class?: HTMLAttributes['class'] } & { variant?: TabsListVariants['variant'] }>()
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props
+    const { class: _, ...delegated } = props
 
-  return delegated
+    return delegated
 })
 </script>
 
 <template>
-  <TabsList
-    v-bind="delegatedProps"
-    :class="cn(
-      'inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground',
-      props.class,
-    )"
-  >
-    <slot />
-  </TabsList>
+    <TabsList v-bind="delegatedProps" :class="cn(tabsListVariants({ variant }),
+        props.class,
+    )">
+        <slot />
+    </TabsList>
 </template>

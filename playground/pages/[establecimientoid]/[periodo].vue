@@ -11,10 +11,10 @@ const showConfetti = () => {
 </script>
 
 <template lang="pug">
-
+.py-2
     Card
-        Button(@click="showConfetti", variant="secondary") Show confetti
-        Button(as-child)
-            NuxtLink(to="/103/2024/animations") Go
-        NuxtPage
+        CardHeader
+            CardTitle Playground
+        CardContent
+            NuxtPage
 </template>
