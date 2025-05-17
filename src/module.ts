@@ -13,6 +13,7 @@ export interface ModuleOptions {
     redirectToAdmin: string;
     postHogApiKey?: string;
     postHogApiHost?: string;
+    prismicEndPoint?: string;
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -41,7 +42,8 @@ export default defineNuxtModule<ModuleOptions>({
             shouldRedirect: options.shouldRedirect,
             rollbarToken: options.rollbarToken,
             postHogApiKey: options.postHogApiKey,
-            postHogApiHost: options.postHogApiHost
+            postHogApiHost: options.postHogApiHost,
+            prismicEndPoint: options.prismicEndPoint
         })
 
         try {
@@ -119,6 +121,10 @@ export default defineNuxtModule<ModuleOptions>({
 
         await installModule('nuxt-rollbar', {
             clientAccessToken: options.rollbarToken
+        })
+
+        await installModule('@nuxtjs/prismic', {
+            endpoint: options.prismicEndPoint
         })
 
         await installModule('nuxt-posthog', {

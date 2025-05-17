@@ -1,0 +1,6 @@
+{
+  "repositoryName": "redcollege-tech-marketing",
+  "adapter": "@slicemachine/adapter-nuxt",
+  "libraries": ["./src/runtime/components/slices"],
+  "localSliceSimulatorURL": "http://localhost:3000/slice-simulator"
+}

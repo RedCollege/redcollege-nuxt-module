@@ -13,7 +13,8 @@ export default defineNuxtConfig({
         redirectToAdmin: 'socket',
         shouldRedirect: true,
         postHogApiKey: process.env.POSTHOG_API_KEY,
-        postHogApiHost: process.env.POSTHOG_API_HOST
+        postHogApiHost: process.env.POSTHOG_API_HOST,
+        prismicEndPoint: process.env.PRISMIC_END_POINT
     },
     devtools: { enabled: true },
     compatibilityDate: '2024-08-16',

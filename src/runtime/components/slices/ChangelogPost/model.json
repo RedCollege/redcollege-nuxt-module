@@ -1,0 +1,16 @@
+{
+  "id": "changelog_post",
+  "type": "SharedSlice",
+  "name": "ChangelogPost",
+  "description": "ChangelogPost",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": ""
+    }
+  ]
+}
