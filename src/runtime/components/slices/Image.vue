@@ -17,5 +17,5 @@ const props = defineProps<Props>();
 </script>
 
 <template lang="pug">
-    img.rounded-xl.border(:src="props.node.url" :alt="props.node.alt || ''" loading="lazy")
+    img.rounded-xl.border.w-full(:src="props.node.url" :alt="props.node.alt || ''" loading="lazy")
 </template>

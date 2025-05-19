@@ -38,6 +38,7 @@ const { redirectTo } = useRuntimeConfig().public.redcollege
 const periodos = ref<Array<IPeriodoEscolar>>([])
 const isBuscadorEstablecimientoOpen = ref(false)
 const isSearching = ref(false)
+const isChangelogOpen = ref(false)
 
 const arePeriodosLoaded = ref(false)
 const areCursosLoaded = ref(false)
@@ -254,124 +255,136 @@ const logout = () => {
 </script>
 
 <template lang="pug">
-.bg-background.py-2.shadow-sm
-    .container.mx-auto(v-if="isLoggedIn && user")
-        .flex.items-center.gap-4
-            .grow
-                .flex.gap-4.items-center
-                    SidebarSheetMenu(:logo-url="logoUrl", :titulo="titulo")
-                    .flex.gap-2.items-center
-                        img(:src="logoUrl", width="30")
-                        h5.text-primary.font-bold(class="hidden md:block") {{ titulo }}
-                    NavigationMenu(class="hidden md:block")
-                        NavigationMenuList
+div
+    .bg-background.py-2.shadow-sm
+        .container.mx-auto(v-if="isLoggedIn && user")
+            .flex.items-center.gap-4
+                .grow
+                    .flex.gap-4.items-center
+                        SidebarSheetMenu(:logo-url="logoUrl", :titulo="titulo")
+                        .flex.gap-2.items-center
+                            img(:src="logoUrl", width="30")
+                            h5.text-primary.font-bold(class="hidden md:block") {{ titulo }}
+                        NavigationMenu(class="hidden md:block")
+                            NavigationMenuList
+                                NavigationMenuItem
+                                    NavigationMenuTrigger
+                                        .flex.gap-2.items-center.text-primary
+                                            Icon(name="tabler:layout-2", size="20")
+                                            p Mis Módulos
+                                    NavigationMenuContent
+                                        ul(class="grid w-[500px] gap-2 p-4 grid-cols-2")
+                                            li(v-for="module in modules", :key="module.title")
+                                                NavigationMenuLink(as-child)
+                                                    a.relative(:href="module.link", class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground")
+                                                        .flex.gap-2.items-center
+                                                            img(:src="module.img", width="30px")
+                                                            div
+                                                                .text-sm.font-medium.leading-none {{  module.title  }}
+                                                                p.line-clamp-2.text-sm.leading-snug.text-muted-foreground {{  module.subtitle  }}
+                                                        .absolute.top-2.right-2(v-if="module.doHighlight")
+                                                            p.bg-sky-700.text-white.font-medium.rounded-md.uppercase.px-2.py-1.animate-bounce(class="text-[.4rem]") Nuevo Módulo
+                                NavigationMenuItem(v-if="isSuperAdmin")
+                                    Button.flex.gap-2.items-center.text-primary(variant="ghost", @click="isChangelogOpen = true")
+                                        Icon.text-primary(name="tabler:brand-github")
+                                        p.text-sm.font-medium Changelog
+
+                .flex-none
+                    NavigationMenu
+                        NavigationMenuList(class="gap-2")
                             NavigationMenuItem
-                                NavigationMenuTrigger
-                                    .flex.gap-2.items-center.text-primary
-                                        Icon(name="tabler:layout-2", size="25")
-                                        p Mis Módulos
-                                NavigationMenuContent
-                                    ul(class="grid w-[500px] gap-2 p-4 grid-cols-2")
-                                        li(v-for="module in modules", :key="module.title")
-                                            NavigationMenuLink(as-child)
-                                                a.relative(:href="module.link", class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground")
-                                                    .flex.gap-2.items-center
-                                                        img(:src="module.img", width="30px")
-                                                        div
-                                                            .text-sm.font-medium.leading-none {{  module.title  }}
-                                                            p.line-clamp-2.text-sm.leading-snug.text-muted-foreground {{  module.subtitle  }}
-                                                    .absolute.top-2.right-2(v-if="module.doHighlight")
-                                                        p.bg-sky-700.text-white.font-medium.rounded-md.uppercase.px-2.py-1.animate-bounce(class="text-[.4rem]") Nuevo Módulo
-            .flex-none
-                NavigationMenu
-                    NavigationMenuList(class="gap-2")
-                        NavigationMenuItem
-                            Button(variant="secondary", as-child)
-                                a.flex.gap-2.items-center(href="https://redcollege.freshdesk.com/support/solutions", target="_blank")
-                                    img.w-4.h-4(src="../assets/images/help.svg")
-                                    span Tutoriales
-                        //-NavigationMenuItem(v-if="isSuperAdmin")
-                            Popover(v-model:open="isBuscadorEstablecimientoOpen")
-                                PopoverTrigger.w-full(as-child)
-                                    Button.w-full.flex.gap-2.items-center.font-normal(type="button", variant="outline")
-                                        span Buscar establecimiento
-                                        Icon.opacity-50(name="tabler:selector", size="18")
-                                PopoverContent
-                                    Command(:should-filter="false")
-                                        .relative.w-full
-                                            CommandInput(placeholder="Buscar establecimiento", @input="buscarEstablecimiento")
-                                            CommandList
-                                                template(v-if="establecimientosResultados.length === 0")
-                                                    CommandEmpty No se encontraron resultados
-                                                template(v-else)
-                                                    CommandGroup(heading="Establecimientos")
-                                                        CommandItem(v-for="establecimiento in establecimientosResultados", :key="establecimiento.id")
-                                                            .flex.gap-2.items-center
-                                                                Avatar.w-8.h-8
-                                                                    AvatarImage(:src="establecimiento.logo", v-if="establecimiento.logo")
-                                                                    AvatarFallBack(v-else)
-                                                                        Icon.text-gray-400(name="tabler:school", size="18")
-                                                                p.truncate.max-w-48
-                                                                    span {{ establecimiento.nombre }}
-                        NavigationMenuItem(v-if="!hideEstablecimientos")
-                            Select(v-model="selectedEstablecimientoId")
-                                SelectTrigger
-                                    SelectValue(placeholder="Elige un establecimiento")
-                                SelectContent
-                                    SelectGroup
-                                        SelectLabel Mis Establecimientos
-                                        SelectItem(:value="String(establecimiento.id)", v-for="establecimiento in user.establecimientos", :key="establecimiento.id")
-                                            .flex.gap-2.items-center
-                                                img(:src="establecimiento.logo", width="25px")
-                                                span {{  establecimiento.nombre }}
-                        NavigationMenuItem(v-if="!hidePeriodos")
-                            Select(:disabled="!arePeriodosLoaded ", v-model="selectedPeriodoId")
-                                SelectTrigger
-                                    SelectValue(placeholder="Elige un año escolar")
-                                SelectContent
-                                    SelectGroup
-                                        SelectLabel Años Escolares
-                                        SelectItem(:value="String(periodo.periodo)", v-for="periodo in periodos", :key="periodo.periodo") {{ periodo.periodo }}
+                                Button(variant="secondary", as-child)
+                                    a.flex.gap-2.items-center(href="https://redcollege.freshdesk.com/support/solutions", target="_blank")
+                                        img.w-4.h-4(src="../assets/images/help.svg")
+                                        span Tutoriales
+                            //-NavigationMenuItem(v-if="isSuperAdmin")
+                                Popover(v-model:open="isBuscadorEstablecimientoOpen")
+                                    PopoverTrigger.w-full(as-child)
+                                        Button.w-full.flex.gap-2.items-center.font-normal(type="button", variant="outline")
+                                            span Buscar establecimiento
+                                            Icon.opacity-50(name="tabler:selector", size="18")
+                                    PopoverContent
+                                        Command(:should-filter="false")
+                                            .relative.w-full
+                                                CommandInput(placeholder="Buscar establecimiento", @input="buscarEstablecimiento")
+                                                CommandList
+                                                    template(v-if="establecimientosResultados.length === 0")
+                                                        CommandEmpty No se encontraron resultados
+                                                    template(v-else)
+                                                        CommandGroup(heading="Establecimientos")
+                                                            CommandItem(v-for="establecimiento in establecimientosResultados", :key="establecimiento.id")
+                                                                .flex.gap-2.items-center
+                                                                    Avatar.w-8.h-8
+                                                                        AvatarImage(:src="establecimiento.logo", v-if="establecimiento.logo")
+                                                                        AvatarFallBack(v-else)
+                                                                            Icon.text-gray-400(name="tabler:school", size="18")
+                                                                    p.truncate.max-w-48
+                                                                        span {{ establecimiento.nombre }}
+                            NavigationMenuItem(v-if="!hideEstablecimientos")
+                                Select(v-model="selectedEstablecimientoId")
+                                    SelectTrigger
+                                        SelectValue(placeholder="Elige un establecimiento")
+                                    SelectContent
+                                        SelectGroup
+                                            SelectLabel Mis Establecimientos
+                                            SelectItem(:value="String(establecimiento.id)", v-for="establecimiento in user.establecimientos", :key="establecimiento.id")
+                                                .flex.gap-2.items-center
+                                                    img(:src="establecimiento.logo", width="25px")
+                                                    span {{  establecimiento.nombre }}
+                            NavigationMenuItem(v-if="!hidePeriodos")
+                                Select(:disabled="!arePeriodosLoaded ", v-model="selectedPeriodoId")
+                                    SelectTrigger
+                                        SelectValue(placeholder="Elige un año escolar")
+                                    SelectContent
+                                        SelectGroup
+                                            SelectLabel Años Escolares
+                                            SelectItem(:value="String(periodo.periodo)", v-for="periodo in periodos", :key="periodo.periodo") {{ periodo.periodo }}
 
-                        NavigationMenuItem.max-w-64(v-if="!hideCursos")
-                            Select(:disabled="!areCursosLoaded", v-model="selectedCursoId")
-                                SelectTrigger
-                                    SelectValue(placeholder="Elige un curso")
-                                SelectContent
-                                    SelectGroup
-                                        SelectLabel Cursos
-                                        SelectItem(:value="String(curso.id)", v-for="curso in cursos") {{ curso?.sige.tipo_ensenanza_id }} | {{  curso?.sige.descripcion_grado  }} {{ curso?.sige.descripcion }} {{ curso.seccion }}
+                            NavigationMenuItem.max-w-64(v-if="!hideCursos")
+                                Select(:disabled="!areCursosLoaded", v-model="selectedCursoId")
+                                    SelectTrigger
+                                        SelectValue(placeholder="Elige un curso")
+                                    SelectContent
+                                        SelectGroup
+                                            SelectLabel Cursos
+                                            SelectItem(:value="String(curso.id)", v-for="curso in cursos") {{ curso?.sige.tipo_ensenanza_id }} | {{  curso?.sige.descripcion_grado  }} {{ curso?.sige.descripcion }} {{ curso.seccion }}
 
-                        NavigationMenuItem
-                            Separator(orientation="vertical", class="h-10")
-                        NavigationMenuItem
-                            DropdownMenu
-                                DropdownMenuTrigger(as-child)
-                                    Button(variant="ghost", size="icon")
-                                        Loader.animate-spin(v-if="isUploadingAvatar")
-                                        Avatar(class="h-8 w-8", v-else)
-                                            AvatarImage(:src="user.avatarUrl")
-                                            AvatarFallback {{ user.iniciales }}
-                                DropdownMenuContent.w-56
-                                    DropdownMenuLabel Mi Cuenta
-                                    DropdownMenuSeparator
-                                    DropdownMenuGroup
-                                        DropdownMenuItem
-                                            a.flex.gap-2.items-center(href="https://login.redcollege.net/")
-                                                Icon(name="tabler:home", size="20")
-                                                span Inicio
-                                        DropdownMenuItem
-                                            .cursor-pointer.flex.gap-2.items-center(href="https://login.redcollege.net/", @click="openFilePicker")
-                                                Icon(name="tabler:photo", size="20")
-                                                span Subir Avatar
-                                            input.hidden(type="file", ref="fileInput", accept="image/*", @change="handleFileUpload")
-                                        DropdownMenuItem
-                                            a.flex.gap-2.items-center(href="https://redcollege.freshdesk.com/support/home", target="_blank")
-                                                Icon(name="tabler:help", size="20")
-                                                span Ayuda
+                            NavigationMenuItem
+                                Separator(orientation="vertical", class="h-10")
+                            NavigationMenuItem
+                                DropdownMenu
+                                    DropdownMenuTrigger(as-child)
+                                        Button(variant="ghost", size="icon")
+                                            Loader.animate-spin(v-if="isUploadingAvatar")
+                                            Avatar(class="h-8 w-8", v-else)
+                                                AvatarImage(:src="user.avatarUrl")
+                                                AvatarFallback {{ user.iniciales }}
+                                    DropdownMenuContent.w-56
+                                        DropdownMenuLabel Mi Cuenta
                                         DropdownMenuSeparator
-                                        DropdownMenuItem
-                                            div.flex.gap-2.items-center(@click="logout")
-                                                Icon(name="tabler:logout", size="20")
-                                                span Cerrar Sesión
+                                        DropdownMenuGroup
+                                            DropdownMenuItem
+                                                a.flex.gap-2.items-center(href="https://login.redcollege.net/")
+                                                    Icon(name="tabler:home", size="20")
+                                                    span Inicio
+                                            DropdownMenuItem
+                                                .cursor-pointer.flex.gap-2.items-center(href="https://login.redcollege.net/", @click="openFilePicker")
+                                                    Icon(name="tabler:photo", size="20")
+                                                    span Subir Avatar
+                                                input.hidden(type="file", ref="fileInput", accept="image/*", @change="handleFileUpload")
+                                            DropdownMenuItem
+                                                a.flex.gap-2.items-center(href="https://redcollege.freshdesk.com/support/home", target="_blank")
+                                                    Icon(name="tabler:help", size="20")
+                                                    span Ayuda
+                                            DropdownMenuSeparator
+                                            DropdownMenuItem
+                                                div.flex.gap-2.items-center(@click="logout")
+                                                    Icon(name="tabler:logout", size="20")
+                                                    span Cerrar Sesión
+    Dialog(v-model:open="isChangelogOpen")
+        DialogContent(class="sm:max-w-[825px]")
+            DialogHeader
+                DialogTitle Changelog
+            ScrollArea(class="max-h-[80dvh]")
+                RedCollegeChangelogContainer
 </template>

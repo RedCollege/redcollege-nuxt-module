@@ -3,9 +3,9 @@ import { isFilled, asDate } from "@prismicio/client";
 import type { ChangelogPostDocumentData } from "@/prismicio-types";
 import { DateFormatter, getLocalTimeZone } from '@internationalized/date'
 import { computed } from "vue";
-import Paragraph from "../slices/Paragraph.vue";
-import ListItem from "../slices/ListItem.vue";
-import Image from "../slices/Image.vue";
+import Paragraph from "../../slices/Paragraph.vue";
+import ListItem from "../../slices/ListItem.vue";
+import Image from "../../slices/Image.vue";
 
 interface Props {
     post: {
