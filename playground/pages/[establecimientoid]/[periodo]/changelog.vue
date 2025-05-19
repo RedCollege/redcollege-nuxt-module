@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { SliceSimulator } from "@slicemachine/adapter-nuxt/simulator";
 const prismic = usePrismic();
 const { data: posts } = await useAsyncData("changelog_posts", () =>
     prismic.client.getAllByType('changelog_post', {
