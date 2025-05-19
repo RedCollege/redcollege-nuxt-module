@@ -5,6 +5,7 @@ import { ref, watch, onMounted } from 'vue';
 import { useMagicKeys } from '@vueuse/core'
 import { useAuthStore } from "../stores/authStore";
 import { useDebugReportGenerator } from "../composables/useDebugReportGenerator";
+import { useNuxtApp } from "#app";
 
 const sidebar = useSidebar()
 const navbarStore = useNavbar()
@@ -53,7 +54,8 @@ onMounted(() => {
     if(user.value){
         $clientPosthog?.identify(String(user.value.id), {
             correo: user.value.correo,
-            nombre: user.value.nombreCompleto
+            nombre: user.value.nombreCompleto,
+            establecimiento: user.value.establecimientos.length > 0 ? user.value.establecimientos.at(0)?.nombre : "Usuario Sin Establecimiento"
         })
     }
 })
