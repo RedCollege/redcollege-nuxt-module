@@ -61,7 +61,7 @@ const hasEvents = (date: any): boolean => {
 const getDotsForDate = (date: any) => {
   const events = getEventsForDate(date)
   const maxDots = 3
-  
+
   if (events.length <= maxDots) {
     return {
       dots: events,
@@ -69,7 +69,7 @@ const getDotsForDate = (date: any) => {
       totalCount: events.length
     }
   }
-  
+
   return {
     dots: events.slice(0, maxDots - 1),
     hasMore: true,
@@ -99,52 +99,33 @@ const getDotsForDate = (date: any) => {
         </CalendarGridHead>
 
         <CalendarGridBody>
-          <CalendarGridRow
-            v-for="(weekDates, index) in month.rows"
-            :key="`weekDate-${index}`"
-            class="mt-2 w-full"
-          >
+          <CalendarGridRow v-for="(weekDates, index) in month.rows" :key="`weekDate-${index}`" class="mt-2 w-full">
             <CalendarCell v-for="weekDate in weekDates" :key="weekDate.toString()" :date="weekDate">
-              <CalendarCellTrigger 
-                :day="weekDate" 
-                :month="month.value"
-                :class="cn(hasEvents(weekDate) && 'pb-2')"
-              />
-                <TooltipProvider>
-                  <Tooltip v-if="hasEvents(weekDate)">
-                    <TooltipTrigger asChild>
-                      <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-1 cursor-pointer">
-                      <span
-                        v-for="(event, index) in getDotsForDate(weekDate).dots"
-                        :key="`dot-${index}`"
-                        :class="cn([
-                          'w-1.5 h-1.5 rounded-full',
-                          event.color
-                        ])"
-                      />
-                      
-                    <div
-                      v-if="getDotsForDate(weekDate).hasMore"
-                      class="w-1.5 h-1.5 rounded-full flex items-center justify-center text-blue-400 font-bold text-xs leading-none"
-                    >
-                      +
-                    </div>
+              <CalendarCellTrigger :day="weekDate" :month="month.value" :class="cn(hasEvents(weekDate) && 'pb-2')" />
+              <TooltipProvider>
+                <Tooltip v-if="hasEvents(weekDate)">
+                  <TooltipTrigger asChild>
+                    <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-1 cursor-pointer">
+                      <span v-for="(event, index) in getDotsForDate(weekDate).dots" :key="`dot-${index}`" :class="cn([
+                        'w-1.5 h-1.5 rounded-full',
+                        event.color
+                      ])" />
+
+                      <div v-if="getDotsForDate(weekDate).hasMore"
+                        class="w-1.5 h-1.5 rounded-full flex items-center justify-center text-blue-400 font-bold text-xs leading-none">
+                        +
+                      </div>
                     </div>
                   </TooltipTrigger>
-                  
+
                   <TooltipContent>
                     <div class="flex flex-col gap-2">
-                      <div
-                        v-for="(event, index) in getEventsForDate(weekDate)"
-                        :key="`tooltip-${index}`"
-                        class="flex items-center gap-2"
-                      >
-                        <div 
-                          :class="cn([
-                            'w-2 h-2 rounded-full flex-shrink-0',
-                            event.color
-                          ])" 
-                        />
+                      <div v-for="(event, index) in getEventsForDate(weekDate)" :key="`tooltip-${index}`"
+                        class="flex items-center gap-2">
+                        <div :class="cn([
+                          'w-2 h-2 rounded-full flex-shrink-0',
+                          event.color
+                        ])" />
                         <span class="text-sm font-medium">{{ event.nombre }}</span>
                       </div>
                     </div>
