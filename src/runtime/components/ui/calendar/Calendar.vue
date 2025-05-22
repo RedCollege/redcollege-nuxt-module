@@ -104,7 +104,7 @@ const getDotsForDate = (date: any) => {
               <CalendarCellTrigger :day="weekDate" :month="month.value" :class="cn(hasEvents(weekDate) && 'pb-2')" />
               <TooltipProvider>
                 <Tooltip v-if="hasEvents(weekDate)">
-                  <TooltipTrigger asChild>
+                  <TooltipTrigger as-child>
                     <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-1 cursor-pointer">
                       <span v-for="(event, index) in getDotsForDate(weekDate).dots" :key="`dot-${index}`" :class="cn([
                         'w-1.5 h-1.5 rounded-full',
