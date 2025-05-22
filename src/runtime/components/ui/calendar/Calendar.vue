@@ -112,7 +112,7 @@ const getDotsForDate = (date: any) => {
               />
                 <TooltipProvider>
                   <Tooltip v-if="hasEvents(weekDate)">
-                    <TooltipTrigger asChild>
+                    <TooltipTrigger as-child>
                       <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-1 cursor-pointer">
                       <span
                         v-for="(event, index) in getDotsForDate(weekDate).dots"
