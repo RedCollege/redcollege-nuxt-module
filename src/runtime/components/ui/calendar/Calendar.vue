@@ -16,7 +16,7 @@ import {
 } from '.'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip'
 import { cn } from '../../../lib/utils'
-import { CalendarEvent } from '../../../types/components/calendar'
+import type { CalendarEvent } from '~/src/runtime/types/components/calendar'
 
 const props = defineProps<CalendarRootProps & {
   locale?: string
@@ -43,17 +43,17 @@ const eventMap = computed(() => {
   return map
 })
 
-const getEventsForDate = (date: any): CalendarEvent[] => {
+const getEventsForDate = (date: Date): CalendarEvent[] => {
   const key = new Date(date).toDateString()
   return eventMap.value.get(key) ?? []
 }
 
-const hasEvents = (date: any): boolean => {
+const hasEvents = (date: Date): boolean => {
   const key = new Date(date).toDateString()
   return eventMap.value.has(key)
 }
 
-const getDotsForDate = (date: any) => {
+const getDotsForDate = (date: Date) => {
   const events = getEventsForDate(date)
   const maxDots = 3
 
