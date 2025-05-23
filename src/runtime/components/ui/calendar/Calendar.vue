@@ -16,12 +16,7 @@ import {
 } from '.'
 import { Tooltip, TooltipContent, TooltipTrigger } from '../tooltip'
 import { cn } from '../../../lib/utils'
-
-export interface CalendarEvent {
-  fecha: Date
-  color: string
-  nombre: string
-}
+import { CalendarEvent } from '../../../types/components/calendar'
 
 const props = defineProps<CalendarRootProps & {
   locale?: string
