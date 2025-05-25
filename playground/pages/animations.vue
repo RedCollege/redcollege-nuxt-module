@@ -1,5 +1,4 @@
 <script setup lang="ts">
-const saludo = 'Hola'
 </script>
 
 <template lang="pug">
