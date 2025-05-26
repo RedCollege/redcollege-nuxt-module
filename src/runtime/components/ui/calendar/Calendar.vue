@@ -101,12 +101,16 @@ const getDotsForDate = (date: Date) => {
                 <Tooltip v-if="hasEvents(weekDate)">
                   <TooltipTrigger as-child>
                     <div class="absolute bottom-1 left-1/2 transform -translate-x-1/2 flex gap-1 cursor-pointer">
-                      <span v-for="(event, index) in getDotsForDate(weekDate).dots" :key="`dot-${index}`" :class="cn([
+                      <span 
+                        v-for="(event, idx) in getDotsForDate(weekDate).dots" 
+                        :key="`dot-${idx}`" 
+                        :class="cn([
                         'w-1.5 h-1.5 rounded-full',
                         event.color
                       ])" />
 
-                      <div v-if="getDotsForDate(weekDate).hasMore"
+                      <div 
+                        v-if="getDotsForDate(weekDate).hasMore"
                         class="w-1.5 h-1.5 rounded-full flex items-center justify-center text-blue-400 font-bold text-xs leading-none">
                         +
                       </div>
@@ -115,9 +119,12 @@ const getDotsForDate = (date: Date) => {
 
                   <TooltipContent>
                     <div class="flex flex-col gap-2">
-                      <div v-for="(event, index) in getEventsForDate(weekDate)" :key="`tooltip-${index}`"
+                      <div 
+                        v-for="(event, idx) in getEventsForDate(weekDate)" 
+                        :key="`tooltip-${idx}`"
                         class="flex items-center gap-2">
-                        <div :class="cn([
+                        <div 
+                          :class="cn([
                           'w-2 h-2 rounded-full flex-shrink-0',
                           event.color
                         ])" />
