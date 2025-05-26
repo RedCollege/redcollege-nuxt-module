@@ -46,6 +46,7 @@
         "@unovis/vue": "^1.5.1",
         "@vee-validate/nuxt": "^4.13.2",
         "@vee-validate/zod": "^4.14.7",
+        "@vue/language-plugin-pug": "^2.2.10",
         "@vueuse/motion": "^2.2.6",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
