@@ -16,7 +16,8 @@ import {
     RegistroAtencionModule,
     PermisoModule,
     UsuarioModule,
-    AntecedenteSaludModule
+    AntecedenteSaludModule,
+    SimceEstablecimientoModule
 } from '../repository/modules'
 import AuxiliarModule from '../repository/modules/general/auxiliar'
 import ContenidoModule from '../repository/modules/planificaciones/contenido'
@@ -107,6 +108,7 @@ export type EnfermeriaModules = {
 
 export type EvaluacionesModules = {
     evaluacionCurso: EvaluacionCursoModule
+    simceEstablecimiento: SimceEstablecimientoModule
 }
 
 // agrupación de modulos
@@ -227,7 +229,8 @@ export function createApiModules (
             }
         case 'evaluaciones':
             return {
-                evaluacionCurso: new EvaluacionCursoModule(apiFetcher)
+                evaluacionCurso: new EvaluacionCursoModule(apiFetcher),
+                simceEstablecimiento: new SimceEstablecimientoModule(apiFetcher)
             }
         case 'horario':
             return {
