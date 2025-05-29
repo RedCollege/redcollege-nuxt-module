@@ -9,9 +9,9 @@ export interface IActividad {
     establecimientoId: number;
     periodo: number;
     tipoActividadId: number;
-    observaciones: string;
-    isFinalizada: boolean;
+    descripcion: string;
     isSuspendida: boolean;
+    programadaOFinalizada?: string;
     deletedBy: number | null;
     deletedAt: DateTime | null;
     createdAt: DateTime;
@@ -23,22 +23,23 @@ export interface IActividad {
 }
 
 export interface IActividadForm {
-    nombre: string;
-    fechaActividad: string;
-    lugarActividadId: number;
-    establecimientoId: number;
-    periodo: number;
-    tipoActividadId: number;
+    nombre?: string;
+    fechaActividad?: DateTime;
+    lugarActividadId?: number;
+    establecimientoId?: number;
+    periodo?: number;
+    tipoActividadId?: number;
     descripcion?: string;
-    isFinalizada?: boolean;
     isSuspendida?: boolean;
-    responsablesIds: number[];
+    responsablesIds?: number[];
     participantesIds?: number[];
 }
 
 export interface IActividadFilter {
     establecimiento?: number;
     periodo?: number;
+    searchTerm?: string;
+    page?: number;
 }
 
 export interface IActividadResponse {
@@ -46,6 +47,7 @@ export interface IActividadResponse {
         total: number;
         finalizadas: number;
         suspendidas: number;
+        programadas: number;
         per_page: number;
         current_page: number;
         last_page: number;
