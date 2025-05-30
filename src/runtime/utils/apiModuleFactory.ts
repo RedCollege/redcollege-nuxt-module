@@ -36,6 +36,7 @@ import ConfiguracionItemModule from '../repository/modules/enfermeria/configurac
 import RegistroAccidenteModule from '../repository/modules/enfermeria/registro_accidente'
 import HorarioModule from '../repository/modules/curso/horario/horario'
 import HorarioDiaAsignaturaModule from '../repository/modules/curso/horario/horario_dia_asignatura'
+import AdministracionMedicamentosModule from '../repository/modules/enfermeria/administracion_medicamento'
 
 export type AuthModules = {
     usuario: UsuarioModule
@@ -103,6 +104,7 @@ export type EnfermeriaModules = {
     configuracionItem: ConfiguracionItemModule
     registroAccidente: RegistroAccidenteModule
     estadistica: EstadisticaModule
+    administracionMedicamentos: AdministracionMedicamentosModule
 }
 
 export type EvaluacionesModules = {
@@ -223,7 +225,8 @@ export function createApiModules (
                 ),
                 configuracionItem: new ConfiguracionItemModule(apiFetcher),
                 registroAccidente: new RegistroAccidenteModule(apiFetcher),
-                estadistica: new EstadisticaModule(apiFetcher)
+                estadistica: new EstadisticaModule(apiFetcher),
+                administracionMedicamentos: new AdministracionMedicamentosModule(apiFetcher)
             }
         case 'evaluaciones':
             return {
