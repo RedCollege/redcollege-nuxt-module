@@ -23,3 +23,4 @@ export { default as EnfermedadDiscapacidadModule } from './enfermeria/enfermedad
 export { default as ConfiguracionItemModule } from './enfermeria/configuracion_item'
 export { default as EstadisticaModule } from './enfermeria/estadistica'
 export { default as HorarioModule } from './curso/horario/horario'
+export { default as SimceEstablecimientoModule } from './evaluacion/simce_establecimiento'

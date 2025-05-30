@@ -169,6 +169,7 @@ export default defineNuxtModule<ModuleOptions>({
         addImportsDir(resolver.resolve('runtime/composables'))
         addLayout(resolver.resolve('runtime/layouts', 'dashboard.vue'), 'dashboard')
         addLayout(resolver.resolve('runtime/layouts', 'settings.vue'), 'settings')
+        addLayout(resolver.resolve('runtime/layouts', 'superadmin.vue'), 'superadmin')
 
         addTemplate({
             filename: 'types/redcollege-ui.d.ts',
