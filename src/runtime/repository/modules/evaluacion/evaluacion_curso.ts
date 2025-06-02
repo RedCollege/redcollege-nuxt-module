@@ -25,7 +25,7 @@ export default class EvaluacionCursoModule {
     }
 
     async obtenerInformeDetalladoByEvaluacionCursoId(evaluacionCursoId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<IInformeDetallado> {
-        return this.fetcher(`/evaluacion_curso/obtenerInformeDetalladoByEvaluacionCursoId/${evaluacionCursoId}&tipo=${tipo}`, {
+        return this.fetcher(`/evaluacion_curso/obtenerInformeDetalladoByEvaluacionCursoId/${evaluacionCursoId}?tipo=${tipo}`, {
             method: 'GET'
         })
     }
