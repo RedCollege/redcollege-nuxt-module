@@ -5,46 +5,46 @@ import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInf
 export default class EvaluacionCursoModule {
     constructor(private fetcher: $Fetch) { }
 
-    async obtenerInformeCursoByEstablecimientoId(establecimientoId: number, periodo: number): Promise<IInformeCursoEvalua> {
-        return this.fetcher(`/evaluacion_curso/obtenerInformeCursoByEstablecimientoId/${establecimientoId}?periodo=${periodo}`, {
+    async obtenerInformeCursoByEstablecimientoId(establecimientoId: number, periodo: number, tipo: 'SIMCE' | 'PAES'): Promise<IInformeCursoEvalua> {
+        return this.fetcher(`/evaluacion_curso/obtenerInformeCursoByEstablecimientoId/${establecimientoId}?periodo=${periodo}&tipo=${tipo}`, {
             method: 'GET'
         })
     }
 
-    async obtenerInformeGlobalByEstablecimientoId(establecimientoId: number, periodo: number): Promise<IInformeGlobalEvalua> {
-        return this.fetcher(`/evaluacion_curso/obtenerInformeGlobalByEstablecimientoId/${establecimientoId}?periodo=${periodo}`, {
+    async obtenerInformeGlobalByEstablecimientoId(establecimientoId: number, periodo: number, tipo: 'SIMCE' | 'PAES'): Promise<IInformeGlobalEvalua> {
+        return this.fetcher(`/evaluacion_curso/obtenerInformeGlobalByEstablecimientoId/${establecimientoId}?periodo=${periodo}&tipo=${tipo}`, {
             method: 'GET'
         })
     }
 
-    async obtenerInformeEstablecimientosComparativo(periodo: number, establecimientoIds: number[], sigeId: number, grupoAsignaturaId: number): Promise<IInformeEstablecimientoEvalua> {
+    async obtenerInformeEstablecimientosComparativo(periodo: number, establecimientoIds: number[], sigeId: number, grupoAsignaturaId: number, tipo: 'SIMCE' | 'PAES'): Promise<IInformeEstablecimientoEvalua> {
         const idsParam = establecimientoIds.join(',');
-        return this.fetcher(`/evaluacion_curso/obtenerInformeResumidoMultiEstablecimiento?periodo=${periodo}&establecimientoIds=${idsParam}&sigeId=${sigeId}&grupoAsignaturaId=${grupoAsignaturaId}`, {
+        return this.fetcher(`/evaluacion_curso/obtenerInformeResumidoMultiEstablecimiento?periodo=${periodo}&establecimientoIds=${idsParam}&sigeId=${sigeId}&grupoAsignaturaId=${grupoAsignaturaId}&tipo=${tipo}`, {
             method: 'GET'
         })
     }
 
-    async obtenerInformeDetalladoByEvaluacionCursoId(evaluacionCursoId: number): Promise<IInformeDetallado> {
-        return this.fetcher(`/evaluacion_curso/obtenerInformeDetalladoByEvaluacionCursoId/${evaluacionCursoId}`, {
+    async obtenerInformeDetalladoByEvaluacionCursoId(evaluacionCursoId: number, tipo: 'SIMCE' | 'PAES'): Promise<IInformeDetallado> {
+        return this.fetcher(`/evaluacion_curso/obtenerInformeDetalladoByEvaluacionCursoId/${evaluacionCursoId}&tipo=${tipo}`, {
             method: 'GET'
         })
     }
 
-    async obtenerEvaluacionesSimceByMultiEstablecimientoId(establecimientoIds: number[], periodo: number): Promise<IEvaluacionCurso[]> {
+    async obtenerEvaluacionesSimceByMultiEstablecimientoId(establecimientoIds: number[], periodo: number, tipo: 'SIMCE' | 'PAES'): Promise<IEvaluacionCurso[]> {
         const idsParam = establecimientoIds.join(',');
-        return this.fetcher(`/evaluacion_curso/obtenerEvaluacionesSimceByMultiEstablecimientoId?&establecimientoIds=${idsParam}&periodo=${periodo}`, {
+        return this.fetcher(`/evaluacion_curso/obtenerEvaluacionesSimceByMultiEstablecimientoId?&establecimientoIds=${idsParam}&periodo=${periodo}&tipo=${tipo}`, {
             method: 'GET'
         })
     }
 
-    async obtenerEvaluacionesSimceByEstablecimientoId(establecimientoId: number, periodo: number): Promise<IEvaluacionCurso[]> {
-        return this.fetcher(`/evaluacion_curso/obtenerEvaluacionesSimceByEstablecimientoId/${establecimientoId}?periodo=${periodo}`, {
+    async obtenerEvaluacionesSimceByEstablecimientoId(establecimientoId: number, periodo: number, tipo: 'SIMCE' | 'PAES'): Promise<IEvaluacionCurso[]> {
+        return this.fetcher(`/evaluacion_curso/obtenerEvaluacionesSimceByEstablecimientoId/${establecimientoId}?periodo=${periodo}&tipo=${tipo}`, {
             method: 'GET'
         })
     }
 
-    async obtenerInformeEvaluacionesSimceByCursoId(cursoId: number, grupoAsignaturaId: number): Promise<IEstudianteEvaluacion[]> {
-        return this.fetcher(`/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}?grupoAsignaturaId=${grupoAsignaturaId}`, {
+    async obtenerInformeEvaluacionesSimceByCursoId(cursoId: number, grupoAsignaturaId: number, tipo: 'SIMCE' | 'PAES'): Promise<IEstudianteEvaluacion[]> {
+        return this.fetcher(`/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}?grupoAsignaturaId=${grupoAsignaturaId}&tipo=${tipo}`, {
             method: 'GET'
         })
     }
