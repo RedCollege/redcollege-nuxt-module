@@ -37,6 +37,7 @@ import ConfiguracionItemModule from "../repository/modules/enfermeria/configurac
 import RegistroAccidenteModule from "../repository/modules/enfermeria/registro_accidente";
 import HorarioModule from "../repository/modules/curso/horario/horario";
 import HorarioDiaAsignaturaModule from "../repository/modules/curso/horario/horario_dia_asignatura";
+import ActividadModule from "../repository/modules/enfermeria/actividad";
 
 export type AuthModules = {
     usuario: UsuarioModule;
