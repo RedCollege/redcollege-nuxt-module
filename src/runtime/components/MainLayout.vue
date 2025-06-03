@@ -77,6 +77,8 @@ div
                 CommandGroup(heading="Debugging")
                     CommandItem(value="Ver Estadisticas de Plataforma", @click="openStatusPlataforma") Ver Estadísticas de Plataforma
                     CommandItem(value="Logs", @click="generarReporte") Copiar Logs De Reporte de Error
+                    CommandItem(value="evalua360", as-child)
+                        NuxtLink(to="/super-admin/evalua") Configurar Evalúa 360
 
         Dialog(v-model:open="isModalStatusOpen")
             DialogScrollContent.w-96(class="lg:max-w-[796px]")

@@ -17,6 +17,7 @@ export interface IAntecedentesResultados {
     notaPromedioDelCurso: number;
     notaMinimaObtenida: number;
     notaMaximaObtenida: number;
+    puntajePromedioPAES: number;
 }
 
 export interface INivelLogro {
@@ -35,6 +36,7 @@ export interface IEstudianteDetalle {
     nota: number;
     puntajeSimce: number;
     nivelLogro: string;
+    puntajePAES: number
 }
 
 export interface IBloqueNivel {

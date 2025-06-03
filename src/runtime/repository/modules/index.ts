@@ -25,3 +25,4 @@ export { default as ConfiguracionItemModule } from "./enfermeria/configuracion_i
 export { default as EstadisticaModule } from "./enfermeria/estadistica";
 export { default as HorarioModule } from "./curso/horario/horario";
 export { default as ActividadModule } from "./enfermeria/actividad";
+export { default as SimceEstablecimientoModule } from "./evaluacion/simce_establecimiento";

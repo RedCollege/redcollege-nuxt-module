@@ -17,6 +17,7 @@ import {
     PermisoModule,
     UsuarioModule,
     AntecedenteSaludModule,
+    SimceEstablecimientoModule,
 } from "../repository/modules";
 import AuxiliarModule from "../repository/modules/general/auxiliar";
 import ContenidoModule from "../repository/modules/planificaciones/contenido";
@@ -36,7 +37,6 @@ import ConfiguracionItemModule from "../repository/modules/enfermeria/configurac
 import RegistroAccidenteModule from "../repository/modules/enfermeria/registro_accidente";
 import HorarioModule from "../repository/modules/curso/horario/horario";
 import HorarioDiaAsignaturaModule from "../repository/modules/curso/horario/horario_dia_asignatura";
-import ActividadModule from "../repository/modules/enfermeria/actividad";
 
 export type AuthModules = {
     usuario: UsuarioModule;
@@ -109,6 +109,7 @@ export type EnfermeriaModules = {
 
 export type EvaluacionesModules = {
     evaluacionCurso: EvaluacionCursoModule;
+    simceEstablecimiento: SimceEstablecimientoModule;
 };
 
 // agrupación de modulos
@@ -233,6 +234,9 @@ export function createApiModules(
         case "evaluaciones":
             return {
                 evaluacionCurso: new EvaluacionCursoModule(apiFetcher),
+                simceEstablecimiento: new SimceEstablecimientoModule(
+                    apiFetcher
+                ),
             };
         case "horario":
             return {
