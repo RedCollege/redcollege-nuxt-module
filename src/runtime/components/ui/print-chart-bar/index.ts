@@ -75,7 +75,7 @@ export interface BaseChartProps<T extends Record<string, any>> {
   disableAnimation?: boolean
 }
 
-export function defaultColors(count: number = 3) {
+export const defaultColors = (count: number = 3) => {
   const quotient = Math.floor(count / 2)
   const remainder = count % 2
 

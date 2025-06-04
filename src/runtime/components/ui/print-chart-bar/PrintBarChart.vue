@@ -13,7 +13,6 @@ import {
   type ChartData,
   type ChartOptions
 } from 'chart.js'
-import { computed, watch, nextTick } from 'vue'
 
 // Registrar componentes de Chart.js
 ChartJS.register(
@@ -42,7 +41,7 @@ const props = withDefaults(defineProps<BaseChartProps<T>>(), {
 type KeyOfT = Extract<keyof T, string>
 type Data = typeof props.data[number]
 
-const index = computed(() => props.index as KeyOfT)
+const index = computed<string>(() => props.index as KeyOfT)
 
 
 // Función para convertir colores HSL con variables CSS a valores RGB
@@ -67,7 +66,7 @@ const resolveColor = (color: string): string => {
 }
 
 // Colores computados usando defaultColors si no se proporcionan colores personalizados
-const computedColors = computed(() => {
+const computedColors = computed<string[]>(() => {
   if (props.colors && props.colors.length > 0) {
     return props.colors.map(resolveColor)
   }
@@ -216,7 +215,7 @@ const chartOptions = computed((): ChartOptions<'bar'> => ({
 }))
 
 // Key para forzar re-render cuando cambian los datos
-const chartKey = computed(() => 
+const chartKey = computed<string>(() => 
   `${JSON.stringify(props.data)}-${props.categories.join('-')}-${props.type}`
 )
 </script>
