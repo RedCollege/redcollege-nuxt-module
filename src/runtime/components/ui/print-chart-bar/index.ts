@@ -1,6 +1,7 @@
 // index.ts
-export { default as DescargableBarChart } from './DescargableBarChart.vue'
+export { default as DescargableBarChart } from './PrintBarChart.vue'
 
+type KeyOf<T extends Record<string, any>> = Extract<keyof T, string>
 
 export interface BaseChartProps<T extends Record<string, any>> {
   /**
