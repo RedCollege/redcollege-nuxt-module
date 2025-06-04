@@ -11,7 +11,7 @@ export interface IActividad {
     tipoActividadId: number;
     descripcion: string;
     isSuspendida: boolean;
-    programadaOFinalizada?: string;
+    programadaOFinalizada: string;
     deletedBy: number | null;
     deletedAt: DateTime | null;
     createdAt: DateTime;
