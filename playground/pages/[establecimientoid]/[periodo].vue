@@ -41,7 +41,7 @@ const salesData: SalesData[] = [
             .space-y-4
                 p.text-sm.text-gray-600 Ejemplo básico de BarChart con vue-chartjs
                 .h-full.w-full
-                    DescargableBarChart(
+                    PrintBarChart(
                         :data="salesData"
                         index="name"
                         :categories="['total']"
