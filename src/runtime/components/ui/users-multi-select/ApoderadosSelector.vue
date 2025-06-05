@@ -133,7 +133,7 @@ const selectAllState = computed(() => {
             // Checkbox "Seleccionar todos"
             .flex.items-center.space-x-2.py-2.px-2.rounded(class="hover:bg-sky/5")
                 Checkbox(
-                    :checked="selectAllState === true"
+                    :model-value="selectAllState === true"
                     :indeterminate="selectAllState === 'indeterminate'"
                     @update:model-value="toggleSelectAll"
                 )
@@ -149,7 +149,7 @@ const selectAllState = computed(() => {
             )
                 .flex.items-center.space-x-2
                     Checkbox(
-                        :checked="isUserSelected(apoderado.id?.toString() || apoderado.nombreCompleto)"
+                        :model-value="isUserSelected(apoderado.id?.toString() || apoderado.nombreCompleto)"
                         @update:model-value="(checked) => updateSelector(checked, apoderado)"
                     )
                     div

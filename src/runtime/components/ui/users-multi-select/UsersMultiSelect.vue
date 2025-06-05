@@ -10,7 +10,7 @@ import type { IUsuario } from '~/src/runtime/models'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 interface UsersMultiSelectProps {
-    modelValue?: IUsuario[] // Array de objetos IUsuario completos
+    modelValue?: string[] // Array de IDs como strings
     placeholder?: string
     animation?: number
     maxCount?: number
@@ -45,8 +45,8 @@ const multiSelectVariants = cva(
 
 const props = defineProps<UsersMultiSelectProps>()
 const emit = defineEmits<{
-    'update:modelValue': [value: IUsuario[]]
-    'select': [value: IUsuario[]]
+    'update:modelValue': [value: string[]] // Emite array de IDs
+    'select': [value: string[]] // Emite array de IDs
 }>()
 
 const isPopoverOpen = ref(false)
@@ -81,15 +81,56 @@ const { data: apoderados } = await useAsyncData('apoderados-establecimiento-mult
 })
 
 // Estado interno para valores seleccionados como objetos IUsuario
-const internalSelectedValues = ref<IUsuario[]>(props.modelValue || [])
+const internalSelectedValues = ref<IUsuario[]>([])
+
+// Función para encontrar usuarios por IDs en todas las fuentes de datos
+const findUsuarioById = (id: string): IUsuario | null => {
+    // Buscar en personal
+    const personalMatch = data.value?.personal?.find(p => p.id?.toString() === id)
+    if (personalMatch) return personalMatch
+
+    // Buscar en estudiantes
+    const estudianteMatch = estudiantes.value?.data?.find(e => e.id?.toString() === id)
+    if (estudianteMatch) return estudianteMatch
+
+    // Buscar en apoderados
+    const apoderadoMatch = apoderados.value?.data?.find(a => a.id?.toString() === id)
+    if (apoderadoMatch) return apoderadoMatch
+
+    return null
+}
+
+// Inicializar usuarios internos basado en los IDs del modelValue
+const initializeInternalUsers = (userIds: string[]) => {
+    const usuarios: IUsuario[] = []
+    userIds.forEach(id => {
+        const usuario = findUsuarioById(id)
+        if (usuario) {
+            usuarios.push(usuario)
+        }
+    })
+    internalSelectedValues.value = usuarios
+}
+
+// Inicializar al montar si hay modelValue
+if (props.modelValue && props.modelValue.length > 0) {
+    // Esperar a que los datos estén cargados antes de inicializar
+    watch([data, estudiantes, apoderados], () => {
+        if (data.value && estudiantes.value && apoderados.value) {
+            initializeInternalUsers(props.modelValue || [])
+        }
+    }, { immediate: true })
+}
 
 // Computed que sincroniza con el v-model del padre
 const selectedValues = computed({
     get: () => internalSelectedValues.value,
-    set: (newValue) => {
+    set: (newValue: IUsuario[]) => {
         internalSelectedValues.value = newValue
-        emit('update:modelValue', newValue)
-        emit('select', newValue)
+        // Emitir solo los IDs al padre
+        const userIds = newValue.map(user => user.id?.toString() || user.nombreCompleto)
+        emit('update:modelValue', userIds)
+        emit('select', userIds)
     }
 })
 
@@ -107,10 +148,17 @@ const selectedOptions = computed(() => {
     }))
 })
 
-// Watcher para sincronizar cambios externos
+// Watcher para sincronizar cambios externos (cuando el padre cambia el modelValue)
 watch(() => props.modelValue, (newVal) => {
-    if (newVal && JSON.stringify(newVal) !== JSON.stringify(internalSelectedValues.value)) {
-        internalSelectedValues.value = [...newVal]
+    if (newVal && data.value && estudiantes.value && apoderados.value) {
+        // Convertir IDs a objetos IUsuario
+        const currentIds = internalSelectedValues.value.map(u => u.id?.toString() || u.nombreCompleto)
+        const newIds = newVal
+
+        // Solo actualizar si realmente cambió
+        if (JSON.stringify(currentIds.sort()) !== JSON.stringify(newIds.sort())) {
+            initializeInternalUsers(newVal)
+        }
     }
 }, { deep: true })
 
