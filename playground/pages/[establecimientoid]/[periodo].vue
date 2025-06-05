@@ -38,19 +38,5 @@ const salesData: SalesData[] = [
         CardHeader
             CardTitle Playground
         CardContent
-            .space-y-4
-                p.text-sm.text-gray-600 Ejemplo básico de BarChart con vue-chartjs
-                .h-full.w-full
-                    DescargableBarChart(
-                        :data="salesData"
-                        index="name"
-                        :categories="['total']"
-                        :disable-animation="false"
-                    )
-                    //- BarChart.h-48(:data="salesData", index="mes", :categories="['ventas', 'marketing', 'soporte']", :disable-animation="false")
-                
-                button(
-                    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-                    @click="showConfetti"
-                ) Mostrar Confetti
+            NuxtPage
 </template>

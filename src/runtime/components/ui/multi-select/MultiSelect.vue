@@ -124,7 +124,7 @@ defineExpose({
                             multiSelectVariants({ variant })
                         ]" :style="{ animationDuration: `${animation}s` }">
                             {{ options.find((o) => o.value === value)?.label }}
-                           <span @click.stop="toggleOption(value)">
+                            <span @click.stop="toggleOption(value)">
                                 <Icon name="tabler:circle-x" class="ml-2 h-4 w-4 cursor-pointer" />
                             </span>
                         </Badge>

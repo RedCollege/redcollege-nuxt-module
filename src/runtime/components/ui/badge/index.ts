@@ -22,7 +22,7 @@ export const badgeVariants = cva(
                     'border-transparent bg-green text-primary-foreground  hover:bg-primary/80',
                 gold:
                     'border-transparent bg-gold text-primary-foreground  hover:bg-primary/80',
-            },
+            }
         },
         defaultVariants: {
             variant: 'default',
