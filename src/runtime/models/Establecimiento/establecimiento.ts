@@ -1,4 +1,5 @@
 import type { DateTime } from 'luxon';
+import type { IUsuario } from '../Auth';
 
 interface Meta {
     total: number | null;
@@ -24,4 +25,9 @@ export interface IEstablecimiento {
 export interface IEstablecimientoResponse {
     meta: Meta;
     data: IEstablecimiento[];
+}
+
+export interface IUsuarioEstablecimientoResponse {
+    meta: Meta;
+    data: IUsuario[];
 }
