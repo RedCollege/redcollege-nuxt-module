@@ -52,6 +52,8 @@ const emit = defineEmits<{
 const isPopoverOpen = ref(false)
 const isAnimating = ref(false)
 const { establecimiento } = useNuxtApp().$apis
+const searchEstudiante = ref<string>("")
+const searchApoderado = ref<string>("")
 
 // Async data para cargar información
 const { data } = await useAsyncData('user-establecimiento-data', async () => {
@@ -65,20 +67,20 @@ const { data } = await useAsyncData('user-establecimiento-data', async () => {
 const { data: estudiantes } = await useAsyncData('estudiantes-establecimiento-multiselect', async () => {
     return establecimiento.establecimiento.obtenerUsuariosPorRol(props.establecimientoId, {
         rolId: 7,
-        search: '',
+        search: searchEstudiante.value,
         page: 1,
         periodo: props.periodo
     })
-})
+}, { watch: [searchEstudiante] })
 
 const { data: apoderados } = await useAsyncData('apoderados-establecimiento-multiselect', async () => {
     return establecimiento.establecimiento.obtenerUsuariosPorRol(props.establecimientoId, {
         rolId: 6,
-        search: '',
+        search: searchApoderado.value,
         page: 1,
         periodo: props.periodo
     })
-})
+}, { watch: [searchApoderado] })
 
 // Estado interno para valores seleccionados como objetos IUsuario
 const internalSelectedValues = ref<IUsuario[]>([])
@@ -228,6 +230,15 @@ const removeUser = (usuario: IUsuario): void => {
 const clearAllUsers = (): void => {
     selectedValues.value = []
 }
+
+const filterEstudiante = (search: string): void => {
+    searchEstudiante.value = search
+}
+
+const filterApoderado = (search: string) : void => {
+    searchApoderado.value = search
+}
+
 </script>
 
 
@@ -274,7 +285,8 @@ div
                     TabsContent(value="personal")
                         PersonalSelector(:usuarios="data.personal", @select-usuario="updateUsuarios", :selected-users="selectedValues")
                     TabsContent(value="estudiantes")
-                        EstudiantesSelector(:usuarios="estudiantes", @select-usuario="updateUsuarios", :selected-users="selectedValues")
+                        pre {{searchEstudiante}}
+                        EstudiantesSelector(:usuarios="estudiantes", @select-usuario="updateUsuarios", :periodo="periodo", :establecimiento-id="establecimientoId", :selected-users="selectedValues", @search="filterEstudiante")
                     TabsContent(value="apoderados")
-                        ApoderadosSelector(:usuarios="apoderados", @select-usuario="updateUsuarios", :selected-users="selectedValues")
+                        ApoderadosSelector(:usuarios="apoderados", @select-usuario="updateUsuarios", :periodo="periodo", :establecimiento-id="establecimientoId", :selected-users="selectedValues", @search="filterApoderado")
 </template>

@@ -154,7 +154,7 @@ const uniqueCargos = computed(() => {
                     :indeterminate="selectAllState === 'indeterminate'"
                     @update:model-value="toggleSelectAll"
                 )
-                label.text-sm.font-medium.leading-none(
+                label.text-sm.text-primary.leading-none(
                     class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 ) Seleccionar todos ({{ filteredUsuarios.length }})
 
@@ -170,7 +170,7 @@ const uniqueCargos = computed(() => {
                         @update:model-value="(checked) => updateSelector(checked, usuario)"
                     )
                     div
-                        label.text-sm.font-medium.leading-none(
+                        label.text-sm.leading-none(
                             class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         ) {{ usuario.nombreCompleto }}
                 p.text-xs.text-gray-500 {{ usuario.cargo || '' }}
