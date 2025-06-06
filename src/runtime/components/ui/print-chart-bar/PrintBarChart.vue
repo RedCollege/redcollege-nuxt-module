@@ -1,5 +1,7 @@
 <script setup lang="ts" generic="T extends Record<string, any>">
 import { Bar } from 'vue-chartjs'
+import { computed, watch, nextTick } from 'vue'
+
 import type { BaseChartProps } from '.';
 import { defaultColors } from '.';
 import {
