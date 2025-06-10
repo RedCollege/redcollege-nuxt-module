@@ -23,6 +23,11 @@ const props = withDefaults(defineProps<BaseChartProps<T> & {
    * @default 0
    */
   roundedCorners?: number
+  /**
+   * Disable chart animation
+   * @default false
+   */
+  disableAnimation?: boolean
 }>(), {
   type: 'grouped',
   margin: () => ({ top: 0, bottom: 0, left: 0, right: 0 }),
@@ -33,7 +38,9 @@ const props = withDefaults(defineProps<BaseChartProps<T> & {
   showTooltip: true,
   showLegend: true,
   showGridLine: true,
+  disableAnimation: false,
 })
+
 const emits = defineEmits<{
   legendItemClick: [d: BulletLegendItemInterface, i: number]
 }>()
@@ -57,25 +64,30 @@ function handleLegendItemClick(d: BulletLegendItemInterface, i: number) {
 
 const VisBarComponent = computed(() => props.type === 'grouped' ? VisGroupedBar : VisStackedBar)
 const selectorsBar = computed(() => props.type === 'grouped' ? GroupedBar.selectors.bar : StackedBar.selectors.bar)
+
+// Configuración de duración para controlar animaciones
+const animationDuration = computed(() => props.disableAnimation ? 0 : 600)
 </script>
 
 <template>
   <div :class="cn('w-full h-[400px] flex flex-col items-end', $attrs.class ?? '')">
     <ChartLegend v-if="showLegend" v-model:items="legendItems" @legend-item-click="handleLegendItemClick" />
-
+    
     <VisXYContainer
       :data="data"
       :style="{ height: isMounted ? '100%' : 'auto' }"
       :margin="margin"
+      :duration="animationDuration"
     >
       <ChartCrosshair v-if="showTooltip" :colors="colors" :items="legendItems" :custom-tooltip="customTooltip" :index="index" />
-
+      
       <VisBarComponent
         :x="(d: Data, i: number) => i"
         :y="categories.map(category => (d: Data) => d[category]) "
         :color="colors"
         :rounded-corners="roundedCorners"
         :bar-padding="0.05"
+        :duration="animationDuration"
         :attributes="{
           [selectorsBar]: {
             opacity: (d: Data, i:number) => {
@@ -85,13 +97,14 @@ const selectorsBar = computed(() => props.type === 'grouped' ? GroupedBar.select
           },
         }"
       />
-
+      
       <VisAxis
         v-if="showXAxis"
         type="x"
         :tick-format="xFormatter ?? ((v: number) => data[v]?.[index])"
         :grid-line="false"
         :tick-line="false"
+        :duration="animationDuration"
         tick-text-color="hsl(var(--vis-text-color))"
       />
       <VisAxis
@@ -101,6 +114,7 @@ const selectorsBar = computed(() => props.type === 'grouped' ? GroupedBar.select
         :tick-format="yFormatter"
         :domain-line="false"
         :grid-line="showGridLine"
+        :duration="animationDuration"
         :attributes="{
           [Axis.selectors.grid]: {
             class: 'text-muted',
@@ -108,7 +122,7 @@ const selectorsBar = computed(() => props.type === 'grouped' ? GroupedBar.select
         }"
         tick-text-color="hsl(var(--vis-text-color))"
       />
-
+      
       <slot />
     </VisXYContainer>
   </div>

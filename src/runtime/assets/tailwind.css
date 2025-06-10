@@ -81,6 +81,12 @@
     body {
         @apply bg-background text-foreground;
     }
+
+    @media print {
+        body {
+            background-color: white !important;
+        }
+    }
 }
 
 @layer base {
