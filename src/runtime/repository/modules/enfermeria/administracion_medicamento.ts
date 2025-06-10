@@ -1,14 +1,16 @@
 import type { $Fetch } from "ofetch";
 import type { 
     IAdministracionMedicamento, 
+    IAdministracionMedicamentoAdjunto, 
     IAdministracionMedicamentoFilter, 
-    IAdministracionMedicamentoForm 
+    IAdministracionMedicamentoForm, 
+    IAdministracionMedicamentoResponse
 } from "~/src/runtime/models";
 
 export default class AdministracionMedicamentosModule {
     constructor(private fetcher: $Fetch) {}
 
-    async getAll(props?: IAdministracionMedicamentoFilter): Promise<IAdministracionMedicamento> {
+    async getAll(props?: IAdministracionMedicamentoFilter): Promise<IAdministracionMedicamentoResponse> {
         return this.fetcher("/enfermeria/administracion_medicamentos", {
             params: props,
             method: "GET",
@@ -82,5 +84,26 @@ export default class AdministracionMedicamentosModule {
                 method: "DELETE",
             }
         );
+    }
+
+    async subirAdjunto(
+        file: File,
+        folder: string
+    ): Promise<IAdministracionMedicamentoAdjunto> {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("folder", folder);
+        return this.fetcher(`/enfermeria/administracion_medicamentos/adjuntos/upload`, {
+            method: "POST",
+            body: formData,
+        });
+    }
+
+    async eliminarAdjunto(
+        id: number
+    ): Promise<{ success: boolean; message: string }> {
+        return this.fetcher(`/enfermeria/administracion_medicamentos/adjuntos/delete/${id}`, {
+            method: "DELETE",
+        });
     }
 }
