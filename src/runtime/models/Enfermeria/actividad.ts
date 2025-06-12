@@ -31,7 +31,7 @@ export interface IActividadForm {
     tipoActividadId?: number;
     descripcion?: string;
     isSuspendida: boolean;
-    responsablesIds?: number[];
+    responsablesIds: number[];
     participantesIds?: number[];
 }
 
