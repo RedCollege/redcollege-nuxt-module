@@ -40,6 +40,7 @@ export interface IActividadFilter {
     periodo?: number;
     searchTerm?: string;
     page?: number;
+    mes?: number;
 }
 
 export interface IActividadResponse {

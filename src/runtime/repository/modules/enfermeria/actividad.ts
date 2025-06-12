@@ -16,6 +16,13 @@ export default class ActividadModule {
         });
     }
 
+    async getByMes(props?: IActividadFilters): Promise<IActividadResponse> {
+        return this.fetcher("/enfermeria/actividad/mes", {
+            params: props,
+            method: "GET",
+        });
+    }
+
     async getById(actividadId: number): Promise<IActividad> {
         return this.fetcher(`/enfermeria/actividad/${actividadId}`, {
             method: "GET",
