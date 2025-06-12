@@ -41,12 +41,11 @@ const delegatedProps = computed(() => {
         "
     >
         <ProgressIndicator
-            class="h-full transition-all flex items-center justify-end pr-2"
+            class="h-full transition-all flex items-center justify-items-end px-4"
             :class="cn(progressVariants({ variant }))"
             :style="{ width: `${props.modelValue}%` }"
         >
             <span
-                v-if="props.showLabel && props.modelValue >= 5"
                 class="text-xs font-semibold text-white"
             >
                 {{ props.modelValue }}%
