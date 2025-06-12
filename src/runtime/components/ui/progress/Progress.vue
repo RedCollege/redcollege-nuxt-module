@@ -41,7 +41,7 @@ const delegatedProps = computed(() => {
         "
     >
         <ProgressIndicator
-            class="h-full transition-all flex items-center justify-items-end px-4"
+            class="h-full transition-all flex items-center justify-end px-12"
             :class="cn(progressVariants({ variant }))"
             :style="{ width: `${props.modelValue}%` }"
         >
