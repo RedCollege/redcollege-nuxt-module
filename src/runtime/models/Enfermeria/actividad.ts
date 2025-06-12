@@ -30,7 +30,7 @@ export interface IActividadForm {
     periodo?: number;
     tipoActividadId?: number;
     descripcion?: string;
-    isSuspendida?: boolean;
+    isSuspendida: boolean;
     responsablesIds?: number[];
     participantesIds?: number[];
 }
