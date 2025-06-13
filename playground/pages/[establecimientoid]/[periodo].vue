@@ -39,16 +39,51 @@ const salesData: SalesData[] = [
             CardTitle Playground
         CardContent
             .space-y-4
-                p.text-sm.text-gray-600 Ejemplo básico de BarChart con vue-chartjs
-                .h-full.w-full
-                    PrintBarChart(
-                        :data="salesData"
-                        index="name"
-                        :categories="['total']"
-                        :disable-animation="false"
-                    )
-                    //- BarChart.h-48(:data="salesData", index="mes", :categories="['ventas', 'marketing', 'soporte']", :disable-animation="false")
-                
+                p.text-sm.text-gray-600 Ejemplo básico de PrintProgress
+                .h-full.w-full.p-6
+
+                    div(class="grid grid-cols-12 gap-2")
+                        div(class="col-span-3")
+                            p(class="font-medium text-primary text-xs line-clamp-2") Interpretar /  Hab.Predominante: Comprensión  /  Dificultad: Básico
+                        div(class="col-span-9")
+                            .grid.gap-2
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="47"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="48"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="49"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="50"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="51"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="52"
+                                        :showLabel="true"
+                                        )
+
                 button(
                     class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
                     @click="showConfetti"
