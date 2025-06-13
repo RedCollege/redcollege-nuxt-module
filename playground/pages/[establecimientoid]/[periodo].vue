@@ -39,53 +39,50 @@ const salesData: SalesData[] = [
             CardTitle Playground
         CardContent
             .space-y-4
-                p.text-sm.text-gray-600 Ejemplo básico de Progress
-                .h-full.w-full.grid.gap-8
-                   Progress(
-                    :modelValue="1"
-                    :variant="destructive"
-                    :showLabel="true"
-                   )
-                   Progress(
-                    :modelValue="2"
-                    :variant="destructive"
-                    :showLabel="true"
-                   )
-                   Progress(
-                    :modelValue="3"
-                    :variant="destructive"
-                    :showLabel="true"
-                   )
-                   Progress(
-                    :modelValue="4"
-                    :variant="destructive"
-                    :showLabel="true"
-                   )
-                   Progress(
-                    :modelValue="5"
-                    :variant="destructive"
-                    :showLabel="true"
-                   )
-                   Progress(
-                    :modelValue="6"
-                    :variant="destructive"
-                    :showLabel="true"
-                   )
-                   Progress(
-                    :modelValue="7"
-                    :variant="destructive"
-                    :showLabel="true"
-                   )
-                   Progress(
-                    :modelValue="25"
-                    :variant="destructive"
-                    :showLabel="true"
-                   )
-                   Progress(
-                    :modelValue="60"
-                    :variant="destructive"
-                    :showLabel="true"
-                   )
+                p.text-sm.text-gray-600 Ejemplo básico de PrintProgress
+                .h-full.w-full.p-6
+
+                    div(class="grid grid-cols-12 gap-2")
+                        div(class="col-span-3")
+                            p(class="font-medium text-primary text-xs line-clamp-2") Interpretar /  Hab.Predominante: Comprensión  /  Dificultad: Básico
+                        div(class="col-span-9")
+                            .grid.gap-2
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="47"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="48"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="49"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="50"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="51"
+                                        :showLabel="true"
+                                        )
+                                .flex.gap-2.items-center
+                                    p.font-medium.text-xs.flex-none 4 Enseñanza Básica A
+                                    Progress(
+                                        :modelValue="52"
+                                        :showLabel="true"
+                                        )
 
                 button(
                     class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
