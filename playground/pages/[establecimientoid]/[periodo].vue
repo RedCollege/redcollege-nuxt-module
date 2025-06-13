@@ -39,16 +39,54 @@ const salesData: SalesData[] = [
             CardTitle Playground
         CardContent
             .space-y-4
-                p.text-sm.text-gray-600 Ejemplo básico de BarChart con vue-chartjs
-                .h-full.w-full
-                    PrintBarChart(
-                        :data="salesData"
-                        index="name"
-                        :categories="['total']"
-                        :disable-animation="false"
-                    )
-                    //- BarChart.h-48(:data="salesData", index="mes", :categories="['ventas', 'marketing', 'soporte']", :disable-animation="false")
-                
+                p.text-sm.text-gray-600 Ejemplo básico de Progress
+                .h-full.w-full.grid.gap-8
+                   Progress(
+                    :modelValue="1"
+                    :variant="destructive"
+                    :showLabel="true"
+                   )
+                   Progress(
+                    :modelValue="2"
+                    :variant="destructive"
+                    :showLabel="true"
+                   )
+                   Progress(
+                    :modelValue="3"
+                    :variant="destructive"
+                    :showLabel="true"
+                   )
+                   Progress(
+                    :modelValue="4"
+                    :variant="destructive"
+                    :showLabel="true"
+                   )
+                   Progress(
+                    :modelValue="5"
+                    :variant="destructive"
+                    :showLabel="true"
+                   )
+                   Progress(
+                    :modelValue="6"
+                    :variant="destructive"
+                    :showLabel="true"
+                   )
+                   Progress(
+                    :modelValue="7"
+                    :variant="destructive"
+                    :showLabel="true"
+                   )
+                   Progress(
+                    :modelValue="25"
+                    :variant="destructive"
+                    :showLabel="true"
+                   )
+                   Progress(
+                    :modelValue="60"
+                    :variant="destructive"
+                    :showLabel="true"
+                   )
+
                 button(
                     class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
                     @click="showConfetti"
