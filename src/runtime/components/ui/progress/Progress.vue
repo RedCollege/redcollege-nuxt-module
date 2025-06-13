@@ -44,8 +44,8 @@ const delegatedProps = computed(() => {
             :class="cn(
                 'h-full transition-all flex items-center',
                 {
-                    'justify-items-end px-4': props.showLabel && props.modelValue < 5,
-                    'justify-end px-12': props.showLabel && props.modelValue >= 5,
+                    'justify-items-end px-8': props.showLabel && props.modelValue < 5,
+                    'justify-end px-2': props.showLabel && props.modelValue >= 5,
                 },
                 progressVariants({ variant })
             )"
