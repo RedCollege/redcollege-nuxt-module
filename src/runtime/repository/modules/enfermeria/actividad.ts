@@ -54,4 +54,13 @@ export default class ActividadModule {
             method: "DELETE",
         });
     }
+
+    async getDescargables(
+        props?: IActividadFilters
+    ): Promise<IActividadResponse> {
+        return this.fetcher("/enfermeria/actividad/descargable", {
+            params: props,
+            method: "GET",
+        });
+    }
 }
