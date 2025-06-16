@@ -57,7 +57,7 @@ const progressValue = computed<number>(() => props.modelValue ?? 0);
         >
             <span 
                 class="text-xs font-semibold transition-colors duration-200"
-                :class="progressValue >= 50 ? 'text-white' : 'text-black'"
+                :class="progressValue >= 51 ? 'text-white' : 'text-black'"
             >
                 {{ progressValue }}%
             </span>
