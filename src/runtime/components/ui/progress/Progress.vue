@@ -6,7 +6,7 @@ import {
     type ProgressRootProps,
 } from "reka-ui";
 import { cn } from "../../../lib/utils";
-import { type ProgressVariant, progressVariants } from "../progress/index";
+import { type ProgressVariant, progressVariants } from "./index";
 
 const props = withDefaults(
     defineProps<
@@ -25,9 +25,12 @@ const props = withDefaults(
 );
 
 const delegatedProps = computed(() => {
-    const { class: _, showLabel: __, ...delegated } = props;
+    const { class: _, showLabel: __, variant: ___, ...delegated } = props;
     return delegated;
 });
+
+// Computed para manejar el valor con null safety
+const progressValue = computed<number>(() => props.modelValue ?? 0);
 </script>
 
 <template>
@@ -41,16 +44,23 @@ const delegatedProps = computed(() => {
         "
     >
         <ProgressIndicator
-            class="h-full transition-all flex items-center justify-end pr-2"
-            :class="cn(progressVariants({ variant }))"
-            :style="{ width: `${props.modelValue}%` }"
+            :class="cn(
+                'h-full transition-all',
+                progressVariants({ variant: props.variant })
+            )"
+            :style="{ width: `${progressValue}%` }"
+        />
+        
+        <div 
+            v-if="props.showLabel"
+            class="absolute inset-0 flex items-center justify-center pointer-events-none"
         >
-            <span
-                v-if="props.showLabel && props.modelValue >= 5"
-                class="text-xs font-semibold text-white"
+            <span 
+                class="text-xs font-semibold transition-colors duration-200"
+                :class="progressValue >= 51 ? 'text-white' : 'text-black'"
             >
-                {{ props.modelValue }}%
+                {{ progressValue }}%
             </span>
-        </ProgressIndicator>
+        </div>
     </ProgressRoot>
 </template>
