@@ -38,6 +38,7 @@ import RegistroAccidenteModule from "../repository/modules/enfermeria/registro_a
 import HorarioModule from "../repository/modules/curso/horario/horario";
 import HorarioDiaAsignaturaModule from "../repository/modules/curso/horario/horario_dia_asignatura";
 import ActividadModule from "../repository/modules/enfermeria/actividad";
+import CursoAsignaturaCurricularModule from "../repository/modules/establecimiento/curso_asignatura_curricular";
 
 export type AuthModules = {
     usuario: UsuarioModule;
@@ -70,6 +71,7 @@ export type InformesModules = {
 export type EstablecimientoModules = {
     establecimiento: EstablecimientoModule;
     curso: CursoModule;
+    cursoAsignaturaCurricular: CursoAsignaturaCurricularModule;
     asignaturaCurricular: AsignaturaCurricularModule;
     periodoEscolar: PeriodoEscolarModule;
     especialidad: EspecialidadModule;
@@ -195,6 +197,9 @@ export function createApiModules(
             return {
                 periodoEscolar: new PeriodoEscolarModule(apiFetcher),
                 establecimiento: new EstablecimientoModule(apiFetcher),
+                cursoAsignaturaCurricular: new CursoAsignaturaCurricularModule(
+                    apiFetcher
+                ),
                 curso: new CursoModule(apiFetcher),
                 asignaturaCurricular: new AsignaturaCurricularModule(
                     apiFetcher

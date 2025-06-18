@@ -13,7 +13,7 @@ export const tabsListVariants = cva(
                 default:
                     "rounded-lg bg-muted p-1 text-muted-foreground",
                 pill:
-                    "rounded-none bg-background gap-2 p-0",
+                    "rounded-none bg-none gap-2 p-0",
             },
             size: {
                 default: "h-9",
