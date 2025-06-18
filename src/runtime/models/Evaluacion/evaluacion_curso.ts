@@ -87,7 +87,7 @@ interface IEnsayoEvalua {
     promedio: number;
 }
 
-interface IAsignaturaEvalua {
+export interface IAsignaturaEvalua {
     id: number;
     nombre: string;
     ensayos: IEnsayoEvalua[];
