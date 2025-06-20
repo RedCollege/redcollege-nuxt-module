@@ -94,25 +94,28 @@ export function useCardConfig(
                 titulo: "Total Actividades",
                 cantidad: data?.total || 0,
                 ToolTipContenido:
-                    "Actividades realizadas en el establecimiento durante este año escolar",
+                    "Conoce el total de actividades registradas en el rango de fecha indicado. Por defecto se muestra el año en curso",
                 icon: "tabler:calendar-event",
             },
             {
                 titulo: "Finalizadas",
                 cantidad: data?.finalizadas || 0,
-                ToolTipContenido: "Total de actividades finalizadas",
+                ToolTipContenido:
+                    "Conoce el total de actividades finalizadas en el rango de fecha indicado. Por defecto se muestra el año en curso",
                 icon: "tabler:circle-check",
             },
             {
                 titulo: "Programadas",
                 cantidad: data?.programadas || 0,
-                ToolTipContenido: "Total de actividades programadas",
+                ToolTipContenido:
+                    "Conoce el total de actividades programadas en el rango de fecha indicado. Por defecto se muestra el año en curso",
                 icon: "tabler:hourglass",
             },
             {
                 titulo: "Suspendidas",
                 cantidad: data?.suspendidas || 0,
-                ToolTipContenido: "Total de actividades suspendidas",
+                ToolTipContenido:
+                    "Conoce el total de actividades suspendidas en el rango de fecha indicado. Por defecto se muestra el año en curso",
                 icon: "tabler:calendar-x",
             },
         ],

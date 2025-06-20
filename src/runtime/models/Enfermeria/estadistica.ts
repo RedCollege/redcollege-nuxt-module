@@ -25,9 +25,9 @@ export interface IResumenBase {
 }
 
 export enum EstadisticaTabNameEnum {
-    ATENCIONES = "atenciones",
-    ACCIDENTES = "accidentes",
-    ACTIVIDADES = "actividades",
+    ATENCIONES = "atencion",
+    ACCIDENTES = "accidente",
+    ACTIVIDADES = "actividad",
 }
 
 export interface IResumenConContexto extends IResumenBase {
