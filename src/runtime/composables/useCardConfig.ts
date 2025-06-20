@@ -1,4 +1,5 @@
 import { computed, unref, type Ref, type ComputedRef } from "vue";
+
 export interface CardConfig {
     titulo: string;
     cantidad: number;
@@ -26,16 +27,6 @@ export interface CardTotales {
 }
 
 export function useCardConfig(
-    tabType: "accidente" | "atencion" | "actividad",
-    cardsTotales: ComputedRef<CardTotales | undefined>
-): { cards: ComputedRef<CardConfig[]> };
-
-export function useCardConfig(
-    tabNameRef: Ref<string> | ComputedRef<string>,
-    cardsTotales: ComputedRef<CardTotales | undefined>
-): { cards: ComputedRef<CardConfig[]> };
-
-export function useCardConfig(
     tabTypeOrRef:
         | "accidente"
         | "atencion"
@@ -43,7 +34,7 @@ export function useCardConfig(
         | Ref<string>
         | ComputedRef<string>,
     cardsTotales: ComputedRef<CardTotales | undefined>
-) {
+): { cards: ComputedRef<CardConfig[]> } {
     const cardConfigs = {
         accidente: (data: CardTotales["accidente"]): CardConfig[] => [
             {
@@ -139,7 +130,6 @@ export function useCardConfig(
             );
         }
 
-        // Si es ref dinámico (componente con tabs)
         const tabName = unref(tabTypeOrRef).toLowerCase();
 
         if (tabName.includes("accidente")) {

@@ -123,7 +123,6 @@ export function useResumenCard(
             return defaultResumenes;
         }
 
-        // Solución 1: Usar switch para manejar cada caso específicamente
         switch (tipo) {
             case "actividad":
                 return resumenConfigs.actividad(currentEstadisticas.actividad);
@@ -136,7 +135,6 @@ export function useResumenCard(
         }
     });
 
-    // Computed adicionales para otros elementos dinámicos
     const chartData = computed(() => {
         const estadisticas = estadisticasIndividuales.value;
         const tipo = unref(tipoDescargable) as
@@ -152,13 +150,13 @@ export function useResumenCard(
 
         switch (tipo) {
             case "actividad":
-                return "actividades";
+                return "actividad";
             case "accidente":
-                return "accidentes";
+                return "accidente";
             case "atencion":
-                return "atenciones";
+                return "atencion";
             default:
-                return "actividades";
+                return "actividad";
         }
     });
 
