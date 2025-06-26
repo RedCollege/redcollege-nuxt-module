@@ -63,6 +63,7 @@ export interface IAdministracionMedicamentoFilter {
     establecimiento?: number;
     paciente?: number;
     responsable?: number;
+    mes?: string | Date;
 }
 
 export interface IAdministracionMedicamentoAdjunto {
