@@ -329,7 +329,7 @@ div
                     .relative.rounded-sm.overflow-x-scroll.h-14
                         TabsList.absolute(variant="pill")
                             TabsTrigger.border.text-xs.text-foreground(value="participantes", variant="pill") Participantes ({{ selectedValues.length }})
-                            //-TabsTrigger.border.text-xs.text-foreground(value="cursos", variant="pill") Cursos
+                            TabsTrigger.border.text-xs.text-foreground(value="cursos", variant="pill") Cursos
                             TabsTrigger.border.text-xs.text-foreground(value="personal", variant="pill") Personal
                             TabsTrigger.border.text-xs.text-foreground(value="estudiantes", variant="pill") Estudiantes
                             TabsTrigger.border.text-xs.text-foreground(value="apoderados", variant="pill") Apoderados
