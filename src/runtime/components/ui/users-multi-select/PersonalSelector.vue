@@ -59,7 +59,7 @@ const updateSelector = (isChecked: boolean, usuario: IUsuario): void => {
 
 // Filtros de búsqueda
 const searchTerm = ref("");
-const selectedProfile = ref("");
+const selectedProfile = ref("all");
 
 // Usuarios filtrados
 const filteredUsuarios = computed(() => {
@@ -82,7 +82,7 @@ const filteredUsuarios = computed(() => {
     }
 
     // Filtrar por perfil/cargo seleccionado
-    if (selectedProfile.value) {
+    if (selectedProfile.value && selectedProfile.value !== "all") {
         filtered = filtered.filter(
             (usuario) =>
                 usuario.cargo &&
@@ -152,14 +152,13 @@ const uniqueCargos = computed(() => {
             )
             span.absolute.start-0.inset-y-0.flex.items-center.justify-center.px-2
                 Icon.size-5.text-muted-foreground(name="tabler:search")
-        //-Select(v-model="selectedProfile")
+        Select(v-model="selectedProfile")
             SelectTrigger.w-32
                 SelectValue(placeholder="Perfil")
             SelectContent
                 SelectGroup
-                    SelectLabel Niveles
-                    SelectItem(value="") Todos
-                    // Agregar más opciones de perfil según los cargos disponibles
+                    SelectLabel Perfil
+                    SelectItem(v-for="cargo in uniqueCargos", :key="cargo", :value="cargo") {{ cargo }}
 
     ScrollArea(class="h-64")
         .grid
