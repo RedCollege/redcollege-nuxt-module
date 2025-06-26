@@ -17,6 +17,13 @@ export default class AdministracionMedicamentosModule {
         });
     }
 
+    async getAllDescargable(props?: IAdministracionMedicamentoFilter): Promise<IAdministracionMedicamento[]> {
+        return this.fetcher("/enfermeria/administracion_medicamentos/all", {
+            params: props,
+            method: "GET",
+        });
+    }
+
     async getById(
         administracionMedicamentoId: number
     ): Promise<IAdministracionMedicamento> {
