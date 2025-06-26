@@ -64,6 +64,7 @@ export interface IAdministracionMedicamentoFilter {
     paciente?: number;
     responsable?: number;
     mes?: string | Date;
+    paginate?: boolean;
 }
 
 export interface IAdministracionMedicamentoAdjunto {
