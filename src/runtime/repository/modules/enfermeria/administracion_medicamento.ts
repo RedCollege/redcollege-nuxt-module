@@ -106,4 +106,11 @@ export default class AdministracionMedicamentosModule {
             method: "DELETE",
         });
     }
+
+    async getDescargable(props?: IAdministracionMedicamentoFilter): Promise<IAdministracionMedicamento> {
+        return this.fetcher(`/enfermeria/administracion_medicamentos/descargable`, {
+            params: props,
+            method: "GET",
+        });
+    }
 }
