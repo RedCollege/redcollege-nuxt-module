@@ -21,6 +21,7 @@ export interface IMensaje {
     totalDestinatarios: number;
     totalEnviados: number;
     estadoEnvioId: number;
+    permitirRespuesta: boolean;
 }
 
 export interface IMensajeForm {
@@ -29,4 +30,5 @@ export interface IMensajeForm {
     periodo: number;
     establecimientoId: number;
     adjuntosIds: Array<number>;
+    permitirRespuesta: boolean;
 }

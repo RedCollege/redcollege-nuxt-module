@@ -1,10 +1,14 @@
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
 
 export interface IPermiso {
     id?: number;
     establecimientoId: number;
-    isProfAllowedInternal: boolean;
-    isProfAllowedApod: boolean;
+    isProfAllowedInternalToTeachers: boolean;
+    isProfAllowedExternalToApod: boolean;
+    isProfAllowedResponseToAdmin: boolean;
+    isApodAllowedMessageToTeachers: boolean;
+    isApodAllowedMessageToAdmin: boolean;
+    isApodAllowedResponse: boolean;
     createdAt?: DateTime;
     updatedAt?: DateTime;
 }
