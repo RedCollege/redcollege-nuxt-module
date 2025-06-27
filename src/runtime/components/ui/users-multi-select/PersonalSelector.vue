@@ -182,7 +182,7 @@ const uniqueCargos = computed(() => {
                 .flex.items-center.space-x-2
                     Checkbox(
                         :model-value="isUserSelected(usuario.id?.toString() || usuario.nombreCompleto)"
-                        @update:model-value="(checked) => updateSelector(checked, usuario)"
+                        @update:model-value="(checked:boolean) => updateSelector(checked, usuario)"
                     )
                     div
                         label.text-sm.leading-none(

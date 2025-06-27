@@ -338,9 +338,17 @@ div
                     //-TabsContent(value="cursos")
                         CursoSelector(:cursos="data.cursos")
                     TabsContent(value="personal")
-                        PersonalSelector(:usuarios="data.personal", @select-usuario="updateUsuarios", :selected-users="selectedValues")
+                        PersonalSelector(:usuarios="data?.personal || []", @select-usuario="updateUsuarios", :selected-users="selectedValues")
                     TabsContent(value="estudiantes")
-                        EstudiantesSelector(:usuarios="estudiantes", @select-usuario="updateUsuarios", :periodo="periodo", :establecimiento-id="establecimientoId", :selected-users="selectedValues", @search="filterEstudiante")
+                        EstudiantesSelector(
+                            :usuarios="estudiantes"
+                            @select-usuario="updateUsuarios"
+                            :periodo="periodo"
+                            :establecimiento-id="establecimientoId"
+                            :selected-users="selectedValues"
+                            @search="filterEstudiante"
+                            :all-cursos="data.cursos"
+                        )
                     TabsContent(value="apoderados")
                         ApoderadosSelector(:usuarios="apoderados", @select-usuario="updateUsuarios", :periodo="periodo", :establecimiento-id="establecimientoId", :selected-users="selectedValues", @search="filterApoderado")
 </template>
