@@ -4,7 +4,7 @@ export interface IAdministracionMedicamento {
     id: number;
     periodo: number;
     indicacionTratamiento: string;
-    estado: 'en_curso' | 'finalizado' | 'suspendido';
+    estado: EnumAdministracionMedicamentoEstado;
     establecimientoId: number;
     establecimiento: IEstablecimiento;
     pacienteId: number;
@@ -22,7 +22,7 @@ export interface IAdministracionMedicamento {
 export interface IAdministracionMedicamentoForm {
     pacienteId: number;
     periodo: number;
-    estado: 'en_curso' | 'finalizado' | 'suspendido';
+    estado: EnumAdministracionMedicamentoEstado;
     establecimientoId: number;
     medicamentos: string;
     responsables: number[];
@@ -45,6 +45,7 @@ export interface IRecordatorioForm {
     fechaHora: string | Date;
 }
 
+
 export interface IAdministracionMedicamentoResponse {
     meta: {
             total: number;
@@ -57,7 +58,7 @@ export interface IAdministracionMedicamentoResponse {
 export interface IAdministracionMedicamentoFilter {
     searchTerm?: string;
     page?: number;
-    estado?: 'en_curso' | 'finalizado' | 'suspendido';
+    estado?: EnumAdministracionMedicamentoEstado;
     trashed?: boolean;
     periodo?: number;
     establecimiento?: number;
@@ -78,4 +79,20 @@ export interface IAdministracionMedicamentoAdjunto {
 export interface IAdministracionMedicamentoAdjuntoForm {
     administracionMedicamentoId: number;
     archivoId: number;
+}
+
+export interface ISideCalendarEvents {
+    fecha: string | Date;
+    nombre: string;
+    color: string;
+    hora: string;
+    medicamentos: string;
+    estado: EnumAdministracionMedicamentoEstado;
+    checked: boolean;
+}
+
+export enum EnumAdministracionMedicamentoEstado {
+    EN_CURSO = 'en_curso',
+    FINALIZADO = 'finalizado',
+    SUSPENDIDO = 'suspendido',
 }

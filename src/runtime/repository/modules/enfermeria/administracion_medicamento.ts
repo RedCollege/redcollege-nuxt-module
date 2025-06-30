@@ -4,7 +4,8 @@ import type {
     IAdministracionMedicamentoAdjunto, 
     IAdministracionMedicamentoFilter, 
     IAdministracionMedicamentoForm, 
-    IAdministracionMedicamentoResponse
+    IAdministracionMedicamentoResponse,
+    ISideCalendarEvents
 } from "~/src/runtime/models";
 
 export default class AdministracionMedicamentosModule {
@@ -17,8 +18,8 @@ export default class AdministracionMedicamentosModule {
         });
     }
 
-    async getAllWhitOutPaginate(props?: IAdministracionMedicamentoFilter): Promise<IAdministracionMedicamento[]> {
-        return this.fetcher("/enfermeria/administracion_medicamentos/all", {
+    async getAllEventsByMonth(props?: IAdministracionMedicamentoFilter): Promise<ISideCalendarEvents[]> {
+        return this.fetcher("/enfermeria/administracion_medicamentos/allEventsByMonth", {
             params: props,
             method: "GET",
         });
