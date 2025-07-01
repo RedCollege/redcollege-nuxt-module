@@ -1,13 +1,21 @@
 import { computed, unref, type Ref, type ComputedRef } from "vue";
 import type { IEstadisticasIndividuales, IResumenCard } from "../models";
 
+type ChartDataType =
+    | IEstadisticasIndividuales["actividad"]["chartData"]
+    | IEstadisticasIndividuales["accidente"]["chartData"]
+    | IEstadisticasIndividuales["atencion"]["chartData"]
+    | undefined;
+
 export function useResumenCard(
     tipoDescargable: Ref<string> | ComputedRef<string>,
-    estadisticasIndividuales: ComputedRef<IEstadisticasIndividuales | undefined>
+    estadisticasIndividuales: ComputedRef<
+        IEstadisticasIndividuales | undefined
+    >,
 ) {
     const resumenConfigs = {
         actividad: (
-            data: IEstadisticasIndividuales["actividad"]
+            data: IEstadisticasIndividuales["actividad"],
         ): IResumenCard[] => [
             {
                 titulo: "Resumen por Tipo de actividad",
@@ -33,7 +41,7 @@ export function useResumenCard(
         ],
 
         accidente: (
-            data: IEstadisticasIndividuales["accidente"]
+            data: IEstadisticasIndividuales["accidente"],
         ): IResumenCard[] => [
             {
                 titulo: "Resumen por Nivel",
@@ -66,7 +74,7 @@ export function useResumenCard(
         ],
 
         atencion: (
-            data: IEstadisticasIndividuales["atencion"]
+            data: IEstadisticasIndividuales["atencion"],
         ): IResumenCard[] => [
             {
                 titulo: "Resumen por Nivel",
@@ -135,7 +143,7 @@ export function useResumenCard(
         }
     });
 
-    const chartData = computed(() => {
+    const chartData = computed<ChartDataType>(() => {
         const estadisticas = estadisticasIndividuales.value;
         const tipo = unref(tipoDescargable) as
             | "actividad"
@@ -145,7 +153,7 @@ export function useResumenCard(
         return estadisticas?.[tipo]?.chartData;
     });
 
-    const tabName = computed(() => {
+    const tabName = computed<string>(() => {
         const tipo = unref(tipoDescargable);
 
         switch (tipo) {
@@ -160,7 +168,7 @@ export function useResumenCard(
         }
     });
 
-    const tituloResumen = computed(() => {
+    const tituloResumen = computed<string>(() => {
         const tipo = unref(tipoDescargable);
 
         switch (tipo) {
