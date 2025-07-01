@@ -237,6 +237,9 @@ export function createApiModules(
                 configuracionItem: new ConfiguracionItemModule(apiFetcher),
                 registroAccidente: new RegistroAccidenteModule(apiFetcher),
                 estadistica: new EstadisticaModule(apiFetcher),
+                administracionMedicamentos:
+                    new AdministracionMedicamentosModule(apiFetcher),
+                actividad: new ActividadModule(apiFetcher),
             };
         case "evaluaciones":
             return {
