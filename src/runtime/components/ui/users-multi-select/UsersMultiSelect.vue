@@ -347,7 +347,7 @@ div
                             :establecimiento-id="establecimientoId"
                             :selected-users="selectedValues"
                             @search="filterEstudiante"
-                            :all-cursos="data.cursos"
+                            :all-cursos="data?.cursos || []"
                         )
                     TabsContent(value="apoderados")
                         ApoderadosSelector(:usuarios="apoderados", @select-usuario="updateUsuarios", :periodo="periodo", :establecimiento-id="establecimientoId", :selected-users="selectedValues", @search="filterApoderado")

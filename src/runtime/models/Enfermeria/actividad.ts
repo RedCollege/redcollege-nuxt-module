@@ -16,23 +16,23 @@ export interface IActividad {
     deletedAt: DateTime | null;
     createdAt: DateTime;
     updatedAt: DateTime;
-    tipoActividad?: IConfiguracionItem;
-    lugarActividad?: IConfiguracionItem;
-    responsables?: IUsuario[];
-    participantes?: IUsuario[];
+    tipoActividad: IConfiguracionItem;
+    lugarActividad: IConfiguracionItem;
+    responsables: IUsuario[];
+    participantes: IUsuario[];
 }
 
 export interface IActividadForm {
-    nombre?: string;
-    fechaActividad?: DateTime;
-    lugarActividadId?: number;
-    establecimientoId?: number;
-    periodo?: number;
-    tipoActividadId?: number;
+    nombre: string;
+    fechaActividad: DateTime;
+    lugarActividadId: number;
+    establecimientoId: number;
+    periodo: number;
+    tipoActividadId: number;
     descripcion?: string;
     isSuspendida: boolean;
     responsablesIds: number[];
-    participantesIds?: number[];
+    participantesIds: number[];
 }
 
 export interface IActividadFilter {
