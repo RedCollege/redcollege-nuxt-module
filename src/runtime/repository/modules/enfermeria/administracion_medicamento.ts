@@ -12,14 +12,14 @@ export default class AdministracionMedicamentosModule {
     constructor(private fetcher: $Fetch) {}
 
     async getAll(props?: IAdministracionMedicamentoFilter): Promise<IAdministracionMedicamentoResponse> {
-        return this.fetcher("/enfermeria/administracion_medicamentos", {
+        return this.fetcher("/enfermeria/administracion-medicamentos", {
             params: props,
             method: "GET",
         });
     }
 
     async getAllEventsByMonth(props?: IAdministracionMedicamentoFilter): Promise<ISideCalendarEvents[]> {
-        return this.fetcher("/enfermeria/administracion_medicamentos/allEventsByMonth", {
+        return this.fetcher("/enfermeria/administracion-medicamentos/allEventsByMonth", {
             params: props,
             method: "GET",
         });
@@ -29,7 +29,7 @@ export default class AdministracionMedicamentosModule {
         administracionMedicamentoId: number
     ): Promise<IAdministracionMedicamento> {
         return this.fetcher(
-            `/enfermeria/administracion_medicamentos/${administracionMedicamentoId}`,
+            `/enfermeria/administracion-medicamentos/${administracionMedicamentoId}`,
             {
                 method: "GET",
             }
@@ -39,7 +39,7 @@ export default class AdministracionMedicamentosModule {
     async saveAdministracionMedicamento(
         data: IAdministracionMedicamentoForm
     ): Promise<IAdministracionMedicamento> {
-        return this.fetcher("/enfermeria/administracion_medicamentos", {
+        return this.fetcher("/enfermeria/administracion-medicamentos", {
             method: "POST",
             body: data,
         });
@@ -53,7 +53,7 @@ export default class AdministracionMedicamentosModule {
         administracionMedicamentoId: number;
     }): Promise<IAdministracionMedicamento> {
         return this.fetcher(
-            `/enfermeria/administracion_medicamentos/${administracionMedicamentoId}`,
+            `/enfermeria/administracion-medicamentos/${administracionMedicamentoId}`,
             {
                 method: "PATCH",
                 body: data,
@@ -65,7 +65,7 @@ export default class AdministracionMedicamentosModule {
         administracionMedicamentoId: number
     ): Promise<IAdministracionMedicamento> {
         return this.fetcher(
-            `/enfermeria/administracion_medicamentos/${administracionMedicamentoId}`,
+            `/enfermeria/administracion-medicamentos/${administracionMedicamentoId}`,
             {
                 method: "DELETE",
             }
@@ -76,7 +76,7 @@ export default class AdministracionMedicamentosModule {
         administracionMedicamentoId: number
     ): Promise<IAdministracionMedicamento> {
         return this.fetcher(
-            `/enfermeria/administracion_medicamentos/${administracionMedicamentoId}/restore`,
+            `/enfermeria/administracion-medicamentos/${administracionMedicamentoId}/restore`,
             {
                 method: "PATCH",
             }
@@ -87,7 +87,7 @@ export default class AdministracionMedicamentosModule {
         administracionMedicamentoId: number
     ): Promise<IAdministracionMedicamento> {
         return this.fetcher(
-            `/enfermeria/administracion_medicamentos/${administracionMedicamentoId}/destroy`,
+            `/enfermeria/administracion-medicamentos/${administracionMedicamentoId}/destroy`,
             {
                 method: "DELETE",
             }
@@ -101,7 +101,7 @@ export default class AdministracionMedicamentosModule {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("folder", folder);
-        return this.fetcher(`/enfermeria/administracion_medicamentos/adjuntos/upload`, {
+        return this.fetcher(`/enfermeria/administracion-medicamentos/adjuntos/upload`, {
             method: "POST",
             body: formData,
         });
@@ -110,13 +110,13 @@ export default class AdministracionMedicamentosModule {
     async eliminarAdjunto(
         id: number
     ): Promise<{ success: boolean; message: string }> {
-        return this.fetcher(`/enfermeria/administracion_medicamentos/adjuntos/delete/${id}`, {
+        return this.fetcher(`/enfermeria/administracion-medicamentos/adjuntos/delete/${id}`, {
             method: "DELETE",
         });
     }
 
     async getDescargable(props?: IAdministracionMedicamentoFilter): Promise<IAdministracionMedicamento> {
-        return this.fetcher(`/enfermeria/administracion_medicamentos/descargable`, {
+        return this.fetcher(`/enfermeria/administracion-medicamentos/descargable`, {
             params: props,
             method: "GET",
         });
