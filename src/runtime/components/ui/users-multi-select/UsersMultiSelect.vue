@@ -301,7 +301,7 @@ const filterApoderado = (search: string): void => {
 div
     Popover
         PopoverTrigger(:disabled="disabled" class="w-full")
-            Button(type="button", class="flex w-full p-1 rounded-md border border-input min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit")
+            Button(:disabled="disabled" type="button", class="flex w-full p-1 rounded-md border border-input min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit")
                 .flex.justify-between.items-center.w-full(v-if="selectedValues.length > 0")
                     .flex.flex-wrap.items-center
                             Badge(v-for="option in selectedOptions.slice(0, maxCount || 3)", :key="option.value", :class="[ isAnimating ? 'animate-bounce' : '', multiSelectVariants({ variant })]"
