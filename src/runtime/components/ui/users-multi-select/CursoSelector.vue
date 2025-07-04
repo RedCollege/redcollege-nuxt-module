@@ -33,11 +33,11 @@ const updateSelector = (isChecked: boolean, curso: ICurso): void => {
 };
 
 // Filtros de búsqueda
-const searchTerm = ref("");
-const selectedLevel = ref("");
+const searchTerm = ref<string>("");
+const selectedLevel = ref<string>("");
 
 // Cursos filtrados
-const filteredCursos = computed(() => {
+const filteredCursos = computed<ICurso[]>(() => {
     if (!props.cursos) return [];
 
     return props.cursos.filter((curso) => {
@@ -71,7 +71,7 @@ const toggleSelectAll = (isChecked: boolean): void => {
 };
 
 // Computed para el estado del checkbox "Seleccionar todos"
-const isAllSelected = computed(() => {
+const isAllSelected = computed<boolean | "intermediate">(() => {
     const filteredCourses = filteredCursos.value;
     if (filteredCourses.length === 0) return false;
     const selectedCount = filteredCourses.filter((curso) =>
@@ -80,7 +80,7 @@ const isAllSelected = computed(() => {
 
     if (selectedCount === 0) return false;
     if (selectedCount === filteredCourses.length) return true;
-    return "indeterminate";
+    return "intermediate";
 });
 </script>
 

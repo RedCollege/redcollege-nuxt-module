@@ -9,20 +9,20 @@ export interface CardConfig {
 
 export interface CardTotales {
     accidente?: {
-        total?: number;
-        enTrayecto?: number;
-        enEstablecimiento?: number;
+        total: number;
+        enTrayecto: number;
+        enEstablecimiento: number;
     };
     atencion?: {
-        total?: number;
-        finalizadas?: number;
-        abiertas?: number;
+        total: number;
+        finalizadas: number;
+        abiertas: number;
     };
     actividad?: {
-        total?: number;
-        finalizadas?: number;
-        programadas?: number;
-        suspendidas?: number;
+        total: number;
+        finalizadas: number;
+        programadas: number;
+        suspendidas: number;
     };
 }
 
@@ -33,7 +33,7 @@ export function useCardConfig(
         | "actividad"
         | Ref<string>
         | ComputedRef<string>,
-    cardsTotales: ComputedRef<CardTotales | undefined>
+    cardsTotales: ComputedRef<CardTotales | undefined>,
 ): { cards: ComputedRef<CardConfig[]> } {
     const cardConfigs = {
         accidente: (data: CardTotales["accidente"]): CardConfig[] => [
@@ -125,9 +125,16 @@ export function useCardConfig(
         const currentCardsTotales = cardsTotales.value;
 
         if (typeof tabTypeOrRef === "string") {
-            return cardConfigs[tabTypeOrRef](
-                currentCardsTotales?.[tabTypeOrRef]
-            );
+            if (tabTypeOrRef === "accidente") {
+                return cardConfigs.accidente(currentCardsTotales?.accidente);
+            }
+            if (tabTypeOrRef === "atencion") {
+                return cardConfigs.atencion(currentCardsTotales?.atencion);
+            }
+            if (tabTypeOrRef === "actividad") {
+                return cardConfigs.actividad(currentCardsTotales?.actividad);
+            }
+            return defaultCards;
         }
 
         const tabName = unref(tabTypeOrRef).toLowerCase();

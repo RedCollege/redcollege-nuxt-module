@@ -5,12 +5,6 @@ const showConfetti = () => {
     confetti.showConfetti();
 };
 
-// Data estática para el ejemplo
-interface SalesData {
-    name: string;
-    total: number;
-}
-
 const salesData: SalesData[] = [
     {
         name: "Bajo (B)",
@@ -40,7 +34,7 @@ const selectedUserIds = ref<string[]>([]);
             CardTitle Playground
         CardContent
             .space-y-4
-              UsersMultiSelect(  v-model="selectedUserIds" :establecimientoId=" Number(establecimientoid) ", :periodo="Number(2024)")
+              UsersMultiSelect(  v-model="selectedUserIds" :establecimientoId=" Number(establecimientoid) ", :periodo="Number(periodo)")
             .space-y-4 
                 pre {{ selectedUserIds }}
 </template>

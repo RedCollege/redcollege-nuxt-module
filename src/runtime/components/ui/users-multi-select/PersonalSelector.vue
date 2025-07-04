@@ -58,11 +58,11 @@ const updateSelector = (isChecked: boolean, usuario: IUsuario): void => {
 };
 
 // Filtros de búsqueda
-const searchTerm = ref("");
-const selectedProfile = ref("all");
+const searchTerm = ref<string>("");
+const selectedProfile = ref<string>("all");
 
 // Usuarios filtrados
-const filteredUsuarios = computed(() => {
+const filteredUsuarios = computed<IUsuario[]>(() => {
     if (!props.usuarios) return [];
 
     let filtered = props.usuarios;

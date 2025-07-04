@@ -12,7 +12,7 @@ interface Props {
     periodo: number;
     establecimientoId: number;
     usuarios: IUsuarioEstablecimientoResponse;
-    selectedUsers?: IUsuario[]; // Array de objetos IUsuario completos
+    selectedUsers: IUsuario[]; // Array de objetos IUsuario completos
 }
 
 const props = defineProps<Props>();
@@ -23,9 +23,14 @@ const emit = defineEmits<{
 }>();
 
 // Filtros de búsqueda
-const searchTerm = ref("");
-const selectedProfile = ref("");
-const isFirstLoading = ref(true);
+const searchTerm = ref<string>("");
+const selectedProfile = ref<string>("");
+const isFirstLoading = ref<boolean>(true);
+
+const localUsuarios = ref<IUsuarioEstablecimientoResponse>({
+    data: [...(props.usuarios.data ?? [])],
+    meta: { ...(props.usuarios.meta ?? {}) },
+});
 const { establecimiento } = useNuxtApp().$apis;
 
 // Estado interno para mantener los IDs seleccionados (solo para UI)
@@ -44,16 +49,18 @@ if (props.selectedUsers) {
 }
 
 // Usar la información del meta del padre
-const currentPage = computed(() => props.usuarios?.meta?.currentPage ?? 1);
-const lastPage = computed(() => props.usuarios?.meta?.lastPage ?? 1);
-const total = computed(() => props.usuarios?.meta?.total ?? 0);
-const perPage = computed(() => props.usuarios?.meta?.perPage ?? 15);
+const currentPage = computed<number>(
+    () => props.usuarios?.meta?.currentPage ?? 1,
+);
+const lastPage = computed<number>(() => props.usuarios?.meta?.lastPage ?? 1);
+const total = computed<number>(() => props.usuarios?.meta?.total ?? 0);
+const perPage = computed<number>(() => props.usuarios?.meta?.perPage ?? 15);
 
 // Calcular la siguiente página que debe cargar el hijo
-const nextPageToLoad = computed(() => currentPage.value + 1);
+const nextPageToLoad = computed<number>(() => currentPage.value + 1);
 
 // Verificar si puede cargar más páginas
-const canLoadMore = computed(() => {
+const canLoadMore = computed<boolean>(() => {
     return (
         currentPage.value < lastPage.value &&
         props.usuarios?.data?.length < total.value
@@ -79,13 +86,13 @@ const updateSelector = (isChecked: boolean, usuario: IUsuario): void => {
 };
 
 // Usuarios filtrados
-const filteredUsuarios = computed(() => {
+const filteredUsuarios = computed<IUsuario[]>(() => {
     if (!props.usuarios?.data) return [];
     return props.usuarios.data;
 });
 
 // Computed para el estado del "Seleccionar todos"
-const selectAllState = computed(() => {
+const selectAllState = computed<string | boolean>(() => {
     const filteredUsers = filteredUsuarios.value;
     if (filteredUsers.length === 0) return false;
 
@@ -150,12 +157,13 @@ const setupInfiniteScroll = async () => {
                     Array.isArray(data.data) &&
                     data.data.length > 0
                 ) {
-                    // Agregar los nuevos datos
-                    props.usuarios.data.push(...data.data);
+                    // Agregar los nuevos datos a la variable local
+                    localUsuarios.value.data.push(...data.data);
 
                     // Actualizar el meta con la información de la nueva página cargada
-                    if (props.usuarios.meta) {
-                        props.usuarios.meta.currentPage = nextPageToLoad.value;
+                    if (localUsuarios.value.meta) {
+                        localUsuarios.value.meta.currentPage =
+                            nextPageToLoad.value;
                     }
                 }
 
@@ -221,10 +229,6 @@ watch(
 onMounted(async () => {
     await setupInfiniteScroll();
 });
-
-const search = (search: string) => {
-    emit("search", search);
-};
 
 watch(
     () => searchTerm.value,
