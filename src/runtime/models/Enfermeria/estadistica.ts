@@ -91,6 +91,7 @@ export interface IActividadIndividual {
     chartData: IChartData[];
     resumenPorTipoActividad: IResumenConContexto[];
     resumenPorResponsable: IResumenBase[];
+    resumenPorParticipante: IResumenBase[];
     resumenPorLugar: IResumenConContexto[];
 }
 

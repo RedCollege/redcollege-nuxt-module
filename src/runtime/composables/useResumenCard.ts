@@ -38,6 +38,14 @@ export function useResumenCard(
                 variant: "text-purple",
                 progressItems: data?.resumenPorLugar ?? [],
             },
+
+            {
+                titulo: "Resumen por Participante",
+                ToolTipContenido:
+                    "Conoce el total de actividades realizadas, clasificadas según el Participante de la misma",
+                variant: "text-gold",
+                progressItems: data?.resumenPorParticipante ?? [],
+            },
         ],
 
         accidente: (
