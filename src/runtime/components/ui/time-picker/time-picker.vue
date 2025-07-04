@@ -49,7 +49,7 @@
             :disabled="disabled"
         >
             <div class="flex flex-col items-center gap-1">
-                <Label for="periodRef" class="text-xs">Horario</Label>
+                <Label v-if="withLabels" for="periodRef" class="text-xs">Horario</Label>
                 <SelectTrigger
                     ref="periodRef"
                     @keydown.arrow-left="focusLeftConditional"
