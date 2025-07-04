@@ -43,8 +43,20 @@ export default class EvaluacionCursoModule {
         })
     }
 
-    async obtenerInformeEvaluacionesSimceByCursoId(cursoId: number, grupoAsignaturaId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<IEstudianteEvaluacion[]> {
-        return this.fetcher(`/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}?grupoAsignaturaId=${grupoAsignaturaId}&tipo=${tipo}`, {
+    async obtenerInformeEvaluacionesSimceByCursoId(cursoId: number, grupoAsignaturaId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE', evaluacionId?: number): Promise<IEstudianteEvaluacion[]> {
+        const baseUrl = `/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}`;
+        const params = new URLSearchParams({
+            grupoAsignaturaId: grupoAsignaturaId.toString(),
+            tipo: tipo
+        });
+
+        if (evaluacionId) {
+            params.append('evaluacionId', evaluacionId.toString());
+        }
+
+        const url = `${baseUrl}?${params.toString()}`;
+
+        return this.fetcher(url, {
             method: 'GET'
         })
     }
