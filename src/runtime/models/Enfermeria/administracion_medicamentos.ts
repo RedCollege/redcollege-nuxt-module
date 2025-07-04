@@ -96,3 +96,10 @@ export enum EnumAdministracionMedicamentoEstado {
     FINALIZADO = 'finalizado',
     SUSPENDIDO = 'suspendido',
 }
+
+export interface IAdministracionMedicamentoDescargable {
+    meta: {
+        total: number;
+    };
+    data: IAdministracionMedicamento[];
+}
