@@ -19,33 +19,33 @@ export default class ConfiguracionItemModule {
             params.context = context
         }
 
-        return this.fetcher(`/enfermeria/configuracion_item/${establecimientoId}`, {
+        return this.fetcher(`/enfermeria/configuracion-item/${establecimientoId}`, {
             method: 'GET',
             params,
         });
     }
 
     async saveConfiguracionItem(data: IConfiguracionItemForm): Promise<IConfiguracionItem> {
-        return this.fetcher('/enfermeria/configuracion_item', {
+        return this.fetcher('/enfermeria/configuracion-item', {
             method: 'POST',
             body: data
         })
     }
 
     async deleteConfiguracionItem(id: number): Promise<IConfiguracionItem> {
-        return this.fetcher(`/enfermeria/configuracion_item/${id}`, {
+        return this.fetcher(`/enfermeria/configuracion-item/${id}`, {
             method: 'DELETE'
         })
     }
 
     async restoreConfiguracionItem(id: number): Promise<IConfiguracionItem> {
-        return this.fetcher(`/enfermeria/configuracion_item/${id}/restore`, {
+        return this.fetcher(`/enfermeria/configuracion-item/${id}/restore`, {
             method: 'PATCH'
         })
     }
 
     async destroyConfiguracionItem(id: number): Promise<IConfiguracionItem> {
-        return this.fetcher(`/enfermeria/configuracion_item/${id}/destroy`, {
+        return this.fetcher(`/enfermeria/configuracion-item/${id}/destroy`, {
             method: 'DELETE'
         })
     }

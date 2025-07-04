@@ -4,4 +4,6 @@ export * from "./enfermedad_discapacidad";
 export * from "./configuracion_item";
 export * from "./adjunto";
 export * from "./registro_accidente";
-export  * from "./estadistica";
+export * from "./estadistica";
+export * from "./administracion_medicamentos";
+export * from "./actividad";
