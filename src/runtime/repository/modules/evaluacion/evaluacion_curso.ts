@@ -49,15 +49,40 @@ export default class EvaluacionCursoModule {
             grupoAsignaturaId: grupoAsignaturaId.toString(),
             tipo: tipo
         });
-
+        
         if (evaluacionId) {
             params.append('evaluacionId', evaluacionId.toString());
         }
-
+        
         const url = `${baseUrl}?${params.toString()}`;
-
+      
         return this.fetcher(url, {
             method: 'GET'
         })
+    }
+
+    async actualizarObservacionRevision(
+        evaluacionCursoId: number, 
+        usuarioId: number, 
+        observacion: string
+    ): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            id: number;
+            observaciones: string | null;
+            updatedAt: string;
+        };
+    }> {
+        return this.fetcher(
+            `/evaluacion_curso/${evaluacionCursoId}/revisiones/${usuarioId}/observacion`,
+            {
+                method: 'PATCH',
+                body: JSON.stringify({ observacion }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
     }
 }
