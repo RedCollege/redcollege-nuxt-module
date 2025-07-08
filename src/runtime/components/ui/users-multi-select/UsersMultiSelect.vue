@@ -70,7 +70,7 @@ const { data } = await useAsyncData("user-establecimiento-data", async () => {
     return { personal, cursos };
 });
 
-const { data: estudiantes } = await useAsyncData(
+const { data: estudiantes, status: estudiantesStatus } = await useAsyncData(
     "estudiantes-establecimiento-multiselect",
     async () => {
         return establecimiento.establecimiento.obtenerUsuariosPorRol(
@@ -86,7 +86,7 @@ const { data: estudiantes } = await useAsyncData(
     { watch: [searchEstudiante] },
 );
 
-const { data: apoderados } = await useAsyncData(
+const { data: apoderados, status: apoderadosStatus } = await useAsyncData(
     "apoderados-establecimiento-multiselect",
     async () => {
         return establecimiento.establecimiento.obtenerUsuariosPorRol(
@@ -295,10 +295,14 @@ const filterEstudiante = (search: string): void => {
 const filterApoderado = (search: string): void => {
     searchApoderado.value = search;
 };
+
+const isLoading = computed<boolean>(() => {
+    return apoderadosStatus.value === 'pending' && estudiantesStatus.value === 'pending';
+});
 </script>
 
 <template lang="pug">
-div
+div(v-if="!isLoading")
     Popover
         PopoverTrigger(:disabled="disabled" class="w-full")
             Button(:disabled="disabled" type="button", class="flex w-full p-1 rounded-md border border-input min-h-10 h-auto items-center justify-between bg-inherit hover:bg-inherit")
