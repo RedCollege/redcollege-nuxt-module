@@ -111,6 +111,10 @@ export interface IInformeDetallado {
     listadoIndividualLogros: IEstudianteDetalle[];
     analisisEntradasCurriculares: IAnalisisEntradaCurricular[];
     analisisTendenciasPregunta: ITendenciaPregunta[];
+    evaluacion: {
+        nombre: string,
+        fecha: string
+    }
 }
 
 //Individual
