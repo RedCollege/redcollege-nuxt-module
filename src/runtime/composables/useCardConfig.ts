@@ -82,7 +82,7 @@ export function useCardConfig(
 
         actividad: (data: CardTotales["actividad"]): CardConfig[] => [
             {
-                titulo: "Total Actividades",
+                titulo: "Total",
                 cantidad: data?.total || 0,
                 ToolTipContenido:
                     "Conoce el total de actividades registradas en el rango de fecha indicado. Por defecto se muestra el año en curso",
