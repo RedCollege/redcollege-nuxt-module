@@ -21,7 +21,10 @@ const forwardedProps = useForwardProps(delegatedProps)
     v-bind="forwardedProps"
   >
     <slot :heading-value>
-      {{ headingValue }}
+      {{ headingValue.split(' ').map(word => word.includes('-') 
+        ? word.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('-')
+        : word.charAt(0).toUpperCase() + word.slice(1)
+      ).join(' ') }}
     </slot>
   </RangeCalendarHeading>
 </template>
