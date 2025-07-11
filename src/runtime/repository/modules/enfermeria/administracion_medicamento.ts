@@ -2,7 +2,6 @@ import type { $Fetch } from "ofetch";
 import type { 
     IAdministracionMedicamento, 
     IAdministracionMedicamentoAdjunto, 
-    IAdministracionMedicamentoDescargable, 
     IAdministracionMedicamentoFilter, 
     IAdministracionMedicamentoForm, 
     IAdministracionMedicamentoResponse,
@@ -116,7 +115,7 @@ export default class AdministracionMedicamentosModule {
         });
     }
 
-    async getDescargable(props?: IAdministracionMedicamentoFilter): Promise<IAdministracionMedicamentoDescargable> {
+    async getDescargable(props?: IAdministracionMedicamentoFilter): Promise<IAdministracionMedicamento> {
         return this.fetcher(`/enfermeria/administracion-medicamentos/descargable`, {
             params: props,
             method: "GET",
