@@ -13,7 +13,7 @@ export interface IAdministracionMedicamento {
     responsables: IUsuario[];
     adjuntos: IAdministracionMedicamentoAdjunto[];
     recordatorios: IRecordatorio[];
-    frecuencia: 'diaria' | 'manual;
+    frecuencia: 'diaria' | 'manual';
     fechaInicio: string | Date;
     fechaFin: string | Date;
     horaFrecuencia: string | Date | null;
