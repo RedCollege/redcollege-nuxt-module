@@ -31,7 +31,7 @@ const selectedUserIds = ref<string[]>([]);
 .py-2
     Card
         CardHeader
-            CardTitle Playground
+            CardTitle Playground.
         CardContent
             .space-y-4
               UsersMultiSelect(  v-model="selectedUserIds" :establecimientoId=" Number(establecimientoid) ", :periodo="Number(periodo)")
