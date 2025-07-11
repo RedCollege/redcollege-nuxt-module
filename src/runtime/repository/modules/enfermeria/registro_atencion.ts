@@ -1,5 +1,5 @@
 import type { $Fetch } from "ofetch";
-import type { IRegistroAtencionAdjunto } from "~/src/runtime/models/Enfermeria/adjunto";
+import type { IArchivo } from "~/src/runtime/models";
 import type {
     IRegistroAtencion,
     IRegistroAtencionDescargable,
@@ -87,27 +87,30 @@ export default class RegistroAtencionModule {
         );
     }
 
-    async subirAdjunto(
-        file: File,
-        folder: string
-    ): Promise<IRegistroAtencionAdjunto> {
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("folder", folder);
-        return this.fetcher(`/enfermeria/registro-atencion/adjuntos/upload`, {
-            method: "POST",
-            body: formData,
+    async asociarAdjunto(id: number, archivoId: number): Promise<IArchivo> {
+        return this.fetcher(`/enfermeria/registro-atencion/${id}/archivos`, {
+            method: 'POST',
+            body: {
+                archivoId
+            }
+        });
+    }
+    
+    async softDeleteAdjunto(id: number, archivoId: number): Promise<IArchivo> {
+        return this.fetcher(`/enfermeria/registro-atencion/${id}/archivos/soft`, {
+            method: 'DELETE',
+            body: {
+                archivoId
+            }
         });
     }
 
-    async eliminarAdjunto(
-        url: string
-    ): Promise<{ success: boolean; message: string }> {
-        return this.fetcher(`/enfermeria/registro-atencion/adjuntos/delete`, {
-            method: "DELETE",
+    async destroyAdjunto(id: number, archivoId: number): Promise<IArchivo> {
+        return this.fetcher(`/enfermeria/registro-atencion/${id}/archivos`, {
+            method: 'DELETE',
             body: {
-                url,
-            },
+                archivoId
+            }
         });
     }
 

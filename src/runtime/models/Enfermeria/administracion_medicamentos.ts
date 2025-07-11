@@ -11,7 +11,7 @@ export interface IAdministracionMedicamento {
     paciente: IUsuario;
     medicamentos: string;
     responsables: IUsuario[];
-    adjuntos: IAdministracionMedicamentoAdjunto[];
+    adjuntos: IArchivo[];
     recordatorios: IRecordatorio[];
     frecuencia: 'diaria' | 'manual';
     fechaInicio: string | Date;
@@ -65,20 +65,6 @@ export interface IAdministracionMedicamentoFilter {
     paciente?: number;
     responsable?: number;
     mes?: string | Date;
-}
-
-export interface IAdministracionMedicamentoAdjunto {
-    id: number;
-    administracionMedicamentoId: number;
-    archivoId: number;
-    archivo: IArchivo;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export interface IAdministracionMedicamentoAdjuntoForm {
-    administracionMedicamentoId: number;
-    archivoId: number;
 }
 
 export interface ISideCalendarEvents {
