@@ -21,7 +21,7 @@ const forwardedProps = useForwardProps(delegatedProps)
     v-bind="forwardedProps"
   >
     <slot :heading-value>
-      {{ headingValue }}
+      {{ headingValue.charAt(0).toUpperCase() + headingValue.slice(1) }}
     </slot>
   </CalendarHeading>
 </template>

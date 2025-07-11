@@ -9,6 +9,7 @@ export interface IUnidad {
     id: number;
     planificacionId: number;
     titulo: string;
+    cobertura: number
     numero: number;
     cantidadContenidosAsociados: number;
     descripcion: string | null;
