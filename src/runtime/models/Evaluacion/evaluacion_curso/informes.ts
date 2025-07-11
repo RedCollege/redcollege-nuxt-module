@@ -107,6 +107,7 @@ export interface IInformeDetallado {
     antecedentesGeneralesResultados: IAntecedentesResultados;
     balanceCurricularLogros: INivelLogro[];
     nivelesEvaluacionSimce: INivelLogro[];
+    nivelesEvaluacionPaes?: INivelLogro[];
     listadoIndividualLogros: IEstudianteDetalle[];
     analisisEntradasCurriculares: IAnalisisEntradaCurricular[];
     analisisTendenciasPregunta: ITendenciaPregunta[];
