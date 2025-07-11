@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { ICursoAsignatura, IEstablecimientoResponse, IUsuarioEstablecimientoResponse } from '../../../models/Establecimiento';
+import type { ICursoAsignatura, IEstablecimiento, IEstablecimientoResponse, IUsuarioEstablecimientoResponse } from '../../../models/Establecimiento';
 import type { ICurso } from '~/src/runtime/models/Establecimiento/curso';
 import type { IUsuario } from '~/src/runtime/models/Auth/usuario';
 
@@ -16,6 +16,12 @@ export default class EstablecimientoModule {
 
     async obtenerEstablecimientos(search: string, page: number): Promise<IEstablecimientoResponse> {
         return this.fetcher(`/establecimiento/obtenerEstablecimientos?search=${search}&page=${page}`, {
+            method: 'GET'
+        });
+    }
+
+    async obtenerEstablecimientoPorId(establecimientoId: number): Promise<IEstablecimiento> {
+        return this.fetcher(`/establecimiento/${establecimientoId}/info`, {
             method: 'GET'
         });
     }
