@@ -1,5 +1,6 @@
 import type { DateTime } from "luxon"
 import type { IConfiguracionItem, ICurso, IEstablecimiento, IMatricula, IUsuario } from ".."
+import type { CalendarDate } from "@internationalized/date"
 
 export interface ITestigo {
     id: number
@@ -79,8 +80,8 @@ export interface IRegistroAccidenteForm {
 }
 
 interface IRangoFecha {
-    start: Date | string
-    end: Date | string
+    start: Date | CalendarDate | string
+    end: Date | CalendarDate | string
 }
 export interface IRegistroAccidenteFilter {
     trashed?: boolean;

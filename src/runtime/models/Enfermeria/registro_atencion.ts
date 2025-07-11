@@ -6,6 +6,7 @@ import type {
     IRegistroAtencionAdjunto,
     IEstablecimiento,
 } from "..";
+import type { CalendarDate } from "@internationalized/date";
 
 export interface IRegistroAtencion {
     id: number;
@@ -76,8 +77,8 @@ export interface IRegistroAtencionForm {
 }
 
 interface IRangoFecha {
-    start: Date | string;
-    end: Date | string;
+    start: Date | CalendarDate | string;
+    end: Date | CalendarDate | string;
 }
 export interface IRegistroAtencionFilters {
     trashed?: boolean;
