@@ -5,7 +5,7 @@ export default class RegistroAccidenteModule {
     constructor(private fetcher: $Fetch) {}
 
     async getAll(props?: IRegistroAccidenteFilter): Promise<IRegistroAccidente> {
-            return this.fetcher("/enfermeria/registro-accidente", {
+            return this.fetcher("/enfermeria/registro_accidente", {
                 params: props,
                 method: "GET",
             });
@@ -14,7 +14,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number
         ): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro-accidente/${registroAccidenteId}`,
+                `/enfermeria/registro_accidente/${registroAccidenteId}`,
                 {
                     method: "GET",
                 }
@@ -24,7 +24,7 @@ export default class RegistroAccidenteModule {
         async saveRegistroAccidente(
             data: IRegistroAccidenteForm
         ): Promise<IRegistroAccidente> {
-            return this.fetcher("/enfermeria/registro-accidente", {
+            return this.fetcher("/enfermeria/registro_accidente", {
                 method: "POST",
                 body: data,
             });
@@ -38,7 +38,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number;
         }): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro-accidente/${registroAccidenteId}`,
+                `/enfermeria/registro_accidente/${registroAccidenteId}`,
                 {
                     method: "PATCH",
                     body: data,
@@ -50,7 +50,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number
         ): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro-accidente/${registroAccidenteId}`,
+                `/enfermeria/registro_accidente/${registroAccidenteId}`,
                 {
                     method: "DELETE",
                 }
@@ -61,7 +61,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number
         ): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro-accidente/${registroAccidenteId}/restore`,
+                `/enfermeria/registro_accidente/${registroAccidenteId}/restore`,
                 {
                     method: "PATCH",
                 }
@@ -72,7 +72,7 @@ export default class RegistroAccidenteModule {
             registroAccidenteId: number
         ): Promise<IRegistroAccidente> {
             return this.fetcher(
-                `/enfermeria/registro-accidente/${registroAccidenteId}/destroy`,
+                `/enfermeria/registro_accidente/${registroAccidenteId}/destroy`,
                 {
                     method: "DELETE",
                 }
@@ -80,7 +80,7 @@ export default class RegistroAccidenteModule {
         }
 
         async getDescargable(props?: IRegistroAccidenteFilter): Promise<IRegistroAccidenteDescargable> {
-            return this.fetcher("/enfermeria/registro-accidente/descargable", {
+            return this.fetcher("/enfermeria/registro_accidente/descargable", {
                 params: props,
                 method: "GET",
             });
@@ -88,7 +88,7 @@ export default class RegistroAccidenteModule {
 
         async getDescargableIndividual(registroAccidenteId: number): Promise<IRegistroAccidenteDescargableIndividual> {
             return this.fetcher(
-                `/enfermeria/registro-accidente/descargable/${registroAccidenteId}`,
+                `/enfermeria/registro_accidente/descargable/${registroAccidenteId}`,
                 {
                     method: "GET"
                 }
