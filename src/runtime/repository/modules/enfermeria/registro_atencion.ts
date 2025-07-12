@@ -12,7 +12,7 @@ export default class RegistroAtencionModule {
     constructor(private fetcher: $Fetch) {}
 
     async getAll(props?: IRegistroAtencionFilters): Promise<IRegistroAtencionResponse> {
-        return this.fetcher("/enfermeria/registro-atencion", {
+        return this.fetcher("/enfermeria/registro_atencion", {
             params: props,
             method: "GET",
         });
@@ -22,7 +22,7 @@ export default class RegistroAtencionModule {
         registroAtencionId: number
     ): Promise<IRegistroAtencion> {
         return this.fetcher(
-            `/enfermeria/registro-atencion/${registroAtencionId}`,
+            `/enfermeria/registro_atencion/${registroAtencionId}`,
             {
                 method: "GET",
             }
@@ -32,7 +32,7 @@ export default class RegistroAtencionModule {
     async saveRegistroAtencion(
         data: IRegistroAtencionForm
     ): Promise<IRegistroAtencion> {
-        return this.fetcher("/enfermeria/registro-atencion", {
+        return this.fetcher("/enfermeria/registro_atencion", {
             method: "POST",
             body: data,
         });
@@ -46,7 +46,7 @@ export default class RegistroAtencionModule {
         registroAtencionId: number;
     }): Promise<IRegistroAtencion> {
         return this.fetcher(
-            `/enfermeria/registro-atencion/${registroAtencionId}`,
+            `/enfermeria/registro_atencion/${registroAtencionId}`,
             {
                 method: "PATCH",
                 body: data,
@@ -58,7 +58,7 @@ export default class RegistroAtencionModule {
         registroAtencionId: number
     ): Promise<IRegistroAtencion> {
         return this.fetcher(
-            `/enfermeria/registro-atencion/${registroAtencionId}`,
+            `/enfermeria/registro_atencion/${registroAtencionId}`,
             {
                 method: "DELETE",
             }
@@ -69,7 +69,7 @@ export default class RegistroAtencionModule {
         registroAtencionId: number
     ): Promise<IRegistroAtencion> {
         return this.fetcher(
-            `/enfermeria/registro-atencion/${registroAtencionId}/restore`,
+            `/enfermeria/registro_atencion/${registroAtencionId}/restore`,
             {
                 method: "PATCH",
             }
@@ -80,7 +80,7 @@ export default class RegistroAtencionModule {
         registroAtencionId: number
     ): Promise<IRegistroAtencion> {
         return this.fetcher(
-            `/enfermeria/registro-atencion/${registroAtencionId}/destroy`,
+            `/enfermeria/registro_atencion/${registroAtencionId}/destroy`,
             {
                 method: "DELETE",
             }
@@ -115,7 +115,7 @@ export default class RegistroAtencionModule {
     }
 
     async getDescargable(props?: IRegistroAtencionFilters): Promise<IRegistroAtencionDescargable> {
-        return this.fetcher("/enfermeria/registro-atencion/descargable", {
+        return this.fetcher("/enfermeria/registro_atencion/descargable", {
             params: props,
             method: "GET",
         });
