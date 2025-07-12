@@ -95,7 +95,7 @@ export default class AdministracionMedicamentosModule {
     }
 
     async asociarAdjunto(id: number, archivoId: number): Promise<IArchivo> {
-        return this.fetcher(`/enfermeria/administracion-medicamentos/${id}/archivos`, {
+        return this.fetcher(`/enfermeria/administracion_medicamentos/${id}/archivos`, {
             method: 'POST',
             body: {
                 archivoId
@@ -104,7 +104,7 @@ export default class AdministracionMedicamentosModule {
     }
     
     async softDeleteAdjunto(id: number, archivoId: number): Promise<IArchivo> {
-        return this.fetcher(`/enfermeria/administracion-medicamentos/${id}/archivos/soft`, {
+        return this.fetcher(`/enfermeria/administracion_medicamentos/${id}/archivos/soft`, {
             method: 'DELETE',
             body: {
                 archivoId
@@ -113,7 +113,7 @@ export default class AdministracionMedicamentosModule {
     }
 
     async destroyAdjunto(id: number, archivoId: number): Promise<IArchivo> {
-        return this.fetcher(`/enfermeria/administracion-medicamentos/${id}/archivos`, {
+        return this.fetcher(`/enfermeria/administracion_medicamentos/${id}/archivos`, {
             method: 'DELETE',
             body: {
                 archivoId

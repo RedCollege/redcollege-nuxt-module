@@ -88,7 +88,7 @@ export default class RegistroAtencionModule {
     }
 
     async asociarAdjunto(id: number, archivoId: number): Promise<IArchivo> {
-        return this.fetcher(`/enfermeria/registro-atencion/${id}/archivos`, {
+        return this.fetcher(`/enfermeria/registro_atencion/${id}/archivos`, {
             method: 'POST',
             body: {
                 archivoId
@@ -97,7 +97,7 @@ export default class RegistroAtencionModule {
     }
     
     async softDeleteAdjunto(id: number, archivoId: number): Promise<IArchivo> {
-        return this.fetcher(`/enfermeria/registro-atencion/${id}/archivos/soft`, {
+        return this.fetcher(`/enfermeria/registro_atencion/${id}/archivos/soft`, {
             method: 'DELETE',
             body: {
                 archivoId
@@ -106,7 +106,7 @@ export default class RegistroAtencionModule {
     }
 
     async destroyAdjunto(id: number, archivoId: number): Promise<IArchivo> {
-        return this.fetcher(`/enfermeria/registro-atencion/${id}/archivos`, {
+        return this.fetcher(`/enfermeria/registro_atencion/${id}/archivos`, {
             method: 'DELETE',
             body: {
                 archivoId
