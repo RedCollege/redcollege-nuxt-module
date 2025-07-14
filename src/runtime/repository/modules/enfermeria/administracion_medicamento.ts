@@ -1,10 +1,10 @@
 import type { $Fetch } from "ofetch";
 import type { 
     IAdministracionMedicamento, 
-    IAdministracionMedicamentoAdjunto, 
     IAdministracionMedicamentoFilter, 
     IAdministracionMedicamentoForm, 
     IAdministracionMedicamentoResponse,
+    IArchivo,
     ISideCalendarEvents
 } from "~/src/runtime/models";
 
@@ -94,24 +94,30 @@ export default class AdministracionMedicamentosModule {
         );
     }
 
-    async subirAdjunto(
-        file: File,
-        folder: string
-    ): Promise<IAdministracionMedicamentoAdjunto> {
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("folder", folder);
-        return this.fetcher(`/enfermeria/administracion_medicamentos/adjuntos/upload`, {
-            method: "POST",
-            body: formData,
+    async asociarAdjunto(id: number, archivoId: number): Promise<IArchivo> {
+        return this.fetcher(`/enfermeria/administracion_medicamentos/${id}/archivos`, {
+            method: 'POST',
+            body: {
+                archivoId
+            }
+        });
+    }
+    
+    async softDeleteAdjunto(id: number, archivoId: number): Promise<IArchivo> {
+        return this.fetcher(`/enfermeria/administracion_medicamentos/${id}/archivos/soft`, {
+            method: 'DELETE',
+            body: {
+                archivoId
+            }
         });
     }
 
-    async eliminarAdjunto(
-        id: number
-    ): Promise<{ success: boolean; message: string }> {
-        return this.fetcher(`/enfermeria/administracion_medicamentos/adjuntos/delete/${id}`, {
-            method: "DELETE",
+    async destroyAdjunto(id: number, archivoId: number): Promise<IArchivo> {
+        return this.fetcher(`/enfermeria/administracion_medicamentos/${id}/archivos`, {
+            method: 'DELETE',
+            body: {
+                archivoId
+            }
         });
     }
 

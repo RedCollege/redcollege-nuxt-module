@@ -1,5 +1,4 @@
 import type { IArchivo, IEstablecimiento, IUsuario } from "..";
-
 export interface IAdministracionMedicamento {
     id: number;
     periodo: number;
@@ -11,9 +10,9 @@ export interface IAdministracionMedicamento {
     paciente: IUsuario;
     medicamentos: string;
     responsables: IUsuario[];
-    adjuntos: IAdministracionMedicamentoAdjunto[];
+    adjuntos: IArchivo[];
     recordatorios: IRecordatorio[];
-    frecuencia: 'diaria' | 'manual';
+    frecuencia: FrecuenciaTipo;
     fechaInicio: string | Date;
     fechaFin: string | Date;
     horaFrecuencia: string | Date | null;
@@ -28,7 +27,7 @@ export interface IAdministracionMedicamentoForm {
     responsables: number[];
     indicacionTratamiento: string;
     adjuntosIds: number[];
-    frecuencia: 'diaria' | 'manual';
+    frecuencia: FrecuenciaTipo;
     fechaInicio: string | Date;
     fechaFin: string | Date;
     horaFrecuencia?: string | Date | null;
@@ -44,7 +43,6 @@ export interface IRecordatorio {
 export interface IRecordatorioForm {
     fechaHora: string | Date;
 }
-
 
 export interface IAdministracionMedicamentoResponse {
     meta: {
@@ -67,20 +65,6 @@ export interface IAdministracionMedicamentoFilter {
     mes?: string | Date;
 }
 
-export interface IAdministracionMedicamentoAdjunto {
-    id: number;
-    administracionMedicamentoId: number;
-    archivoId: number;
-    archivo: IArchivo;
-    createdAt: string;
-    updatedAt: string;
-}
-
-export interface IAdministracionMedicamentoAdjuntoForm {
-    administracionMedicamentoId: number;
-    archivoId: number;
-}
-
 export interface ISideCalendarEvents {
     fecha: string | Date;
     nombre: string;
@@ -95,4 +79,9 @@ export enum EnumAdministracionMedicamentoEstado {
     EN_CURSO = 'en_curso',
     FINALIZADO = 'finalizado',
     SUSPENDIDO = 'suspendido',
+}
+
+export enum FrecuenciaTipo {
+    Diaria = 'diaria',
+    Manual = 'manual'
 }
