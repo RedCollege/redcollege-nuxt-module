@@ -1,6 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInformeEstablecimientoEvalua, IEvaluacionCurso, IEstudianteEvaluacion } from '~/src/runtime/models/Evaluacion';
-
+import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInformeEstablecimientoEvalua, IEvaluacionCurso, IEstudianteEvaluacion, IInformeEstudianteIndividual } from '~/src/runtime/models/Evaluacion';
 
 export default class EvaluacionCursoModule {
     constructor(private fetcher: $Fetch) { }
@@ -47,5 +46,12 @@ export default class EvaluacionCursoModule {
         return this.fetcher(`/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}?grupoAsignaturaId=${grupoAsignaturaId}&tipo=${tipo}`, {
             method: 'GET'
         })
+    }
+
+    async obtenerRevisionesPorEstudiantes(evaluacionCursoId: number, estudiantesIds: number[], asignaturaId: number, evaluacionId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<IInformeEstudianteIndividual[]> {
+        return this.fetcher(`/evaluacion/revision/obtener-por-estudiantes/${evaluacionCursoId}?asignaturaId=${asignaturaId}&evaluacionId=${evaluacionId}&tipo=${tipo}`, {
+            method: 'POST',
+            body: { estudiantesIds }
+        });
     }
 }
