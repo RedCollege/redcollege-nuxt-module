@@ -42,10 +42,47 @@ export default class EvaluacionCursoModule {
         })
     }
 
-    async obtenerInformeEvaluacionesSimceByCursoId(cursoId: number, grupoAsignaturaId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<IEstudianteEvaluacion[]> {
-        return this.fetcher(`/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}?grupoAsignaturaId=${grupoAsignaturaId}&tipo=${tipo}`, {
+    async obtenerInformeEvaluacionesSimceByCursoId(cursoId: number, grupoAsignaturaId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE', evaluacionId?: number): Promise<IEstudianteEvaluacion[]> {
+        const baseUrl = `/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}`;
+        const params = new URLSearchParams({
+            grupoAsignaturaId: grupoAsignaturaId.toString(),
+            tipo: tipo
+        });
+        
+        if (evaluacionId) {
+            params.append('evaluacionId', evaluacionId.toString());
+        }
+        
+        const url = `${baseUrl}?${params.toString()}`;
+      
+        return this.fetcher(url, {
             method: 'GET'
         })
+    }
+
+    async actualizarObservacionRevision(
+        evaluacionCursoId: number, 
+        usuarioId: number, 
+        observacion: string
+    ): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            id: number;
+            observaciones: string | null;
+            updatedAt: string;
+        };
+    }> {
+        return this.fetcher(
+            `/evaluacion_curso/${evaluacionCursoId}/revisiones/${usuarioId}/observacion`,
+            {
+                method: 'PATCH',
+                body: JSON.stringify({ observacion }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
     }
 
     async obtenerRevisionesPorEstudiantes(evaluacionCursoId: number, estudiantesIds: number[], asignaturaId: number, evaluacionId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<IInformeEstudianteIndividual[]> {
