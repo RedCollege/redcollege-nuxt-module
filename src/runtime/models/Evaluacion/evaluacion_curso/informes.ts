@@ -201,4 +201,9 @@ export interface IInformeEstudianteIndividual {
   observaciones: {
     contenido: string;
   };
+  actividades: Array<{
+    descripcion: string,
+    nivel_logro: string,
+    porcentaje_logro: number
+  }>
 }
