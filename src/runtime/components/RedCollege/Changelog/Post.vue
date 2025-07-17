@@ -6,6 +6,7 @@ import { computed } from "vue";
 import Paragraph from "../../slices/Paragraph.vue";
 import ListItem from "../../slices/ListItem.vue";
 import Image from "../../slices/Image.vue";
+import Embed from "../../slices/Embed.vue";
 
 interface Props {
     post: {
@@ -31,14 +32,15 @@ const fechaFormateada = computed(() : string => {
 </script>
 
 <template lang="pug">
+div
     Card
         CardHeader
             .flex.justify-between.items-center
                 CardTitle {{ post.data.titulo_del_changelog }}
-                .flex.gap-2.items-center
+                .flex.gap-2.items-center.flex-none
                     Badge {{ post.data.modulo }}
                     Badge(variant="outline") {{ fechaFormateada }}
         CardContent
             .p-6.border.shadow-sm.rounded-xl
-                PrismicRichText(:field="post.data.resumen_de_cambios", :components="{ paragraph: Paragraph, listItem: ListItem, image: Image }")
+                PrismicRichText(:field="post.data.resumen_de_cambios", :components="{ paragraph: Paragraph, listItem: ListItem, image: Image, embed: Embed }")
 </template>
