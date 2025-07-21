@@ -2,6 +2,9 @@
  * Interfaces para el informe detallado de evaluación
  */
 
+import type { IItemEntradaCurricular } from "../../Curriculum";
+import type { IEvaluacion } from "../evaluacion";
+
 export interface IAntecedentesEvaluacion {
   estudiantesDelCurso: number;
   estudiantesEvaluados: number;
@@ -139,6 +142,7 @@ export interface IEstudianteEvaluacion {
   }
 }
 
+
 interface IDetalleRespuesta {
   pregunta: {
     id: number,
@@ -169,7 +173,8 @@ interface IDetalleRespuesta {
     isCorrecta: boolean,
     orden: number,
     itemId: number
-  }
+  },
+  explicacion: string
 }
 
 export interface IInformeEstudianteIndividual {
@@ -184,26 +189,31 @@ export interface IInformeEstudianteIndividual {
     puntajeObtenido: number,
     porcentajeLogro: number,
     nota: number,
-    fechaEvaluacion: string
+    fechaEvaluacion: string,
+    exigencia: number,
+    notaPromedioDelCurso: number,
+    puntaje: number
   };
   detalleRespuestas: Array<IDetalleRespuesta>,
   evolucion: Array<{
-    fecha: string;
-    porcentajeLogro: number;
+    nota: number;
+    createdAt: string;
+    nombreEvaluacion: string | null;
   }>;
-  areasAprendizaje: Array<{
-    id: number;
-    descripcion: string;
-    total_preguntas: number;
-    respuestas_correctas: number;
-  }>;
+  areasAprendizaje: {
+    name: string;
+    items: IItemEntradaCurricular[];
+  }[];
   recomendaciones: string[];
-  observaciones: {
-    contenido: string;
-  };
+  observaciones: string;
   actividades: Array<{
     descripcion: string,
     nivel_logro: string,
     porcentaje_logro: number
   }>
+  asignatura: {
+    id: number;
+    nombre: string;
+  };
+  evaluacion: IEvaluacion
 }

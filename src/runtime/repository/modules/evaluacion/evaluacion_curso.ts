@@ -48,21 +48,21 @@ export default class EvaluacionCursoModule {
             grupoAsignaturaId: grupoAsignaturaId.toString(),
             tipo: tipo
         });
-        
+
         if (evaluacionId) {
             params.append('evaluacionId', evaluacionId.toString());
         }
-        
+
         const url = `${baseUrl}?${params.toString()}`;
-      
+
         return this.fetcher(url, {
             method: 'GET'
         })
     }
 
     async actualizarObservacionRevision(
-        evaluacionCursoId: number, 
-        usuarioId: number, 
+        evaluacionCursoId: number,
+        usuarioId: number,
         observacion: string
     ): Promise<{
         success: boolean;
