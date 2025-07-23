@@ -48,21 +48,21 @@ export default class EvaluacionCursoModule {
             grupoAsignaturaId: grupoAsignaturaId.toString(),
             tipo: tipo
         });
-
+        
         if (evaluacionId) {
             params.append('evaluacionId', evaluacionId.toString());
         }
-
+        
         const url = `${baseUrl}?${params.toString()}`;
-
+      
         return this.fetcher(url, {
             method: 'GET'
         })
     }
 
     async actualizarObservacionRevision(
-        evaluacionCursoId: number,
-        usuarioId: number,
+        evaluacionCursoId: number, 
+        usuarioId: number, 
         observacion: string
     ): Promise<{
         success: boolean;
@@ -85,8 +85,8 @@ export default class EvaluacionCursoModule {
         );
     }
 
-    async obtenerRevisionesPorEstudiantes(evaluacionCursoId: number, estudiantesIds: number[], asignaturaId: number, evaluacionId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<IInformeEstudianteIndividual[]> {
-        return this.fetcher(`/evaluacion/revision/obtener-por-estudiantes/${evaluacionCursoId}?asignaturaId=${asignaturaId}&evaluacionId=${evaluacionId}&tipo=${tipo}`, {
+    async obtenerRevisionesPorEstudiantes(evaluacionCursoId: number, estudiantesIds: number[], tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<IInformeEstudianteIndividual[]> {
+        return this.fetcher(`/evaluacion/revision/obtenerPorEstudiantes/${evaluacionCursoId}?tipo=${tipo}`, {
             method: 'POST',
             body: { estudiantesIds }
         });
