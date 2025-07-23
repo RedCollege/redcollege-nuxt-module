@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, defineEmits, watch, toRef } from 'vue'
+import { onMounted, ref, defineEmits, watch, toRef, onUnmounted } from 'vue'
 import { QuillyEditor } from 'vue-quilly'
 import { useNuxtApp, useRoute } from '#app';
 import ImageUploader from "quill2-image-uploader";
@@ -34,8 +34,12 @@ const {
 console.log(props.value)
 
 let quill: Quill | null = null
-Quill.register('modules/imageUploader', ImageUploader)
-Quill.register('modules/blotFormatter', BlotFormatter);
+if (!Quill.imports['modules/imageUploader']) {
+    Quill.register('modules/imageUploader', ImageUploader)
+}
+if (!Quill.imports['modules/blotFormatter']) {
+    Quill.register('modules/blotFormatter', BlotFormatter)
+}
 
 const keyBinders = {
     custom: {
@@ -85,12 +89,20 @@ const options = ref({
     readOnly: false
 })
 let isProcessing = false;
+
 onMounted(() => {
-    quill = editor.value?.initialize(Quill)!
-    editorData.value = inputValue.value
-    //model.value = quill.getText()
+    // Verificar que no esté ya inicializado
+    if (!quill && editor.value) {
+        quill = editor.value.initialize(Quill)!
+        editorData.value = inputValue.value
+    }
 })
 
+onUnmounted(() => {
+    if (quill) {
+        quill = null
+    }
+})
 
 watch(editorData, (value) => {
     handleChange(value)
