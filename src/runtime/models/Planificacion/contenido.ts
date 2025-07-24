@@ -5,6 +5,13 @@ import type { IRegistroDua } from './dua';
 import type { IUnidad } from './unidad';
 import type { IAdecuacionCurricular } from './adecuacion_curricular';
 
+export enum TipoDuplicacion {
+    MISMA_UNIDAD = 'MISMA_UNIDAD',
+    OTRA_UNIDAD = 'OTRA_UNIDAD',
+    OTRA_PLANIFICACION_Y_UNIDAD = 'OTRA_PLANIFICACION_Y_UNIDAD',
+}
+
+
 export interface IContenido {
     id: number;
     unidadId: number;

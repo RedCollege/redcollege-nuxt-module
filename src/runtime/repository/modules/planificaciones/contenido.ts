@@ -1,7 +1,7 @@
 import type { $Fetch } from 'ofetch';
 import type { IItemEntradaCurricular } from '../../../models';
 import type { IArchivo } from '../../../models/General/archivo';
-import type { IContenido, IContenidoForm } from '../../../models/Planificacion/contenido';
+import type { IContenido, IContenidoForm, TipoDuplicacion } from '../../../models/Planificacion/contenido';
 import type { DateTime } from 'luxon';
 
 export default class ContenidoModule {
@@ -93,9 +93,13 @@ export default class ContenidoModule {
         });
     }
 
-    async duplicarContenido(contenidoId: number): Promise<IContenido> {
+    async duplicarContenido(
+        contenidoId: number,
+        opciones?: { unidadId?: number; planificacionId?: number; tipoDuplicacion?: TipoDuplicacion; }
+      ): Promise<IContenido> {
         return this.fetcher(`/contenidos/duplicarContenido/${contenidoId}`, {
-            method: "POST"
-        })
-    }
+          method: 'POST',
+          body: opciones,
+        });
+      }
 }
