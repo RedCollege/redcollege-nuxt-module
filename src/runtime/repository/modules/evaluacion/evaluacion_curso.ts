@@ -77,7 +77,7 @@ export default class EvaluacionCursoModule {
             `/evaluacion_curso/${evaluacionCursoId}/revisiones/${usuarioId}/observacion`,
             {
                 method: 'PATCH',
-                body: JSON.stringify({ observacion }),
+                body: observacion,
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -89,6 +89,12 @@ export default class EvaluacionCursoModule {
         return this.fetcher(`/evaluacion/revision/obtenerPorEstudiantes/${evaluacionCursoId}?tipo=${tipo}`, {
             method: 'POST',
             body: { estudiantesIds }
+        });
+    }
+
+    async obtenerInformeEstudianteCursoConsolidado(cursoId: number, asignaturaId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<any> {
+        return this.fetcher(`/evaluacion/revision/obtenerInformeEstudianteCursoConsolidado/${cursoId}/${asignaturaId}?tipo=${tipo}`, {
+            method: 'GET',
         });
     }
 }

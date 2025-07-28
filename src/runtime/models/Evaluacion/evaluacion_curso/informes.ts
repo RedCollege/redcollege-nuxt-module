@@ -4,6 +4,8 @@
 
 import type { IItemEntradaCurricular } from "../../Curriculum";
 import type { IEvaluacion } from "../evaluacion";
+import type { IUsuario } from "../../Auth/usuario";
+import type { IAsignaturaEvalua } from "../evaluacion_curso";
 
 export interface IAntecedentesEvaluacion {
   estudiantesDelCurso: number;
@@ -143,77 +145,90 @@ export interface IEstudianteEvaluacion {
 }
 
 
-interface IDetalleRespuesta {
-  pregunta: {
-    id: number,
-    orden: number,
-    contenido: string,
-    descripcion: string,
-    puntaje: string,
-    itemId: number,
-    evaluacionId: number,
-    tipoItemEvaluacionId: number,
-    createdAt: string,
-    updatedAt: string,
-    nItem: number
-  },
-  respuestaSeleccionada: {
-    id: number,
-    isCorrecta: boolean,
-    descripcion: string,
-    itemId: number,
-    createdAt: string,
-    updatedAt: string,
-    orden: number
-  },
+// Interfaces para el modelo de evaluación
+
+export interface IPregunta {
+  id: number;
+  orden: number;
+  contenido: string;
+  descripcion: string;
+  puntaje: string;
+  itemId: number;
+  evaluacionId: number;
+  tipoItemEvaluacionId: number;
+  createdAt: string;
+  updatedAt: string;
+  nItem: number;
+}
+
+export interface IRespuestaSeleccionada {
+  id: number;
+  isCorrecta: boolean;
+  descripcion: string;
+  itemId: number;
+  createdAt: string;
+  updatedAt: string;
+  orden: number;
+}
+
+export interface IRespuestaCorrecta {
+  id: number;
+  descripcion: string;
+  isCorrecta: boolean;
+  orden: number;
+  itemId: number;
+}
+
+export interface IDetalleRespuesta {
+  pregunta: IPregunta;
+  respuestaSeleccionada: IRespuestaSeleccionada;
   esCorrecta: boolean;
-  respuestaCorrecta: {
-    id: number,
-    descripcion: string,
-    isCorrecta: boolean,
-    orden: number,
-    itemId: number
-  },
-  explicacion: string
+  respuestaCorrecta: IRespuestaCorrecta;
+  explicacion: string;
+}
+
+// Interfaces para el informe individual
+
+export interface IActividad {
+  descripcion: string;
+  nivel_logro: string;
+  porcentaje_logro: number;
+}
+
+export interface IAreaAprendizaje {
+  name: string;
+  items: IItemEntradaCurricular[];
+}
+
+export interface IResumenGeneral {
+  puntajeTotal: number;
+  puntajeObtenido: number;
+  porcentajeLogro: number;
+  nota: number;
+  fechaEvaluacion: string;
+  exigencia: number;
+  notaPromedioDelCurso: number;
+  puntaje: number;
 }
 
 export interface IInformeEstudianteIndividual {
   id: number;
-  estudiante: {
-    id: number;
-    nombre: string;
-    avatar: string;
-  };
-  resumenGeneral: {
-    puntajeTotal: number,
-    puntajeObtenido: number,
-    porcentajeLogro: number,
-    nota: number,
-    fechaEvaluacion: string,
-    exigencia: number,
-    notaPromedioDelCurso: number,
-    puntaje: number
-  };
-  detalleRespuestas: Array<IDetalleRespuesta>,
+  estudiante: Partial<IUsuario>;
+  resumenGeneral: IResumenGeneral;
+  detalleRespuestas: IDetalleRespuesta[];
   evolucion: Array<{
     nota: number;
     createdAt: string;
     nombreEvaluacion: string | null;
   }>;
-  areasAprendizaje: {
-    name: string;
-    items: IItemEntradaCurricular[];
-  }[];
+  areasAprendizaje: IAreaAprendizaje[];
   recomendaciones: string[];
-  observaciones: string;
-  actividades: Array<{
-    descripcion: string,
-    nivel_logro: string,
-    porcentaje_logro: number
-  }>
-  asignatura: {
-    id: number;
-    nombre: string;
+  observaciones: string | null;
+  actividades: IActividad[];
+  asignatura: Partial<IAsignaturaEvalua>;
+  evaluacion: Omit<IEvaluacion, 'asignatura'> & {
+    // Usamos Omit para excluir campos no necesarios y añadimos los específicos
+    grupoAsignaturaId: number;
+    gradoEducacionalId: number;
   };
-  evaluacion: IEvaluacion
 }
