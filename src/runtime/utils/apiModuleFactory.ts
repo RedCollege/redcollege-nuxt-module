@@ -40,6 +40,7 @@ import HorarioDiaAsignaturaModule from "../repository/modules/curso/horario/hora
 import ActividadModule from "../repository/modules/enfermeria/actividad";
 import AdministracionMedicamentosModule from "../repository/modules/enfermeria/administracion_medicamento";
 import CursoAsignaturaModule from "../repository/modules/establecimiento/curso_asignatura";
+import OpenAIModule from "../repository/modules/openai/openai";
 
 export type AuthModules = {
     usuario: UsuarioModule;
@@ -117,6 +118,10 @@ export type EvaluacionesModules = {
     simceEstablecimiento: SimceEstablecimientoModule;
 };
 
+export type OpenAIModules = {
+    openAi: OpenAIModule
+}
+
 // agrupación de modulos
 export type ApiModules = {
     auth: AuthModules;
@@ -131,6 +136,7 @@ export type ApiModules = {
     comunicaciones: ComunicacionesModules;
     evaluaciones: EvaluacionesModules;
     horario: HorarioModules;
+    openai: OpenAIModules
 };
 
 export function createApiModules(
@@ -146,7 +152,8 @@ export function createApiModules(
         | "comunicaciones"
         | "enfermeria"
         | "evaluaciones"
-        | "horario",
+        | "horario"
+        | "openai",
     apiFetcher: $Fetch,
 ):
     | AuthModules
@@ -160,11 +167,12 @@ export function createApiModules(
     | ComunicacionesModules
     | EnfermeriaModules
     | EvaluacionesModules
-    | HorarioModules {
+    | HorarioModules
+    | OpenAIModules {
     switch (apiType) {
         case "auth":
             return {
-                usuario: new UsuarioModule(apiFetcher),
+                usuario: new UsuarioModule(apiFetcher)
             };
         case "planificaciones":
             return {
@@ -254,6 +262,10 @@ export function createApiModules(
                 horarioDiaAsignatura: new HorarioDiaAsignaturaModule(
                     apiFetcher,
                 ),
-            };
+        };
+        case "openai":
+            return {
+                openAi: new OpenAIModule(apiFetcher)
+            }
     }
 }
