@@ -1,7 +1,6 @@
 import type { $Fetch } from 'ofetch';
 import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInformeEstablecimientoEvalua, IEvaluacionCurso, IEstudianteEvaluacion } from '~/src/runtime/models/Evaluacion';
 
-
 export default class EvaluacionCursoModule {
     constructor(private fetcher: $Fetch) { }
 
@@ -43,9 +42,67 @@ export default class EvaluacionCursoModule {
         })
     }
 
-    async obtenerInformeEvaluacionesSimceByCursoId(cursoId: number, grupoAsignaturaId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<IEstudianteEvaluacion[]> {
-        return this.fetcher(`/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}?grupoAsignaturaId=${grupoAsignaturaId}&tipo=${tipo}`, {
+    async obtenerInformeEvaluacionesSimceByCursoId(cursoId: number, grupoAsignaturaId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE', evaluacionId?: number): Promise<IEstudianteEvaluacion[]> {
+        const baseUrl = `/evaluacion_curso/obtenerInformeEvaluacionesSimceByCursoId/${cursoId}`;
+        const params = new URLSearchParams({
+            grupoAsignaturaId: grupoAsignaturaId.toString(),
+            tipo: tipo
+        });
+        
+        if (evaluacionId) {
+            params.append('evaluacionId', evaluacionId.toString());
+        }
+        
+        const url = `${baseUrl}?${params.toString()}`;
+      
+        return this.fetcher(url, {
             method: 'GET'
         })
+    }
+
+    async actualizarObservacionRevision(
+        evaluacionCursoId: number, 
+        usuarioId: number, 
+        observacion: string
+    ): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            id: number;
+            observaciones: string | null;
+            updatedAt: string;
+        };
+    }> {
+        return this.fetcher(
+            `/evaluacion_curso/${evaluacionCursoId}/revisiones/${usuarioId}/observacion`,
+            {
+                method: 'PATCH',
+                body: {
+                    observacion: observacion
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+    }
+
+    async obtenerRevisionesPorEstudiantes(evaluacionCursoId: number, estudiantesIds: number[], tipo: 'SIMCE' | 'PAES' = 'SIMCE'){
+        return this.fetcher(`/evaluacion/revision/obtenerPorEstudiantes/${evaluacionCursoId}?tipo=${tipo}`, {
+            method: 'POST',
+            body: { estudiantesIds }
+        });
+    }
+
+    async obtenerInformeEstudianteCursoConsolidado(cursoId: number, asignaturaId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<any> {
+        return this.fetcher(`/evaluacion/revision/obtenerInformeEstudianteCursoConsolidado/${cursoId}/${asignaturaId}?tipo=${tipo}`, {
+            method: 'GET',
+        });
+    }
+
+    async obtenerEstudiantesPuntajesPorEntrada(cursoId: number, asignaturaId: number): Promise<any> {
+        return this.fetcher(`/evaluacion/revision/obtenerEstudiantesPuntajesPorEntrada/${cursoId}/${asignaturaId}`, {
+            method: 'GET',
+        });
     }
 }
