@@ -1,12 +1,6 @@
 /**
  * Interfaces para el informe detallado de evaluación
  */
-
-import type { IItemEntradaCurricular } from "../../Curriculum";
-import type { IEvaluacion } from "../evaluacion";
-import type { IUsuario } from "../../Auth/usuario";
-import type { IAsignaturaEvalua } from "../evaluacion_curso";
-
 export interface IAntecedentesEvaluacion {
   estudiantesDelCurso: number;
   estudiantesEvaluados: number;
@@ -185,50 +179,4 @@ export interface IDetalleRespuesta {
   esCorrecta: boolean;
   respuestaCorrecta: IRespuestaCorrecta;
   explicacion: string;
-}
-
-// Interfaces para el informe individual
-
-export interface IActividad {
-  descripcion: string;
-  nivel_logro: string;
-  porcentaje_logro: number;
-}
-
-export interface IAreaAprendizaje {
-  name: string;
-  items: IItemEntradaCurricular[];
-}
-
-export interface IResumenGeneral {
-  puntajeTotal: number;
-  puntajeObtenido: number;
-  porcentajeLogro: number;
-  nota: number;
-  fechaEvaluacion: string;
-  exigencia: number;
-  notaPromedioDelCurso: number;
-  puntaje: number;
-}
-
-export interface IInformeEstudianteIndividual {
-  id: number;
-  estudiante: Partial<IUsuario>;
-  resumenGeneral: IResumenGeneral;
-  detalleRespuestas: IDetalleRespuesta[];
-  evolucion: Array<{
-    nota: number;
-    createdAt: string;
-    nombreEvaluacion: string | null;
-  }>;
-  areasAprendizaje: IAreaAprendizaje[];
-  recomendaciones: string[];
-  observaciones: string | null;
-  actividades: IActividad[];
-  asignatura: Partial<IAsignaturaEvalua>;
-  evaluacion: Omit<IEvaluacion, 'asignatura'> & {
-    // Usamos Omit para excluir campos no necesarios y añadimos los específicos
-    grupoAsignaturaId: number;
-    gradoEducacionalId: number;
-  };
 }

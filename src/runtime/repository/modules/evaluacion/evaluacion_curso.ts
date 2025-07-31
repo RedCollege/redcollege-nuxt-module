@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInformeEstablecimientoEvalua, IEvaluacionCurso, IEstudianteEvaluacion, IInformeEstudianteIndividual } from '~/src/runtime/models/Evaluacion';
+import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInformeEstablecimientoEvalua, IEvaluacionCurso, IEstudianteEvaluacion } from '~/src/runtime/models/Evaluacion';
 
 export default class EvaluacionCursoModule {
     constructor(private fetcher: $Fetch) { }
@@ -77,7 +77,9 @@ export default class EvaluacionCursoModule {
             `/evaluacion_curso/${evaluacionCursoId}/revisiones/${usuarioId}/observacion`,
             {
                 method: 'PATCH',
-                body: observacion,
+                body: {
+                    observacion: observacion
+                },
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -85,7 +87,7 @@ export default class EvaluacionCursoModule {
         );
     }
 
-    async obtenerRevisionesPorEstudiantes(evaluacionCursoId: number, estudiantesIds: number[], tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<IInformeEstudianteIndividual[]> {
+    async obtenerRevisionesPorEstudiantes(evaluacionCursoId: number, estudiantesIds: number[], tipo: 'SIMCE' | 'PAES' = 'SIMCE'){
         return this.fetcher(`/evaluacion/revision/obtenerPorEstudiantes/${evaluacionCursoId}?tipo=${tipo}`, {
             method: 'POST',
             body: { estudiantesIds }
@@ -94,6 +96,12 @@ export default class EvaluacionCursoModule {
 
     async obtenerInformeEstudianteCursoConsolidado(cursoId: number, asignaturaId: number, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<any> {
         return this.fetcher(`/evaluacion/revision/obtenerInformeEstudianteCursoConsolidado/${cursoId}/${asignaturaId}?tipo=${tipo}`, {
+            method: 'GET',
+        });
+    }
+
+    async obtenerEstudiantesPuntajesPorEntrada(cursoId: number, asignaturaId: number): Promise<any> {
+        return this.fetcher(`/evaluacion/revision/obtenerEstudiantesPuntajesPorEntrada/${cursoId}/${asignaturaId}`, {
             method: 'GET',
         });
     }

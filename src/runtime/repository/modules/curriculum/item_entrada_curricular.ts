@@ -30,4 +30,10 @@ export default class ItemEntradaCurricularModule {
             method: 'DELETE'
         });
     }
+
+    async obtenerDetalleItemEntradaConEstudiantes(cursoId: number, asignaturaId: number, itemEntradaId: number): Promise<any> {
+        return this.fetcher(`itemEntradaCurricular/${cursoId}/${asignaturaId}/${itemEntradaId}/estudiantes`, {
+            method: 'GET',
+        });
+    }
 }
