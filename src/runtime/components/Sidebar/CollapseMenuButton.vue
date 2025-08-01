@@ -43,9 +43,9 @@ div
                 class="w-full justify-start h-10 mb-1"
                 asChild=""
             )
-                NuxtLink(:href="href")
+                NuxtLink(:to="href")
                     span.mr-4.ml-2
-                        Icon(size="10", name="tabler:point-filled")
+                        //-Icon(size="10", name="tabler:point-filled")
                     p(
                         :class="['max-w-[170px] truncate', isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0']"
                     ) {{ label }}
@@ -63,7 +63,7 @@ div
                 | {{ label }}
             DropdownMenuSeparator
             DropdownMenuItem(v-for="({ href, label }, index) in submenus" :key="index" as-child)
-                a.cursor-pointer(:href="href")
+                NuxtLink.cursor-pointer(:to="href")
                     p.truncate(class="max-w-[180px]") {{ label }}
             DropdownMenuArrow(class="fill-border")
 </template>
