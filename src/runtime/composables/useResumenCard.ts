@@ -73,6 +73,13 @@ export function useResumenCard(
                 progressItems: data?.resumenPorGravedad ?? [],
             },
             {
+                titulo: "Resumen por Tipo de Accidente",
+                ToolTipContenido:
+                    "Atenciones realizadas/Accidentes atendidos segmentados según el tipo de accidente",
+                variant: "text-orange",
+                progressItems: data?.resumenPorTipoAccidente ?? [],
+            },
+            {
                 titulo: "Resumen por Bloques de Horario",
                 ToolTipContenido:
                     "Atenciones realizadas/Accidentes atendidos segmentados según el horario en el que ocurrieron",
