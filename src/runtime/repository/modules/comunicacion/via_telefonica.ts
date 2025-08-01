@@ -20,9 +20,10 @@ export interface IAsociarRegistrosPivoteResponse {
 export default class ViaTelefonicaModule {
     constructor(private fetcher: $Fetch) {}
 
-    async index(): Promise<IViaTelefonica[]> {
+    async getByEstablecimiento(data: { establecimiento: number, periodo: number }): Promise<IViaTelefonica[]> {
         return this.fetcher("/comunicacion/via_telefonica", {
             method: "GET",
+            params: data,
         });
     }
 
