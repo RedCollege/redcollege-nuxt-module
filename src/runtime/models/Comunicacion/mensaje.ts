@@ -1,6 +1,9 @@
 import { DateTime } from "luxon";
 import type { IUsuario } from "../Auth/usuario.ts";
 import type { IAdjunto } from "./adjunto.ts";
+import type { IRegistroAtencion } from "../Enfermeria/registro_atencion.ts";
+import type { IRegistroAccidente } from "../Enfermeria/registro_accidente.ts";
+import type { IAdministracionMedicamento } from "../Enfermeria/administracion_medicamentos.js";
 
 export interface IMensaje {
     id: number;
@@ -22,6 +25,9 @@ export interface IMensaje {
     totalEnviados: number;
     estadoEnvioId: number;
     permitirRespuesta: boolean;
+    registroAtencion: Array<IRegistroAtencion>;
+    registroAccidente: Array<IRegistroAccidente>;
+    administracionMedicamento: Array<IAdministracionMedicamento>;
 }
 
 export interface IMensajeForm {
