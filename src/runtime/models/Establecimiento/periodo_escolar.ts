@@ -6,6 +6,8 @@ export interface IPeriodoEscolar {
     periodo: number;
     notaMinima: number;
     porcentajeExigencia: number;
+    totalCursos: number;
+    totalMatriculas: number;
     createdAt: DateTime;
     updatedAt: DateTime;
 }
