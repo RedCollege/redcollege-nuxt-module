@@ -21,40 +21,40 @@ export default class ViaTelefonicaModule {
     constructor(private fetcher: $Fetch) {}
 
     async getByEstablecimiento(data: { establecimiento: number, periodo: number }): Promise<IViaTelefonica[]> {
-        return this.fetcher("/comunicacion/via_telefonica", {
+        return this.fetcher("/comunicaciones/via_telefonica", {
             method: "GET",
             params: data,
         });
     }
 
     async getById(id: number): Promise<IViaTelefonica> {
-        return this.fetcher(`/comunicacion/via_telefonica/${id}`, {
+        return this.fetcher(`/comunicaciones/via_telefonica/${id}`, {
             method: "GET",
         });
     }
 
     async store(data: IViaTelefonicaForm): Promise<IViaTelefonica> {
-        return this.fetcher("/comunicacion/via_telefonica/crear", {
+        return this.fetcher("/comunicaciones/via_telefonica", {
             method: "POST",
             body: data,
         });
     }
     
     async update(id: number, data: IViaTelefonicaForm): Promise<IViaTelefonica> {
-        return this.fetcher(`/comunicacion/via_telefonica/actualizar/${id}`, {
+        return this.fetcher(`/comunicaciones/via_telefonica/${id}`, {
             method: "PATCH",
             body: data,
         });
     }
 
     async delete(id: number): Promise<IViaTelefonica> {
-        return this.fetcher(`/comunicacion/via_telefonica/eliminar/${id}`, {
+        return this.fetcher(`/comunicaciones/via_telefonica/${id}`, {
             method: "DELETE",
         });
     }
     
     async asociarRegistrosPivote(data: IAsociarRegistrosPivoteRequest): Promise<IAsociarRegistrosPivoteResponse> {
-        return this.fetcher("/comunicacion/via_telefonica/asociarRegistrosPivote", {
+        return this.fetcher("/comunicaciones/via_telefonica/asociarRegistrosPivote", {
             method: "POST",
             body: data,
         });
