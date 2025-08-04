@@ -22,6 +22,7 @@ const scrollarea = ref<InstanceType<typeof ScrollArea> | null>(null);
 const emit = defineEmits<{
     (e: "selectUsuario", usuario: IUsuario, isEnabled: boolean): void;
     (e: "search", search: string): void;
+    (e: "searchCurso", cursoId: number) : void;
 }>();
 
 // Estado interno para mantener los IDs seleccionados (solo para UI)
@@ -76,11 +77,11 @@ if (props.selectedUsers) {
 
 const filteredUsuarios = computed<IUsuario[]>(() => {
     if (!props.usuarios?.data) return [];
-
+    console.log(props.usuarios.data)
     let filtered = [...props.usuarios.data]; // Crear copia para no mutar el original
 
     // Aplicar ambos filtros de manera independiente
-    filtered = filtered.filter((usuario) => {
+    /*filtered = filtered.filter((usuario) => {
         // Filtro por término de búsqueda
         const matchesSearch =
             !searchTerm.value ||
@@ -109,7 +110,7 @@ const filteredUsuarios = computed<IUsuario[]>(() => {
                 }));
 
         return matchesSearch && matchesCurso;
-    });
+    });*/
 
     return filtered;
 });
@@ -152,24 +153,7 @@ const canLoadMore = computed<boolean>(() => {
     );
 });
 
-// Función para actualizar la lista de cursos disponibles
-const updateAvailableCursos = (usuarios: IUsuario[]): void => {
-    usuarios.forEach((usuario) => {
-        if (usuario.cursos && usuario.cursos.length > 0) {
-            usuario.cursos.forEach((curso: ICurso) => {
-                const label = getCursoLabel(curso);
-                if (
-                    label &&
-                    label.trim() !== "" &&
-                    label !== "- " &&
-                    label !== "undefined - undefined"
-                ) {
-                    allAvailableCursos.value.add(label);
-                }
-            });
-        }
-    });
-};
+
 
 // Función para verificar si un usuario está seleccionado
 const isUserSelected = (userId: string): boolean => {
@@ -232,6 +216,7 @@ const setupInfiniteScroll = async () => {
                             search: searchTerm.value,
                             page: nextPageToLoad.value,
                             periodo: props.periodo,
+                            ...(Number(selectedCurso.value) > 0 && { cursoId: Number(selectedCurso.value) })
                         },
                     );
 
@@ -243,13 +228,12 @@ const setupInfiniteScroll = async () => {
                     // Agregar los nuevos datos
                     props.usuarios.data.push(...data.data);
 
-                    // NUEVO: Actualizar la lista de cursos disponibles con los nuevos datos
-                    updateAvailableCursos(data.data);
-
                     // Actualizar el meta con la información de la nueva página cargada
                     if (props.usuarios.meta) {
                         props.usuarios.meta.currentPage = nextPageToLoad.value;
                     }
+
+                    //-isSearchLoading.value = false
 
                     // Si después de cargar esta página ya no hay más, terminar el loading de búsqueda
                     if (!canLoadMore.value) {
@@ -279,10 +263,7 @@ const search = (search: string): void => {
 watch(
     () => props.usuarios,
     async (newUsuarios, oldUsuarios) => {
-        // Solo agregar cursos nuevos si no tenemos allCursos
-        if (!props.allCursos && newUsuarios?.data) {
-            updateAvailableCursos(newUsuarios.data);
-        }
+
 
         if (
             newUsuarios &&
@@ -349,11 +330,24 @@ watch(
     },
 );
 
+watch(
+    () => selectedCurso.value,
+    (newSearchTerm) => {
+        // Iniciar el loading cuando se hace una búsqueda
+        isSearchLoading.value = true;
+
+        // SOLO hacer scroll al top cuando el usuario cambia la búsqueda
+        const viewport = scrollarea.value?.$el?.querySelector(
+            "[data-reka-scroll-area-viewport]",
+        );
+        viewport?.scrollTo({ top: 0, behavior: "smooth" });
+
+        emit("searchCurso", Number(newSearchTerm));
+    },
+);
+
 // Inicializar cursos disponibles y configurar infinite scroll cuando se monta el componente
 onMounted(async () => {
-    if (props.usuarios?.data && props.usuarios.data.length > 0) {
-        updateAvailableCursos(props.usuarios.data);
-    }
     await setupInfiniteScroll();
 });
 </script>
@@ -377,43 +371,48 @@ onMounted(async () => {
                 SelectGroup
                     SelectLabel Curso
                     SelectItem(value="all") Todos los cursos
-                    SelectItem(v-for="curso in uniqueCursos", :key="curso", :value="curso") {{ curso }}
+                    SelectItem(v-for="curso in allCursos", :key="curso.id", :value="curso.id")
+                        .flex.items-center.gap-2
+                            Badge {{ curso.sige?.tipoEnsenanzaId }}
+                            | {{  curso.sige?.codigoGradoId  }} {{  curso.seccion  }}
+    //-template(v-if="showInitialLoader") cargando
+    div
+        ScrollArea(class="h-48" ref="scrollarea")
+            // Loader inicial
+            //-.flex.items-center.justify-center.h-full(v-if="showInitialLoader")
+                .flex.flex-col.items-center.gap-2
+                    // Spinner/loader (puedes usar el componente de loader que tengas en tu proyecto)
+                    .animate-spin.rounded-full.h-8.w-8.border-b-2.border-primary
+                    p.text-sm.text-muted-foreground Cargando estudiantes...
 
-    ScrollArea(class="h-48" ref="scrollarea")
-        // Loader inicial
-        .flex.items-center.justify-center.h-full(v-if="showInitialLoader")
-            .flex.flex-col.items-center.gap-2
-                // Spinner/loader (puedes usar el componente de loader que tengas en tu proyecto)
-                .animate-spin.rounded-full.h-8.w-8.border-b-2.border-primary
-                p.text-sm.text-muted-foreground Cargando estudiantes...
-        
-        // Contenido principal (solo se muestra cuando no está cargando)
-        .grid(v-else)
-            // Checkbox "Seleccionar todos"
-            .flex.items-center.space-x-2.py-2.px-2.rounded(class="hover:bg-sky/5")
-                Checkbox(
-                    :model-value="selectAllState === true"
-                    :indeterminate="selectAllState === 'indeterminate'"
-                    @update:model-value="toggleSelectAll"
-                )
-                label.text-sm.text-primary.leading-none(
-                    class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                ) Seleccionar todos ({{ filteredUsuarios.length }})
-
-            // Lista de estudiantes filtrados
-            .flex.justify-between.items-center.py-2.px-2.rounded(
-                v-for="estudiante in filteredUsuarios",
-                :key="estudiante.id"
-                class="hover:bg-sky/5"
-            )
-                .flex.items-center.space-x-2
+            // Contenido principal (solo se muestra cuando no está cargando)
+            .grid
+                // Checkbox "Seleccionar todos"
+                .flex.items-center.space-x-2.py-2.px-2.rounded(class="hover:bg-sky/5")
                     Checkbox(
-                        :model-value="isUserSelected(estudiante.id?.toString() || estudiante.nombreCompleto)"
-                        @update:model-value="(checked:boolean) => updateSelector(checked, estudiante)"
+                        :model-value="selectAllState === true"
+                        :indeterminate="selectAllState === 'indeterminate'"
+                        @update:model-value="toggleSelectAll"
                     )
-                    div
-                        label.text-sm.leading-none(
-                            class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        ) {{ estudiante.nombreCompleto }}
-                p.text-xs.text-gray-500 {{ estudiante.cursos.length > 0 ? estudiante.cursos.at(0)?.nombreCompleto : '' }}
+                    label.text-sm.text-primary.leading-none(
+                        class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    ) Seleccionar todos los visibles ({{ filteredUsuarios.length }})
+                    Loader.text-primary.animate-spin(v-if="showInitialLoader && filteredUsuarios.length === 0")
+
+                // Lista de estudiantes filtrados
+                .flex.justify-between.items-center.py-2.px-2.rounded(
+                    v-for="estudiante in filteredUsuarios",
+                    :key="estudiante.id"
+                    class="hover:bg-sky/5"
+                )
+                    .flex.items-center.space-x-2
+                        Checkbox(
+                            :model-value="isUserSelected(estudiante.id?.toString() || estudiante.nombreCompleto)"
+                            @update:model-value="(checked:boolean) => updateSelector(checked, estudiante)"
+                        )
+                        div
+                            label.text-sm.leading-none(
+                                class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                            ) {{ estudiante.nombreCompleto }}
+                    p.text-xs.text-gray-500 {{ estudiante.cursos.length > 0 ? estudiante.cursos.at(0)?.nombreCompleto : '' }}
 </template>
