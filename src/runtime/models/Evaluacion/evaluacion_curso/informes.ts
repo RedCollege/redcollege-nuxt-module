@@ -27,6 +27,7 @@ export interface INivelLogro {
     porcentajeEstudiantes: string;
 }
 
+
 export interface IEstudianteDetalle {
     numero: number;
     estudiante: string;
@@ -127,6 +128,8 @@ interface IEnsayo {
     rendido: boolean;
 }
 
+
+
 export interface IEstudianteEvaluacion {
     id: number;
     nombre: string;
@@ -137,4 +140,30 @@ export interface IEstudianteEvaluacion {
         nota: number;
         tendencia: 'subida' | 'bajada' | 'estable';
     }
+}
+
+
+/**
+ * Informe Por Estudiantes
+ */
+
+export interface ICursoInforme {
+    estudiantes: IEstudianteEvaluacion[];
+    componentes: ICursoInformeEntrada[]
+}
+
+export interface ICursoInformeEntrada {
+    entrada: string;
+    items: ICursoInformeItemEntrada[]
+}
+
+export interface ICursoInformeItemEntrada {
+    nombre: string;
+    alias: string;
+    promedio: string;
+}
+
+export interface ICursoInformeEstudianteItemEntrada {
+    estudiante: string;
+    puntaje: number;
 }
