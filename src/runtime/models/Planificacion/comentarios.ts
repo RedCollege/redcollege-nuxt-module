@@ -1,14 +1,16 @@
 import type { DateTime } from "luxon";
 import type { IUsuario } from "../";
 
-export interface IComentario {
+export interface IComentariosResponse {
     fecha: DateTime;
-    comentarios: {
-        id: number;
-        comentario: string;
-        editado: boolean;
-        fechaHora: DateTime;
-        usuario: IUsuario;
-        recibido: boolean;
-    }[];
+    comentarios: IComentario[];
+}
+
+export interface IComentario {
+    id: number;
+    comentario: string;
+    editado: boolean;
+    fechaHora: DateTime;
+    usuario: IUsuario;
+    recibido: boolean;
 }
