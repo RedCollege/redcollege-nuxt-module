@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInformeEstablecimientoEvalua, IEvaluacionCurso, IEstudianteEvaluacion, ICursoInforme, ICursoInformeEstudianteItemEntrada } from '~/src/runtime/models/Evaluacion';
+import type { IInformeCursoEvalua, IInformeDetallado, IInformeGlobalEvalua, IInformeEstablecimientoEvalua, IEvaluacionCurso, IEstudianteEvaluacion, ICursoInforme, ICursoInformeEstudianteItemEntrada, IEstudianteInforme, IEstudianteInformeIndividual } from '~/src/runtime/models/Evaluacion';
 
 
 export default class EvaluacionCursoModule {
@@ -51,6 +51,13 @@ export default class EvaluacionCursoModule {
 
     async obtenerInformeEstudiantesEntradaByCursoId(cursoId: number, grupoAsignaturaId: number, nombreItem : string, tipo: 'SIMCE' | 'PAES' = 'SIMCE'): Promise<ICursoInformeEstudianteItemEntrada[]> {
         return this.fetcher(`/evaluacion_curso/obtenerInformeEstudiantesEntradaByCursoId/${cursoId}?grupoAsignaturaId=${grupoAsignaturaId}&nombreItem=${nombreItem}&tipo=${tipo}`, {
+            method: 'GET'
+        })
+    }
+
+    async obtenerInformeIndividualPorEstudiantes(evaluacionCursoId: number, estudianteIds: number[]): Promise<IEstudianteInformeIndividual> {
+        const idsParam = estudianteIds.join(',');
+        return this.fetcher(`/evaluacion_curso/obtenerInformeIndividualPorEstudiantes?evaluacionCursoId=${evaluacionCursoId}&estudianteIds=${idsParam}`, {
             method: 'GET'
         })
     }
