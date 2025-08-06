@@ -13,6 +13,7 @@ export interface IPlanificacion {
     cobertura: number;
     estadoId: number;
     cursoId: number;
+    cantidadComentarios: number;
     establecimientoId: number;
     usuarioId: number;
     unidadId: number;
@@ -27,7 +28,6 @@ export interface IPlanificacion {
     asignaturas: Array<ICursoAsignatura>;
     unidades: Array<IUnidad>;
     itemsEntradasCurriculares: Array<IItemEntradaCurricular>;
-    tieneComentarios: boolean;
 }
 
 export interface IPlanificacionResponse {
