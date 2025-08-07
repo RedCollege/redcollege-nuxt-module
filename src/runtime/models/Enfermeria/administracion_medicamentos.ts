@@ -38,7 +38,7 @@ export interface IAdministracionMedicamentoForm {
 
 export interface IRecordatorio {
     id?: number;
-    fechaHora: string | Date;
+    fecha: string | Date;
     administracionMedicamentoId?: number;
 }
 

@@ -76,6 +76,7 @@ export interface IRegistroAccidenteForm {
     fechaAccidente: DateTime | string | Date
     lugarAccidenteId: number | string
     gravedadAccidenteId: number | string
+    tipoAccidenteId: number | string
     circunstancias: string
     haveTestigos: boolean
     testigos: ITestigoForm[]
