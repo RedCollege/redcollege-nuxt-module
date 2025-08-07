@@ -28,6 +28,7 @@ export interface IMensaje {
     registroAtencion: Array<IRegistroAtencion>;
     registroAccidente: Array<IRegistroAccidente>;
     administracionMedicamento: Array<IAdministracionMedicamento>;
+    destinatarios: Array<IUsuario>;
 }
 
 export interface IMensajeForm {
