@@ -29,7 +29,7 @@ div
                         span.mr-4
                             Icon.text-primary(size="20", :name="`tabler:${icon}`")
                         p(
-                            :class="['max-w-[150px] truncate',isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0']"
+                            :class="['max-w-[150px] truncate text-primary',isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0']"
                         ) {{ label }}
                     div(
                         :class="['whitespace-nowrap', isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0']"
@@ -47,7 +47,7 @@ div
                     span.mr-4.ml-2
                         Icon(size="10", name="tabler:point-filled")
                     p(
-                        :class="['max-w-[170px] truncate', isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0']"
+                        :class="['max-w-[170px] text-primary truncate', isOpen ? 'translate-x-0 opacity-100' : '-translate-x-96 opacity-0']"
                     ) {{ label }}
     DropdownMenu(v-else)
         DropdownMenuTrigger(as-child)
@@ -56,14 +56,14 @@ div
                     div.flex.items-center
                         span(:class="isOpen === false ? '' : 'mr-4'")
                             Icon.text-primary(size="20", :name="`tabler:${icon}`")
-                        p(:class="[ 'max-w-[200px] truncate', isOpen === false ? 'opacity-0' : 'opacity-100' ]")
+                        p(:class="[ 'max-w-[200px] truncate text-primary', isOpen === false ? 'opacity-0' : 'opacity-100' ]")
                             | {{ label }}
         DropdownMenuContent(side="right" :sideOffset="25" align="start")
-            DropdownMenuLabel(class="max-w-[190px] truncate")
+            DropdownMenuLabel(class="max-w-[190px] truncate text-primary")
                 | {{ label }}
             DropdownMenuSeparator
             DropdownMenuItem(v-for="({ href, label }, index) in submenus" :key="index" as-child)
                 a.cursor-pointer(:href="href")
-                    p.truncate(class="max-w-[180px]") {{ label }}
+                    p.truncate.text-primary(class="max-w-[180px]") {{ label }}
             DropdownMenuArrow(class="fill-border")
 </template>
