@@ -29,6 +29,17 @@ export default class RegistroAtencionModule {
         );
     }
 
+    async obtenerRegistroByIdConInfoParaComunicado(
+        registroAtencionId: number
+    ): Promise<IRegistroAtencion> {
+        return this.fetcher(
+            `/enfermeria/registro_atencion/obtenerRegistroByIdConInfoParaComunicado/${registroAtencionId}`,
+            {
+                method: "GET",
+            }
+        );
+    }
+
     async saveRegistroAtencion(
         data: IRegistroAtencionForm
     ): Promise<IRegistroAtencion> {

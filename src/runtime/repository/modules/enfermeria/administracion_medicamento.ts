@@ -35,6 +35,17 @@ export default class AdministracionMedicamentosModule {
             }
         );
     }
+    
+    async obtenerRegistroByIdConInfoParaComunicado(
+        administracionMedicamentoId: number
+    ): Promise<IAdministracionMedicamento> {
+        return this.fetcher(
+            `/enfermeria/administracion_medicamentos/obtenerRegistroByIdConInfoParaComunicado/${administracionMedicamentoId}`,
+            {
+                method: "GET",
+            }
+        );
+    }
 
     async saveAdministracionMedicamento(
         data: IAdministracionMedicamentoForm

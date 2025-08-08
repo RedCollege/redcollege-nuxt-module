@@ -20,6 +20,17 @@ export default class RegistroAccidenteModule {
                 }
             );
         }
+        
+        async obtenerRegistroByIdConInfoParaComunicado(
+            registroAccidenteId: number
+        ): Promise<IRegistroAccidente> {
+            return this.fetcher(
+                `/enfermeria/registro_accidente/obtenerRegistroByIdConInfoParaComunicado/${registroAccidenteId}`,
+                {
+                    method: "GET",
+                }
+            );
+        }
     
         async saveRegistroAccidente(
             data: IRegistroAccidenteForm

@@ -13,6 +13,7 @@ import { useField } from 'vee-validate';
 interface Props {
     value?: string;
     name: string;
+    disabled?: boolean;
 }
 
 const props = defineProps<Props>()
@@ -53,6 +54,7 @@ const keyBinders = {
 
 const options = ref({
     theme: 'snow',
+    readOnly: props.disabled,
     modules: {
         keyboard: {
             bindings: keyBinders
@@ -86,7 +88,6 @@ const options = ref({
         }
     },
     placeholder: 'Escribir aquí ...',
-    readOnly: false
 })
 let isProcessing = false;
 
@@ -114,11 +115,27 @@ watch(() => props.value, (newValue) => {
     }
 }, { immediate: true })
 
+watch(() => props.disabled, (newValue) => {
+    if (quill) {
+        if (newValue) {
+            quill.disable();
+        } else {
+            quill.enable();
+        }
+        options.value.readOnly = newValue;
+    }
+}, { immediate: true });
 </script>
 
 <template lang="pug">
-    .flex.flex-col.h-full
-        QuillyEditor(ref="editor", v-model="editorData", :options="options")
+    .flex.flex-col.h-full(:class="{ 'opacity-75': disabled, 'cursor-not-allowed': disabled }")
+        QuillyEditor(
+            ref="editor"
+            v-model="editorData"
+            :options="options"
+            :disabled="disabled"
+            :class="{ 'pointer-events-none': disabled }"
+        )
 </template>
 
 <style lang="css">

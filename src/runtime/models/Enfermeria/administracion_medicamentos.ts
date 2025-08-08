@@ -15,6 +15,8 @@ export interface IAdministracionMedicamento {
     frecuencia: FrecuenciaTipo;
     fechaInicio: string | Date;
     fechaFin: string | Date;
+    viaTelefonicaCount: number;
+    mensajesCount: number;
     horaFrecuencia: string | Date | null;
 }
 
