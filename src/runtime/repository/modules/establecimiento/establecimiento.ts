@@ -8,6 +8,7 @@ interface GetUsuariosProps {
     page?: number;
     search?: string;
     rolId: number;
+    cursoId?: number
 }
 
 export default class EstablecimientoModule {
