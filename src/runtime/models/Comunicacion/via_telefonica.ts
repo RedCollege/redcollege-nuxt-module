@@ -13,7 +13,7 @@ export enum TipoRegistro {
 export interface IViaTelefonicaForm {
     fechaReporte: DateTime;
     isContactoEstablecido: boolean;
-    observaciones: string;
+    observaciones?: string;
     tipoRegistro: TipoRegistro;
     apoderados: Array<number>;
 }
