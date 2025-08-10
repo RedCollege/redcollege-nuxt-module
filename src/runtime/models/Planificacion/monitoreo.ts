@@ -48,3 +48,12 @@ export interface IResumenCurso {
 export interface IMonitoreoCurso {
     resumenAnualCobertura: IResumenCurso | null;
 }
+
+export interface IMonitoreoDocente {
+    docenteId: number
+    docenteNombre: string
+    asignaturas: number
+    oaPlanificados: number
+    oaRealizados: number
+    coberturaPromedio: number
+}

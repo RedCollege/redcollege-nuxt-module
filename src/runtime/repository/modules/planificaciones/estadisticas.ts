@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IMonitoreoCurso } from '~/src/runtime/models/Planificacion/monitoreo';
+import type { IMonitoreoCurso, IMonitoreoDocente } from '~/src/runtime/models/Planificacion/monitoreo';
 
 interface AllProps {
     establecimientoId: number;
@@ -14,7 +14,7 @@ export default class PlanificacionEstadisticaModule {
     constructor(private fetcher: $Fetch) { }
 
 
-    async getEstadisticas(props: AllProps): Promise<IMonitoreoCurso> {
+    async getEstadisticas(props: AllProps): Promise<IMonitoreoCurso | IMonitoreoDocente> {
 
         return this.fetcher(`/planificacion/monitoreo/${props.establecimientoId}`, {
             method: 'GET',
