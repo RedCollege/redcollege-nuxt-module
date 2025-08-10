@@ -15,6 +15,7 @@ import type {
     EnfermeriaModules,
     EvaluacionesModules,
     HorarioModules,
+    NotificacionesModules,
 } from "../utils/apiModuleFactory";
 import { useAuthStore } from "../stores/authStore";
 
@@ -35,30 +36,40 @@ export default defineNuxtPlugin((nuxtApp) => {
         auth: createApiModules("auth", apiFetcher) as AuthModules,
         planificaciones: createApiModules(
             "planificaciones",
-            apiFetcher
+            apiFetcher,
         ) as PlanificacionesModules,
         informes: createApiModules("informes", apiFetcher) as InformesModules,
         establecimiento: createApiModules(
             "establecimiento",
-            apiFetcher
+            apiFetcher,
         ) as EstablecimientoModules,
         matriculas: createApiModules(
             "matriculas",
-            apiFetcher
+            apiFetcher,
         ) as MatriculasModules,
         curriculum: createApiModules(
             "curriculum",
-            apiFetcher
+            apiFetcher,
         ) as CurriculumModules,
         general: createApiModules("general", apiFetcher) as GeneralModules,
         health: createApiModules("health", apiFetcher) as HealthModules,
         comunicaciones: createApiModules(
             "comunicaciones",
-            apiFetcher
+            apiFetcher,
         ) as ComunicacionesModules,
-        enfermeria: createApiModules("enfermeria", apiFetcher) as EnfermeriaModules,
-        evaluaciones: createApiModules("evaluaciones", apiFetcher) as EvaluacionesModules,
-        horario: createApiModules("horario", apiFetcher) as HorarioModules
+        enfermeria: createApiModules(
+            "enfermeria",
+            apiFetcher,
+        ) as EnfermeriaModules,
+        evaluaciones: createApiModules(
+            "evaluaciones",
+            apiFetcher,
+        ) as EvaluacionesModules,
+        horario: createApiModules("horario", apiFetcher) as HorarioModules,
+        notificacion: createApiModules(
+            "notificacion",
+            apiFetcher,
+        ) as NotificacionesModules,
     };
 
     return {

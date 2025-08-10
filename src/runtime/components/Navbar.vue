@@ -1,257 +1,295 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
-import { storeToRefs } from 'pinia'
-import { applicationModules as modules } from '../config/modules'
-import type { IEstablecimiento, IPeriodoEscolar } from '../models'
-import { useAuthStore } from '../stores/authStore'
-import { useRuntimeConfig, useRoute, useRouter, useNuxtApp } from '#app'
-import { useNavbar, useNotification } from '../composables/states'
+import { onMounted, ref, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { applicationModules as modules } from "../config/modules";
+import type { IEstablecimiento, IPeriodoEscolar } from "../models";
+import { useAuthStore } from "../stores/authStore";
+import { useRuntimeConfig, useRoute, useRouter, useNuxtApp } from "#app";
+import { useNavbar, useNotification } from "../composables/states";
 
 interface Props {
-    logoUrl: string,
-    titulo: string,
-    hideCursos?: boolean,
-    hidePeriodos?: boolean,
-    hideEstablecimientos?: boolean
+    logoUrl: string;
+    titulo: string;
+    hideCursos?: boolean;
+    hidePeriodos?: boolean;
+    hideEstablecimientos?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    logoUrl: '',
-    titulo: '',
+    logoUrl: "",
+    titulo: "",
     hideCursos: false,
     hidePeriodos: false,
-    hideEstablecimientos: false
-})
+    hideEstablecimientos: false,
+});
 
-const { $apis } = useNuxtApp()
-const route = useRoute()
-const router = useRouter()
-const fileInput = ref<HTMLInputElement | null>(null)
-const establecimientosResultados = ref<Array<IEstablecimiento>>([])
-const selectedEstablecimientoId = ref("")
-const selectedPeriodoId = ref("")
-const selectedCursoId = ref("")
-const isUploadingAvatar = ref(false)
-const authStore = useAuthStore()
-const { user, isLoggedIn, isSuperAdmin } = storeToRefs(authStore)
-const { redirectTo } = useRuntimeConfig().public.redcollege
-const periodos = ref<Array<IPeriodoEscolar>>([])
-const isBuscadorEstablecimientoOpen = ref(false)
-const isSearching = ref(false)
-const isChangelogOpen = ref(false)
+const { $apis } = useNuxtApp();
+const route = useRoute();
+const router = useRouter();
+const fileInput = ref<HTMLInputElement | null>(null);
+const establecimientosResultados = ref<Array<IEstablecimiento>>([]);
+const selectedEstablecimientoId = ref("");
+const selectedPeriodoId = ref("");
+const selectedCursoId = ref("");
+const isUploadingAvatar = ref(false);
+const authStore = useAuthStore();
+const { user, isLoggedIn, isSuperAdmin } = storeToRefs(authStore);
+const { redirectTo } = useRuntimeConfig().public.redcollege;
+const periodos = ref<Array<IPeriodoEscolar>>([]);
+const isBuscadorEstablecimientoOpen = ref(false);
+const isSearching = ref(false);
+const isChangelogOpen = ref(false);
 
-const arePeriodosLoaded = ref(false)
-const areCursosLoaded = ref(false)
+const arePeriodosLoaded = ref(false);
+const areCursosLoaded = ref(false);
 
-const emit = defineEmits(['sucessLogout', 'selectedFilters'])
+const emit = defineEmits(["sucessLogout", "selectedFilters"]);
 
 // Función para actualizar la ruta
 const updateRoute = (establecimientoId: string, periodoId: string) => {
     if (establecimientoId) {
-        const currentPath = route.path
-        const pathParts = currentPath.split('/')
+        const currentPath = route.path;
+        const pathParts = currentPath.split("/");
 
         // Importante: nunca usar 0 como periodoId en la URL
-        const safePerioId = periodoId && periodoId !== "0" ? periodoId :
-            (periodos.value.length > 0 ? String(periodos.value[0].periodo) : String(new Date().getFullYear()))
+        const safePerioId =
+            periodoId && periodoId !== "0"
+                ? periodoId
+                : periodos.value.length > 0
+                  ? String(periodos.value[0].periodo)
+                  : String(new Date().getFullYear());
 
         // Si estamos en la ruta inicial o solo con establecimiento
         if (pathParts.length <= 2) {
-            const newPath = `/${establecimientoId}/${safePerioId}/${redirectTo}`
+            const newPath = `/${establecimientoId}/${safePerioId}/${redirectTo}`;
 
             if (currentPath !== newPath) {
-                router.push(newPath)
+                router.push(newPath);
             }
         } else {
-            const remainingPath = pathParts.slice(3).join('/')
-            const newPath = `/${establecimientoId}/${safePerioId}/${remainingPath}`
+            const remainingPath = pathParts.slice(3).join("/");
+            const newPath = `/${establecimientoId}/${safePerioId}/${remainingPath}`;
 
             if (currentPath !== newPath) {
-                router.push(newPath)
+                router.push(newPath);
             }
         }
     }
-}
+};
 
 // Función para cargar periodos
 const loadPeriodos = async (establecimientoId: number) => {
     try {
-        periodos.value = await $apis.establecimiento.periodoEscolar.getByEstablecimiento(establecimientoId)
-        arePeriodosLoaded.value = true
+        periodos.value =
+            await $apis.establecimiento.periodoEscolar.getByEstablecimiento(
+                establecimientoId,
+            );
+        arePeriodosLoaded.value = true;
 
         // Si después de cargar los periodos, el periodo seleccionado no está en la lista o es 0
         // seleccionamos el primer periodo disponible para evitar el 0
-        if (selectedPeriodoId.value === "0" || selectedPeriodoId.value === "" ||
-            !periodos.value.some(p => String(p.periodo) === selectedPeriodoId.value)) {
+        if (
+            selectedPeriodoId.value === "0" ||
+            selectedPeriodoId.value === "" ||
+            !periodos.value.some(
+                (p) => String(p.periodo) === selectedPeriodoId.value,
+            )
+        ) {
             if (periodos.value.length > 0) {
-                selectedPeriodoId.value = String(periodos.value[0].periodo)
-                useNavbar().setSelectedPeriodo(periodos.value[0].periodo)
+                selectedPeriodoId.value = String(periodos.value[0].periodo);
+                useNavbar().setSelectedPeriodo(periodos.value[0].periodo);
             }
         }
     } catch (error) {
-        console.error('Error al cargar periodos:', error)
-        periodos.value = []
-        arePeriodosLoaded.value = true
+        console.error("Error al cargar periodos:", error);
+        periodos.value = [];
+        arePeriodosLoaded.value = true;
     }
-}
+};
 
 // Función para cargar cursos
 const loadCursos = async (establecimientoId: number, year: string) => {
     try {
         //cursos.value = await $apis.establecimiento.curso.getByEstablecimiento(establecimientoId, year)
-        areCursosLoaded.value = true
+        areCursosLoaded.value = true;
     } catch (error) {
-        console.error('Error al cargar cursos:', error)
+        console.error("Error al cargar cursos:", error);
         //cursos.value = []
-        areCursosLoaded.value = true
+        areCursosLoaded.value = true;
     }
-}
+};
 
 // Función para resetear los selects - modificada para NO usar 0 como valor
-const resetSelects = (resetPeriodo: boolean = true, resetCurso: boolean = true) => {
+const resetSelects = (
+    resetPeriodo: boolean = true,
+    resetCurso: boolean = true,
+) => {
     if (resetPeriodo) {
         // En lugar de usar valor vacío, verificamos si hay periodos disponibles
         if (periodos.value.length > 0) {
             // Usamos el primer periodo disponible en lugar de valor vacío
-            selectedPeriodoId.value = String(periodos.value[0].periodo)
-            useNavbar().setSelectedPeriodo(periodos.value[0].periodo)
+            selectedPeriodoId.value = String(periodos.value[0].periodo);
+            useNavbar().setSelectedPeriodo(periodos.value[0].periodo);
         } else {
             // Si no hay periodos, utilizamos el año actual como respaldo
-            const currentYear = new Date().getFullYear()
-            selectedPeriodoId.value = String(currentYear)
-            useNavbar().setSelectedPeriodo(currentYear)
+            const currentYear = new Date().getFullYear();
+            selectedPeriodoId.value = String(currentYear);
+            useNavbar().setSelectedPeriodo(currentYear);
         }
     }
     if (resetCurso) {
-        selectedCursoId.value = ""
+        selectedCursoId.value = "";
         //cursos.value = []
-        areCursosLoaded.value = false
+        areCursosLoaded.value = false;
     }
-}
+};
 
 const openFilePicker = (): void => {
-    fileInput.value?.click()
-}
+    fileInput.value?.click();
+};
 
 // Maneja la carga de archivos
 const handleFileUpload = async (event: Event) => {
-    isUploadingAvatar.value = true
-    const target = event.target as HTMLInputElement
-    const file = target.files?.[0]
+    isUploadingAvatar.value = true;
+    const target = event.target as HTMLInputElement;
+    const file = target.files?.[0];
     if (file) {
         try {
-            const { url } = await $apis.auth.usuario.actualizarAvatar(file)
-            authStore.updateAvatar(url)
-            isUploadingAvatar.value = false
+            const { url } = await $apis.auth.usuario.actualizarAvatar(file);
+            authStore.updateAvatar(url);
+            isUploadingAvatar.value = false;
             useNotification().toast({
-                title: 'Avatar Actualizado'
-            })
+                title: "Avatar Actualizado",
+            });
         } catch (error) {
-            isUploadingAvatar.value = false
+            isUploadingAvatar.value = false;
             useNotification().toast({
-                title: 'Revisa la imagen adjuntada, no puede pesar más de 10mb',
-                variant: 'destructive'
-            })
+                title: "Revisa la imagen adjuntada, no puede pesar más de 10mb",
+                variant: "destructive",
+            });
         }
     }
-}
+};
 
-const buscarEstablecimiento = (async(event: KeyboardEvent) => {
-    const busqueda = (event.target as HTMLInputElement).value
-    try{
-        isSearching.value = true
-        const data = await $apis.establecimiento.establecimiento.obtenerEstablecimientos(busqueda, 1)
-        establecimientosResultados.value = data.data
-        isSearching.value = false
-    }catch(error){
-
-    }
-})
+const buscarEstablecimiento = async (event: KeyboardEvent) => {
+    const busqueda = (event.target as HTMLInputElement).value;
+    try {
+        isSearching.value = true;
+        const data =
+            await $apis.establecimiento.establecimiento.obtenerEstablecimientos(
+                busqueda,
+                1,
+            );
+        establecimientosResultados.value = data.data;
+        isSearching.value = false;
+    } catch (error) {}
+};
 
 // Inicialización desde los parámetros de la ruta
 onMounted(async () => {
-    const establecimientoIdParam = Number(route.params.establecimientoid)
-    const periodoParam = Number(route.params.periodo)
+    const establecimientoIdParam = Number(route.params.establecimientoid);
+    const periodoParam = Number(route.params.periodo);
 
     if (establecimientoIdParam > 0) {
-        selectedEstablecimientoId.value = String(establecimientoIdParam)
-        useNavbar().setSelectedEstablecimientoId(establecimientoIdParam)
+        selectedEstablecimientoId.value = String(establecimientoIdParam);
+        useNavbar().setSelectedEstablecimientoId(establecimientoIdParam);
 
         // Cargar periodos primero
-        await loadPeriodos(establecimientoIdParam)
+        await loadPeriodos(establecimientoIdParam);
 
         // Si hay un periodo en la ruta
         if (periodoParam > 0) {
             // Verificar si existe en los periodos cargados
-            if (periodos.value.some(p => p.periodo === periodoParam)) {
-                selectedPeriodoId.value = String(periodoParam)
-                useNavbar().setSelectedPeriodo(periodoParam)
+            if (periodos.value.some((p) => p.periodo === periodoParam)) {
+                selectedPeriodoId.value = String(periodoParam);
+                useNavbar().setSelectedPeriodo(periodoParam);
             } else if (periodos.value.length > 0) {
                 // Si el periodo no existe pero hay periodos disponibles, usar el primero
-                selectedPeriodoId.value = String(periodos.value[0].periodo)
-                useNavbar().setSelectedPeriodo(periodos.value[0].periodo)
+                selectedPeriodoId.value = String(periodos.value[0].periodo);
+                useNavbar().setSelectedPeriodo(periodos.value[0].periodo);
 
                 // Actualizar la URL para reflejar el periodo correcto
-                updateRoute(String(establecimientoIdParam), selectedPeriodoId.value)
+                updateRoute(
+                    String(establecimientoIdParam),
+                    selectedPeriodoId.value,
+                );
             }
         } else {
             // Si el periodo es 0 o undefined y hay periodos disponibles
             if (periodos.value.length > 0) {
-                selectedPeriodoId.value = String(periodos.value[0].periodo)
-                useNavbar().setSelectedPeriodo(periodos.value[0].periodo)
+                selectedPeriodoId.value = String(periodos.value[0].periodo);
+                useNavbar().setSelectedPeriodo(periodos.value[0].periodo);
 
                 // Actualizar la URL para reflejar el periodo correcto
-                updateRoute(String(establecimientoIdParam), selectedPeriodoId.value)
+                updateRoute(
+                    String(establecimientoIdParam),
+                    selectedPeriodoId.value,
+                );
             }
         }
 
         // Cargar cursos si necesario
         if (selectedPeriodoId.value) {
-            await loadCursos(establecimientoIdParam, selectedPeriodoId.value)
+            await loadCursos(establecimientoIdParam, selectedPeriodoId.value);
         }
     }
-})
+});
 
 // Watch para establecimiento
 watch(selectedEstablecimientoId, async (newVal) => {
     if (newVal) {
-        useNavbar().setSelectedEstablecimientoId(Number(newVal))
-        await loadPeriodos(Number(newVal))
+        useNavbar().setSelectedEstablecimientoId(Number(newVal));
+        await loadPeriodos(Number(newVal));
 
         // Solo resetear los selects después de cargar los periodos
-        resetSelects()
+        resetSelects();
 
         // Asegurarse de que selectedPeriodoId tenga un valor válido antes de actualizar la ruta
-        updateRoute(newVal, selectedPeriodoId.value)
-        emit('selectedFilters', newVal, selectedPeriodoId.value, selectedCursoId.value)
+        updateRoute(newVal, selectedPeriodoId.value);
+        emit(
+            "selectedFilters",
+            newVal,
+            selectedPeriodoId.value,
+            selectedCursoId.value,
+        );
     }
-})
+});
 
 // Watch para periodo
 watch(selectedPeriodoId, async (newVal, oldVal) => {
     // Solo proceder si hay un nuevo valor y es diferente de 0
     if (newVal && newVal !== "0") {
-        resetSelects(false, true)
-        useNavbar().setSelectedPeriodo(Number(newVal))
+        resetSelects(false, true);
+        useNavbar().setSelectedPeriodo(Number(newVal));
         if (selectedEstablecimientoId.value) {
-            await loadCursos(Number(selectedEstablecimientoId.value), newVal)
-            updateRoute(selectedEstablecimientoId.value, newVal)
+            await loadCursos(Number(selectedEstablecimientoId.value), newVal);
+            updateRoute(selectedEstablecimientoId.value, newVal);
         }
-        emit('selectedFilters', selectedEstablecimientoId.value, newVal, selectedCursoId.value)
+        emit(
+            "selectedFilters",
+            selectedEstablecimientoId.value,
+            newVal,
+            selectedCursoId.value,
+        );
     } else if (newVal === "0" && periodos.value.length > 0) {
         // Si el nuevo valor es 0 y hay periodos disponibles, establecer al primer periodo
-        selectedPeriodoId.value = String(periodos.value[0].periodo)
+        selectedPeriodoId.value = String(periodos.value[0].periodo);
     }
-})
+});
 
 // Watch para curso
 watch(selectedCursoId, (newVal) => {
-    emit('selectedFilters', selectedEstablecimientoId.value, selectedPeriodoId.value, newVal)
-})
+    emit(
+        "selectedFilters",
+        selectedEstablecimientoId.value,
+        selectedPeriodoId.value,
+        newVal,
+    );
+});
 
 const logout = () => {
-    authStore.logout()
-}
+    authStore.logout();
+};
 </script>
 
 <template lang="pug">
@@ -351,6 +389,8 @@ div
 
                             NavigationMenuItem
                                 Separator(orientation="vertical", class="h-10")
+                            NavigationMenuItem
+                                NotificacionesBell
                             NavigationMenuItem
                                 DropdownMenu
                                     DropdownMenuTrigger(as-child)

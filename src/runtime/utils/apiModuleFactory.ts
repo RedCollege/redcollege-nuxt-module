@@ -19,6 +19,7 @@ import {
     AntecedenteSaludModule,
     SimceEstablecimientoModule,
     ComentarioModule,
+    NotificacionModule,
 } from "../repository/modules";
 import AuxiliarModule from "../repository/modules/general/auxiliar";
 import ContenidoModule from "../repository/modules/planificaciones/contenido";
@@ -119,6 +120,10 @@ export type EvaluacionesModules = {
     simceEstablecimiento: SimceEstablecimientoModule;
 };
 
+export type NotificacionesModules = {
+    notificacion: NotificacionModule;
+};
+
 // agrupación de modulos
 export type ApiModules = {
     auth: AuthModules;
@@ -133,6 +138,7 @@ export type ApiModules = {
     comunicaciones: ComunicacionesModules;
     evaluaciones: EvaluacionesModules;
     horario: HorarioModules;
+    notificacion: NotificacionesModules;
 };
 
 export function createApiModules(
@@ -148,7 +154,8 @@ export function createApiModules(
         | "comunicaciones"
         | "enfermeria"
         | "evaluaciones"
-        | "horario",
+        | "horario"
+        | "notificacion",
     apiFetcher: $Fetch,
 ):
     | AuthModules
@@ -162,7 +169,8 @@ export function createApiModules(
     | ComunicacionesModules
     | EnfermeriaModules
     | EvaluacionesModules
-    | HorarioModules {
+    | HorarioModules
+    | NotificacionesModules {
     switch (apiType) {
         case "auth":
             return {
@@ -255,6 +263,10 @@ export function createApiModules(
                 horarioDiaAsignatura: new HorarioDiaAsignaturaModule(
                     apiFetcher,
                 ),
+            };
+        case "notificacion":
+            return {
+                notificacion: new NotificacionModule(apiFetcher),
             };
     }
 }

@@ -26,3 +26,4 @@ export { default as HorarioModule } from "./curso/horario/horario";
 export { default as ActividadModule } from "./enfermeria/actividad";
 export { default as SimceEstablecimientoModule } from "./evaluacion/simce_establecimiento";
 export { default as ComentarioModule } from "./planificaciones/comentarios";
+export { default as NotificacionModule } from "./notificacion/notificacion";
