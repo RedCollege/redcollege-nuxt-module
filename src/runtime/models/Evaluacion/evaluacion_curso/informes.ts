@@ -2,6 +2,9 @@
  * Interfaces para el informe detallado de evaluación
  */
 
+import type { DateTime } from "luxon";
+import type { ICurso, IEstablecimiento } from "../../Establecimiento";
+
 export interface IAntecedentesEvaluacion {
     estudiantesDelCurso: number;
     estudiantesEvaluados: number;
@@ -26,6 +29,7 @@ export interface INivelLogro {
     cantidadEstudiantes: number;
     porcentajeEstudiantes: string;
 }
+
 
 export interface IEstudianteDetalle {
     numero: number;
@@ -127,6 +131,8 @@ interface IEnsayo {
     rendido: boolean;
 }
 
+
+
 export interface IEstudianteEvaluacion {
     id: number;
     nombre: string;
@@ -137,4 +143,91 @@ export interface IEstudianteEvaluacion {
         nota: number;
         tendencia: 'subida' | 'bajada' | 'estable';
     }
+}
+
+
+/**
+ * Informe Por Estudiantes
+ */
+
+export interface ICursoInforme {
+    estudiantes: IEstudianteEvaluacion[];
+    componentes: ICursoInformeEntrada[]
+}
+
+export interface ICursoInformeEntrada {
+    entrada: string;
+    items: ICursoInformeItemEntrada[]
+}
+
+export interface ICursoInformeItemEntrada {
+    nombre: string;
+    alias: string;
+    promedio: string;
+}
+
+export interface ICursoInformeEstudianteItemEntrada {
+    estudiante: string;
+    puntaje: number;
+}
+
+/**
+ * Informa Individual Estudiante
+ */
+
+/**
+* Interfaces para el informe individual de estudiantes
+*/
+
+// Respuesta de una pregunta específica
+export interface IRespuestaPregunta {
+    pregunta: number;
+    correcta: string;
+    tuRespuesta: string;
+    resultado: 'Correcto' | 'Incorrecto' | 'Sin respuesta' | 'Desarrollo';
+    explicacion: string;
+    tipoPregunta: 'V/F' | 'Desarrollo' | 'Alternativas' | 'Otro';
+    puntajePregunta: number;
+    puntajeObtenido: number;
+}
+
+// Evaluación en la progresión histórica
+export interface IEvaluacionProgresion {
+    nombreEvaluacion: string;
+    nEnsayo: number;
+    nota: number;
+    aumentoDesdeInicio: number;
+}
+
+// Evaluación actual con el aumento calculado
+export interface IEvaluacionActual {
+    nombreEvaluacion: string;
+    nEnsayo: number;
+    nota: number;
+    aumentoDesdeInicio: number;
+}
+
+// Datos completos de un estudiante (resultado de la función SQL)
+export interface IEstudianteInforme {
+    usuarioId: number;
+    nombreCompleto: string;
+    fotografiaUrl: string | null;
+    nota: number;
+    notaPromedioCurso: number;
+    puntajeTotalObtenido: number;
+    puntajeTotalEvaluacion: number;
+    porcentajeLogro: number;
+    puntajeSimce: number;
+    exigencia: string;
+    progresion: IEvaluacionProgresion[] | null;
+    evaluacionActual: IEvaluacionActual;
+    resultados: IRespuestaPregunta[];
+}
+
+export interface IEstudianteInformeIndividual {
+    curso: ICurso;
+    establecimiento: IEstablecimiento;
+    evaluacionNombre: string;
+    fechaEvaluacion: DateTime;
+    resultados: IEstudianteInforme[]
 }

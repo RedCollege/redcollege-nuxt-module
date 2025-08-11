@@ -86,6 +86,7 @@ export interface IAccidenteIndividual {
     resumenPorGravedad: IResumenConContexto[];
     resumenPorLugar: IResumenConContexto[];
     resumenPorBloqueHorario: IResumenBase[];
+    resumenPorTipoAccidente: IResumenConContexto[];
 }
 export interface IActividadIndividual {
     chartData: IChartData[];

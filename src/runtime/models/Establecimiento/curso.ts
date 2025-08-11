@@ -18,7 +18,9 @@ export interface ICurso {
      * Contiene la información del codigo sige del curso
      */
     sige?: IGradosSige;
-    totalEstudiantes: number;
+    totalEstudiantes: number | null;
+    totalCursoAsignaturas: number | null;
+    totalHorarios: number | null;
     /**
      * Contiene el nombre completo del curso.
      */
