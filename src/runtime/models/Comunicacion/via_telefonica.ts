@@ -1,4 +1,4 @@
-import { DateTime } from "luxon";
+import type { DateTime } from "luxon";
 import type { IUsuario } from "../Auth/usuario.ts";
 import type { IRegistroAtencion } from "../Enfermeria/registro_atencion.ts";
 import type { IRegistroAccidente } from "../Enfermeria/registro_accidente.js";
