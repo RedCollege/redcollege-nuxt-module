@@ -41,6 +41,7 @@ import HorarioDiaAsignaturaModule from "../repository/modules/curso/horario/hora
 import ActividadModule from "../repository/modules/enfermeria/actividad";
 import AdministracionMedicamentosModule from "../repository/modules/enfermeria/administracion_medicamento";
 import CursoAsignaturaModule from "../repository/modules/establecimiento/curso_asignatura";
+import ViaTelefonicaModule from "../repository/modules/comunicacion/via_telefonica";
 
 export type AuthModules = {
     usuario: UsuarioModule;
@@ -101,6 +102,7 @@ export type ComunicacionesModules = {
     permiso: PermisoModule;
     usuarioPlantilla: UsuarioPlantillaModule;
     sistemaPlantilla: SistemaPlantillaModule;
+    viaTelefonica: ViaTelefonicaModule;
 };
 
 export type EnfermeriaModules = {
@@ -227,6 +229,7 @@ export function createApiModules(
                 permiso: new PermisoModule(apiFetcher),
                 usuarioPlantilla: new UsuarioPlantillaModule(apiFetcher),
                 sistemaPlantilla: new SistemaPlantillaModule(apiFetcher),
+                viaTelefonica: new ViaTelefonicaModule(apiFetcher),
             };
         case "enfermeria":
             return {
