@@ -55,6 +55,11 @@ export interface IUsuario {
     fechaRetiroCurso: DateTime;
     numeroLista: number | null;
     cursoUsuarioId: number;
+    /**
+     * 1. Profesor Jefe
+     * 2. Profesor Auxiliar
+     */
+    tipoProfesorId: number | null
 }
 
 export interface IUsuarioUpdate {

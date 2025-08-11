@@ -11,13 +11,16 @@ interface GetAllProps {
     curso?: string;
     estado?: string;
     condicion?: boolean;
+    usuarioId?: number;
+    tipoPaciente?: number;
+    diagnostico?: number;
     page?: number;
     buscar?: string;
     establecimiento: number;
 }
 
 export default class AntecedenteSalud {
-    constructor(private fetcher: $Fetch) {}
+    constructor(private fetcher: $Fetch) { }
 
     async getByEstablecimiento(
         props?: GetAllProps

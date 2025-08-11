@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import type { DateTime } from 'luxon';
 import type { IAsignaturaCurricular } from "./asignatura_curricular.ts";
 import type { IAsignaturaSige } from "./asignatura_sige.ts";
 
