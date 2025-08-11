@@ -57,3 +57,8 @@ export interface IMonitoreoDocente {
     oaRealizados: number
     coberturaPromedio: number
 }
+
+export interface IMonitoreo {
+    curso: IMonitoreoCurso;
+    docente: IMonitoreoDocente;
+}
