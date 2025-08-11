@@ -5,3 +5,4 @@ export * from "../Planificacion/contenido";
 export * from "./dua/index";
 export * from "./adecuacion_curricular";
 export * from "./marcador"
+export * from "./monitoreo"

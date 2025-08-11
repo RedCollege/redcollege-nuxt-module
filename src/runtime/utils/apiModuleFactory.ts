@@ -40,6 +40,8 @@ import HorarioModule from "../repository/modules/curso/horario/horario";
 import HorarioDiaAsignaturaModule from "../repository/modules/curso/horario/horario_dia_asignatura";
 import ActividadModule from "../repository/modules/enfermeria/actividad";
 import AdministracionMedicamentosModule from "../repository/modules/enfermeria/administracion_medicamento";
+import CursoAsignaturaCurricularModule from "../repository/modules/establecimiento/curso_asignatura_curricular";
+import PlanificacionEstadisticaModule from "../repository/modules/planificaciones/estadisticas";
 import CursoAsignaturaModule from "../repository/modules/establecimiento/curso_asignatura";
 
 export type AuthModules = {
@@ -48,6 +50,7 @@ export type AuthModules = {
 
 export type PlanificacionesModules = {
     planificacion: PlanificacionModule;
+    monitoreo: PlanificacionEstadisticaModule;
     unidades: UnidadModule;
     contenidos: ContenidoModule;
     contenidoActividades: ContenidoActividadModule;
@@ -172,6 +175,7 @@ export function createApiModules(
             return {
                 planificacion: new PlanificacionModule(apiFetcher),
                 unidades: new UnidadModule(apiFetcher),
+                monitoreo: new PlanificacionEstadisticaModule(apiFetcher),
                 contenidos: new ContenidoModule(apiFetcher),
                 contenidoActividades: new ContenidoActividadModule(apiFetcher),
                 contenidoRecursos: new ContenidoRecursoModule(apiFetcher),
