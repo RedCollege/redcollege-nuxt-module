@@ -301,20 +301,21 @@
                         TabsTrigger(value="leidas")
                             span Todas las notificaciones
                     Separator
-                    ScrollArea(ref="scrollarea" class="h-[calc(100vh_-_120px)]")
+                    ScrollArea(ref="scrollarea" class="h-[calc(100vh_-_135px)]")
                         TabsContent(value="no-leidas" class="h-full")
                             template(v-if="loading")
                                 div.flex.items-center.justify-center.p-4
                                     span.text-muted-foreground Cargando notificaciones...
                             template(v-else)
                                 template(v-if="allNotificacionesNoLeidas.length === 0")
-                                    div.flex.items-center.justify-center.p-4
-                                        span.text-muted-foreground No hay notificaciones no leídas
+                                    div.flex.flex-col.items-center.justify-center.gap-2(class="h-[calc(100vh_-_150px)]")
+                                        img(src="../../assets/images/emptyNotificaciones.svg")
+                                        span.text-muted-foreground.text-xl No hay notificaciones sin leer
                                 template(v-else)
                                     template(v-for="grupo in notificacionesNoLeidasPorFecha")
                                         h3(class="text-center text-muted-foreground p-1") {{ grupo.fecha }}
                                         template(v-for="notificacion in grupo.notificaciones")
-                                            NotificacionesCard(:notificacion="notificacion" @notificacion-leida="handleNotificacionLeida")
+                                            NotificacionesCard(:notificacion="notificacion" @notificacion-leida="handleNotificacionLeida" @update:is-open="(state) => emit('update:is-open', state)")
                                     div(v-if="hasMoreData" class="flex flex-col items-center justify-center p-6 gap-2")
                                         template(v-if="isLoadingMore")
                                             span.text-sm.text-muted-foreground Cargando más notificaciones...
@@ -325,19 +326,21 @@
                                     span.text-muted-foreground Cargando notificaciones...
                             template(v-else)
                                 template(v-if="notificacionesPorFecha.length === 0")
-                                    div.flex.items-center.justify-center.p-4
-                                        span.text-muted-foreground No hay notificaciones
+                                    div.flex.flex-col.items-center.justify-center.gap-2(class="h-[calc(100vh_-_150px)]")
+                                        img(src="../../assets/images/emptyNotificaciones.svg")
+                                        span.text-muted-foreground.text-xl No hay notificaciones
                                 template(v-else)
                                     template(v-for="grupo in notificacionesPorFecha")
                                         h3(class="text-center text-muted-foreground p-1") {{ grupo.fecha }}
                                         template(v-for="notificacion in grupo.notificaciones")
-                                            NotificacionesCard(:notificacion="notificacion" @notificacion-leida="handleNotificacionLeida")
+                                            NotificacionesCard(:notificacion="notificacion" @notificacion-leida="handleNotificacionLeida" @update:is-open="(state) => emit('update:is-open', state)")
                                     div(v-if="hasMoreData" class="flex flex-col items-center justify-center p-6 gap-2")
                                         template(v-if="isLoadingMore")
                                             span.text-sm.text-muted-foreground Cargando más notificaciones...
                                             Loader.animate-spin
-                Separator
-                SheetFooter
-                    div(class="flex-1 flex flex-row items-center justify-center p-2 text-primary select-none cursor-pointer hover:bg-primary hover:text-white transition-all duration-100 ease-in-out" @click="abrirPanel")
-                        span(class="font-semibold") Ver Todas
+                template(v-if="notificacionesPorFecha.length !== 0")
+                    Separator
+                    SheetFooter.p-2
+                        Button.w-full(@click="abrirPanel")
+                            span Ver Todas
 </template>

@@ -11,6 +11,7 @@
 
     const emit = defineEmits<{
         "notificacion-leida": [notificacionId: number];
+        "update:is-open": [value: boolean];
     }>();
 
     const marcarComoLeido = async () => {
@@ -25,8 +26,10 @@
 
     const marcarComoLeidoRedireccion = async () => {
         await marcarComoLeido()
-        if(props.notificacion.plantilla.requiereEmisor)
+        if (props.notificacion.plantilla.requiereEmisor) {
+            emit("update:is-open", false)
             useRouter().push(`${props.notificacion.tipo.baseUrl}?moveTo=${props.notificacion.finalUrl}`)
+        }
     }
 
 </script>
@@ -37,16 +40,16 @@
         Avatar(class="h-16 w-16 bg-muted border border-muted-foreground/40 shadow-lg")
             AvatarImage(:src="notificacion.emisor.avatarUrl" v-if="notificacion.emisor.avatarUrl")
             AvatarFallback(class="text-xl" v-else) {{ notificacion.emisor.iniciales }}
-        Avatar(class="absolute h-8 w-8 bottom-0 right-0 bg-white border border-muted-foreground/40")
+        Avatar(class="absolute h-8 w-8 -bottom-2 -right-2 bg-white border border-muted-foreground/40")
             AvatarImage(:src="notificacion.tipo.icono" class="scale-50 bg-white overflow-visible")
 
     div(class="flex-1 flex flex-col gap-0.5")
         div(class="truncate flex-1 max-w-[380px]").font-semibold 
             span {{ notificacion.asunto }}
-        p(class="text-justify break-words ") {{ notificacion.mensaje }}
+        p(class="break-words") {{ notificacion.mensaje }}
         div.flex.flex-row.items-center.gap-2
             small(class="font-medium text-muted-foreground") {{ formatearFechaNotificacion(notificacion.createdAt.toString()) }}
-            div(class="rounded-full w-3 h-3 bg-green" v-if="!notificacion.isLeido")
+            div(class="rounded-full w-2 h-2 bg-green" v-if="!notificacion.isLeido")
     TooltipProvider
         Tooltip
             TooltipTrigger(as-child)
