@@ -30,6 +30,8 @@ export interface IRegistroAtencion {
     paciente: IUsuario;
     usuario: IUsuario;
     curso: ICurso;
+    viaTelefonicaCount: number;
+    mensajesCount: number;
     deletedBy?: number;
     deletedAt?: DateTime;
     createdAt: DateTime;
