@@ -7,6 +7,7 @@ interface AllProps {
     seccion: 'sostenedor' | 'cursos' | 'docentes' | 'general' | 'global'
     usuario?: number
     cursoId?: number;
+    filtro?: string;
 }
 
 export default class PlanificacionEstadisticaModule {

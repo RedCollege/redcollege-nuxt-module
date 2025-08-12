@@ -60,5 +60,5 @@ export interface IMonitoreoDocente {
 
 export interface IMonitoreo {
     curso: IMonitoreoCurso;
-    docente: IMonitoreoDocente;
+    docentes: IMonitoreoDocente[];
 }

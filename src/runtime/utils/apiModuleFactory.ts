@@ -40,7 +40,7 @@ import HorarioModule from "../repository/modules/curso/horario/horario";
 import HorarioDiaAsignaturaModule from "../repository/modules/curso/horario/horario_dia_asignatura";
 import ActividadModule from "../repository/modules/enfermeria/actividad";
 import AdministracionMedicamentosModule from "../repository/modules/enfermeria/administracion_medicamento";
-import CursoAsignaturaCurricularModule from "../repository/modules/establecimiento/curso_asignatura_curricular";
+import CursoAsignaturaCurricularModule from "../repository/modules/establecimiento/asignaturas_curriculares";
 import PlanificacionEstadisticaModule from "../repository/modules/planificaciones/estadisticas";
 import CursoAsignaturaModule from "../repository/modules/establecimiento/curso_asignatura";
 
