@@ -1,5 +1,6 @@
 import type { DateTime } from "luxon";
 import type { IUsuario } from "../../types";
+import { boolean } from "zod";
 
 export interface INotificacionesResponse {
     meta: {
@@ -32,7 +33,8 @@ export interface INotificacion {
     fechaLectura: DateTime;
     createdAt: DateTime;
     updatedAt: DateTime;
-    emisor: IUsuario;
+    plantilla: IPlantilla;
+    emisor: IUsuario & { iniciales: string };
     tipo: ITipo;
 }
 
@@ -58,4 +60,8 @@ export interface INotificacionesQueryParams {
 export interface INotificacionContadores {
     noLeidas: number;
     total: number;
+}
+
+interface IPlantilla {
+    requiereEmisor: boolean
 }

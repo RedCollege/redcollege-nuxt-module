@@ -1,9 +1,9 @@
 <script setup lang="ts">
     import { useAsyncData, useNuxtApp, useRouter } from "#app";
     import { computed, ref, watch } from "vue";
-    import { formatearFechaNotificacion } from "../../../utils/notificaciones";
     import type { INotificacion } from "~/src/runtime/models/Notificacion/notificacion";
     import { useToast } from "../../ui/toast";
+    import { refDebounced } from "@vueuse/core";
 
     const { notificacion } = useNuxtApp().$apis.notificacion;
 
@@ -38,6 +38,7 @@
     const perPage = ref<number>(10);
 
     const search = ref<string>('');
+    const debouncedSearch = refDebounced(search, 500)
     const selectedModule = ref<number>(0);
     const selectedEstadoLeido = ref<number>(0);
     const isDialogOpen = ref<boolean>(false);
@@ -46,10 +47,11 @@
 
     const { data: notificaciones, execute: refreshDataTable } = await useAsyncData(
         async () => {
+            console.log('a')
             try {
                 const result = await notificacion.obtenerNotificaciones({
                     page: currentPage.value,
-                    limit: 10,
+                    limit: 15,
                     tipoId:
                         selectedModule.value !== 0
                             ? selectedModule.value
@@ -68,7 +70,7 @@
             }
         },
         {
-            watch: [currentPage, selectedModule, selectedEstadoLeido, search],
+            watch: [currentPage, selectedModule, selectedEstadoLeido, debouncedSearch],
         },
     );
 
@@ -105,6 +107,7 @@
         try {
             await notificacion.marcarMultiplesBorradas(Array.from(selectedNotifications.value))
             refreshDataTable()
+            selectedNotifications.value.clear()
             useToast().toast({
                 title: "Notificaciones eliminadas con éxito",
                 description: "Todas las notificaciones seleccionadas han sido eliminadas de forma exitosa"
@@ -117,6 +120,7 @@
     const marcarTodasLeidas = async () => {
         try {
             await notificacion.marcarTodasLeidas();
+            refreshDataTable()
             useToast().toast({
                 title: "Notificaciones marcadas como leídas",
                 description: "Todas las notificaciones sin leer han sido marcadas como leídas"
@@ -134,6 +138,10 @@
                 title: "Notificación marcada como leída",
                 description: "La notificación ha sido marcada como leída"
             })
+            const notif = notificaciones.value?.find(not => not.id === _notificacion.id)
+            if (notif && !notif.isLeido) {
+                notif.isLeido = true
+            }
         } catch (e) {
             console.log(e);
         }
@@ -145,10 +153,11 @@
 <template lang="pug">
 Card
     CardHeader
-        .flex.flex-row.items-center.justify-between
+        CardTitle
             div(class="w-1/3 flex flex-row items-center gap-2" )
-                Icon(name="tabler:arrow-big-left-filled" class="text-primary font-bold cursor-pointer" @click="useRouter().back()")
+                Icon(name="tabler:arrow-left" class="text-primary font-bold cursor-pointer" @click="useRouter().back()")
                 h3(class="font-semibold text-primary text-xl") Panel de Notificaciones
+        .flex.flex-row.items-center.justify-end
             div(class="w-2/3 flex flex-row items-center gap-4 justify-end")
                 .relative
                     Input(class="pl-8 w-72" placeholder="Buscar notificación" v-model="search")
@@ -176,31 +185,8 @@ Card
                             )
                                 span {{ estado.nombre }}
     CardContent
-        ScrollArea(class="border rounded-xl mb-2")
-            Table
-                TableHeader(class="bg-sky/15 text-muted-foreground")
-                    TableRow
-                        TableHead
-                            Checkbox(:model-value="areAllSelected" @update:model-value="toggleAllNotifications")
-                        TableHead(v-for="header in headers") {{ header.title }}
-                TableBody(v-auto-animate)
-                    TableRow(v-if="notificaciones?.length !== 0" v-for="notificacion, i in notificaciones", :key="notificacion.id" :class="`${i % 2 == 0 ? 'bg-white' : 'bg-muted'}`")
-                        TableCell
-                            Checkbox(:model-value="selectedNotifications.has(notificacion.id)" @update:model-value="(state) => toggleNotification(state, notificacion.id)")
-                        TableCell.flex.flex-row.items-center.gap-2
-                            Avatar(class="h-7 w-7 bg-white border border-muted-foreground/40")
-                                AvatarImage(:src="notificacion.tipo.icono" class="scale-50 bg-white overflow-visible")
-                            span {{ notificacion.asunto }}
-                        TableCell
-                            p {{ notificacion.mensaje }}
-                        TableCell
-                            span {{ formatearFechaNotificacion(notificacion.createdAt.toString()) }}
-                        TableCell 
-                            div.flex.flex-row.items-center.justify-center.cursor-pointer(@click="marcarLeida(notificacion)")
-                                Icon(name="tabler:circle-check" size=26 v-if="!notificacion.isLeido" class="text-muted-foreground")
-                                Icon(name="tabler:circle-check-filled" size=26 v-else class="text-green")
-                    TableEmpty(v-else class="" :colspan="5")
-                        h3 No hay notificaciones
+        ScrollArea(class="border rounded-xl mb-2 h-[calc(100vh_-_300px)]")
+            NotificacionesPanelTable(:areAllSelected="areAllSelected" :notificaciones="notificaciones" :selectedNotifications="selectedNotifications" @marcar-leida="marcarLeida" @toggle-all-notifications="toggleAllNotifications" @toggle-notification="toggleNotification")
         .flex.justify-between.items-center
             .flex.flex-row.items-center.gap-2
                 Button(variant='outline' @click="marcarTodasLeidas")

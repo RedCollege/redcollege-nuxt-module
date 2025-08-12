@@ -25,15 +25,20 @@
 
     const marcarComoLeidoRedireccion = async () => {
         await marcarComoLeido()
-        window.open(`${props.notificacion.tipo.baseUrl}${props.notificacion.finalUrl}`, "_blank")
+        if(props.notificacion.plantilla.requiereEmisor)
+            useRouter().push(`${props.notificacion.tipo.baseUrl}?moveTo=${props.notificacion.finalUrl}`)
     }
 
 </script>
 
 <template lang="pug">
 .flex.flex-row.items-center.p-2.pr-4.gap-4(:class="`border-y border-y-muted-foreground/5 cursor-pointer hover:bg-primary/10 transition-colors duration-100 ease-in-out ${!props.notificacion.isLeido ? 'bg-white' : 'bg-transparent'}`" @click="marcarComoLeidoRedireccion")
-    Avatar(class="h-16 w-16 bg-white border border-muted-foreground/40")
-        AvatarImage(:src="notificacion.tipo.icono" class="scale-50 bg-white overflow-visible")
+    div(class="relative") 
+        Avatar(class="h-16 w-16 bg-muted border border-muted-foreground/40 shadow-lg")
+            AvatarImage(:src="notificacion.emisor.avatarUrl" v-if="notificacion.emisor.avatarUrl")
+            AvatarFallback(class="text-xl" v-else) {{ notificacion.emisor.iniciales }}
+        Avatar(class="absolute h-8 w-8 bottom-0 right-0 bg-white border border-muted-foreground/40")
+            AvatarImage(:src="notificacion.tipo.icono" class="scale-50 bg-white overflow-visible")
 
     div(class="flex-1 flex flex-col gap-0.5")
         div(class="truncate flex-1 max-w-[380px]").font-semibold 
@@ -42,7 +47,12 @@
         div.flex.flex-row.items-center.gap-2
             small(class="font-medium text-muted-foreground") {{ formatearFechaNotificacion(notificacion.createdAt.toString()) }}
             div(class="rounded-full w-3 h-3 bg-green" v-if="!notificacion.isLeido")
-    div(@click="(e) => { e.stopPropagation(); marcarComoLeido() }")
-        Icon(name="tabler:circle-check" size=26 v-if="!notificacion.isLeido" class="text-muted-foreground")
-        Icon(name="tabler:circle-check-filled" size=26 v-else class="text-green")
+    TooltipProvider
+        Tooltip
+            TooltipTrigger(as-child)
+                div(@click="(e) => { e.stopPropagation(); marcarComoLeido() }")
+                    Icon(name="tabler:circle-check" size=26 v-if="!notificacion.isLeido" class="text-muted-foreground")
+                    Icon(name="tabler:circle-check-filled" size=26 v-else class="text-green")
+            TooltipContent(v-if="!notificacion.isLeido")
+                p Marcar como leída
 </template>

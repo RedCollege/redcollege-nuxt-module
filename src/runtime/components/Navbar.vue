@@ -13,6 +13,7 @@ interface Props {
     hideCursos?: boolean;
     hidePeriodos?: boolean;
     hideEstablecimientos?: boolean;
+    hideNotificationsBell?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -21,6 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
     hideCursos: false,
     hidePeriodos: false,
     hideEstablecimientos: false,
+    hideNotificationsBell: false,
 });
 
 const { $apis } = useNuxtApp();
@@ -389,7 +391,7 @@ div
 
                             NavigationMenuItem
                                 Separator(orientation="vertical", class="h-10")
-                            NavigationMenuItem
+                            NavigationMenuItem(v-if="!hideNotificationsBell")
                                 NotificacionesBell
                             NavigationMenuItem
                                 DropdownMenu

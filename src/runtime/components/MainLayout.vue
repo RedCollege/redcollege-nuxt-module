@@ -10,7 +10,7 @@ import { useNuxtApp } from "#app";
 const sidebar = useSidebar()
 const navbarStore = useNavbar()
 const { isOpen } = storeToRefs(sidebar)
-const { hideCursos, hidePeriodos } = storeToRefs(navbarStore)
+const { hideCursos, hidePeriodos, hideEstablecimientos, hideNotificationsBell } = storeToRefs(navbarStore)
 const isCommandOpen = ref(false)
 const isModalStatusOpen = ref(false)
 const { isSuperAdmin, user } = storeToRefs(useAuthStore())
@@ -66,7 +66,7 @@ onMounted(() => {
 div
     Sidebar(class="print:hidden")
     main(class="min-h-[calc(100vh_-_0px)] print:m-0 print:p-0 bg-muted print:bg-white dark:bg-zinc-900 transition-[margin-left] ease-in-out duration-300", :class="[isOpen === false ? 'lg:ml-[70px]' : 'lg:ml-72']")
-        Navbar(class="print:hidden" :logoUrl="logoUrl", :titulo="titulo", :hideCursos="hideCursos", :hidePeriodos="hidePeriodos")
+        Navbar(class="print:hidden" :logoUrl="logoUrl", :titulo="titulo", :hideCursos="hideCursos", :hidePeriodos="hidePeriodos", :hideEstablecimientos="hideEstablecimientos", :hideNotificationsBell="hideNotificationsBell")
         div(class="container print:m-0 print:p-0 print:w-screen")
             slot
     template(v-if="isSuperAdmin")

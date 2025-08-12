@@ -23,7 +23,7 @@
     const { notificacion } = useNuxtApp().$apis.notificacion;
 
     const loading = ref<boolean>(true);
-    const activeTab = ref<string>("tab2");
+    const activeTab = ref<string>("leidas");
     const scrollarea = ref<InstanceType<typeof ScrollArea> | null>(null);
 
     // Variables para infinite scroll
@@ -38,7 +38,7 @@
     const allNotificaciones = ref<INotificacion[]>([]);
     const allNotificacionesNoLeidas = ref<INotificacion[]>([]);
 
-    // Arrays organizados por fecha (para probar)
+    // Arrays organizados por fecha
     const notificacionesPorFecha = ref<
         { fecha: string; notificaciones: INotificacion[] }[]
     >([]);
@@ -48,7 +48,6 @@
 
     // Variables para controlar el infinite scroll
     const isInfiniteScrollSetup = ref(false);
-    const infiniteScrollCleanup = ref<(() => void) | null>(null);
 
     const agruparNotificacionesPorFecha = (
         notificaciones: INotificacion[],
@@ -97,7 +96,6 @@
             hasMoreData.value = result.meta.currentPage < result.meta.lastPage;
             currentPage.value = result.meta.currentPage;
 
-            // Actualizar arrays organizados
             actualizarNotificacionesOrganizadas();
         } catch (e) {
             console.error("Error en cargarNotificaciones:", e);
@@ -125,7 +123,6 @@
                 result.meta.currentPage < result.meta.lastPage;
             currentPageNoLeidas.value = result.meta.currentPage;
 
-            // Actualizar arrays organizados
             actualizarNotificacionesOrganizadas();
         } catch (e) {
             console.error("Error en cargarNotificacionesNoLeidas:", e);
@@ -135,10 +132,6 @@
     };
 
     const cleanupInfiniteScroll = () => {
-        if (infiniteScrollCleanup.value) {
-            infiniteScrollCleanup.value();
-            infiniteScrollCleanup.value = null;
-        }
         isInfiniteScrollSetup.value = false;
     };
 
@@ -149,16 +142,30 @@
 
         await nextTick();
 
+        await new Promise((resolve) => setTimeout(resolve, 50));
+
         let viewport = scrollarea.value?.$el?.querySelector(
             "[data-reka-scroll-area-viewport]",
         );
+
+        if (!viewport) {
+            await nextTick();
+            viewport = scrollarea.value?.$el?.querySelector(
+                "[data-reka-scroll-area-viewport]",
+            );
+        }
+
+        if (!viewport) {
+            console.warn("No se pudo encontrar el viewport del scroll area");
+            return;
+        }
 
         useInfiniteScroll(
             viewport,
             async () => {
                 if (!props.isOpen) return;
 
-                if (activeTab.value === "tab1") {
+                if (activeTab.value === "no-leidas") {
                     if (!hasMoreDataNoLeidas.value || isLoadingMoreNoLeidas.value) {
                         return;
                     }
@@ -176,7 +183,7 @@
                     } finally {
                         isLoadingMoreNoLeidas.value = false;
                     }
-                } else if (activeTab.value === "tab2") {
+                } else if (activeTab.value === "leidas") {
                     if (!hasMoreData.value || isLoadingMore.value) {
                         return;
                     }
@@ -197,7 +204,7 @@
                 distance: 100,
                 canLoadMore: () => {
                     if (!props.isOpen) return false;
-                    if (activeTab.value === "tab1") {
+                    if (activeTab.value === "no-leidas") {
                         const canLoad =
                             hasMoreDataNoLeidas.value &&
                             !isLoadingMoreNoLeidas.value;
@@ -215,8 +222,9 @@
 
     watch(
         () => activeTab.value,
-        async (newTab) => {
-            if (!isInfiniteScrollSetup.value && props.isOpen) {
+        async () => {
+            if (props.isOpen) {
+                await nextTick();
                 await setupInfiniteScroll();
             }
         },
@@ -233,6 +241,24 @@
             }
         },
     );
+
+    watch(
+        () => scrollarea.value,
+        async (newScrollArea) => {
+            if (newScrollArea && props.isOpen && !isInfiniteScrollSetup.value) {
+                await nextTick();
+                await setupInfiniteScroll();
+            }
+        },
+        { immediate: true },
+    );
+
+    watch(
+        activeTab,
+        () => {
+            (scrollarea.value?.$el as HTMLDivElement).firstElementChild?.scrollTo({ top: 0 })
+        }
+    )
 
     await cargarNotificaciones();
     await cargarNotificacionesNoLeidas();
@@ -262,20 +288,21 @@
 </script>
 
 <template lang="pug">
-    Sheet(:open="isOpen" @update:open="(value) => emit('update:is-open', value)" class="bg-gray-100")
-        SheetContent(class="sm:max-w-[525px] flex flex-col h-full p-0 gap-0 bg-gray-100" :showClose="false")
-                h1.text-lg.bg-white.p-2.px-3.font-semibold.text-primary Notificaciones
-                ScrollArea(ref="scrollarea" class="flex-1")
-                    Tabs(v-model="activeTab" class="h-full")
-                        TabsList(variant="underlined" class="bg-white") 
-                            TabsTrigger(value="tab1", variant="underlined" class="w-fit")
-                                span No Leídas 
-                                Badge(v-if="contador?.noLeidas !== 0")
-                                    span(v-if="contador && contador?.noLeidas < 10") 0
-                                    span {{ contador?.noLeidas }}
-                            TabsTrigger(value="tab2", variant="underlined" class="w-fit")
-                                span Todas
-                        TabsContent(value="tab1" class="h-full")
+    Sheet(:open="isOpen" @update:open="(value) => emit('update:is-open', value)")
+        SheetContent(class="sm:max-w-[525px] flex flex-col h-full p-0 gap-0" :showClose="false")
+                h1.text-lg.p-2.px-3.font-semibold.text-primary Notificaciones
+                Tabs(v-model="activeTab" class="h-full")
+                    TabsList(class="w-full bg-transparent")
+                        TabsTrigger(value="no-leidas")
+                            span Notificaciones no Leídas 
+                            Badge(v-if="contador?.noLeidas !== 0" :class="`ml-2 ${activeTab === 'no-leidas' ? 'bg-muted text-primary' : 'bg-primary'}`")
+                                span(v-if="contador && contador?.noLeidas < 10") 0
+                                span {{ contador?.noLeidas }}
+                        TabsTrigger(value="leidas")
+                            span Todas las notificaciones
+                    Separator
+                    ScrollArea(ref="scrollarea" class="h-[calc(100vh_-_120px)]")
+                        TabsContent(value="no-leidas" class="h-full")
                             template(v-if="loading")
                                 div.flex.items-center.justify-center.p-4
                                     span.text-muted-foreground Cargando notificaciones...
@@ -292,7 +319,7 @@
                                         template(v-if="isLoadingMore")
                                             span.text-sm.text-muted-foreground Cargando más notificaciones...
                                             Loader.animate-spin
-                        TabsContent(value="tab2" class="h-full")
+                        TabsContent(value="leidas" class="h-full")
                             template(v-if="loading")
                                 div.flex.items-center.justify-center.p-4
                                     span.text-muted-foreground Cargando notificaciones...
