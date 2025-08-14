@@ -294,12 +294,12 @@
                 Tabs(v-model="activeTab" class="h-full")
                     TabsList(class="w-full bg-transparent")
                         TabsTrigger(value="no-leidas")
-                            span Notificaciones no Leídas 
+                            span No leídas
                             Badge(v-if="contador?.noLeidas !== 0" :class="`ml-2 ${activeTab === 'no-leidas' ? 'bg-muted text-primary' : 'bg-primary'}`")
                                 span(v-if="contador && contador?.noLeidas < 10") 0
                                 span {{ contador?.noLeidas }}
                         TabsTrigger(value="leidas")
-                            span Todas las notificaciones
+                            span Todas
                     Separator
                     ScrollArea(ref="scrollarea" class="h-[calc(100vh_-_135px)]")
                         TabsContent(value="no-leidas" class="h-full")

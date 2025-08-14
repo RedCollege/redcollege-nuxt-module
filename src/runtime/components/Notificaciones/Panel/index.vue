@@ -189,7 +189,7 @@ Card
             NotificacionesPanelTable(:areAllSelected="areAllSelected" :notificaciones="notificaciones" :selectedNotifications="selectedNotifications" @marcar-leida="marcarLeida" @toggle-all-notifications="toggleAllNotifications" @toggle-notification="toggleNotification")
         .flex.justify-between.items-center
             .flex.flex-row.items-center.gap-2
-                Button(variant='outline' @click="marcarTodasLeidas")
+                Button(variant='outline' @click="marcarTodasLeidas" :disabled="total === 0")
                     Icon(name="tabler:copy-check")
                     span Marcar todas como leídas
                 Button(variant='outline' :disabled="!selectedNotifications.size" @click="() => isDialogOpen = true")
