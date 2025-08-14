@@ -9,7 +9,7 @@ export const formatearFecha = (fecha: string): string => {
     } else if (fechaObj.hasSame(ayer, "day")) {
         return "Ayer";
     } else {
-        const fechaFormateada = fechaObj.toFormat("dd MM yyyy");
+        const fechaFormateada = fechaObj.toFormat("dd MMM yyyy");
         return (
             fechaFormateada.charAt(0).toUpperCase() + fechaFormateada.slice(1)
         );
