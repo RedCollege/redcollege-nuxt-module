@@ -27,21 +27,21 @@ export default class NotificacionModule {
     }
 
     async marcarLeida(id: number): Promise<INotificacion> {
-        return this.fetcher(`/notificaciones/${id}/marcar-leida`, {
-            method: "PUT",
+        return this.fetcher(`/notificaciones/${id}/marcar_leida`, {
+            method: "PATCH",
         });
     }
 
     async marcarTodasLeidas() {
-        return this.fetcher(`/notificaciones/marcar-todas-leidas`, {
-            method: "PUT",
+        return this.fetcher(`/notificaciones/marcar_todas_leidas`, {
+            method: "PATCH",
         });
     }
 
     async marcarMultiplesBorradas(
         notificacionIds: number[],
     ): Promise<{ cantidad: number }> {
-        return this.fetcher(`/notificaciones/marcar-multiples-borradas`, {
+        return this.fetcher(`/notificaciones/marcar_multiples_borradas`, {
             method: "PUT",
             body: {
                 notificacionIds,

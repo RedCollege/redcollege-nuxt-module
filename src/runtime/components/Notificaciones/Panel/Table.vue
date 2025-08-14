@@ -58,5 +58,7 @@ Table
                         TooltipContent(v-if="!notificacion.isLeido")
                             p Marcar como leída
         TableEmpty(v-else class="" :colspan="5")
-            h3 No hay notificaciones
+            .flex.flex-col.items-center.justify-center.gap-2
+                img(src="../../../assets/images/emptyNotificaciones.svg")
+                h3.text-lg.text-muted-foreground No hay notificaciones
 </template>
