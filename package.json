@@ -40,6 +40,7 @@
         "@nuxtjs/tailwindcss": "6.13.2",
         "@pinia/nuxt": "^0.5.3",
         "@radix-icons/vue": "^1.0.0",
+        "@tailwindcss/vite": "^4.1.12",
         "@tanstack/vue-table": "^8.20.4",
         "@types/node": "^20.14.11",
         "@types/quill": "^2.0.14",
