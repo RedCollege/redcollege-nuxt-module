@@ -1,6 +1,7 @@
 <script setup lang="ts">
-    import { onMounted, onUnmounted, ref, useNavbar } from '#imports';
-    const navbar = useNavbar()
+    import { onMounted, onUnmounted, ref } from '#imports';
+    import { useNavbarStore } from '../stores/navbarStore';
+    const navbar = useNavbarStore()
 
     const hideCursos = ref<boolean>(navbar.hideCursos)
     const hidePeriodos = ref<boolean>(navbar.hidePeriodos)
