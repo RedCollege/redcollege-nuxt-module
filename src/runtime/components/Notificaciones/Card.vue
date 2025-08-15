@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useNuxtApp, useRouter } from "#imports";
+import { useNuxtApp, navigateTo } from "#imports";
 import type { INotificacion } from "@/src/runtime/models/Notificacion/notificacion";
 import { formatearFechaNotificacion } from "../../utils/notificaciones";
 
