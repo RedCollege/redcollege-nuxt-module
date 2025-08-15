@@ -53,6 +53,7 @@ const isPopoverOpen = ref(false);
 const isAnimating = ref(false);
 const { establecimiento } = useNuxtApp().$apis;
 const searchEstudiante = ref<string>("");
+const searchCursoEstudiante = ref<number>("");
 const searchApoderado = ref<string>("");
 
 // Async data para cargar información
@@ -80,10 +81,11 @@ const { data: estudiantes, status: estudiantesStatus } = await useAsyncData(
                 search: searchEstudiante.value,
                 page: 1,
                 periodo: props.periodo,
+                ...(Number(searchCursoEstudiante.value) > 0 && { cursoId: Number(searchCursoEstudiante.value) })
             },
         );
     },
-    { watch: [searchEstudiante] },
+    { watch: [searchEstudiante, searchCursoEstudiante] },
 );
 
 const { data: apoderados, status: apoderadosStatus } = await useAsyncData(
@@ -292,6 +294,10 @@ const filterEstudiante = (search: string): void => {
     searchEstudiante.value = search;
 };
 
+const filterEstudianteCurso = (cursoId: number) : void => {
+    searchCursoEstudiante.value = cursoId;
+}
+
 const filterApoderado = (search: string): void => {
     searchApoderado.value = search;
 };
@@ -351,6 +357,7 @@ div(v-if="!isLoading")
                             :establecimiento-id="establecimientoId"
                             :selected-users="selectedValues"
                             @search="filterEstudiante"
+                            @search-curso="filterEstudianteCurso"
                             :all-cursos="data?.cursos || []"
                         )
                     TabsContent(value="apoderados")

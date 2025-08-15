@@ -22,6 +22,13 @@ export interface IActividad {
     participantes: IUsuario[];
 }
 
+
+
+export interface IActividadConGruposParticipantes extends IActividad {
+    grupos: string[]
+}
+
+
 export interface IActividadForm {
     nombre: string;
     fechaActividad: DateTime;
@@ -58,5 +65,5 @@ export interface IActividadResponse {
         next_page_url: string | null;
         previous_page_url: string | null;
     };
-    data: IActividad[];
+    data: IActividadConGruposParticipantes[];
 }

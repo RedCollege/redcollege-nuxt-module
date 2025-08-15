@@ -151,7 +151,7 @@ defineExpose({
                 </div>
             </Button>
         </PopoverTrigger>
-        <PopoverContent class="w-auto p-0" :align="'start'" @escape-key-down="setIsPopoverOpen(false)">
+        <PopoverContent class="w-[--reka-popover-trigger-width] p-0" :align="'start'" @escape-key-down="setIsPopoverOpen(false)">
             <Command>
                 <CommandInput placeholder="Buscar..." @keydown="handleInputKeyDown" />
                 <CommandList>

@@ -31,6 +31,8 @@ export interface IRegistroAccidente {
     circunstancias: string
     haveTestigos: boolean
     periodo: number | string
+    viaTelefonicaCount: number
+    mensajesCount: number
     deletedBy: number | null
     createdAt: string
     updatedAt: string
@@ -74,6 +76,7 @@ export interface IRegistroAccidenteForm {
     fechaAccidente: DateTime | string | Date
     lugarAccidenteId: number | string
     gravedadAccidenteId: number | string
+    tipoAccidenteId: number | string
     circunstancias: string
     haveTestigos: boolean
     testigos: ITestigoForm[]

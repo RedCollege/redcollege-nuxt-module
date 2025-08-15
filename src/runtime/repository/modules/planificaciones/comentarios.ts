@@ -1,10 +1,13 @@
 import type { $Fetch } from "ofetch";
-import type { IComentario } from "../../../models/Planificacion/comentarios";
+import type {
+    IComentariosResponse,
+    IComentario,
+} from "../../../models/Planificacion/comentarios";
 
 export default class ComentarioModule {
     constructor(private fetcher: $Fetch) {}
 
-    async getByPlanificacion(id: number): Promise<IComentario[]> {
+    async getByPlanificacion(id: number): Promise<IComentariosResponse[]> {
         return this.fetcher(`/comentarios/planificacion/${id}`, {
             method: "GET",
         });

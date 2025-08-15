@@ -15,6 +15,8 @@ export interface IAdministracionMedicamento {
     frecuencia: FrecuenciaTipo;
     fechaInicio: string | Date;
     fechaFin: string | Date;
+    viaTelefonicaCount: number;
+    mensajesCount: number;
     horaFrecuencia: string | Date | null;
 }
 
@@ -36,7 +38,7 @@ export interface IAdministracionMedicamentoForm {
 
 export interface IRecordatorio {
     id?: number;
-    fechaHora: string | Date;
+    fecha: string | Date;
     administracionMedicamentoId?: number;
 }
 
