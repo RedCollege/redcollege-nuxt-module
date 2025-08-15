@@ -26,6 +26,6 @@
 <template lang="pug">
     BadgeCounter(:total="contador?.noLeidas")
         Button(variant="ghost" size="icon" @click="abrirNotificaciones")
-            Icon.text-primary(name="tabler:bell")
+            Icon.text-primary(name="tabler:bell" class="scale-125")
     NotificacionesContainer(v-model:is-open="isOpen" :contador="contador" @decrementar-contador-no-leidas="decrementarContadorNoLeidas")
 </template>
