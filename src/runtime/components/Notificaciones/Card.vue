@@ -1,36 +1,36 @@
 <script lang="ts" setup>
-    import { useNuxtApp, useRouter } from "#imports";
-    import type { INotificacion } from "@/src/runtime/models/Notificacion/notificacion";
-    import { formatearFechaNotificacion } from "../../utils/notificaciones";
+import { useNuxtApp, useRouter } from "#imports";
+import type { INotificacion } from "@/src/runtime/models/Notificacion/notificacion";
+import { formatearFechaNotificacion } from "../../utils/notificaciones";
 
-    const { notificacion: notificacionModule } = useNuxtApp().$apis.notificacion;
+const { notificacion: notificacionModule } = useNuxtApp().$apis.notificacion;
 
-    const props = defineProps<{
-        notificacion: INotificacion;
-    }>();
+const props = defineProps<{
+    notificacion: INotificacion;
+}>();
 
-    const emit = defineEmits<{
-        "notificacion-leida": [notificacionId: number];
-        "update:is-open": [value: boolean];
-    }>();
+const emit = defineEmits<{
+    "notificacion-leida": [notificacionId: number];
+    "update:is-open": [value: boolean];
+}>();
 
-    const marcarComoLeido = async () => {
-        if (props.notificacion.isLeido) return;
-        try {
-            await notificacionModule.marcarLeida(props.notificacion.id);
-            emit("notificacion-leida", props.notificacion.id);
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    const marcarComoLeidoRedireccion = async () => {
-        await marcarComoLeido()
-        if (props.notificacion.plantilla.requiereEmisor) {
-            emit("update:is-open", false)
-            useRouter().push(`${props.notificacion.tipo.baseUrl}?moveTo=${props.notificacion.finalUrl}`)
-        }
+const marcarComoLeido = async () => {
+    if (props.notificacion.isLeido) return;
+    try {
+        await notificacionModule.marcarLeida(props.notificacion.id);
+        emit("notificacion-leida", props.notificacion.id);
+    } catch (e) {
+        console.log(e);
     }
+};
+
+const marcarComoLeidoRedireccion = async () => {
+    await marcarComoLeido()
+    if (props.notificacion.plantilla.requiereEmisor) {
+        emit("update:is-open", false)
+        await navigateTo(`${props.notificacion.tipo.baseUrl}?moveTo=${props.notificacion.finalUrl}`, { external: true })
+    }
+}
 
 </script>
 
