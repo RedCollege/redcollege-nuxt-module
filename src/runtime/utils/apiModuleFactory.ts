@@ -19,6 +19,7 @@ import {
     AntecedenteSaludModule,
     SimceEstablecimientoModule,
     ComentarioModule,
+    NotificacionModule,
 } from "../repository/modules";
 import AuxiliarModule from "../repository/modules/general/auxiliar";
 import ContenidoModule from "../repository/modules/planificaciones/contenido";
@@ -121,6 +122,10 @@ export type EvaluacionesModules = {
     simceEstablecimiento: SimceEstablecimientoModule;
 };
 
+export type NotificacionesModules = {
+    notificacion: NotificacionModule;
+};
+
 // agrupación de modulos
 export type ApiModules = {
     auth: AuthModules;
@@ -135,6 +140,7 @@ export type ApiModules = {
     comunicaciones: ComunicacionesModules;
     evaluaciones: EvaluacionesModules;
     horario: HorarioModules;
+    notificacion: NotificacionesModules;
 };
 
 export function createApiModules(
@@ -150,8 +156,9 @@ export function createApiModules(
         | "comunicaciones"
         | "enfermeria"
         | "evaluaciones"
-        | "horario",
-    apiFetcher: $Fetch
+        | "horario"
+        | "notificacion",
+    apiFetcher: $Fetch,
 ):
     | AuthModules
     | PlanificacionesModules
@@ -164,7 +171,8 @@ export function createApiModules(
     | ComunicacionesModules
     | EnfermeriaModules
     | EvaluacionesModules
-    | HorarioModules {
+    | HorarioModules
+    | NotificacionesModules {
     switch (apiType) {
         case "auth":
             return {
@@ -180,7 +188,7 @@ export function createApiModules(
                 registroDua: new RegistroDuaModule(apiFetcher),
                 marcadores: new MarcadorModule(apiFetcher),
                 adecuacionCurricular: new AdecuacionCurricularModule(
-                    apiFetcher
+                    apiFetcher,
                 ),
                 comentarios: new ComentarioModule(apiFetcher),
             };
@@ -192,7 +200,7 @@ export function createApiModules(
         case "curriculum":
             return {
                 itemEntradaCurricular: new ItemEntradaCurricularModule(
-                    apiFetcher
+                    apiFetcher,
                 ),
             };
         case "informes":
@@ -207,7 +215,7 @@ export function createApiModules(
                 cursoAsignatura: new CursoAsignaturaModule(apiFetcher),
                 curso: new CursoModule(apiFetcher),
                 asignaturaCurricular: new AsignaturaCurricularModule(
-                    apiFetcher
+                    apiFetcher,
                 ),
                 especialidad: new EspecialidadModule(apiFetcher),
                 // ... inicializar otros submódulos de establecimiento
@@ -236,7 +244,7 @@ export function createApiModules(
                 registroAtencion: new RegistroAtencionModule(apiFetcher),
                 antecedenteSalud: new AntecedenteSaludModule(apiFetcher),
                 enfermedadDiscapacidad: new EnfermedadDiscapacidadModule(
-                    apiFetcher
+                    apiFetcher,
                 ),
                 configuracionItem: new ConfiguracionItemModule(apiFetcher),
                 registroAccidente: new RegistroAccidenteModule(apiFetcher),
@@ -249,15 +257,19 @@ export function createApiModules(
             return {
                 evaluacionCurso: new EvaluacionCursoModule(apiFetcher),
                 simceEstablecimiento: new SimceEstablecimientoModule(
-                    apiFetcher
+                    apiFetcher,
                 ),
             };
         case "horario":
             return {
                 horario: new HorarioModule(apiFetcher),
                 horarioDiaAsignatura: new HorarioDiaAsignaturaModule(
-                    apiFetcher
+                    apiFetcher,
                 ),
+            };
+        case "notificacion":
+            return {
+                notificacion: new NotificacionModule(apiFetcher),
             };
     }
 }
