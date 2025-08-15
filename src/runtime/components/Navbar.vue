@@ -184,7 +184,9 @@ const buscarEstablecimiento = async (event: KeyboardEvent) => {
             );
         establecimientosResultados.value = data.data;
         isSearching.value = false;
-    } catch (error) {}
+    } catch (error) {
+        console.log(error)
+    }
 };
 
 // Inicialización desde los parámetros de la ruta

@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 
 export const formatearFecha = (fecha: string): string => {
-    let fechaObj = DateTime.fromISO(fecha, { zone: "UTC" }).setLocale("es");
+    const fechaObj = DateTime.fromISO(fecha, { zone: "UTC" }).setLocale("es");
     const hoy = DateTime.now().setLocale("es");
     const ayer = hoy.minus({ days: 1 });
     if (fechaObj.hasSame(hoy, "day")) {
