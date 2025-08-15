@@ -132,17 +132,15 @@ export default defineNuxtModule<ModuleOptions>({
             host: options.postHogApiHost
         })
 
-        await installModule('@nuxtjs/tailwindcss', {
-            cssPath: resolver.resolve('./runtime/assets/tailwind.css'),
-            configPath: resolver.resolve('./runtime/tailwind.config.js'),
-            exposeConfig: true,
-            config: {
-                content: [
-                    resolver.resolve('runtime/components/**/*.{vue,js,ts}'),
-                    resolver.resolve('runtime/**/*.{vue,js,ts}')
-                ]
-            }
+        // Configuración de Tailwind v4 con Vite plugin
+        nuxt.hook('vite:extend', async ({ config }) => {
+            config.plugins = config.plugins || []
+            const tailwindcss = await import('@tailwindcss/vite').then(m => m.default || m)
+            config.plugins.push(tailwindcss())
         })
+
+        // Agregar el CSS de Tailwind
+        nuxt.options.css.push(resolver.resolve('./runtime/assets/tailwind.css'))
 
         await installModule('motion-v/nuxt')
 
@@ -156,8 +154,6 @@ export default defineNuxtModule<ModuleOptions>({
         })
 
         await installModule('@formkit/auto-animate/nuxt')
-
-
 
         await installModule('nuxt-icon-tw')
         await installModule('@nuxt/icon', {

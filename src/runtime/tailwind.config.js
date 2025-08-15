@@ -11,11 +11,6 @@ module.exports = {
         './app/**/*.{ts,tsx,vue}',
         './src/**/*.{ts,tsx,vue}',
     ],
-    configViewer: {
-        themeReplacements: {
-            'hsl(var(--sky))': '#22A3E6'
-        }
-    },
     theme: {
         container: {
             center: true,
@@ -32,47 +27,7 @@ module.exports = {
                 'span-15': 'span 15 / span 15',
                 'span-16': 'span 16 / span 16'
             },
-            colors: {
-                border: "hsl(var(--border))",
-                input: "hsl(var(--input))",
-                ring: "hsl(var(--ring))",
-                sky: "hsl(var(--sky))",
-                purple: "hsl(var(--purple))",
-                green: "hsl(var(--green))",
-                yellow: "hsl(var(--yellow))",
-                orange: "hsl(var(--orange))",
-                gold: "hsl(var(--gold))",
-                background: "hsl(var(--background))",
-                foreground: "hsl(var(--foreground))",
-                primary: {
-                    DEFAULT: "hsl(var(--primary))",
-                    foreground: "hsl(var(--primary-foreground))",
-                },
-                secondary: {
-                    DEFAULT: "hsl(var(--secondary))",
-                    foreground: "hsl(var(--secondary-foreground))",
-                },
-                destructive: {
-                    DEFAULT: "hsl(var(--destructive))",
-                    foreground: "hsl(var(--destructive-foreground))",
-                },
-                muted: {
-                    DEFAULT: "hsl(var(--muted))",
-                    foreground: "hsl(var(--muted-foreground))",
-                },
-                accent: {
-                    DEFAULT: "hsl(var(--accent))",
-                    foreground: "hsl(var(--accent-foreground))",
-                },
-                popover: {
-                    DEFAULT: "hsl(var(--popover))",
-                    foreground: "hsl(var(--popover-foreground))",
-                },
-                card: {
-                    DEFAULT: "hsl(var(--card))",
-                    foreground: "hsl(var(--card-foreground))",
-                },
-            },
+            // Los colores ahora se manejan desde @theme inline en el CSS
             borderRadius: {
                 xl: "calc(var(--radius) + 4px)",
                 lg: "var(--radius)",
@@ -81,20 +36,20 @@ module.exports = {
             },
             keyframes: {
                 "accordion-down": {
-                    from: { height: 0 },
+                    from: { height: "0" },
                     to: { height: "var(--reka-accordion-content-height)" },
                 },
                 "accordion-up": {
                     from: { height: "var(--reka-accordion-content-height)" },
-                    to: { height: 0 },
+                    to: { height: "0" },
                 },
                 "collapsible-down": {
-                    from: { height: 0 },
+                    from: { height: "0" },
                     to: { height: 'var(--reka-collapsible-content-height)' },
                 },
                 "collapsible-up": {
                     from: { height: 'var(--reka-collapsible-content-height)' },
-                    to: { height: 0 },
+                    to: { height: "0" },
                 },
                 "fade-left": {
                     "0%": {
@@ -105,7 +60,7 @@ module.exports = {
                         opacity: "1",
                         transform: "translateX(0)"
                     }
-            }
+                }
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
