@@ -1,26 +1,28 @@
 <script setup lang="ts">
-    import { useNuxtApp, useRouter } from "#app";
+    import { navigateTo, useNuxtApp } from "#app";
     import type {
-        INotificacionContadores,
         INotificacion,
     } from "@/src/runtime/models/Notificacion/notificacion";
-    import { ref, nextTick, watch, onUnmounted } from "vue";
+    import { ref, nextTick, watch, onUnmounted, onBeforeMount } from "vue";
     import { useInfiniteScroll } from "@vueuse/core";
     import type { ScrollArea } from "#components";
     import { Loader } from "lucide-vue-next";
     import { formatearFecha } from "../../utils/notificaciones";
+    import { useNotificacionStore } from "../../stores/notificacacionStore";
+    import { storeToRefs } from "pinia";
 
     const props = defineProps<{
         isOpen: boolean;
-        contador: INotificacionContadores | null;
     }>();
 
     const emit = defineEmits<{
         "update:is-open": [value: boolean];
-        "decrementar-contador-no-leidas": [];
     }>();
 
     const { notificacion } = useNuxtApp().$apis.notificacion;
+    const notificacionStore = useNotificacionStore()
+    const { notificacion: notificacionReciente, contadorNotificaciones } = storeToRefs(notificacionStore)
+    const { setContadores } = notificacionStore
 
     const loading = ref<boolean>(true);
     const activeTab = ref<string>("leidas");
@@ -220,6 +222,28 @@
         isInfiniteScrollSetup.value = true;
     };
 
+    const handleNotificacionLeida = async (notificacionId: number) => {
+        const notif = allNotificaciones.value.find((n) => n.id === notificacionId);
+        if (notif && !notif.isLeido) {
+            notif.isLeido = true;
+        }
+
+        allNotificacionesNoLeidas.value = allNotificacionesNoLeidas.value.filter(
+            (n) => n.id !== notificacionId,
+        );
+
+        actualizarNotificacionesOrganizadas();
+
+        setContadores({
+            noLeidas: contadorNotificaciones.value.noLeidas - 1,
+            total: contadorNotificaciones.value.total - 1
+        });
+    };
+
+    const abrirPanel = () => {
+        navigateTo({name: "panel-notificaciones"})
+    };
+
     watch(
         () => activeTab.value,
         async () => {
@@ -253,38 +277,43 @@
         { immediate: true },
     );
 
+    watch(activeTab, () => {
+        (scrollarea.value?.$el as HTMLDivElement).firstElementChild?.scrollTo({
+            top: 0,
+        });
+    });
+
     watch(
-        activeTab,
-        () => {
-            (scrollarea.value?.$el as HTMLDivElement).firstElementChild?.scrollTo({ top: 0 })
+        () => notificacionReciente.value,
+        async (nuevaNotificacion) => {
+            if (nuevaNotificacion) {
+                allNotificaciones.value.unshift(nuevaNotificacion)
+                allNotificacionesNoLeidas.value.unshift(nuevaNotificacion)
+                actualizarNotificacionesOrganizadas()
+                await nextTick()
+            }
+        },
+        { immediate: false },
+    );
+
+    watch(
+        ()=> allNotificacionesNoLeidas.value,
+        async ()=>{
+            if(allNotificacionesNoLeidas.value.length < 15 && hasMoreDataNoLeidas.value){
+                console.log("diablo")
+                await cargarNotificacionesNoLeidas(undefined, true)
+            }
         }
     )
-
-    await cargarNotificaciones();
-    await cargarNotificacionesNoLeidas();
 
     onUnmounted(() => {
         cleanupInfiniteScroll();
     });
 
-    const handleNotificacionLeida = async (notificacionId: number) => {
-        const notif = allNotificaciones.value.find((n) => n.id === notificacionId);
-        if (notif && !notif.isLeido) {
-            notif.isLeido = true;
-        }
-
-        allNotificacionesNoLeidas.value = allNotificacionesNoLeidas.value.filter(
-            (n) => n.id !== notificacionId,
-        );
-
-        actualizarNotificacionesOrganizadas();
-
-        emit("decrementar-contador-no-leidas");
-    };
-
-    const abrirPanel = () => {
-        useRouter().push({ name: "panel-notificaciones" });
-    };
+    onBeforeMount(async ()=>{
+        await cargarNotificaciones();
+        await cargarNotificacionesNoLeidas();
+    })
 </script>
 
 <template lang="pug">
@@ -295,9 +324,9 @@
                     TabsList(class="w-full bg-transparent")
                         TabsTrigger(value="no-leidas")
                             span No leídas
-                            Badge(v-if="contador?.noLeidas !== 0" :class="`ml-2 ${activeTab === 'no-leidas' ? 'bg-muted text-primary' : 'bg-primary'}`")
-                                span(v-if="contador && contador?.noLeidas < 10") 0
-                                span {{ contador?.noLeidas }}
+                            Badge(v-if="contadorNotificaciones.noLeidas !== 0" :class="`ml-2 ${activeTab === 'no-leidas' ? 'bg-muted text-primary' : 'bg-primary'}`")
+                                span(v-if="contadorNotificaciones.noLeidas < 10") 0
+                                span {{ contadorNotificaciones.noLeidas }}
                         TabsTrigger(value="leidas")
                             span Todas
                     Separator

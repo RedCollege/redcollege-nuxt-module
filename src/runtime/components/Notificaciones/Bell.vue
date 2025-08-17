@@ -1,31 +1,33 @@
 <script setup lang="ts">
-    import { useAsyncData, useNuxtApp } from '#app';
-    import { ref } from 'vue';
-    import type { INotificacionContadores } from '../../models/Notificacion/notificacion';
+import { useNuxtApp } from "#app";
+import { onMounted, ref } from "vue";
+import { useNotificacion } from "../../composables/useNotificacion";
+import { useNotificacionStore } from "../../stores/notificacacionStore";
+import { storeToRefs } from "pinia";
 
-    const isOpen = ref<boolean>(false);
+const isOpen = ref<boolean>(false);
 
-    const { notificacion } = useNuxtApp().$apis.notificacion;
+const { notificacion } = useNuxtApp().$apis.notificacion;
 
-    const { data: contador } = await useAsyncData<INotificacionContadores>(async () => {
-        const result = await notificacion.obtenerContadores();
-        return result;
-    });
+const { subscribe } = useNotificacion()
 
-    const abrirNotificaciones = () => (isOpen.value = true);
+const notificacionStore = useNotificacionStore()
+const {contadorNotificaciones } = storeToRefs(notificacionStore)
+const {setContadores} = notificacionStore
 
-    const decrementarContadorNoLeidas = () => {
-        if (contador.value)
-            contador.value = {
-                noLeidas: contador.value?.noLeidas - 1,
-                total: contador.value?.total
-            }
-    }
+const abrirNotificaciones = () => (isOpen.value = true);
+
+onMounted(async () => {
+    await notificacion.obtenerContadores().then((contadores)=>{
+        setContadores(contadores)
+    })
+    await subscribe()
+});
 </script>
 
 <template lang="pug">
-    BadgeCounter(:total="contador?.noLeidas")
+    BadgeCounter(:total="contadorNotificaciones.noLeidas")
         Button(variant="ghost" size="icon" @click="abrirNotificaciones")
             Icon.text-primary(name="tabler:bell" class="scale-125")
-    NotificacionesContainer(v-model:is-open="isOpen" :contador="contador" @decrementar-contador-no-leidas="decrementarContadorNoLeidas")
+    NotificacionesContainer(v-model:is-open="isOpen" :contador="contadorNotificaciones")
 </template>

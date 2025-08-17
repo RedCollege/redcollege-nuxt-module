@@ -4,8 +4,11 @@
     import type { INotificacion } from "~/src/runtime/models/Notificacion/notificacion";
     import { useToast } from "../../ui/toast";
     import { refDebounced } from "@vueuse/core";
+    import { useNotificacionStore } from "../../../stores/notificacacionStore";
+    import { storeToRefs } from "pinia";
 
     const { notificacion } = useNuxtApp().$apis.notificacion;
+    const { notificacion: notificacionReciente } = storeToRefs(useNotificacionStore())
 
     const modulos: { id: number; nombre: string }[] = [
         { id: 0, nombre: "Todos los módulos" },
@@ -26,13 +29,6 @@
             { id: 2, nombre: "No Leídas", status: false },
         ];
 
-    const headers: { title: string }[] = [
-        { title: "Asunto de la notificación" },
-        { title: "Descripción" },
-        { title: "Fecha" },
-        { title: "Estado" },
-    ];
-
     const currentPage = ref<number>(1);
     const total = ref<number>(0);
     const perPage = ref<number>(10);
@@ -47,7 +43,6 @@
 
     const { data: notificaciones, execute: refreshDataTable } = await useAsyncData(
         async () => {
-            console.log('a')
             try {
                 const result = await notificacion.obtenerNotificaciones({
                     page: currentPage.value,
@@ -148,6 +143,10 @@
     }
 
     watch(selectedModule, () => (currentPage.value = 1));
+
+    watch(()=> notificacionReciente.value, ()=>{
+        refreshDataTable()
+    })
 </script>
 
 <template lang="pug">

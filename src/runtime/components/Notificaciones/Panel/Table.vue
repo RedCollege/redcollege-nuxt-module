@@ -1,5 +1,4 @@
 <script setup lang="ts">
-    import { boolean } from "zod";
     import type { INotificacion } from "../../../models/Notificacion/notificacion";
     import { formatearFechaNotificacion } from "../../../utils/notificaciones";
 
