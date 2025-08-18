@@ -23,7 +23,6 @@ export const useNotificacion = () => {
             await subscription.create();
             unsuscribe.value = subscription.onMessage(
                 async (data: { notificacion: INotificacion }) => {
-                    console.log(data)
                     setNotificacion(data.notificacion)
                     setContadores({
                         noLeidas: contadorNotificaciones.value.noLeidas + 1,
