@@ -182,7 +182,7 @@ const chartOptions = computed<ChartOptions<'bar'>>(() => {
                     display: false
                 },
                 ticks: {
-                    color: 'hsl(var(--vis-text-color))'
+                    color: 'var(--vis-text-color)'
                 }
             },
             y: {
@@ -193,7 +193,7 @@ const chartOptions = computed<ChartOptions<'bar'>>(() => {
                     color: 'hsl(201.3, 30%, 50%, 0.2)'
                 },
                 ticks: {
-                    color: 'hsl(var(--vis-text-color))',
+                    color: 'var(--vis-text-color)',
                     callback: function (value, index, ticks) {
                         if (props.yFormatter) {
                             // Convertir los ticks de Chart.js al formato esperado por @unovis

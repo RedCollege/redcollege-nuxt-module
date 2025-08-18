@@ -48,7 +48,7 @@ const index = computed<string>(() => props.index as KeyOfT)
 
 // Función para convertir colores HSL con variables CSS a valores RGB
 const resolveColor = (color: string): string => {
-  if (color.startsWith('hsl(var(')) {
+  if (color.startsWith('var(')) {
     // Crear un elemento temporal para resolver la variable CSS
     const tempDiv = document.createElement('div')
     tempDiv.style.color = color

@@ -105,7 +105,7 @@ const animationDuration = computed(() => props.disableAnimation ? 0 : 600)
         :grid-line="false"
         :tick-line="false"
         :duration="animationDuration"
-        tick-text-color="hsl(var(--vis-text-color))"
+        tick-text-color="var(--vis-text-color)"
       />
       <VisAxis
         v-if="showYAxis"
@@ -120,7 +120,7 @@ const animationDuration = computed(() => props.disableAnimation ? 0 : 600)
             class: 'text-muted',
           },
         }"
-        tick-text-color="hsl(var(--vis-text-color))"
+        tick-text-color="var(--vis-text-color)"
       />
       
       <slot />
