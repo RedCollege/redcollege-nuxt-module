@@ -8,7 +8,7 @@
     import type { ScrollArea } from "#components";
     import { Loader } from "lucide-vue-next";
     import { formatearFecha } from "../../utils/notificaciones";
-    import { useNotificacionStore } from "../../stores/notificacacionStore";
+    import { useNotificacionStore } from "../../stores/notificacionStore";
     import { storeToRefs } from "pinia";
 
     const props = defineProps<{
@@ -339,7 +339,7 @@
                                 template(v-if="allNotificacionesNoLeidas.length === 0")
                                     div.flex.flex-col.items-center.justify-center.gap-2(class="h-[calc(100vh_-_150px)]")
                                         img(src="../../assets/images/emptyNotificaciones.svg")
-                                        span.text-muted-foreground.text-xl No hay notificaciones sin leer
+                                        p.text-muted-foreground.text-sm No hay notificaciones sin leer
                                 template(v-else)
                                     template(v-for="grupo in notificacionesNoLeidasPorFecha")
                                         h3(class="text-center text-muted-foreground p-1") {{ grupo.fecha }}
@@ -357,7 +357,7 @@
                                 template(v-if="notificacionesPorFecha.length === 0")
                                     div.flex.flex-col.items-center.justify-center.gap-2(class="h-[calc(100vh_-_150px)]")
                                         img(src="../../assets/images/emptyNotificaciones.svg")
-                                        span.text-muted-foreground.text-xl No hay notificaciones
+                                        p.text-muted-foreground.text-sm No hay notificaciones
                                 template(v-else)
                                     template(v-for="grupo in notificacionesPorFecha")
                                         h3(class="text-center text-muted-foreground p-1") {{ grupo.fecha }}

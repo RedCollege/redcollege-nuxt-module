@@ -22,8 +22,12 @@ export const formatearFechaNotificacion = (fecha: string): string => {
     const diferenciaMs = ahora.getTime() - fechaNotificacion.getTime();
     const diferenciaMinutos = Math.floor(diferenciaMs / (1000 * 60));
 
+    if (diferenciaMinutos == 0){
+        return 'Justo ahora'
+    }
+
     if (diferenciaMinutos < 60) {
-        return `hace ${diferenciaMinutos} min`;
+        return `Hace ${diferenciaMinutos} min`;
     }
 
     return fechaNotificacion

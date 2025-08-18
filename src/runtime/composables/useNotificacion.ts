@@ -1,7 +1,7 @@
 import type { INotificacion } from "../models/Notificacion/notificacion";
 import { ref, storeToRefs, useAuthStore, useTransmit } from "#imports";
 import { useToast } from "../components/ui/toast";
-import { useNotificacionStore } from "../stores/notificacacionStore";
+import { useNotificacionStore } from "../stores/notificacionStore";
 
 export const useNotificacion = () => {
     const { transmit } = useTransmit();

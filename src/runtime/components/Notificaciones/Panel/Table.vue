@@ -40,8 +40,7 @@ Table
                     Avatar(class="h-8 w-8 bg-muted border border-muted-foreground/40 shadow-lg")
                         AvatarImage(:src="notificacion.emisor.avatarUrl" v-if="notificacion.emisor.avatarUrl")
                         AvatarFallback(class="text-md" v-else) {{ notificacion.emisor.iniciales }}
-                    Avatar(class="absolute h-5 w-5 -bottom-1 -right-1.5 bg-white border border-muted-foreground/40")
-                        AvatarImage(:src="notificacion.tipo.icono" class="scale-50 bg-white overflow-visible")
+                    img(:src="notificacion.tipo.icono" class="border shadow-xl absolute w-5 h-5 rounded-full bg-white p-1 -bottom-1 -right-1")
                 span {{ notificacion.asunto }}
             TableCell
                 p {{ notificacion.mensaje }}
@@ -59,5 +58,5 @@ Table
         TableEmpty(v-else class="" :colspan="5")
             .flex.flex-col.items-center.justify-center.gap-2
                 img(src="../../../assets/images/emptyNotificaciones.svg")
-                h3.text-lg.text-muted-foreground No hay notificaciones
+                h6.text-sm.text-muted-foreground No hay notificaciones
 </template>

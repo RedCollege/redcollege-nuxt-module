@@ -2,7 +2,7 @@
 import { useNuxtApp } from "#app";
 import { onMounted, ref } from "vue";
 import { useNotificacion } from "../../composables/useNotificacion";
-import { useNotificacionStore } from "../../stores/notificacacionStore";
+import { useNotificacionStore } from "../../stores/notificacionStore";
 import { storeToRefs } from "pinia";
 
 const isOpen = ref<boolean>(false);

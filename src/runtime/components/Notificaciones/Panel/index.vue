@@ -4,7 +4,7 @@
     import type { INotificacion } from "~/src/runtime/models/Notificacion/notificacion";
     import { useToast } from "../../ui/toast";
     import { refDebounced } from "@vueuse/core";
-    import { useNotificacionStore } from "../../../stores/notificacacionStore";
+    import { useNotificacionStore } from "../../../stores/notificacionStore";
     import { storeToRefs } from "pinia";
 
     const { notificacion } = useNuxtApp().$apis.notificacion;

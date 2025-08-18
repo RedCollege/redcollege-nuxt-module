@@ -35,21 +35,20 @@ const marcarComoLeidoRedireccion = async () => {
 </script>
 
 <template lang="pug">
-.flex.flex-row.items-center.p-2.pr-4.gap-4(:class="`border-y border-y-muted-foreground/5 cursor-pointer hover:bg-primary/10 transition-colors duration-100 ease-in-out ${!props.notificacion.isLeido ? 'bg-white' : 'bg-transparent'}`" @click="marcarComoLeidoRedireccion")
+.flex.flex-row.items-center.p-2.pr-4.gap-4.px-6(:class="`border-y border-y-muted-foreground/5 cursor-pointer hover:bg-primary/10 transition-colors duration-100 ease-in-out ${!props.notificacion.isLeido ? 'bg-primary/5 ' : 'bg-transparent'}`" @click="marcarComoLeidoRedireccion")
     div(class="relative") 
-        Avatar(class="h-16 w-16 bg-muted border border-muted-foreground/40 shadow-lg")
+        Avatar(class="h-14 w-14 bg-muted border border-muted-foreground/40 shadow-lg")
             AvatarImage(:src="notificacion.emisor.avatarUrl" v-if="notificacion.emisor.avatarUrl")
             AvatarFallback(class="text-xl" v-else) {{ notificacion.emisor.iniciales }}
-        Avatar(class="absolute h-8 w-8 -bottom-2 -right-2 bg-white border border-muted-foreground/40")
-            AvatarImage(:src="notificacion.tipo.icono" class="scale-50 bg-white overflow-visible")
+        img(:src="notificacion.tipo.icono" class="border shadow-xl absolute w-6 h-6 rounded-full bg-white p-1 -bottom-1 -right-1")
 
-    div(class="flex-1 flex flex-col gap-0.5")
+    div(class="flex-1 flex flex-col")
         div(class="truncate flex-1 max-w-[380px]").font-semibold 
-            span {{ notificacion.asunto }}
-        p(class="break-words") {{ notificacion.mensaje }}
+            h6.text-sm {{ notificacion.asunto }}
+        p.text-xs(class="break-words") {{ notificacion.mensaje }}
         div.flex.flex-row.items-center.gap-2
             small(class="font-medium text-muted-foreground") {{ formatearFechaNotificacion(notificacion.createdAt.toString()) }}
-            div(class="rounded-full w-2 h-2 bg-green" v-if="!notificacion.isLeido")
+            div(class="rounded-full w-2 h-2 bg-green mt-0.5" v-if="!notificacion.isLeido")
     TooltipProvider
         Tooltip
             TooltipTrigger(as-child)
