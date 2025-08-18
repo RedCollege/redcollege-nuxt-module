@@ -36,17 +36,17 @@ Table
             TableCell
                 Checkbox(:model-value="selectedNotifications.has(notificacion.id)" @update:model-value="(state) => emit('toggle-notification', state, notificacion.id)")
             TableCell.flex.flex-row.items-center.gap-2
-                div(class="relative") 
+                div(class="relative")
                     Avatar(class="h-8 w-8 bg-muted border border-muted-foreground/40 shadow-lg")
-                        AvatarImage(:src="notificacion.emisor.avatarUrl" v-if="notificacion.emisor.avatarUrl")
-                        AvatarFallback(class="text-md" v-else) {{ notificacion.emisor.iniciales }}
+                        AvatarImage(:src="notificacion.emisor.avatarUrl")
+                        AvatarFallback {{ notificacion.emisor.iniciales }}
                     img(:src="notificacion.tipo.icono" class="border shadow-xl absolute w-5 h-5 rounded-full bg-white p-1 -bottom-1 -right-1")
                 span {{ notificacion.asunto }}
             TableCell
                 p {{ notificacion.mensaje }}
             TableCell
                 span {{ formatearFechaNotificacion(notificacion.createdAt.toString()) }}
-            TableCell 
+            TableCell
                 TooltipProvider
                     Tooltip
                         TooltipTrigger(as-child)

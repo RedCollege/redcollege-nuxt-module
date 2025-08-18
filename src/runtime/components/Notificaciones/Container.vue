@@ -314,6 +314,9 @@
         await cargarNotificaciones();
         await cargarNotificacionesNoLeidas();
     })
+
+
+
 </script>
 
 <template lang="pug">
@@ -341,10 +344,11 @@
                                         img(src="../../assets/images/emptyNotificaciones.svg")
                                         p.text-muted-foreground.text-sm No hay notificaciones sin leer
                                 template(v-else)
-                                    template(v-for="grupo in notificacionesNoLeidasPorFecha")
-                                        h3(class="text-center text-muted-foreground p-1") {{ grupo.fecha }}
-                                        template(v-for="notificacion in grupo.notificaciones")
-                                            NotificacionesCard(:notificacion="notificacion" @notificacion-leida="handleNotificacionLeida" @update:is-open="(state) => emit('update:is-open', state)")
+                                    AnimatePresence
+                                        template(v-for="grupo in notificacionesNoLeidasPorFecha")
+                                            h3(class="text-center text-muted-foreground p-1") {{ grupo.fecha }}
+                                            Motion(as-child, v-for="(notificacion, index) in grupo.notificaciones", :key="notificacion.id", :exit="{ opacity: 0, y: 10, transition: { duration: 0.5 } }" :transition="{ type: 'spring', delay: isOpen ? index * 0.05 : 0 }"  :initial="{ opacity: 0, y: 10 }" :animate="isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }")
+                                                NotificacionesCard(:notificacion="notificacion" @notificacion-leida="handleNotificacionLeida" @update:is-open="(state) => emit('update:is-open', state)")
                                     div(v-if="hasMoreData" class="flex flex-col items-center justify-center p-6 gap-2")
                                         template(v-if="isLoadingMore")
                                             span.text-sm.text-muted-foreground Cargando más notificaciones...
@@ -361,7 +365,7 @@
                                 template(v-else)
                                     template(v-for="grupo in notificacionesPorFecha")
                                         h3(class="text-center text-muted-foreground p-1") {{ grupo.fecha }}
-                                        template(v-for="notificacion in grupo.notificaciones")
+                                        Motion(as-child, v-for="(notificacion, index) in grupo.notificaciones", :key="notificacion.id", :exit="{ opacity: 0, y: 10, transition: { duration: 0.5 } }" :transition="{ type: 'spring', delay: isOpen ? index * 0.05 : 0 }"  :initial="{ opacity: 0, y: 10 }" :animate="isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }")
                                             NotificacionesCard(:notificacion="notificacion" @notificacion-leida="handleNotificacionLeida" @update:is-open="(state) => emit('update:is-open', state)")
                                     div(v-if="hasMoreData" class="flex flex-col items-center justify-center p-6 gap-2")
                                         template(v-if="isLoadingMore")

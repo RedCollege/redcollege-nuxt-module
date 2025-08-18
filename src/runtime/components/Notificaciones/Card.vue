@@ -36,14 +36,14 @@ const marcarComoLeidoRedireccion = async () => {
 
 <template lang="pug">
 .flex.flex-row.items-center.p-2.pr-4.gap-4.px-6(:class="`border-y border-y-muted-foreground/5 cursor-pointer hover:bg-primary/10 transition-colors duration-100 ease-in-out ${!props.notificacion.isLeido ? 'bg-primary/5 ' : 'bg-transparent'}`" @click="marcarComoLeidoRedireccion")
-    div(class="relative") 
-        Avatar(class="h-14 w-14 bg-muted border border-muted-foreground/40 shadow-lg")
-            AvatarImage(:src="notificacion.emisor.avatarUrl" v-if="notificacion.emisor.avatarUrl")
-            AvatarFallback(class="text-xl" v-else) {{ notificacion.emisor.iniciales }}
+    .relative
+        Avatar(class="h-14 w-14 bg-muted border border-muted-foreground/20 shadow-xl")
+            AvatarImage(:src="notificacion.emisor.avatarUrl")
+            AvatarFallback(class="text-xl") {{ notificacion.emisor.iniciales }}
         img(:src="notificacion.tipo.icono" class="border shadow-xl absolute w-6 h-6 rounded-full bg-white p-1 -bottom-1 -right-1")
 
     div(class="flex-1 flex flex-col")
-        div(class="truncate flex-1 max-w-[380px]").font-semibold 
+        div(class="truncate flex-1 max-w-[380px]").font-semibold
             h6.text-sm {{ notificacion.asunto }}
         p.text-xs(class="break-words") {{ notificacion.mensaje }}
         div.flex.flex-row.items-center.gap-2

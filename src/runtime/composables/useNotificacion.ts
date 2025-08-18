@@ -8,10 +8,10 @@ export const useNotificacion = () => {
     const { user } = useAuthStore();
 
     const notificacionStore = useNotificacionStore()
-    
+
     const {setNotificacion, setContadores} = notificacionStore;
     const {contadorNotificaciones} = storeToRefs(notificacionStore)
-    
+
     const unsuscribe = ref<(() => void) | undefined>();
 
     const subscribe = async () => {
@@ -23,6 +23,7 @@ export const useNotificacion = () => {
             await subscription.create();
             unsuscribe.value = subscription.onMessage(
                 async (data: { notificacion: INotificacion }) => {
+                    console.log(data)
                     setNotificacion(data.notificacion)
                     setContadores({
                         noLeidas: contadorNotificaciones.value.noLeidas + 1,
