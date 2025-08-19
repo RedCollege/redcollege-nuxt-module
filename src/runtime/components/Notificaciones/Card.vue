@@ -42,10 +42,10 @@ const marcarComoLeidoRedireccion = async () => {
             AvatarFallback(class="text-xl") {{ notificacion.emisor.iniciales }}
         img(:src="notificacion.tipo.icono" class="border shadow-xl absolute w-6 h-6 rounded-full bg-white p-1 -bottom-1 -right-1")
 
-    div(class="flex-1 flex flex-col")
-        div(class="truncate flex-1 max-w-[380px]").font-semibold
-            h6.text-sm {{ notificacion.asunto }}
-        p.text-xs(class="break-words") {{ notificacion.mensaje }}
+    div(class="flex-1")
+        div(class="flex-1 max-w-[360px]").font-semibold
+            h6.text-sm.truncate {{ notificacion.asunto }}
+        p.text-xs(class="break-words") {{ notificacion.mensaje }}  
         div.flex.flex-row.items-center.gap-2
             small(class="font-medium text-muted-foreground") {{ formatearFechaNotificacion(notificacion.createdAt.toString()) }}
             div(class="rounded-full w-2 h-2 bg-green mt-0.5" v-if="!notificacion.isLeido")
