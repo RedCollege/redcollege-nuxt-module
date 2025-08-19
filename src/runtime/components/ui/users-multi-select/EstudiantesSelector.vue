@@ -374,6 +374,7 @@ onMounted(async () => {
                     SelectItem(v-for="curso in allCursos", :key="curso.id", :value="curso.id")
                         .flex.items-center.gap-2
                             Badge {{ curso.sige?.tipoEnsenanzaId }}
+                            span.px-1 /
                             | {{  curso.sige?.codigoGradoId  }} {{  curso.seccion  }}
     //-template(v-if="showInitialLoader") cargando
     div
