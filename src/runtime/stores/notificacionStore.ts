@@ -7,6 +7,8 @@ import type {
 
 export const useNotificacionStore = defineStore("notificacion", () => {
     const notificacion = ref<INotificacion | null>(null);
+    const unsuscribe = ref<any>()
+
     const contadorNotificaciones = ref<INotificacionContadores>({
         noLeidas: 0,
         total: 0,
@@ -20,10 +22,16 @@ export const useNotificacionStore = defineStore("notificacion", () => {
         contadorNotificaciones.value = contadores;
     }
 
+    function setUnsuscribe(_unuscribe: any) {
+        unsuscribe.value = _unuscribe
+    }
+
     return {
         notificacion,
         contadorNotificaciones,
+        unsuscribe,
         setNotificacion,
         setContadores,
+        setUnsuscribe,
     };
 });

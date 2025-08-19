@@ -9,7 +9,7 @@ export const useNotificacion = () => {
 
     const notificacionStore = useNotificacionStore();
 
-    const { setNotificacion, setContadores } = notificacionStore;
+    const { setNotificacion, setContadores, setUnsuscribe } = notificacionStore;
     const { contadorNotificaciones } = storeToRefs(notificacionStore);
 
     const unsuscribe = ref<(() => void) | undefined>();
@@ -34,6 +34,7 @@ export const useNotificacion = () => {
                     });
                 },
             );
+            setUnsuscribe(unsuscribe.value)
         }
     };
 

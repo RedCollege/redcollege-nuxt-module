@@ -1,15 +1,16 @@
 import { ref } from 'vue'
-import { defineStore } from 'pinia';
+import { defineStore, storeToRefs } from 'pinia';
 import type { IAuthUsuarioResponse } from '../models/Auth'
 import type { IUsuario } from '../types/auth/usuario';
 import type { IPeriodoEscolar } from '../models/Establecimiento/periodo_escolar'
 import { navigateTo, useCookie, useNuxtApp, useRouter, useRuntimeConfig, useRoute } from '#app';
 import { DateTime } from 'luxon'
-import { useNotification } from '#imports';
+import { useNotificacionStore, useNotification } from '#imports';
 
 export const useAuthStore = defineStore('auth', () => {
 
     const { $apis } = useNuxtApp()
+    const { unsuscribe } = storeToRefs(useNotificacionStore())
     interface ITokenMainResponse {
         type: string;
         token: string;
@@ -174,6 +175,8 @@ export const useAuthStore = defineStore('auth', () => {
             },
         });
 
+        console.log(unsuscribe)
+        unsuscribe.value()
         user.value = {} as IAuthUsuarioResponse
         isLoggedIn.value = false
         userId.value = 0
