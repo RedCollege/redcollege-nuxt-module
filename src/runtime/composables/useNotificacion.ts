@@ -8,7 +8,6 @@ export const useNotificacion = () => {
     const { user } = useAuthStore();
 
     const notificacionStore = useNotificacionStore();
-
     const { setNotificacion, setContadores } = notificacionStore;
     const { contadorNotificaciones } = storeToRefs(notificacionStore);
 
