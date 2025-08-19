@@ -37,7 +37,7 @@ export interface IAntecedentePersonal {
     isReligion: boolean;
     identificacionOrigen: boolean;
     paisId: number;
-    nacionalidadId: boolean;
+    nacionalidadId: number;
     fotografiaUrl: string;
     createdAt: DateTime;
     updatedAt: DateTime;
