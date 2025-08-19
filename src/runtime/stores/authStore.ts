@@ -5,7 +5,7 @@ import type { IUsuario } from '../types/auth/usuario';
 import type { IPeriodoEscolar } from '../models/Establecimiento/periodo_escolar'
 import { navigateTo, useCookie, useNuxtApp, useRouter, useRuntimeConfig, useRoute } from '#app';
 import { DateTime } from 'luxon'
-import { useNotificacionStore, useNotification } from '#imports';
+import { useNotificacionStore } from '#imports';
 
 export const useAuthStore = defineStore('auth', () => {
 
@@ -175,8 +175,8 @@ export const useAuthStore = defineStore('auth', () => {
             },
         });
 
-        console.log(unsuscribe)
-        unsuscribe.value()
+        if(unsuscribe.value)
+            unsuscribe.value()
         user.value = {} as IAuthUsuarioResponse
         isLoggedIn.value = false
         userId.value = 0

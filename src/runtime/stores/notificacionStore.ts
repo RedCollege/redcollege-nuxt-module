@@ -7,7 +7,7 @@ import type {
 
 export const useNotificacionStore = defineStore("notificacion", () => {
     const notificacion = ref<INotificacion | null>(null);
-    const unsuscribe = ref<any>()
+    const unsuscribe = ref<() => void>();
 
     const contadorNotificaciones = ref<INotificacionContadores>({
         noLeidas: 0,
@@ -18,12 +18,12 @@ export const useNotificacionStore = defineStore("notificacion", () => {
         notificacion.value = _notificacion;
     }
 
-    function setContadores(contadores : INotificacionContadores) {
+    function setContadores(contadores: INotificacionContadores) {
         contadorNotificaciones.value = contadores;
     }
 
-    function setUnsuscribe(_unuscribe: any) {
-        unsuscribe.value = _unuscribe
+    function setUnsuscribe(_unuscribe: () => void) {
+        unsuscribe.value = _unuscribe;
     }
 
     return {
