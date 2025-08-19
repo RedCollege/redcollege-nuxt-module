@@ -7,10 +7,10 @@ export const useNotificacion = () => {
     const { transmit } = useTransmit();
     const { user } = useAuthStore();
 
-    const notificacionStore = useNotificacionStore()
+    const notificacionStore = useNotificacionStore();
 
-    const {setNotificacion, setContadores} = notificacionStore;
-    const {contadorNotificaciones} = storeToRefs(notificacionStore)
+    const { setNotificacion, setContadores } = notificacionStore;
+    const { contadorNotificaciones } = storeToRefs(notificacionStore);
 
     const unsuscribe = ref<(() => void) | undefined>();
 
@@ -19,19 +19,18 @@ export const useNotificacion = () => {
             const subscription = transmit.subscription(
                 `notificaciones/${user.id}`,
             );
-            if(subscription.isDeleted || subscription.isCreated) return;
+            if (subscription.isDeleted || subscription.isCreated) return;
             await subscription.create();
             unsuscribe.value = subscription.onMessage(
                 async (data: { notificacion: INotificacion }) => {
-                    setNotificacion(data.notificacion)
+                    setNotificacion(data.notificacion);
                     setContadores({
                         noLeidas: contadorNotificaciones.value.noLeidas + 1,
-                        total: contadorNotificaciones.value.total + 1
-                    })
+                        total: contadorNotificaciones.value.total + 1,
+                    });
                     useToast().toast({
-                        title: "¡Tienes una nueva notificación!",
-                        description:
-                        "Acabas de recibir una nueva notificación.",
+                        title: data.notificacion.asunto,
+                        description: data.notificacion.mensaje,
                     });
                 },
             );
@@ -39,13 +38,13 @@ export const useNotificacion = () => {
     };
 
     const close = () => {
-        if(unsuscribe.value){
-            unsuscribe.value()
+        if (unsuscribe.value) {
+            unsuscribe.value();
         }
-    }
+    };
 
     return {
         subscribe,
-        close
+        close,
     };
 };

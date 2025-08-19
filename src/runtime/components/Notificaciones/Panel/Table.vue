@@ -38,7 +38,7 @@ Table
             TableCell.flex.flex-row.items-center.gap-2
                 div(class="relative")
                     Avatar(class="h-8 w-8 bg-muted border border-muted-foreground/40 shadow-lg")
-                        AvatarImage(:src="notificacion.emisor.avatarUrl")
+                        AvatarImage(:src="String(notificacion.emisor.avatarUrl)")
                         AvatarFallback {{ notificacion.emisor.iniciales }}
                     img(:src="notificacion.tipo.icono" class="border shadow-xl absolute w-5 h-5 rounded-full bg-white p-1 -bottom-1 -right-1")
                 span {{ notificacion.asunto }}
