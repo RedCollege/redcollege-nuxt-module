@@ -43,7 +43,7 @@ const marcarComoLeidoRedireccion = async () => {
         img(:src="notificacion.tipo.icono" class="border shadow-xl absolute w-6 h-6 rounded-full bg-white p-1 -bottom-1 -right-1")
 
     div(class="flex-1")
-        div(class="flex-1 max-w-[360px]").font-semibold
+        div(class="font-semibold max-w-[360px]")
             h6.text-sm.truncate {{ notificacion.asunto }}
         p.text-xs(class="break-words") {{ notificacion.mensaje }}  
         div.flex.flex-row.items-center.gap-2
