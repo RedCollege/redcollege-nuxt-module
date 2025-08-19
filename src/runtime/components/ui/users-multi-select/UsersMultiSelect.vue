@@ -333,7 +333,7 @@ div(v-if="!isLoading")
                 .flex.items-center.justify-between.w-full.mx-auto(v-else)
                     span.text-sm.text-muted-foreground.mx-3 {{ placeholder }}
                     Icon(name="tabler:chevron-down", class="h-4 cursor-pointer text-muted-foreground mx-2")
-        PopoverContent.p-2(align="start", class="w-[--reka-popover-trigger-width]", :side-offset="5", @escape-key-down="setIsPopoverOpen(false)")
+        PopoverContent.p-2(align="start", class="w-[length:var(--reka-popover-trigger-width)]", :side-offset="5", @escape-key-down="setIsPopoverOpen(false)")
             .grid.gap-2
                 Tabs(default-value="cursos")
                     .relative.rounded-sm.overflow-x-scroll.h-14
