@@ -5,7 +5,6 @@ import { readdirSync } from 'fs';
 export interface ModuleOptions {
     baseURL: string;
     socketURL: string;
-    rollbarToken?: string;
     logoURL: string;
     nombreModulo: string;
     shouldRedirect: boolean;
@@ -40,7 +39,6 @@ export default defineNuxtModule<ModuleOptions>({
             redirectTo: options.redirectTo,
             redirectToAdmin: options.redirectToAdmin,
             shouldRedirect: options.shouldRedirect,
-            rollbarToken: options.rollbarToken,
             postHogApiKey: options.postHogApiKey,
             postHogApiHost: options.postHogApiHost,
             prismicEndPoint: options.prismicEndPoint
@@ -119,9 +117,7 @@ export default defineNuxtModule<ModuleOptions>({
             path: resolver.resolve('runtime/components')
         })
 
-        await installModule('nuxt-rollbar', {
-            clientAccessToken: options.rollbarToken
-        })
+      
 
         await installModule('@nuxtjs/prismic', {
             endpoint: options.prismicEndPoint

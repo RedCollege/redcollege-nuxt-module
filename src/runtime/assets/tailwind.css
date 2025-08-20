@@ -47,7 +47,7 @@
   --vis-tooltip-padding: none !important;
 
   --vis-primary-color: var(--primary);
-  --vis-secondary-color: hsl(160 81% 40%);
+  --vis-secondary-color: var(--green);
   --vis-text-color: var(--muted-foreground);
 }
 
