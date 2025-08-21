@@ -1,5 +1,5 @@
 import type { $Fetch } from 'ofetch';
-import type { IMonitoreoCurso, IMonitoreoDocente, IMonitoreo } from '~/src/runtime/models/Planificacion/monitoreo';
+import type { IMonitoreo, IOAporNivel } from '~/src/runtime/models/Planificacion/monitoreo';
 
 interface AllProps {
     establecimientoId: number;
@@ -20,6 +20,13 @@ export default class PlanificacionEstadisticaModule {
         return this.fetcher(`/planificacion/monitoreo/${props.establecimientoId}`, {
             method: 'GET',
             params: props
+        })
+    }
+
+    async getOAporNivel(props: AllProps): Promise<IOAporNivel[]> {
+
+        return this.fetcher(`/planificacion/estadisticas/oa_por_nivel?establecimiento=${props.establecimientoId}&periodo=${props.periodo}`, {
+            method: 'GET',
         })
     }
 

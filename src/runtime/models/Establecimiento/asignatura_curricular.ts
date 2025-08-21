@@ -16,3 +16,8 @@ export interface IAsignaturaCurricular {
     updatedAt: DateTime;
     entradasCurriculares: Array<IEntradaCurricular>;
 }
+
+export interface IAsignatura {
+    id: number;
+    name: string;
+}

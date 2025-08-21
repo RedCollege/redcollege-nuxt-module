@@ -27,3 +27,9 @@ export interface ICurso {
     nombreCompleto: string;
     cupos: number;
 }
+
+export interface ICursoCobertura {
+    cursoId: number;
+    nombreCurso: string;
+    cobertura: number;
+}

@@ -52,13 +52,49 @@ export interface IMonitoreoCurso {
 export interface IMonitoreoDocente {
     docenteId: number
     docenteNombre: string
+    tipoCurso: string
     asignaturas: number
     oaPlanificados: number
     oaRealizados: number
-    coberturaPromedio: number
+    cobertura: number
+    planificaciones: {
+        id: number,
+        titulo: string,
+        cobertura: number,
+        usuarioId: number,
+        estadoId: number,
+        totalAdecuaciones: number,
+        usuario: {
+            id: number,
+            nombre: string,
+            apellidoPaterno: string,
+            apellidoMaterno: string
+        }
+    }[]
+}
+
+export interface IMonitoreoGlobal {
+    cursos: {
+        id: number;
+        nombreCompleto: string;
+        tipoCurso: string;
+        oaPlanificados: number;
+        oaRealizados: number;
+        adecuaciones: number;
+        cobertura: number;
+    }[];
+    estadisticas: IEstadisticaPorGrupo;
 }
 
 export interface IMonitoreo {
     curso: IMonitoreoCurso;
     docentes: IMonitoreoDocente[];
+    global: IMonitoreoGlobal;
+}
+
+export interface IOAporNivel {
+    id: number;
+    nombre: string;
+    oa_planificados: string;
+    oa_ejecutados: string;
 }
